@@ -1,0 +1,34 @@
+.main_body{
+  height: fit-content;
+  background-color: bisque;
+  width: 100%;
+  position: relative;
+}
+.main_bg{
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+.bg{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.sec_1_image_container{
+  position: absolute;
+  right: 0px;
+  width: fit-content;
+}
+.heading_container{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: column;
+  width: 30%;
+  margin-left: 100px;
+  height: 100%;
+}
+.heading_container h1{
+  margin-bottom: 20px;
+}
