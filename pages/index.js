@@ -8,6 +8,7 @@ import HomeFirstSection from "../components/screenComponents/homeScreen/firstSec
 import FindSection from "../components/screenComponents/homeScreen/findSection";
 import Footer from "../components/footer";
 import OurMission from "../components/screenComponents/homeScreen/ourMission";
+import TrendingProperties from "../components/screenComponents/homeScreen/trendingProperties";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
           <HomeFirstSection/>
           <FindSection/>
           <OurMission/>
+          <TrendingProperties/>
         </div>
         <Footer/>
       </div>
