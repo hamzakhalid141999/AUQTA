@@ -1,0 +1,27 @@
+.find_section_wrapper {
+  width: 100%;
+  height: 130vh;
+  position: relative;
+}
+.find_section_section {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.find_section_section h1 {
+  color: rgb(44, 44, 44);
+}
+.cards_container{
+    width: 100%;
+    height: 500px;
+    z-index: 30;
+    padding-top: 60px;
+    padding-left: 120px;
+    padding-right: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

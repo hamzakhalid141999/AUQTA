@@ -1,0 +1,134 @@
+.footer_body{
+    width: 100%;
+    height: 600px;
+    background-color: #6daaf4;
+    border-top-left-radius: 230px;
+    border-top-right-radius: 230px;
+    position: relative;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+}
+.search_bar_container{
+    height: fit-content;
+    width: fit-content;
+    position: absolute;
+    top: -70px;
+    width: 70%;
+}
+.search_bar_content{
+    position: relative;
+}
+.search_btn{
+    cursor: pointer;
+    height: 80%;
+    position: absolute;
+    right: 20px;
+    width: 250px;
+    top: 12px;
+    border-radius: 20px;
+    background-color: #0068ed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease-in-out 200ms;
+}
+.search_btn:hover{
+    background-color: #3d8ef8;
+}
+.search_btn p{
+    font-size: 28px;
+    color: white;
+}
+.footer_content{
+    width: 75%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 150px;
+}
+.col_1{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+.col_2{
+    margin: 10px;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+.logo_container{
+    width: 50%;
+    max-width: 200px;
+    height: fit-content;
+    margin-bottom: 20px;
+}
+.col_1 p{
+    color: white;
+    font-size: 12px;
+    width: 95%;
+    line-height: 20px;
+}
+.col_2 h1{
+    font-size: 15px;
+    color: white;
+    margin-bottom: 50px;
+}
+.col_2 p{
+    font-size: 13px;
+    color: white;
+    margin-bottom: 24px;
+}
+.logo{
+    width: 20%;
+}
+.search_bar{
+    height: 130px;
+    width: 100%;
+    padding-left: 30px;
+    font-size: 30px;
+    background-color: #dbebff94;
+    z-index: 50;
+    border: none;
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    box-shadow: 2px 4px 22px -1px rgba(36, 98, 192, 0.52);
+    border-bottom: 3px solid #1054ad9c;
+}
+.search_bar::placeholder{
+    color: rgb(61, 61, 61);
+}
+.divider{
+    width: 100%;
+    height: 4px;
+    background-color: white;   
+}
+.lower_content_container{
+    width: 100%;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.lower_content{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+}
+.left_content{
+    width: 60%;
+    justify-content: space-evenly;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+.left_content p{
+    font-size: 10px;
+    color: white;
+}

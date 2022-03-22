@@ -1,11 +1,11 @@
 .main_body{
   height: fit-content;
-  background-color: bisque;
+  background-color: #daedfc;
   width: 100%;
   position: relative;
 }
 .main_bg{
-  height: 100vh;
+  height: fit-content;
   width: 100%;
   position: relative;
 }
@@ -28,7 +28,4 @@
   width: 30%;
   margin-left: 100px;
   height: 100%;
-}
-.heading_container h1{
-  margin-bottom: 20px;
 }

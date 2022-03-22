@@ -1,0 +1,37 @@
+.mission_section_wrapper {
+  width: 100%;
+  height: 120vh;
+  position: relative;
+}
+.mission_section_section {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mission_section_section h1 {
+  color: rgb(44, 44, 44);
+  margin-bottom: 20px;
+}
+.content_container{
+    margin-top: 30px;
+    height: 600px;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.image_container{
+    width: 50%;
+    position: relative;
+    height: 100%;
+}
+.img{
+    width: 100%;
+}
