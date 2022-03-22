@@ -3,31 +3,35 @@ import { property1, property2, property3, property4 } from "./picsPath";
 const cardInfo = [
   {
     picture: property1,
-    title: "BUY A HOME",
+    title: "1 KANAL PHASE 3",
     description:
-      "The experience of buying a homes gets elevated through our cutting edge technologies. Now immerse yourself into the digital environment where you can visualise the exterior, interior, and surrounding location of your dream property.",
-    btn: "FIND HOMES",
+      "Fully furnished, good location, available on installments",
+      price: "2.3crores",
+      location: 'BAHRIA, PHASE 3'
   },
   {
     picture: property2,
-    title: "SELL A HOME",
+    title: "2 KANAL PHASE 5",
     description:
-      "Selling your property becomes an easy and engaging process through auqta. Sell your property from your doorsteps as buyers can visualise everything from anywhere.",
-    btn: "SELL HOMES",
+      "Partially furnished, good location.",
+      price: "1.3crores",
+      location: 'BAHRIA, PHASE 5'
   },
   {
     picture: property3,
-    title: "RENT A HOME",
+    title: "1 KANAL PHASE 2",
     description:
-      "Tired of looking for the perfect property to rent. Visualise your property of interest from your comfort zone before even deciding to view it physically.",
-    btn: "RENT HOMES",
+      "Fully furnished, good location, available on installments.",
+      price: "2.6crores",
+      location: 'BAHRIA, PHASE 2'
   },
   {
     picture: property4,
-    title: "RENT A HOME",
+    title: "1 KANAL DHA 2",
     description:
-      "Tired of looking for the perfect property to rent. Visualise your property of interest from your comfort zone before even deciding to view it physically.",
-    btn: "RENT HOMES",
+      "Fully furnished, wooden floor, available on installments",
+    price: "3.3crores",
+    location: 'DHA, PHASE 2'
   }
 ];
 

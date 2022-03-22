@@ -18,7 +18,7 @@ function TrendingProperties() {
         </div>
         <div className={classes.property_cards_container}>
           {cardInfo?.map((property, index) => (
-            <PropertyCard picture = {property.picture} key={index} />
+            <PropertyCard title={property.title} description={property.description} price={property.price} location={property.location} picture = {property.picture} key={index} />
           ))}
         </div>
       </div>
