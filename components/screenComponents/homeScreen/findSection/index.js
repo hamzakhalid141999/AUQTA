@@ -5,7 +5,7 @@ import CardsInfo from "../findSection/components/cardInfo";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-function findSection() {
+function FindSection() {
   console.log(CardsInfo);
 
   useEffect(()=>{
@@ -36,4 +36,4 @@ function findSection() {
   );
 }
 
-export default findSection;
+export default FindSection;
