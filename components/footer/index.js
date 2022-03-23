@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./footer.module.css";
 import logo from "../../public/assets/logo.png";
 import Image from "next/image";
+import {Link} from 'react-scroll'
 
 function Footer() {
   return (
@@ -17,16 +18,12 @@ function Footer() {
           <div className={classes.logo_container}>
             <Image src={logo} className={classes.logo} alt="logo" />
           </div>
-          <p>
-            LOREM IPSUM IS SIMPLY A DUMMY TEXT OF THE PRINTING AND TYPESETTING
-            INDUSTRY. IT HAS SURVIVED NOT ONLY THE FIVE CENTURIES
-          </p>
         </div>
         <div className={classes.col_2}>
           <h1>EXPLORE</h1>
-          <p>HOME</p>
-          <p>ABOUT US</p>
-          <p>FEATURES</p>
+          <p><Link to="mission" spy={true} smooth={true}>ABOUT US</Link></p>
+          <p><Link to="home" spy={true} smooth={true}>HOME</Link></p>
+          <p><Link to="buy" spy={true} smooth={true}>FEATURES</Link></p>
           <p>WORK</p>
           <p>BLOG</p>
         </div>
@@ -40,8 +37,7 @@ function Footer() {
         </div>
         <div className={classes.col_2}>
           <h1>CONTACT</h1>
-          <p>info@abcemail.com</p>
-          <p>+92 3333 5555</p>
+          <p>aliasghar@auqta.com</p>
         </div>
       </div>
       <div className={classes.divider} />

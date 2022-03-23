@@ -21,8 +21,9 @@
   width: 50%;
   justify-content: space-evenly;
 }
-.right_panel p{
-    color: white;
+.right_panel p {
+  cursor: pointer;
+  color: white;
 }
 .left_panel {
   width: 40%;

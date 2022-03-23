@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./navbar.module.css";
 import Image from "next/image";
 import logo from "../../public/assets/logo.png";
+import {Link} from 'react-scroll'
 
 function Navbar() {
   return (
@@ -12,12 +13,12 @@ function Navbar() {
         </div>
       </div>
       <div className={classes.right_panel}>
-        <p>ABOUT</p>
+        <p><Link to="mission" spy={true} smooth={true}>ABOUT</Link></p>
         <p>SERVICES</p>
-        <p>BUY</p>
-        <p>SELL</p>
-        <p>RENT</p>
-        <p>INVEST</p>
+        <p><Link to="buy" spy={true} smooth={true}>BUY</Link></p>
+        <p><Link to="buy" spy={true} smooth={true}>SELL</Link></p>
+        <p><Link to="buy" spy={true} smooth={true}>RENT</Link></p>
+        <p><Link to="trending" spy={true} smooth={true}>INVEST</Link></p>
         <p>LOGIN</p>
       </div>
     </div>

@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./firstSection.module.css";
 import img from "../../../../public/assets/hero_banner_bg.png";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function FirstSection() {
   const [activeTab, setActiveTab] = useState("buy");
+
+  useEffect(() => {
+    AOS.init({
+      duration: 500,
+    });
+    AOS.refresh();
+  }, []);
 
   const handleTab = (value) => {
     setActiveTab(value);
@@ -14,7 +23,7 @@ function FirstSection() {
 
   return (
     <div className={classes.first_section_wrapper}>
-      <div className={classes.first_section_body}>
+      <div id="home" className={classes.first_section_body}>
         <div className={classes.banner_img_container}>
           <Image
             src={img}
@@ -22,12 +31,12 @@ function FirstSection() {
             alt="hero_banner_img"
           />
         </div>
-        <div className={classes.first_section_content_section}>
-          <h1>Indulge in the world of immersive technologies</h1>
-          <p>
+        <div  className={classes.first_section_content_section}>
+          <h1 data-aos="fade-right">Indulge in the world of immersive technologies</h1>
+          <p data-aos="fade-right">
             Auqta brings you the world{"'"}s first immersive property portal
           </p>
-          <div className={classes.search_bar_container}>
+          <div data-aos="fade-up" className={classes.search_bar_container}>
             <div className={classes.tabs_container}>
               <div
                 onClick={() => {

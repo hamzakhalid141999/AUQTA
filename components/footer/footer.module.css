@@ -69,16 +69,19 @@
 .col_1 p{
     color: white;
     font-size: 12px;
+    cursor: pointer;
     width: 95%;
     line-height: 20px;
 }
 .col_2 h1{
     font-size: 15px;
+    cursor: pointer;
     color: white;
     margin-bottom: 50px;
 }
 .col_2 p{
     font-size: 13px;
+    cursor: pointer;
     color: white;
     margin-bottom: 24px;
 }
