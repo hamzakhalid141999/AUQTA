@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import classes from "./firstSection.module.css";
-import img from "../../../../public/assets/hero_banner_bg.png";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -25,14 +24,21 @@ function FirstSection() {
     <div className={classes.first_section_wrapper}>
       <div id="home" className={classes.first_section_body}>
         <div className={classes.banner_img_container}>
-          <Image
-            src={img}
+          <div className={classes.overlay} />
+          <video
+            src="https://farbe9d3fb46190ad4564938d20f57a5ad372133227-test.s3.eu-central-1.amazonaws.com/public/compressed/first_section_banner_video.mp4"
             className={classes.banner_img}
             alt="hero_banner_img"
+            loop
+            autoPlay
+            muted
+            playsInline={true}
           />
         </div>
-        <div  className={classes.first_section_content_section}>
-          <h1 data-aos="fade-right">Indulge in the world of immersive technologies</h1>
+        <div className={classes.first_section_content_section}>
+          <h1 data-aos="fade-right">
+            Indulge in the world of immersive technologies
+          </h1>
           <p data-aos="fade-right">
             Auqta brings you the world{"'"}s first immersive property portal
           </p>

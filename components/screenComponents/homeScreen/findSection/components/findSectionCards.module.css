@@ -1,6 +1,8 @@
 .card_body{
     height: 550px;
-    width: 380px;
+    min-height: 480px;
+    max-width: 380px;
+    min-width: 250px;
     border-radius: 20px;
     background-color: rgba(154, 206, 255, 0.247);
     border-top: 5px solid rgba(255, 255, 255, 0.301);
