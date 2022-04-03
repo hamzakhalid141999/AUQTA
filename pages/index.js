@@ -18,8 +18,8 @@ export default function Home() {
         <div className={classes.main_bg}>
           <Image alt="bg" className={classes.bg} layout="fill" src={bg} />      
           <HomeFirstSection/>
-          <FindSection/>
           <OurMission/>
+          <FindSection/>
           <TrendingProperties/>
         </div>
         <Footer/>

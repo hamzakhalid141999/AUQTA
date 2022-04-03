@@ -21,15 +21,14 @@ function OurMission() {
   return (
     <div className={classes.mission_section_wrapper}>
       <div id="mission" className={classes.mission_section_section}>
-        <h1 data-aos="fade-up">OUR MISSION</h1>
-        <p data-aos="fade-up">
-          Delivering digital convenience to buyers, sellers, investors, and
-          realtors
+        <h1 data-aos="fade-up">WHY CHOOSE US?</h1>
+        <p className={classes.subheading} data-aos="fade-up">
+          Introducing AUQTA, the world{"'"}s first immersive real-estate trading portal. Immersive technologies include Augmented Reality and Virtual Reality, which will indulge the user in a digital environment around the world. The property trading experience will become seamless and convivial, as the user will now visualise digitally created physical spaces before deciding to go forward
         </p>
         <div className={classes.content_container}>
           <div className={classes.image_container}>
             <Image
-            data-aos="fade-right"
+            data-aos="fade-left"
               src={our_mission}
               alt="pic"
               layout="responsive"
@@ -44,11 +43,9 @@ function OurMission() {
                 </div>
               </div>
               <div className={classes.description_container}>
-                <h1>CONVENIENCE</h1>
+                <h1>DIGITAL EXPERIENCES</h1>
                 <p>
-                  We always seek to prioritise a user-friendly experience. Thus,
-                  convenience forms our prime value on which this platform was
-                  built.{" "}
+                  Embrace yourself in the world of immersive technologies where every physical space is captured in a digital environment. Auqta provides digital visualisation of every property space from anywhere around the world.{" "}
                 </p>
               </div>
             </div>
@@ -59,10 +56,9 @@ function OurMission() {
                 </div>
               </div>
               <div className={classes.description_container}>
-                <h1>INNOVATION</h1>
+                <h1>CONVINIENT VIEWING</h1>
                 <p>
-                  Innovation is elemental and thus, we embrace it in every
-                  culture of our company.
+                  Have the convenience of viewing and analysing properties/projects and their respected locations from your doorsteps. We at Auqta understand the daunting process of viewing and thus, want to provide absolute convenience to our user base.
                 </p>
               </div>
             </div>
@@ -73,11 +69,9 @@ function OurMission() {
                 </div>
               </div>
               <div className={classes.description_container}>
-                <h1>TEAMWORK</h1>
+                <h1>SMART INVESTING</h1>
                 <p>
-                  We believe a united team is the backbone of every successful
-                  organization. Thus, team unity and equality are core standards
-                  in our culture.
+                  Analyst investment options in terms of locaiton and the project itself requires a lot of time and resources. Make these decisions at home before even meeting with an agent. Auqta believes in smart investing so let technology guide you in your investment journey.
                 </p>
               </div>
             </div>

@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 
 function PropertyCard({picture, title, description, price, location}) {
-    console.log(picture)
   return (
     <div className={classes.card_body}>
       <div className={classes.image_container}>

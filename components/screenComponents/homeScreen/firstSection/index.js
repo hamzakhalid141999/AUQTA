@@ -48,6 +48,7 @@ function FirstSection() {
                 onClick={() => {
                   handleTab("buy");
                 }}
+                style={{width: '40%'}}
                 className={
                   activeTab === "buy"
                     ? classes.single_tab_active
@@ -60,6 +61,7 @@ function FirstSection() {
                 onClick={() => {
                   handleTab("rent");
                 }}
+                style={{width: '20%'}}
                 className={
                   activeTab === "rent"
                     ? classes.single_tab_active
@@ -72,6 +74,7 @@ function FirstSection() {
                 onClick={() => {
                   handleTab("invest");
                 }}
+                style={{width: '40%'}}
                 className={
                   activeTab === "invest"
                     ? classes.single_tab_active

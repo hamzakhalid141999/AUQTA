@@ -1,15 +1,38 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import classes from "./navbar.module.css";
 import Image from "next/image";
 import logo from "../../public/assets/logo.png";
+import logo_black from "../../public/assets/logo_black.png";
 import {Link} from 'react-scroll'
 
 function Navbar() {
+
+  const [backgroundColor, setBackgroundColor] = useState("transparent")
+  let listener = null;
+
+  useEffect(() => {
+    document.addEventListener("scroll", () => {
+      let scrolled = document.scrollingElement.scrollTop;
+      if (scrolled >= 600) {
+        if (backgroundColor !== "opaque") {
+          setBackgroundColor("opaque");
+        }
+      } else {
+        if (backgroundColor !== "transparent") {
+          setBackgroundColor("transparent");
+        }
+      }
+    });
+    return () => {
+      document.removeEventListener("scroll", listener);
+    };
+  }, [backgroundColor]);
+
   return (
-    <div className={classes.navbar_body}>
+    <div className={backgroundColor === "opaque" ? classes.navbar_body_opaque : classes.navbar_body}>
       <div className={classes.left_panel}>
         <div className={classes.logo}>
-          <Image src={logo} alt="logo" />
+          <Image src={backgroundColor === "transparent" ? logo : logo_black} alt="logo" />
         </div>
       </div>
       <div className={classes.right_panel}>

@@ -1,12 +1,13 @@
 .card_body{
-    height: 550px;
-    min-height: 480px;
-    max-width: 380px;
-    min-width: 250px;
+    height: 450px;
+    min-height: 430px;
+    max-width: 290px;
+    min-width: 200px;
     border-radius: 20px;
-    background-color: rgba(154, 206, 255, 0.247);
-    border-top: 5px solid rgba(255, 255, 255, 0.301);
-    border-bottom: 5px solid rgba(134, 134, 134, 0.082);
+    background-color: #f2f8fa;
+    border-top: 5px solid rgba(255, 255, 255, 0.671);
+    border-bottom: 3px solid rgba(11, 42, 75, 0.281);
+    border-right: 2px solid rgba(151, 151, 151, 0.144);
     transition: ease-in-out 200ms;
     padding: 30px;
     display: flex;
@@ -15,19 +16,19 @@
     position: relative;
 }
 .card_body:hover{
-    background-color: rgba(242, 249, 255, 0.075);
-    box-shadow: 2px 4px 22px -1px rgba(180, 213, 255, 0.486);
+    background-color: #f2f8fa;
+    box-shadow: 8px 15px 35px 17px rgba(199, 223, 255, 0.589);
     border-bottom: 5px solid rgba(134, 134, 134, 0);
     border-top: 5px solid rgba(134, 134, 134, 0);
     transform: translate3d(0px, -4px, 0px);
 }
 .icon_container{
     margin-top: 20px;
-    width: 100%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50%;
+    height: 30%;
     position: relative;
 }
 .card_body h1{
@@ -35,6 +36,7 @@
     margin-top: 25px;
     font-size: 25px;
     margin-bottom: 20px;
+    color: #0169ec;
 }
 .card_body p{
     width: 90%;
@@ -42,7 +44,7 @@
     font-size: 12px;
 }
 .icon{
-    width: 100%;
+    width: 30%;
     object-fit: contain;
     max-width: 320px;
 }

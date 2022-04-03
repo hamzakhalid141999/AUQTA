@@ -17,11 +17,18 @@
 }
 .cards_container{
     width: 90%;
-    height: 500px;
-    z-index: 30;
-    padding-top: 60px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    max-width: 1600px;
+    max-width: 1550px;
+    height: fit-content;
+    margin-top: 80px;
+    height: 700px;
+    position: relative;
 }
+.overlay{
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  pointer-events: none;
+  background-image: linear-gradient(to right, #f1f7f900,#f1f7f900, #f1f7f900,#f1f7f9);
+  z-index: 30;
+}
+

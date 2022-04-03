@@ -1,4 +1,4 @@
-.navbar_body {
+.navbar_body, .navbar_body_opaque {
   height: 80px;
   width: 100%;
   top: 0;
@@ -8,22 +8,33 @@
   align-items: center;
   position: absolute;
   z-index: 30;
+  transition: background-color 300ms linear;
+  position: fixed;
+}
+.navbar_body_opaque{
+  background-color: rgba(234, 243, 255, 0.822);
+  backdrop-filter: blur(4px);
 }
 .right_panel,
 .left_panel {
   display: flex;
   flex-direction: row;
   align-items: center;
-
   height: 100%;
 }
 .right_panel {
   width: 50%;
   justify-content: space-evenly;
 }
-.right_panel p {
+.navbar_body p {
   cursor: pointer;
   color: white;
+  transition: ease-in-out 200ms;
+}
+.navbar_body_opaque p{
+  color: black;
+  transition: ease-in-out 200ms;
+  cursor: pointer;
 }
 .left_panel {
   width: 40%;

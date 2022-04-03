@@ -9,7 +9,7 @@ function findSectionCards({ lower, icon, title, description, btn }) {
 
   return (
     <div
-      style={{ marginTop: lower ? "120px" : "0px" }}
+      // style={{ marginTop: lower ? "120px" : "0px" }}
       className={classes.card_body}
     >
       <div className={classes.icon_container}>
@@ -17,9 +17,7 @@ function findSectionCards({ lower, icon, title, description, btn }) {
       </div>
       <h1>{title}</h1>
       <p>{description}</p>
-      <div className={classes.btn}>
-        <p>{btn}</p>
-      </div>
+
     </div>
   );
 }

@@ -9,7 +9,7 @@ function Footer() {
     <div className={classes.footer_body}>
       <div className={classes.search_bar_container}>
         <div className={classes.search_bar_content}>
-          <input placeholder="ENTER YOUR EMAIL ADDRESS" className={classes.search_bar} />
+          <input placeholder="Enter your email address" className={classes.search_bar} />
           <div className={classes.search_btn}><p>SUBSCRIBE</p></div>
         </div>
       </div>

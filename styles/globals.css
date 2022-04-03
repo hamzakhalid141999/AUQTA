@@ -16,3 +16,12 @@ a {
   padding: 0;
   box-sizing: border-box;
 }
+.slick-list{
+  padding-top: 30px !important;
+  height: 550px !important;
+}
+.slick-initialized .slick-slide{
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
