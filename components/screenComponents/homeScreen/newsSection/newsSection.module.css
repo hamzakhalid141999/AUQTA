@@ -1,0 +1,16 @@
+.news_section_wrapper {
+  width: 100%;
+  height: 140vh;
+  position: relative;
+}
+.news_section_section {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}

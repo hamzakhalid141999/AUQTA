@@ -9,6 +9,7 @@ import FindSection from "../components/screenComponents/homeScreen/findSection";
 import Footer from "../components/footer";
 import OurMission from "../components/screenComponents/homeScreen/ourMission";
 import TrendingProperties from "../components/screenComponents/homeScreen/trendingProperties";
+import NewsSection from "../components/screenComponents/homeScreen/newsSection";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
           <OurMission/>
           <FindSection/>
           <TrendingProperties/>
+          {/* <NewsSection/> */}
         </div>
         <Footer/>
       </div>
