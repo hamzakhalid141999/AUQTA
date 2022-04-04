@@ -10,7 +10,8 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 function Navbar() {
 
   const [categorySelected, setCategorySelected] = useState("buy");
-  const [backgroundColor, setBackgroundColor] = useState("transparent")
+  const [backgroundColor, setBackgroundColor] = useState("transparent");
+  const [showFilter, setShowFilter] = useState(false);
   let listener = null;
 
   const handleCategorySelected = (value) => {
@@ -20,7 +21,13 @@ function Navbar() {
   useEffect(() => {
     document.addEventListener("scroll", () => {
       let scrolled = document.scrollingElement.scrollTop;
-      if (scrolled >= 600) {
+      if (scrolled > 600){
+        setShowFilter(true);
+      }
+      else{
+        setShowFilter(false);
+      }
+      if (scrolled >= 70) {
         if (backgroundColor !== "opaque") {
           setBackgroundColor("opaque");
         }
@@ -37,7 +44,7 @@ function Navbar() {
 
   return (
     <div className={backgroundColor === "opaque" ? classes.navbar_body_opaque : classes.navbar_body}>
-      <div className={backgroundColor === "opaque" ? classes.filter_panel : classes.filter_panel_hidden}>
+      <div className={showFilter ? classes.filter_panel : classes.filter_panel_hidden}>
         <div className={classes.filter_panel_content}>
           <div className={classes.btns_container}>
             <div onClick={()=>{

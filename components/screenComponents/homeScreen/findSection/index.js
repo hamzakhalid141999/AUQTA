@@ -7,10 +7,11 @@ import "aos/dist/aos.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import { useWindowSize } from "../../../../utils";
 
 function FindSection() {
-  console.log(CardsInfo);
-
+  const {width} = useWindowSize();
+  
   useEffect(() => {
     AOS.init({
       duration: 500,
@@ -21,11 +22,13 @@ function FindSection() {
   const settings = {
     dots: false,
     infinite: true,
-    slidesToShow: 4,
+    // slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
   };
+
+  console.log(width)
 
   return (
     <div className={classes.find_section_wrapper}>
@@ -33,7 +36,7 @@ function FindSection() {
         <h1 data-aos="fade-up">BENEFITS OF USING THIS PLATFORM</h1>
         <div data-aos="fade-up" className={classes.cards_container}>
           <div className={classes.overlay} />
-          <Slider {...settings}>
+          <Slider slidesToShow={width > 1360 ? 4 : width < 1360 ? 3 : width < 1024 ? 2 : width < 850 && 1} {...settings}>
             {CardsInfo?.map((card, index) => (
               <Card
                 key={index}

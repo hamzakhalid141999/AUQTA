@@ -3,9 +3,6 @@ import classes from "./findSectionCards.module.css";
 import Image from "next/image";
 
 function findSectionCards({ lower, icon, title, description, btn }) {
-  console.log("picture: ", icon);
-  console.log("title: ", title);
-  console.log("description: ", description);
 
   return (
     <div

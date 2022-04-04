@@ -4,9 +4,10 @@ import PropertyCard from "./components/propertyCard";
 import cardInfo from "./components/propertyCard/cardInfo";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useWindowSize } from "../../../../utils";
 
 function TrendingProperties() {
-
+  const {width} = useWindowSize();
   useEffect(()=>{
     AOS.init({
       duration: 500,
@@ -27,7 +28,7 @@ function TrendingProperties() {
           <p className={classes.category_tabs_unselected}>APARTMENTS</p>
         </div>
         <div data-aos="fade-up" className={classes.property_cards_container}>
-          {cardInfo?.map((property, index) => (
+          {cardInfo?.filter((property, index) => width < 1177 ? index < 3 : 4).map((property, index) => (
             <PropertyCard title={property.title} description={property.description} price={property.price} location={property.location} picture = {property.picture} key={index} />
           ))}
         </div>
