@@ -38,10 +38,10 @@
     margin-bottom: 20px;
     color: #0169ec !important;
 }
-.card_body p{
-    width: 100%;
+.description{
+    width: 100% !important;
     text-align: center;
-    font-size: 10px;
+    font-size: 10px !important;
 }
 .icon{
     width: 30%;

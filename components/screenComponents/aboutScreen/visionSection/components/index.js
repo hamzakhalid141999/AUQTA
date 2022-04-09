@@ -13,7 +13,7 @@ function visionSectionCard({ lower, icon, title, description, btn }) {
         <Image src={icon} layout="fill" className={classes.icon} alt="icon" />
       </div>
       <h1>{title}</h1>
-      <p>{description}</p>
+      <p className={classes.description}>{description}</p>
 
     </div>
   );
