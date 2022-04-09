@@ -9,7 +9,7 @@
     border-bottom: 3px solid rgba(11, 42, 75, 0.281);
     border-right: 2px solid rgba(151, 151, 151, 0.144);
     transition: ease-in-out 200ms;
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
