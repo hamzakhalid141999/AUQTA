@@ -64,6 +64,7 @@
   top: 0px;
   opacity: 0;
   transition: ease-in-out 200ms;
+  pointer-events: none;
 }
 .filter_panel{
   z-index: 20;
@@ -81,6 +82,7 @@
   display: flex;
   backdrop-filter: blur(4px);
   justify-content: center;
+  pointer-events: all;
 }
 .navbar_body_opaque{
   background-color: rgba(225, 238, 255, 0.568);
@@ -94,6 +96,8 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  max-width: 1235px;
+  min-width: 1200px;
 }
 .btns_container{
   width: 30%;

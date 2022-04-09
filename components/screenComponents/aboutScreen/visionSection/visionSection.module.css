@@ -1,0 +1,30 @@
+.vision_section{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content_container{
+    width: 95%;
+    height: 90%;
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+}
+.content_container p{
+    font-size: 12px;
+    width: 70%;
+    text-align: center;
+    margin-top: 20px;
+    max-width: 900px;
+}
+.cards_container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    max-width: 1381px;
+}

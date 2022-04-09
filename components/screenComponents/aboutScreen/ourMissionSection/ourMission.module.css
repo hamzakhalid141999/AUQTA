@@ -1,0 +1,119 @@
+.main_container{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    flex-direction: column;
+}
+.content_content{
+    height: 80%;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 1150px;
+}
+.image_container{
+    width: 40%;
+    position: relative;
+    height: 100%;
+    min-width: 560px;
+    max-width: 590px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.img{
+    width: 100%;
+}
+.description_container{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.description_container h1{
+    margin-bottom: 20px;
+}
+.description_container p{
+    font-size: 12px;
+    line-height: 25px;
+}
+.read_more_btn{
+    padding: 10px 15px;
+    background-color: #0459d0;
+    border-radius: 100px;
+    width: fit-content;
+    margin-top: 100px;
+}
+.read_more_btn p{
+    color: white;
+    font-size: 12px;
+}
+.vision_mission_content{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.our_vision_card{
+    width: 45%;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    background-color: #0459d0;
+    height: 400px;
+    display: flex;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+.our_vision_card h1{
+    color: white;
+}
+.our_vision_card p{
+    color: white;
+    font-weight: bolder;
+    width: 60%;
+    text-align: center;
+}
+.cards_container{
+    width: 90%;
+    height: 500px;
+    margin-top: 100px;
+    max-width: 1225px;
+}
+.icon_container{
+    position: relative;
+}
+.icon{
+    width: 50%;
+}
+.our_mission_card{
+    width: 45%;
+    height: 400px;
+    background-color: white;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+    box-shadow: 4px 7px 43px 0px rgba(19, 75, 138, 0.308);
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.our_mission_card h1{
+    color: #0459d0;
+}
+.our_mission_card p{
+    color: #0459d0;
+    font-weight: bolder;
+    width: 50%;
+    text-align: center;
+}

@@ -101,13 +101,13 @@ function Navbar() {
         </div>
       </div>
       <div className={classes.right_panel}>
-        <p><Link to="mission" spy={true} smooth={true}>ABOUT</Link></p>
+        <p><a href="/about">ABOUT</a></p>
         <p>SERVICES</p>
         <p><Link to="buy" spy={true} smooth={true}>BUY</Link></p>
         <p><Link to="buy" spy={true} smooth={true}>SELL</Link></p>
         <p><Link to="buy" spy={true} smooth={true}>RENT</Link></p>
         <p><Link to="trending" spy={true} smooth={true}>INVEST</Link></p>
-        <p>LOGIN</p>
+        <p><a href="/signUp">LOGOUT</a></p>
       </div>
     </div>
   );
