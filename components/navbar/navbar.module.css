@@ -157,4 +157,5 @@
 .logo {
   min-width: 135px;
   max-width: 25%;
+  cursor: pointer;
 }
