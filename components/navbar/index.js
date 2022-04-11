@@ -25,7 +25,7 @@ function Navbar() {
       } else {
         setShowFilter(false);
       }
-      if (scrolled >= 70) {
+      if (scrolled >= 10) {
         if (backgroundColor !== "opaque") {
           setBackgroundColor("opaque");
         }
@@ -150,7 +150,10 @@ function Navbar() {
         <Link href={"/about"}>
           <p>ABOUT</p>
         </Link>
+        <Link href={"/services"}>
         <p>SERVICES</p>
+        </Link>
+        
         <p>
           <Link href={"#"}>BUY</Link>
         </p>
