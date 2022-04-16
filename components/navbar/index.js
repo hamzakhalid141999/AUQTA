@@ -6,16 +6,23 @@ import logo_black from "../../public/assets/logo_black.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import LoginSignupModal from "../modals/loginSignupModal";
 
 function Navbar() {
   const [categorySelected, setCategorySelected] = useState("buy");
   const [backgroundColor, setBackgroundColor] = useState("transparent");
   const [showFilter, setShowFilter] = useState(false);
+  const [open, setOpen] = useState();
+  const onCloseModal = () => setOpen(false);
   let listener = null;
 
   const handleCategorySelected = (value) => {
     setCategorySelected(value);
   };
+
+  const handleModal = () => {
+    setOpen(true);
+  }
 
   useEffect(() => {
     document.addEventListener("scroll", () => {
@@ -48,6 +55,7 @@ function Navbar() {
           : classes.navbar_body
       }
     >
+      <LoginSignupModal open={open} onCloseModal={onCloseModal}/>
       <div
         className={
           showFilter ? classes.filter_panel : classes.filter_panel_hidden
@@ -166,9 +174,9 @@ function Navbar() {
         <p>
           <Link href={"#"}>INVEST</Link>
         </p>
-        <Link href={"/signUp"}>
-          <p>LOGOUT</p>
-        </Link>
+        
+        <p onClick={handleModal}>LOGIN</p>
+        
       </div>
     </div>
   );
