@@ -19,7 +19,7 @@ function map() {
             borderBottomLeftRadius: "180px",
           }}
           width="100%"
-          height="600"
+          height="700"
           frameBorder="0"
           scrolling="no"
           marginHeight="0"
@@ -43,30 +43,6 @@ function map() {
           </div>
         </div>
         <div className={classes.cards}>
-          <PropertyCard
-            title={"Title goes here"}
-            price={"PKR 230,000"}
-            location={"Islamabad, Pakistan"}
-            picture={img}
-          />
-          <PropertyCard
-            title={"Title goes here"}
-            price={"PKR 230,000"}
-            location={"Islamabad, Pakistan"}
-            picture={img}
-          />
-          <PropertyCard
-            title={"Title goes here"}
-            price={"PKR 230,000"}
-            location={"Islamabad, Pakistan"}
-            picture={img}
-          />
-          <PropertyCard
-            title={"Title goes here"}
-            price={"PKR 230,000"}
-            location={"Islamabad, Pakistan"}
-            picture={img}
-          />
           <PropertyCard
             title={"Title goes here"}
             price={"PKR 230,000"}

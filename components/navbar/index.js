@@ -7,11 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import LoginSignupModal from "../modals/loginSignupModal";
+import { useRouter } from "next/router";
 
 function Navbar() {
+  const router = useRouter();
   const [categorySelected, setCategorySelected] = useState("buy");
   const [backgroundColor, setBackgroundColor] = useState("transparent");
   const [showFilter, setShowFilter] = useState(false);
+  const [isNavbarVisisbleFromTop, setIsNavbarVisibleFromTop] = useState(false);
   const [open, setOpen] = useState();
   const onCloseModal = () => setOpen(false);
   let listener = null;
@@ -20,9 +23,19 @@ function Navbar() {
     setCategorySelected(value);
   };
 
+  useEffect(() => {
+    console.log(router.pathname);
+    if (router.pathname === "/map") {
+      setIsNavbarVisibleFromTop(true);
+      console.log("YES");
+    }
+  }, [router.pathname]);
+
   const handleModal = () => {
     setOpen(true);
-  }
+  };
+
+  console.log(isNavbarVisisbleFromTop);
 
   useEffect(() => {
     document.addEventListener("scroll", () => {
@@ -50,15 +63,21 @@ function Navbar() {
   return (
     <div
       className={
-        backgroundColor === "opaque"
+        isNavbarVisisbleFromTop
+          ? classes.navbar_body_opaque
+          : backgroundColor === "opaque"
           ? classes.navbar_body_opaque
           : classes.navbar_body
       }
     >
-      <LoginSignupModal open={open} onCloseModal={onCloseModal}/>
+      <LoginSignupModal open={open} onCloseModal={onCloseModal} />
       <div
         className={
-          showFilter ? classes.filter_panel : classes.filter_panel_hidden
+          isNavbarVisisbleFromTop
+            ? classes.filter_panel
+            : showFilter
+            ? classes.filter_panel
+            : classes.filter_panel_hidden
         }
       >
         <div className={classes.filter_panel_content}>
@@ -148,7 +167,13 @@ function Navbar() {
         <Link href={"/"}>
           <div className={classes.logo}>
             <Image
-              src={backgroundColor === "transparent" ? logo : logo_black}
+              src={
+                isNavbarVisisbleFromTop
+                  ? logo_black
+                  : backgroundColor === "transparent"
+                  ? logo
+                  : logo_black
+              }
               alt="logo"
             />
           </div>
@@ -159,24 +184,23 @@ function Navbar() {
           <p>ABOUT</p>
         </Link>
         <Link href={"/services"}>
-        <p>SERVICES</p>
+          <p>SERVICES</p>
         </Link>
-        
-        <p>
-          <Link href={"/map"}>BUY</Link>
-        </p>
-        <p>
-          <Link href={"#"}>SELL</Link>
-        </p>
-        <p>
-          <Link href={"#"}>RENT</Link>
-        </p>
-        <p>
-          <Link href={"#"}>INVEST</Link>
-        </p>
-        
+
+        <Link href={"/map"}>
+          <p>BUY</p>
+        </Link>
+        <Link href={"#"}>
+          <p>SELL</p>
+        </Link>
+        <Link href={"#"}>
+          <p>RENT</p>
+        </Link>
+        <Link href={"#"}>
+          <p>INVEST</p>
+        </Link>
+
         <p onClick={handleModal}>LOGIN</p>
-        
       </div>
     </div>
   );
