@@ -49,39 +49,30 @@ function FirstSection() {
                   handleTab("buy");
                 }}
                 style={{width: '40%', borderTopRightRadius: 0}}
-                className={
-                  activeTab === "buy"
-                    ? classes.single_tab_active
-                    : classes.single_tab_inactive
-                }
+                className={classes.single_tab}
               >
-                <p>BUY</p>
+                <p style={{width: '65%', textAlign: 'right', color: activeTab === 'buy' ?  '#0068ed' : 'rgb(70, 70, 70)'}}>BUY</p>
               </div>
+              <div className={classes.divider_small}/>
               <div
                 onClick={() => {
                   handleTab("rent");
                 }}
                 style={{width: '20%', borderTopLeftRadius: 0, borderTopRightRadius: 0}}
-                className={
-                  activeTab === "rent"
-                    ? classes.single_tab_active
-                    : classes.single_tab_inactive
-                }
+                className={classes.single_tab_mid}
               >
-                <p>RENT</p>
+                <p style={{color: activeTab === 'rent' ?  '#0068ed' : 'rgb(70, 70, 70)'}}>RENT</p>
               </div>
+              <div className={classes.divider_small}/>
               <div
                 onClick={() => {
                   handleTab("invest");
                 }}
                 style={{width: '40%', borderTopLeftRadius: 0}}
-                className={
-                  activeTab === "invest"
-                    ? classes.single_tab_active
-                    : classes.single_tab_inactive
+                className={classes.single_tab
                 }
               >
-                <p>INVEST</p>
+                <p style={{width: '65%', textAlign: 'left', color: activeTab === 'invest' ?  '#0068ed' : 'rgb(70, 70, 70)'}}>INVEST</p>
               </div>
             </div>
             <div className={classes.search_bar}>

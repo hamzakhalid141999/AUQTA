@@ -163,7 +163,7 @@ function Navbar() {
         </Link>
         
         <p>
-          <Link href={"#"}>BUY</Link>
+          <Link href={"/map"}>BUY</Link>
         </p>
         <p>
           <Link href={"#"}>SELL</Link>

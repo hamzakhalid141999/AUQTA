@@ -36,7 +36,7 @@ function FindSection() {
         <h1 data-aos="fade-up">BENEFITS OF USING THIS PLATFORM</h1>
         <div data-aos="fade-up" className={classes.cards_container}>
           <div className={classes.overlay} />
-          <Slider slidesToShow={width > 1360 ? 4 : width < 1360 ? 3 : width < 1024 ? 2 : width < 850 && 1} {...settings}>
+          <Slider slidesToShow={width > 1390 ? 4 : width < 1390 ? 3 : width < 1024 ? 2 : width < 850 && 1} {...settings}>
             {CardsInfo?.map((card, index) => (
               <Card
                 key={index}
