@@ -24,10 +24,14 @@ function Navbar() {
   };
 
   useEffect(() => {
-    console.log(router.pathname);
+    console.log("PAGE CHANGED")
+    console.log("path: ", router.pathname);
     if (router.pathname === "/map") {
       setIsNavbarVisibleFromTop(true);
       console.log("YES");
+    }
+    if (router.pathname !== "/map"){
+      setIsNavbarVisibleFromTop(false);
     }
   }, [router.pathname]);
 
