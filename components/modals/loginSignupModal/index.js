@@ -247,13 +247,19 @@ function LoginSignupModal({ open, onCloseModal }) {
                 <p>Continue</p>
               </div>
 
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-              <input type="checkbox"/>
-            <p className={classes.forgot_password}>
-                I accept Auqta{"'"}s terms of use
-              </p>
-            </div>
-              
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <input type="checkbox" />
+                <p className={classes.forgot_password}>
+                  I accept Auqta{"'"}s terms of use
+                </p>
+              </div>
 
               <div className={classes.divider} />
               <p className={classes.connect_with}>Or connect with:</p>

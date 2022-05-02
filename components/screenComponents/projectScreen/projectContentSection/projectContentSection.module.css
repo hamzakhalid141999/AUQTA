@@ -16,10 +16,13 @@
 }
 .video_container{
     width: 90%;
-    height: 450px;
+    height: 550px;
     border-radius: 35px;
     /* background-color: #0050b9; */
     margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     max-width: 1216px;
 }
 .video{
@@ -171,6 +174,8 @@
 .augmented_reality_section{
     width: 90%;
     height: fit-content;
+    padding-top: 40px;
+    padding-bottom: 20px;
     margin-top: 100px;
     display: flex;
     flex-direction: column;

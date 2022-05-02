@@ -17,41 +17,51 @@ function Navbar() {
   const [showFilter, setShowFilter] = useState(false);
   const [isNavbarVisisbleFromTop, setIsNavbarVisibleFromTop] = useState(false);
   const [open, setOpen] = useState();
+  const [currentPage, setCurrentPage] = useState();
   const onCloseModal = () => setOpen(false);
   let listener = null;
 
-  console.log("page: ",page);
+  useEffect(()=>{
+    if (router.pathname){
+      console.log(router.pathname);
+      const page = router.pathname.split('/')
+      setCurrentPage(page[1]);
+    }
+  },[router.pathname])
 
   const handleCategorySelected = (value) => {
     setCategorySelected(value);
   };
 
   useEffect(() => {
-    console.log("PAGE CHANGED");
-    console.log("path: ", router.pathname);
-    if (page === "/map") {
-      setIsNavbarVisibleFromTop(true);
-      console.log("*****************************YES*****************************");
+    if (currentPage){
+      if (currentPage==="map" || currentPage==="invest"){
+        setIsNavbarVisibleFromTop(true);
+      }
+      else if (currentPage!=="map" || currentPage==="invest") {
+        setIsNavbarVisibleFromTop(false);
+      }
     }
-    // else if (page === "/invest") {
-    //   setIsNavbarVisibleFromTop(true);
-    //   console.log("*****************************YES*****************************");
-    // }
-    if (page !== "/map") {
-      setIsNavbarVisibleFromTop(false);
-      console.log("*****************************NO*****************************");
-    }
-    // else if (page !== "/invest") {
-    //   setIsNavbarVisibleFromTop(false);
-    //   console.log("*****************************NO*****************************");
-    // }
-  }, [page]);
+    
+  }, [currentPage]);
+
+  // useEffect(() => {
+  //   if (currentPage){
+  //     if (currentPage === "invest") {
+  //       setIsNavbarVisibleFromTop(true);
+  //     }
+  //     else if (currentPage !== "invest") {
+  //       setIsNavbarVisibleFromTop(false);
+  //     }
+  //   }
+    
+  // }, [currentPage]);
 
   const handleModal = () => {
     setOpen(true);
   };
 
-  console.log(isNavbarVisisbleFromTop);
+  console.log(isNavbarVisisbleFromTop, currentPage);
 
   useEffect(() => {
     document.addEventListener("scroll", () => {
@@ -111,7 +121,7 @@ function Navbar() {
                     : classes.filter_panel_btn_label_unselected
                 }
               >
-                BUY
+                INVEST
               </p>
             </div>
             <div className={classes.divider} />
@@ -128,7 +138,7 @@ function Navbar() {
                     : classes.filter_panel_btn_label_unselected
                 }
               >
-                RENT
+                BUY
               </p>
             </div>
             <div className={classes.divider} />
@@ -145,7 +155,7 @@ function Navbar() {
                     : classes.filter_panel_btn_label_unselected
                 }
               >
-                INVEST
+                RENT
               </p>
             </div>
           </div>
@@ -197,48 +207,91 @@ function Navbar() {
       </div>
       <div className={classes.right_panel}>
         <Link href={"/about"}>
-          <p className={page.includes('about') ? classes.selected : classes.hover_underline_animation}>ABOUT</p>
+          <p
+            className={
+              page.includes("about")
+                ? classes.selected
+                : classes.hover_underline_animation
+            }
+          >
+            ABOUT
+          </p>
         </Link>
         <Link href={"/services"}>
-          <p className={page.includes('services') ? classes.selected : classes.hover_underline_animation}>SERVICES</p>
+          <p
+            className={
+              page.includes("services")
+                ? classes.selected
+                : classes.hover_underline_animation
+            }
+          >
+            SERVICES
+          </p>
         </Link>
         <Link href={"/invest"}>
-          <p className={page.includes('invest') ? classes.selected : classes.hover_underline_animation}>INVEST</p>
+          <p
+            className={
+              page.includes("invest")
+                ? classes.selected
+                : classes.hover_underline_animation
+            }
+          >
+            INVEST
+          </p>
         </Link>
         <Link href={"/map"}>
-          <p className={page.includes('map') ? classes.selected : classes.hover_underline_animation}>BUY</p>
+          <p
+            className={
+              page.includes("map")
+                ? classes.selected
+                : classes.hover_underline_animation
+            }
+          >
+            BUY
+          </p>
         </Link>
         <Link href={"#"}>
-          <p className={page.includes('rent') ? classes.selected : classes.hover_underline_animation}>RENT</p>
+          <p
+            className={
+              page.includes("rent")
+                ? classes.selected
+                : classes.hover_underline_animation
+            }
+          >
+            RENT
+          </p>
         </Link>
-        
+
         <Link href={"#"}>
           <div className={classes.dropdown_container}>
             <div className={classes.dropdown}>
               <div className={classes.option}>
-                <Link href={'/dashboard/property'}><p>Property</p></Link>
+                <Link href={"/dashboard/property"}>
+                  <p>Property</p>
+                </Link>
               </div>
               <div className={classes.option}>
-                <Link href={'/dashboard/agent'}><p>Agent</p></Link>
+                <Link href={"/dashboard/agent"}>
+                  <p>Agent</p>
+                </Link>
               </div>
               <div className={classes.option}>
-                <Link href={'/dashboard/project'}><p>Project</p></Link>
+                <Link href={"/dashboard/project"}>
+                  <p>Project</p>
+                </Link>
               </div>
               <div className={classes.option}>
-                <Link href={'/dashboard/developer'}><p>Developer</p></Link>
+                <Link href={"/dashboard/developer"}>
+                  <p>Developer</p>
+                </Link>
               </div>
             </div>
-          <p className={classes.hover_underline_animation}>DASHBOARD</p>
+            <p className={classes.hover_underline_animation}>DASHBOARD</p>
           </div>
-        
         </Link>
 
-        <div className={classes.login_btn}>
-          <p
-            onClick={handleModal}
-          >
-            LOGIN
-          </p>
+        <div onClick={handleModal} className={classes.login_btn}>
+          <p>LOGIN</p>
         </div>
       </div>
     </div>

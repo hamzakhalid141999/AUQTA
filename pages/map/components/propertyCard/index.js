@@ -8,11 +8,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import Link from "next/link";
 
 function PropertyCard({ picture, title, description, price, location }) {
   return (
-    <Link href={"/project"}>
       <div className={classes.card_body}>
         <FontAwesomeIcon className={classes.like} icon={faHeart} size={"1x"} />
         <div className={classes.image_container}>
@@ -46,7 +44,6 @@ function PropertyCard({ picture, title, description, price, location }) {
         </div> */}
         </div>
       </div>
-    </Link>
   );
 }
 

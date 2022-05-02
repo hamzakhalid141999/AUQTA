@@ -15,7 +15,7 @@
 .content_container p{
     width: 75%;
     margin-top: 30px;
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
     line-height: 20px;
     max-width: 900px;
@@ -68,18 +68,18 @@
     box-shadow: 2px 4px 22px -1px rgba(100, 137, 185, 0.747); 
 }
 .icon_holder{
-    height: 60px;
-    width: 60px;
+    height: 70px;
+    width: 70px;
     background-color: #b0d3ff;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 .icon_container{
-    width: 50%;
+    width: 60%;
     position: relative;
 }
 .tab_icon{
@@ -104,9 +104,9 @@
 }
 .description_container p{
     color: rgb(48, 48, 48);
-    font-size: 13px;
+    font-size: 14px;
     margin: 0;
     text-align: left !important;
-    line-height: 13px;
+    line-height: 20px;
     width: 100%;
 }

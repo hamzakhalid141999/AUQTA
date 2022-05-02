@@ -228,6 +228,7 @@
 .hover_underline_animation {
   display: inline-block;
   position: relative;
+  font-size: 14px !important;
 }
 .hover_underline_animation:after {
   content: '';

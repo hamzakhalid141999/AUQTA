@@ -31,7 +31,7 @@ function invest() {
     </div>
 
     <div className={classes.cards_container}>
-      <TrendingProperties />
+      <TrendingProperties isProject = {true}/>
     </div>
   </div>
   )

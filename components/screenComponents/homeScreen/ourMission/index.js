@@ -23,7 +23,7 @@ function OurMission() {
     <div className={classes.mission_section_wrapper}>
       <div id="mission" className={classes.mission_section_section}>
 
-        <div className={classes.typewriter_container}>
+        <div data-aos="fade-up" className={classes.typewriter_container}>
         <h1>World{"’"}s First Immersive Real Estate Portal</h1>
         {/* <div style={{display: "flex", flexDirection: 'row'}}>
         <Typewriter             
@@ -38,7 +38,7 @@ function OurMission() {
 
         <br/>
         <div className={classes.typewriter_row}>
-          <p style={{marginRight: '15px'}}>Experience{" "}</p>
+          <p className={classes.experience}>Experience{" "}</p>
         <Typewriter             
             words={['Augmented', 'integrated', 'Quantum', 'Technological', 'Architecture','AUQTA']}
             loop

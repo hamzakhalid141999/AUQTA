@@ -6,7 +6,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useWindowSize } from "../../../../utils";
 
-function TrendingProperties() {
+function TrendingProperties({isProject}) {
   const {width} = useWindowSize();
   useEffect(()=>{
     AOS.init({
@@ -30,7 +30,7 @@ function TrendingProperties() {
         </div>
         <div data-aos="fade-up" className={classes.property_cards_container}>
           {cardInfo?.filter((property, index) => width < 1177 ? index < 3 : 4).map((property, index) => (
-            <PropertyCard title={property.title} description={property.description} price={property.price} location={property.location} picture = {property.picture} key={index} />
+            <PropertyCard isProject = {isProject} title={property.title} description={property.description} price={property.price} location={property.location} picture = {property.picture} key={index} />
           ))}
         </div>
       </div>

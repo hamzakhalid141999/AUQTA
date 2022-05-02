@@ -3,9 +3,11 @@ import classes from "./propertyCard.module.css";
 import { faBath, faBed, faMapMarker, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import Link from "next/link";
 
-function PropertyCard({ picture, title, description, price, location }) {
+function PropertyCard({ picture, title, description, price, location, isProject }) {
   return (
+    <Link href={'/project'}>
     <div className={classes.card_body}>
       <div className={classes.image_container}>
         <Image
@@ -40,6 +42,7 @@ function PropertyCard({ picture, title, description, price, location }) {
         </div>
       </div>
     </div>
+    </Link>
   );
 }
 
