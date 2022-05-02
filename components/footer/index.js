@@ -7,9 +7,10 @@ import {Link} from 'react-scroll'
 function Footer() {
   return (
     <div className={classes.footer_body}>
+      <div className={classes.gradient_1}/>
       <div className={classes.search_bar_container}>
         <div className={classes.search_bar_content}>
-          <input placeholder="Enter your email address" className={classes.search_bar} />
+          <input placeholder="Enter your Email address" className={classes.search_bar} />
           <div className={classes.search_btn}><p>SUBSCRIBE</p></div>
         </div>
       </div>

@@ -11,7 +11,7 @@ function LoginSignupModal({ open, onCloseModal }) {
   const [isMix, setIsMix] = useState();
   const [isSpecialCharacter, setIsSpecialCharacter] = useState();
   const [isLowerUpper, setIsLowerUpper] = useState();
-
+  const [isUserAgent, setIsUserAgent] = useState();
   const [signupEmail, setSignupEmail] = useState();
   const [currentState, setCurrentState] = useState(1); //1=Login, 2=Signup, 3=Forget Password
   const toggleAuthScreen = (value) => {
@@ -63,6 +63,10 @@ function LoginSignupModal({ open, onCloseModal }) {
     setCurrentState(state);
   };
 
+  const handleIsUserAgent = (value) => {
+    setIsUserAgent(value);
+  };
+
   return (
     <Modal
       classNames={{
@@ -80,40 +84,36 @@ function LoginSignupModal({ open, onCloseModal }) {
               ? "Welcome to Auqta"
               : currentState === 3 && "Request to reset your Password"}
           </h1>
-          {
-            currentState !== 3 &&
-
+          {currentState !== 3 && (
             <div className={classes.toggle_btn_container}>
-            <div
-              onClick={() => {
-                toggleAuthScreen("signin");
-                handleStateChange(1);
-              }}
-              className={classes.signin_btn}
-            >
-              <p>Sign in</p>
               <div
-                style={{ opacity: activeTab === "signin" ? 1 : 0 }}
-                className={classes.active_tab}
-              />
-            </div>
-            <div
-              onClick={() => {
-                toggleAuthScreen("signup");
-                handleStateChange(2);
-              }}
-              className={classes.signup_btn}
-            >
-              <p>New account</p>
+                onClick={() => {
+                  toggleAuthScreen("signin");
+                  handleStateChange(1);
+                }}
+                className={classes.signin_btn}
+              >
+                <p>Sign in</p>
+                <div
+                  style={{ opacity: activeTab === "signin" ? 1 : 0 }}
+                  className={classes.active_tab}
+                />
+              </div>
               <div
-                style={{ opacity: activeTab === "signup" ? 1 : 0 }}
-                className={classes.active_tab}
-              />
+                onClick={() => {
+                  toggleAuthScreen("signup");
+                  handleStateChange(2);
+                }}
+                className={classes.signup_btn}
+              >
+                <p>New account</p>
+                <div
+                  style={{ opacity: activeTab === "signup" ? 1 : 0 }}
+                  className={classes.active_tab}
+                />
+              </div>
             </div>
-          </div>
-
-          }
-         
+          )}
 
           {currentState === 1 ? (
             <>
@@ -185,12 +185,18 @@ function LoginSignupModal({ open, onCloseModal }) {
 
               <div className={classes.checkboxes_container}>
                 <div className={classes.checkboxes_row}>
-                  <input type="checkbox" />
-                  <p>I am a Landlord or industry professional</p>
+                  <input
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      handleIsUserAgent(e.target.checked);
+                    }}
+                    type="checkbox"
+                  />
+                  <p>I am a Real Estate Agent or Industrial Professional</p>
                 </div>
                 <div className={classes.checkboxes_row}>
                   <input type="checkbox" />
-                  <p>I am looking to invest or purchase</p>
+                  <p>I am looking to Invest or Purchase a property</p>
                 </div>
                 <div className={classes.checkboxes_row}>
                   <input type="checkbox" />
@@ -205,13 +211,16 @@ function LoginSignupModal({ open, onCloseModal }) {
               <div className={classes.professional_information_container}>
                 <h1>Professional Information</h1>
               </div>
-              <div className={classes.inputField}>
-                <label>Professional Type</label>
-                <select>
-                  <option>Real estate/broker</option>
-                  <option>Invester</option>
-                </select>
-              </div>
+              {isUserAgent && (
+                <div className={classes.inputField}>
+                  <label>Professional Type</label>
+                  <select>
+                    <option>Real estate/broker</option>
+                    <option>Invester</option>
+                  </select>
+                </div>
+              )}
+
               <div className={classes.single_row}>
                 <div style={{ width: "45%" }} className={classes.inputField}>
                   <label>First name</label>
@@ -238,9 +247,13 @@ function LoginSignupModal({ open, onCloseModal }) {
                 <p>Continue</p>
               </div>
 
-              <p className={classes.forgot_password}>
-                By submitting, I accept Auqta{"'"}s terms of use
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+              <input type="checkbox"/>
+            <p className={classes.forgot_password}>
+                I accept Auqta{"'"}s terms of use
               </p>
+            </div>
+              
 
               <div className={classes.divider} />
               <p className={classes.connect_with}>Or connect with:</p>
@@ -266,11 +279,14 @@ function LoginSignupModal({ open, onCloseModal }) {
                   <input type="email" placeholder="Enter email" />
                 </div>
 
-                <div onClick={()=>{
-                  handleStateChange(1)
-                }} className={classes.btn}>
-                <p>Reset</p>
-              </div>
+                <div
+                  onClick={() => {
+                    handleStateChange(1);
+                  }}
+                  className={classes.btn}
+                >
+                  <p>Reset</p>
+                </div>
               </>
             )
           )}

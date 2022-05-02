@@ -18,14 +18,15 @@ function TrendingProperties() {
   return (
     <div className={classes.trending_wrapper}>
       <div id="trending" className={classes.trending_container}>
-        <h1 data-aos="fade-up">OUR LATEST AND TRENDING PROPERTY</h1>
+        <h1 data-aos="fade-up">TOP INVESTMENT OPPORTUNITIES</h1>
         <div className={classes.category_tabs_container}>
           <p className={classes.category_tabs_selected}>
-            RECENTLY ADDED PROPERTIES
+            ISLAMABAD
           </p>
-          <p className={classes.category_tabs_unselected}>MODERN PROPERTY</p>
-          <p className={classes.category_tabs_unselected}>HERITAGE PROPERTY</p>
-          <p className={classes.category_tabs_unselected}>APARTMENTS</p>
+          <p className={classes.category_tabs_unselected}>PUNJAB</p>
+          <p className={classes.category_tabs_unselected}>SINDH</p>
+          <p className={classes.category_tabs_unselected}>BALOCHISTAN</p>
+          <p className={classes.category_tabs_unselected}>KHYBER PAKHTUNKHWA</p>
         </div>
         <div data-aos="fade-up" className={classes.property_cards_container}>
           {cardInfo?.filter((property, index) => width < 1177 ? index < 3 : 4).map((property, index) => (

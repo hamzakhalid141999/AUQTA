@@ -216,7 +216,20 @@
   position: absolute;
   right: 20px;
   box-shadow: 2px 1px 13px -1px #003983;
+  transition: ease-in-out 200ms;
+  cursor: pointer;
+}
+.search_icon:hover{
+  background-color: #3d8ffb;
+  box-shadow: 2px 1px 13px -1px #001838;
+}
+.search_icon:hover .icon{
+  width: 22px;
+  height: 22px;
 }
 .icon {
   color: white;
+  width: 17px;
+  height: 17px;
+  transition: ease-in-out 200ms;
 }

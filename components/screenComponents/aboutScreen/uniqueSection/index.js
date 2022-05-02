@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import classes from "./uniqueSection.module.css";
 import Image from "next/image";
 import img from "../../../../public/assets/unique_section_img.png";
@@ -10,26 +10,25 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 function UniqueSection() {
-      
-  useEffect(()=>{
+  useEffect(() => {
     AOS.init({
       duration: 500,
     });
     AOS.refresh();
-  },[])
+  }, []);
 
   return (
     <div className={classes.unique_section}>
       <div className={classes.content_container}>
         <h1 data-aos="fade-up">WHAT MAKES US UNIQUE</h1>
         <p data-aos="fade-up">
-          Digital property portals exist everywhere where the user fitlers out
+          Digital property portals exist everywhere where the user filters out
           interested properties based upon location, size, price preferences
           etc. The use of pictorial architecture in the form of photos and
           videos does not provide enough information to the end user, especially
-          who are living out of the city or are in a foreign country. The
-          integration of immersive technologies makes the business model of
-          Auqta on of a kind
+          who are living out of the city or in a foreign country. The
+          integration of immersive technologies together with our unique
+          interface makes the business model of Auqta one of a kind.
         </p>
         <div className={classes.media_container}>
           <div className={classes.bullets_container}>
@@ -42,7 +41,8 @@ function UniqueSection() {
               <div className={classes.description_container}>
                 <h1>NEXTGENERATIONTECHNOLOGYINTEGRATION</h1>
                 <p>
-                  Through the utilisation of AR and VR, users can digitally visualise the propert, as well as its surrounding locaiton{" "}
+                  A unique user interface designed by a team of world class
+                  software developers.{" "}
                 </p>
               </div>
             </div>
@@ -54,9 +54,10 @@ function UniqueSection() {
                 </div>
               </div>
               <div className={classes.description_container}>
-                <h1>VISUALISE FUTURE PROJECTS</h1>
+                <h1>BESPOKE SERVICES</h1>
                 <p>
-                  Buyers/Investors can potentially visualise the projects that do not exist physically.{" "}
+                  Bespoke architectural services for bringing your vision to
+                  life.{" "}
                 </p>
               </div>
             </div>
@@ -68,9 +69,10 @@ function UniqueSection() {
                 </div>
               </div>
               <div className={classes.description_container}>
-                <h1>REMOTE INVESTMENT</h1>
+                <h1>API INTEGRATION</h1>
                 <p>
-                  Foreign and remote investors have the convenience to invest in projects located in different cities of Pakistan without the need for travelling.{" "}
+                  Mass scale integration of augmented reality and virtual
+                  reality APIs.{" "}
                 </p>
               </div>
             </div>
@@ -82,9 +84,9 @@ function UniqueSection() {
                 </div>
               </div>
               <div className={classes.description_container}>
-                <h1>GLOBAL MARKETING POTENTIAL</h1>
+                <h1>UNIQUE EXPERIENCE</h1>
                 <p>
-                  Realtors can utilise this platform to expand their global outreach and elevate their brand value, providing them with a competitive edge.{" "}
+                  An elevated property trading experience like never before.{" "}
                 </p>
               </div>
             </div>

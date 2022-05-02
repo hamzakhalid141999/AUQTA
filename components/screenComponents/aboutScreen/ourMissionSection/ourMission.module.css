@@ -40,7 +40,7 @@
     margin-bottom: 20px;
 }
 .description_container p{
-    font-size: 12px;
+    font-size: 13px;
     line-height: 25px;
 }
 .read_more_btn{
@@ -61,7 +61,7 @@
     justify-content: space-evenly;
 }
 .our_vision_card{
-    width: 45%;
+    width: 50%;
     border-bottom-left-radius: 30px;
     border-top-left-radius: 30px;
     background-color: #0459d0;
@@ -95,7 +95,7 @@
     width: 50%;
 }
 .our_mission_card{
-    width: 45%;
+    width: 50%;
     height: 400px;
     background-color: white;
     border-bottom-right-radius: 30px;

@@ -64,8 +64,14 @@
     margin-top: 0;
     margin-bottom: 0;
 }
-.location_icon{
+.location_icon, .heart_icon{
     color: #0068ed;
+}
+.heart_icon{
+    float: right;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }
 .property_description_container{
     margin-top: 20px;
@@ -87,7 +93,7 @@
     justify-content: flex-start;
 }
 .bottom_description_container p{
-    font-size: 9px;
+    font-size: 15px;
     margin-left: 10px;
     margin-right: 15px;
 }

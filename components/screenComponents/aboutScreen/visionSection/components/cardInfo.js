@@ -5,7 +5,7 @@ const cardInfo = [
     icon: vision1,
     title: "CONVENIENCE",
     description:
-      "We always seek to prioritise a user-friendly experience. Thus, convenience forms our prime value on which this platform was built.",
+      "We always seek to prioritise a user-friendly experience and provide absolute convenience to our customer base.",
     btn: "FIND HOMES",
   },
   {
@@ -33,7 +33,7 @@ const cardInfo = [
     icon: vision5,
     title: "COMMUNICATION",
     description:
-      "Constructive communication is core for embracing problem solving. We always seek to maintain transparent communication with our clients to understand and deliver on their requirements.",
+      "We always seek to maintain transparent communication with our clients to understand and deliver on their requirements.",
     btn: "RENT HOMES",
   },
 ];

@@ -5,7 +5,8 @@ import Image from "next/image";
 function visionSectionCard({ lower, icon, title, description, btn }) {
 
   return (
-    <div
+    <div className={classes.card_bg}>
+ <div
       // style={{ marginTop: lower ? "120px" : "0px" }}
       className={classes.card_body}
     >
@@ -16,6 +17,8 @@ function visionSectionCard({ lower, icon, title, description, btn }) {
       <p className={classes.description}>{description}</p>
 
     </div>
+    </div>
+   
   );
 }
 

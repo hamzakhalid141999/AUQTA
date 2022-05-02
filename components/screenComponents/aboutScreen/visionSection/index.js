@@ -19,10 +19,7 @@ function VisionSection() {
       <div className={classes.content_container}>
         <h1 data-aos="fade-up">OUR VALUES</h1>
         <p data-aos="fade-up">
-          Our CITIC (Convenience, Innovation, Teamworks, Integrity, and
-          Communication) values give us the courage and motivation to constantly
-          deliver perfection to our user base. We humbly believe that our values
-          will help us outshine in the real estate industry.
+        Our CITIC (Convenience, Innovation, Teamwork, Integrity, and Communication) values give us the courage and motivation to constantly deliver perfection to our user base. 
         </p>
         <div data-aos="fade-up" className={classes.cards_container}>
           {cardInfo?.map((card, index) => (

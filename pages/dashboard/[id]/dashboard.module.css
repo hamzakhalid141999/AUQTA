@@ -1,0 +1,122 @@
+.main_container{
+  width: 100%;
+  height: 380vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  position: relative;
+}
+.first_section_body {
+  width: 100%;
+  height: 90vh;
+  min-height: 670px;
+  max-height: 672px;
+  position: relative;
+  padding: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.dashboard_container{
+  height: fit-content;
+  padding-top: 90px;
+  padding-bottom: 60px;
+  padding-left: 80px;
+  padding-right: 80px;
+  width: 70%;
+  box-shadow: 0 5px 50px 20px rgba(8, 72, 146, 0.24);
+  z-index: 100;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 600px;
+  border-radius: 40px;
+  background-color: rgba(255, 255, 255, 0.712);
+}
+.banner_img {
+  width: 100%;
+  object-fit: cover;
+  border-bottom-left-radius: 200px;
+  border-bottom-right-radius: 200px;
+  z-index: 2;
+  min-height: 670px;
+  max-height: 672px;
+  max-height: 90vh;
+}
+.overlay {
+  background: linear-gradient(to right, #0050b9, #0050b9a6, #0050b900);
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+  height: 90vh;
+  min-height: 85vh;
+  max-height: 90vh;
+  border-bottom-left-radius: 200px;
+  border-bottom-right-radius: 200px;
+}
+.banner_img_container {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  min-height: 670px;
+  max-height: 672px;
+  object-fit: cover;
+  /* max-height: 722px; */
+  min-height: 90vh;
+  border-bottom-left-radius: 200px;
+  border-bottom-right-radius: 200px;
+  z-index: 10;
+}
+.first_section_content_section {
+  position: absolute;
+  top: 170px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 30;
+  height: fit-content;
+  justify-content: center;
+  max-width: 1150px;
+  align-items: center;
+  text-align: center;
+}
+.first_section_content_section h1 {
+  font-size: 35px;
+  font-weight: 800;
+  width: 70%;
+  color: white;
+  text-transform: uppercase;
+}
+.dashboard_heading{
+  width: 100%;
+  height: 100px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 15px 2px rgba(201,243,253,0.75) inset;
+  background-color: rgba(187, 228, 255, 0.178);
+  backdrop-filter: blur(7px);
+}
+.dashboard_heading h1{
+  font-size: 30px;
+}
+.first_section_content_section p {
+  width: 60%;
+  color: white;
+}
+.first_section_content_section h3{
+  margin-top: 50px;
+  font-size: 25px;
+  font-weight: 400;
+}
+.first_section_content_section h2{
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 400;
+}

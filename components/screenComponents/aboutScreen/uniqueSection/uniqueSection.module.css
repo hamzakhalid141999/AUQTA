@@ -99,12 +99,12 @@
 }
 .description_container h1{
     color: #0068ed;
-    font-size: 13px;
+    font-size: 15px;
     margin-bottom: 5px;
 }
 .description_container p{
     color: rgb(48, 48, 48);
-    font-size: 11px;
+    font-size: 13px;
     margin: 0;
     text-align: left !important;
     line-height: 13px;

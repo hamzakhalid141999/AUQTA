@@ -6,7 +6,7 @@ const cardInfo = [
     title: "1 KANAL PHASE 3",
     description:
       "Fully furnished, good location, available on installments",
-      price: "2.3crores",
+      price: "PKR 230,000",
       location: 'BAHRIA, PHASE 3'
   },
   {
@@ -14,7 +14,7 @@ const cardInfo = [
     title: "2 KANAL PHASE 5",
     description:
       "Partially furnished, good location.",
-      price: "1.3crores",
+      price: "PKR 330,000",
       location: 'BAHRIA, PHASE 5'
   },
   {
@@ -22,7 +22,7 @@ const cardInfo = [
     title: "1 KANAL PHASE 2",
     description:
       "Fully furnished, good location, available on installments.",
-      price: "2.6crores",
+      price: "PKR 200,000",
       location: 'BAHRIA, PHASE 2'
   },
   {
@@ -30,7 +30,7 @@ const cardInfo = [
     title: "1 KANAL DHA 2",
     description:
       "Fully furnished, wooden floor, available on installments",
-    price: "3.3crores",
+    price: "PKR 150,000",
     location: 'DHA, PHASE 2'
   }
 ];

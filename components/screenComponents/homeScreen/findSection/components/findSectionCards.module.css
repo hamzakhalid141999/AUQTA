@@ -9,7 +9,7 @@
     align-items: center;
     background-image: linear-gradient(white, #c1dbf6 );
     transition: ease-in-out 200ms;
-    padding: 2px;
+    padding: 1px;
 }
 .card_body{
     height: 100%;

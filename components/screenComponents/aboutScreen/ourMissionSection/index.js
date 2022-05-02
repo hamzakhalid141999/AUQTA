@@ -31,15 +31,13 @@ function OurMission() {
         <div data-aos="fade-left" className={classes.description_container}>
           <h1>OUR STORY</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec
-            efficitur orci, eu auctor mauris. Donec scelerisque urna at odio
-            porttitor aliquam. Nam efficitur turpis vitae urna semper, sed
-            lobortis mauris accumsan. Mauris eu rutrum magna. Nunc pellentesque
-            diam vel finibus convallis
+          With a core belief of revolutionising the real estate industry through technological innovation, Auqta was founded in 2021. The idea behind Auqta was to increase the real estate investment potential by allowing overseas Pakistanis to invest seamlessly and conveniently. Thus, benefiting Pakistan’s real estate industry. Moreover, traditional property portals are creations of the past. We simply want to elevate the user’s experience when it comes to property trading.
           </p>
-          <div className={classes.read_more_btn}>
-            <p>READ MORE</p>
-          </div>
+          <br/>
+          <p>
+          Being the world’s first immersive property portal, Auqta enables its user base to view properties and its surrounding location in a digital environment. Thus, visualise everything digitally and find the right property for yourself from the comfort of your doorsteps anywhere in the world. 
+          </p>
+ 
         </div>
       </div>
       <div className={classes.cards_container}>

@@ -24,7 +24,7 @@
 .description_container p{
     width: 70%;
     line-height: 22px;
-    font-size: 12px;
+    font-size: 14px;
 }
 .description_container h3{
     color: #0050b9;
@@ -76,8 +76,20 @@
     display: flex;
     flex-direction: row;
     position: relative;
+    transition: ease-in-out 200ms;
+    cursor: pointer;
+}
+.heading_container:hover{
+    box-shadow: 4px 1px 48px -1px rgba(32, 59, 99, 0.637);
+}
+.heading_container:hover .left_panel{
+    width: 50px;
+}
+.heading_container:hover .icon_container, .title_container{
+    margin-left: 60px;
 }
 .left_panel{
+    transition: ease-in-out 200ms;
     position: absolute;
     left: 0px;
     border-top-left-radius: 30px;
@@ -95,9 +107,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: ease-in-out 200ms;
     margin-left: 35px;
 }
 .title_container{
+    transition: ease-in-out 200ms;
     width: 50%;
     height: 100%;
     display: flex;
@@ -116,7 +130,7 @@
     width: 90%;
 }
 .service_description_container p{
-    font-size: 12px;
+    font-size: 14px;
     text-align: left;
     margin-top: 10px;
 }

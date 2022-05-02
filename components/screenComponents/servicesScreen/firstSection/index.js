@@ -5,7 +5,7 @@ import banner_img from "../../../../public/assets/services_banner_img.png";
 
 function FirstSection() {
   return (
-    <div id="home" className={classes.first_section_body}>
+    <div className={classes.first_section_body}>
       <div className={classes.banner_img_container}>
         <div className={classes.overlay} />
         <Image
@@ -16,8 +16,7 @@ function FirstSection() {
         />
       </div>
       <div className={classes.first_section_content_section}>
-        <h1 data-aos="fade-right">LOREM IPSUM IS JUST A DUMMY TEXT</h1>
-        <p data-aos="fade-right">Lorem ipsum is just a dummy text which is used to fill in spaces when you have nothing else to write over there</p>
+        <h1 data-aos="fade-right">SERVICES</h1>
       </div>
     </div>
   )

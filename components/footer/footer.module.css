@@ -14,6 +14,14 @@
     border-left: 2px solid white;
     border-top: 2px solid white;
 }
+.gradient_1{
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    right: 200px;
+    top: 40px;
+    background: radial-gradient(circle at center, #3d85e4 0, #2269c6, )
+}
 .search_bar_container{
     height: fit-content;
     width: fit-content;
@@ -29,7 +37,7 @@
     height: 75%;
     position: absolute;
     right: 20px;
-    width: 250px;
+    width: 200px;
     top: 12px;
     border-radius: 100px;
     background-color: #0068ed;
@@ -42,7 +50,7 @@
     background-color: #3d8ef8;
 }
 .search_btn p{
-    font-size: 28px;
+    font-size: 21px;
     color: white;
 }
 .footer_content{

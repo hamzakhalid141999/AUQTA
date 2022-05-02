@@ -5,21 +5,21 @@ const cardInfo = [
     icon: benefit1,
     title: "BETTER VISUALISATION",
     description:
-      "Users will get an instant feel of the property aesthetics and its surrounding location before visitng physically.",
+      "Users will get an instant feel of the property aesthetics and its surrounding location, before visiting physically.",
     btn: "FIND HOMES",
   },
   {
     icon: benefit2,
     title: "EFFECTIVE UTILISATION OF TIME/RESOURCES",
     description:
-      "Auqta enables its users to narrow down their list of properties through digital visualisation. This enables their users to visit the properties they are actually interested in. Thus, reducing their time and resources allocated towards travelling and liasing with agents.",
+      "Users can visualise the properties of interest and thus, save time and resources on numerous visits. ",
     btn: "SELL HOMES",
   },
   {
     icon: benefit3,
     title: "UNIQUE EXPERIENCE",
     description:
-      "Auqta provides an immersive experience to their users. Digital visualisation will provide a unique experience to users and similarly provide a unique selling point towards retailors.",
+      "Digital visualisation will provide a unique experience to users and similarly provide a unique selling point towards realtors.",
     btn: "RENT HOMES",
   },
   {
@@ -33,28 +33,28 @@ const cardInfo = [
     icon: benefit5,
     title: "BETTER MARKETING OPPORTUNITY",
     description:
-      "Realtors will have a unique marketing pitch for their customers. Immersive technology will create a unique visualisation experience which can better engage clients.",
+      "Realtors will have a unique marketing content for their customers. ",
     btn: "RENT HOMES",
   },
   {
     icon: benefit6,
     title: "REACH BUYERS FAR AND WIDE",
     description:
-      "Realtors can offer investment or property buying opportunities to clients all over the world.",
+      "Offer investment or property buying opportunities to clients all over the world.",
     btn: "RENT HOMES",
   },
   {
     icon: benefit7,
     title: "COMPETITIVE ADVANTAGE",
     description:
-      "Having a global outreach and elevated engagement portfolio, realtors will have a competetive advantages in terms of client dealing.",
+      "Having a global outreach and elevated engagement portfolio will provide a competitive advantage to realtors.",
     btn: "RENT HOMES",
   },
   {
     icon: benefit8,
     title: "YIELDS BETTER ROI",
     description:
-      "Through augmented reality real estate agents can achieve quantifiable data. They can analyse the user traffic on their specific properties and the amount of time a user spends on that specific property. They can achieve statistical data to optimise and improve future projects.",
+      "A win/win situation for both the end user and realtors yields a better ROI. ",
     btn: "RENT HOMES",
   },
 ];
