@@ -289,6 +289,11 @@ function Navbar() {
             <p className={classes.hover_underline_animation}>DASHBOARD</p>
           </div>
         </Link>
+        
+        <Link href={"/contact"}>
+          
+            <p className={classes.hover_underline_animation}>CONTACT US</p>
+        </Link>
 
         <div onClick={handleModal} className={classes.login_btn}>
           <p>LOGIN</p>

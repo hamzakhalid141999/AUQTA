@@ -24,7 +24,7 @@ function OurMission() {
       <div id="mission" className={classes.mission_section_section}>
 
         <div data-aos="fade-up" className={classes.typewriter_container}>
-        <h1>World{"’"}s First Immersive Real Estate Portal</h1>
+        {/* <h1>World{"’"}s First Immersive Real Estate Portal</h1> */}
         {/* <div style={{display: "flex", flexDirection: 'row'}}>
         <Typewriter             
             words={['Worlds First Immersive Real Estate Portal']}
@@ -51,7 +51,7 @@ function OurMission() {
         
         </div>
       
-        <h1 data-aos="fade-up">WHY CHOOSE US?</h1>
+        <h1 style={{textTransform: 'uppercase'}} data-aos="fade-up">World{"’"}s First Immersive Real Estate Portal</h1>
         <p className={classes.subheading} data-aos="fade-up">
         Introducing Auqta the world’s first immersive real-estate trading portal. Immersive technologies include Augmented Reality and Virtual Reality, allowing the user to experience physical spaces in a digital environment. The property trading experience will become seamless as the user will have the convenience to visualise existing and investment architecture from anywhere around the world.         </p>
         <div className={classes.content_container}>

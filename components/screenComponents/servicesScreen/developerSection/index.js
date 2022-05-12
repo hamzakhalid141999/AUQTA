@@ -9,8 +9,9 @@ function DeveloperSection() {
       <div className={classes.container}>
         <h1>DEVELOPER PACKAGE</h1>
         <div className={classes.packages_container}>
-          <div className={classes.card_body}>
-            {/* <div className={classes.icon_container}>
+          <div className={classes.card_body_silver_bg}>
+            <div className={classes.card_body_silver}>
+              {/* <div className={classes.icon_container}>
               <Image
                 src={gold}
                 layout="fill"
@@ -18,18 +19,20 @@ function DeveloperSection() {
                 alt="icon"
               />
             </div> */}
-            <h1>Silver</h1>
-            <p>Architectural Renderings</p>
-            <p>Dynamic Virtual Tour </p>
-            <p>Locality Tour</p>
+              <h1>Silver</h1>
+              <p>Architectural Renderings</p>
+              <p>Dynamic Virtual Tour </p>
+              <p>Locality Tour</p>
 
-            <div className={classes.btn}>
-              <p>GET IN TOUCH</p>
+              <div className={classes.btn}>
+                <p>GET IN TOUCH</p>
+              </div>
             </div>
           </div>
 
-          <div className={classes.card_body}>
-            {/* <div className={classes.icon_container}>
+          <div className={classes.card_body_gold_bg}>
+            <div className={classes.card_body_gold}>
+              {/* <div className={classes.icon_container}>
               <Image
                 src={gold}
                 layout="fill"
@@ -37,20 +40,22 @@ function DeveloperSection() {
                 alt="icon"
               />
             </div> */}
-            <h1>Gold</h1>
-            <p>Architectural Renderings</p>
-            <p>Dynamic Virtual Tour </p>
+              <h1>Gold</h1>
+              <p>Architectural Renderings</p>
+              <p>Dynamic Virtual Tour </p>
 
-            <p>Locality Tour</p>
-            <p>Cinematic Virtual Video</p>
+              <p>Locality Tour</p>
+              <p>Cinematic Virtual Video</p>
 
-            <div className={classes.btn}>
-              <p>GET IN TOUCH</p>
+              <div className={classes.btn}>
+                <p>GET IN TOUCH</p>
+              </div>
             </div>
           </div>
 
-          <div className={classes.card_body}>
-            {/* <div className={classes.icon_container}>
+          <div className={classes.card_body_platinum_bg}>
+            <div className={classes.card_body_platinum}>
+              {/* <div className={classes.icon_container}>
               <Image
                 src={gold}
                 layout="fill"
@@ -58,14 +63,15 @@ function DeveloperSection() {
                 alt="icon"
               />
             </div> */}
-            <h1>Platinum</h1>
-            <p>Architectural Renderings</p>
-            <p>Dynamic Virtual Tour</p>
-            <p>Locality Tour</p>
-            <p>Cinematic Virtual Video</p>
-            <p>Augmented Structures</p>
-            <div className={classes.btn}>
-              <p>GET IN TOUCH</p>
+              <h1>Platinum</h1>
+              <p>Architectural Renderings</p>
+              <p>Dynamic Virtual Tour</p>
+              <p>Locality Tour</p>
+              <p>Cinematic Virtual Video</p>
+              <p>Augmented Structures</p>
+              <div className={classes.btn}>
+                <p>GET IN TOUCH</p>
+              </div>
             </div>
           </div>
         </div>

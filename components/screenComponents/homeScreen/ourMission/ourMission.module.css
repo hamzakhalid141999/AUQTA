@@ -70,7 +70,10 @@
 .typewriter_row{
     display: flex;
     flex-direction: row;
-    width: 370px;
+    width: 100%;
+    font-size: 60px;
+    padding-left: 20px;
+    text-align: center;
 }
 .img{
     width: 80%;

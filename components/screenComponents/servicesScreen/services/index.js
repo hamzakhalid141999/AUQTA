@@ -15,18 +15,8 @@ function Services() {
     <div className={classes.container}>
       <div className={classes.content_container}>
         <div className={classes.description_container}>
-          <p>
-            In this era of technological innovation, let technology be your
-            fellow associate in real estate trading. Auqta brings you the one
-            stop solution in a property portal, which hasn’t been done before.
-            Your digital real estate will be presented on Auqta’s immersive
-            portal where people will visualise it on a global scale. Our team of
-            technological experts offer you the services for letting your real
-            estate stand out globally.
-          </p>
           <h3>
-            So, sit back, relax, and let Auqta bring your architecture into the
-            digital realm.
+          Experience Architecture Digitalisation at Auqta and bring your vision to life
           </h3>
           {/* <div className={classes.btn}>
             <p>READ MORE</p>
@@ -188,7 +178,35 @@ function Services() {
                 interact with the property’s exterior/interior environment in
                 real-time.{" "}
               </p>
+
+              <div className={classes.bullet_point}>
+                <div className={classes.bullets_container}>
+                  <div className={classes.bullet}></div>
+                  <p className={classes.bullet_text}>
+                  Have a real-time feel of how you will interact with the property as if you were there                  </p>
+                </div>
+                <p></p>
+              </div>
+
+              <div className={classes.bullet_point}>
+                <div className={classes.bullets_container}>
+                  <div className={classes.bullet}></div>
+                  <p className={classes.bullet_text}>
+                  Deliver a unique and innovative property experience to your clients
+                  </p>
+                </div>
+              </div>
+
+              <div className={classes.bullet_point}>
+                <div className={classes.bullets_container}>
+                  <div className={classes.bullet}></div>
+                  <p className={classes.bullet_text}>
+                  Elevate your client’s satisfaction and credibility
+                  </p>
+                </div>
+              </div>
             </div>
+            
           </div>
         </div>
         <div className={classes.services_container}>
@@ -213,6 +231,35 @@ function Services() {
                 visualisation experts so that clients can showcase a complete
                 pictorial representation on a budget.
               </p>
+
+              <div className={classes.bullet_point}>
+                <div className={classes.bullets_container}>
+                  <div className={classes.bullet}></div>
+                  <p className={classes.bullet_text}>
+                  Capture real-time colours of your property. Our experts understand shot angles
+                  </p>
+                </div>
+              </div>
+
+              <div className={classes.bullet_point}>
+                <div className={classes.bullets_container}>
+                  <div className={classes.bullet}></div>
+                  <p className={classes.bullet_text}>
+                  Professional photos increase customer trustworthiness and credibility
+                  </p>
+                </div>
+              </div>
+
+              <div className={classes.bullet_point}>
+                <div className={classes.bullets_container}>
+                  <div className={classes.bullet}></div>
+                  <p className={classes.bullet_text}>
+                  A great picture speaks a thousand words
+                  </p>
+                </div>
+              </div>
+
+              
             </div>
           </div>
         </div>

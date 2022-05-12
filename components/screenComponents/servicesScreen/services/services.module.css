@@ -29,6 +29,7 @@
 .description_container h3{
     color: #0050b9;
     margin-top: 40px;
+    font-size: 24px;
 }
 .btn{
     height: 50px;
@@ -157,8 +158,10 @@
     margin-left: 12px;
 }
 .bullet{
-    height: 10px;
-    width: 10px;
+    max-height: 10px;
+    max-width: 10px;
+    min-height: 10px;
+    min-width: 10px;
     border-radius: 100px;
     background-color: #0050b9;
 }
