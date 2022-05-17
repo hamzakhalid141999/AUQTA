@@ -213,6 +213,7 @@
   transition: ease-in-out 200ms;
   box-shadow: 2px 1px 13px 3px #003983c7;
   cursor: pointer;
+  column-gap: 10px;
 }
 .login_btn:hover{
   margin-bottom: 7px;

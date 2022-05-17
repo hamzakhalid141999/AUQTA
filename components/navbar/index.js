@@ -9,6 +9,7 @@ import Link from "next/link";
 import LoginSignupModal from "../modals/loginSignupModal";
 import { useRouter } from "next/router";
 import globe from "../../public/assets/globe.png";
+import login_icon from "../../public/assets/login.png";
 
 function Navbar() {
   const router = useRouter();
@@ -299,6 +300,7 @@ function Navbar() {
 
         <div onClick={handleModal} className={classes.login_btn}>
           <p>LOGIN</p>
+          <img src={login_icon.src} style={{width: '14px'}}/>
         </div>
       </div>
     </div>
