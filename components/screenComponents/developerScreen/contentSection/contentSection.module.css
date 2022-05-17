@@ -1,0 +1,223 @@
+.container{
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.content_container{
+    width: 90%;
+    height: fit-content;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
+}
+.developer_info_section{
+    width: 100%;
+    height: fit-content;
+    margin-top: 30px;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    transition: display 1s;
+    /* Causing gap between cards */
+    justify-content: space-between; 
+    background-color: #0050b90e;
+    row-gap: 22px;
+}
+.single_row{
+    display: flex;
+    flex-direction: row;
+    column-gap: 12px;
+}
+.single_row p{
+    height: fit-content;
+    margin-top: 0 !important;
+}
+.single_row > p:nth-child(1){
+    font-weight: bolder;
+}
+.video_container{
+    width: 90%;
+    height: 550px;
+    border-radius: 35px;
+    /* background-color: #0050b9; */
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1216px;
+}
+.video{
+    object-fit: cover;
+    max-width: 1216px;
+    height: 450px;
+    width: 100%;
+    border-radius: 35px;
+}
+.description_container{
+    margin-top: 60px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.description_container p{
+    width: 70%;
+    line-height: 22px;
+    font-size: 12px;
+}
+.description_container h3{
+    color: #0050b9;
+    margin-top: 40px;
+}
+.btn{
+    height: 50px;
+    background-color: #0050b9;
+    border-radius: 100px;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+.btn p{
+    color: white;
+    font-size: 12px;
+}
+.services_container{
+    width: 100%;
+    margin-top: 90px;
+    max-width: 1440px;
+    min-width: 1400px;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.image_container{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.description{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+.description p{
+    text-align: left;
+    font-size: 14px;
+    margin-top: 15px;
+}
+.heading_container{
+    width: 100%;
+    height: 120px;
+    border-radius: 30px;
+    box-shadow: 4px 1px 48px -1px rgba(35,90,174,0.35);
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+.left_panel{
+    position: absolute;
+    left: 0px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    background-color: #0169ec;
+    height: 100%;
+    width: 25px;
+}
+.img{
+    width: 100%;
+}
+.icon_container{
+    width: 20%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 35px;
+}
+.title_container{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    margin-left: 15px;
+}
+.title_container p{
+    font-size: 30px;
+    font-weight: bold;
+    color: #0169ec;
+    text-align: left;
+}
+.service_description_container{
+    margin-top: 20px;
+    width: 90%;
+}
+.service_description_container p{
+    font-size: 12px;
+    text-align: left;
+    margin-top: 10px;
+}
+.description h1{
+    color: #0169ec;
+    font-weight: bolder;
+    text-align: left;
+}
+.bullets_container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+}
+.bullet_point{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0px;
+    height: fit-content;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.bullet_text{
+    font-size: 16px !important;
+    color: #0050b9;
+    font-weight: bold;
+    margin-top: 0px !important;
+    margin-left: 12px;
+}
+.bullet{
+    height: 10px;
+    width: 10px;
+    border-radius: 100px;
+    background-color: #0050b9;
+}
+.augmented_reality_section{
+    width: 90%;
+    height: fit-content;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+}
+.cards_container{
+    width: 100%;
+    height: fit-content;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

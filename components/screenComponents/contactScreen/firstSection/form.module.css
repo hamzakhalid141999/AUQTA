@@ -325,3 +325,17 @@
     right: 0;
   }
   
+.send_message_btn{
+  height: 40px;
+  width: fit-content;
+  padding-left: 25px;
+  padding-right: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0169ec;
+  color: white;
+  border-radius: 100px;
+  font-size: 12px;
+  box-shadow: 0 10px 20px 5px rgba(8, 72, 146, 0.329);
+}

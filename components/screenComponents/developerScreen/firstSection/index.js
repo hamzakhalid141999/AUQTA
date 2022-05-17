@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import classes from "./firstSection.module.css";
 import banner_img from "../../../../public/assets/project_banner_img.png";
 import Image from "next/image";
@@ -17,16 +17,11 @@ function FirstSection() {
         />
       </div>
       <div className={classes.first_section_content_section}>
-        <h1 data-aos="fade-right">PROJECT PAGE</h1>
-        <Link href={"/developer"}>
-          <p>
-            DEVELOPER PAGE<span>{">"}</span>
-          </p>
-        </Link>
+        <h1 data-aos="fade-right">DEVELOPER PAGE</h1>
         {/* <p data-aos="fade-right">Lorem ipsum is just a dummy text which is used to fill in spaces when you have nothing else to write over there</p> */}
       </div>
     </div>
-  );
+  )
 }
 
-export default FirstSection;
+export default FirstSection

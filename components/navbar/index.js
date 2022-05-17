@@ -8,6 +8,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import LoginSignupModal from "../modals/loginSignupModal";
 import { useRouter } from "next/router";
+import globe from "../../public/assets/globe.png";
 
 function Navbar() {
   const router = useRouter();
@@ -286,7 +287,8 @@ function Navbar() {
                 </Link>
               </div>
             </div>
-            <p className={classes.hover_underline_animation}>DASHBOARD</p>
+            {/* <p className={classes.hover_underline_animation}>DASHBOARD</p> */}
+            <img src={globe.src} style={{width: '25px', height: '25px'}} />
           </div>
         </Link>
         

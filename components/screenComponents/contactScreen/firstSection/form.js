@@ -8,8 +8,8 @@ import bg from "../../../../public/assets/contact_page_bg.png";
 function Contact_Form() {
   return (
     <div className={classes.form_body}>
-        <img src={bg.src} className={classes.bg_pic}/>
-      <div style={{paddingTop: '60px'}} className={classes.section_half}>
+      <img src={bg.src} className={classes.bg_pic} />
+      <div style={{ paddingTop: "60px" }} className={classes.section_half}>
         <h1>SAY HELLO TO US!</h1>
         <h3>Let{"'"}s Talk</h3>
         <p>
@@ -52,19 +52,32 @@ function Contact_Form() {
         </div>
         <div className={classes.info_container}>
           <div className={classes.single_info}>
-            <img src={phone.src} style={{ maxWidth: "10%", maxHeight: '15px' }} />
+            <img
+              src={phone.src}
+              style={{ maxWidth: "10%", maxHeight: "15px" }}
+            />
             <p>+92 331 5008852</p>
           </div>
           <div className={classes.single_info}>
-            <img src={mail.src} style={{ maxWidth: "10%", maxHeight: '15px' }} />
+            <img
+              src={mail.src}
+              style={{ maxWidth: "10%", maxHeight: "15px" }}
+            />
             <p>aliasghar@auqta.com</p>
           </div>
           <div className={classes.single_info}>
-            <img src={location.src} style={{ maxWidth: "10%", maxHeight: '15px' }} />
-            <p>Raj Heights, River View Commercial, Phase-7. <br/>Bahria Town. Islamabad</p>
+            <img
+              src={location.src}
+              style={{ maxWidth: "10%", maxHeight: "15px" }}
+            />
+            <p>
+              Raj Heights, River View Commercial, Phase-7. <br />
+              Bahria Town. Islamabad
+            </p>
           </div>
         </div>
       </div>
+      <div className={classes.send_message_btn}>SEND MESSAGE</div>
     </div>
   );
 }
