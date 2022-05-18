@@ -1,5 +1,7 @@
 .unique_section{
-    height: 120vh;
+    height: fit-content;
+    padding-top: 50px;
+    padding-bottom: 50px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -26,6 +28,7 @@
     display: flex;
     flex-direction: row;
     height: 600px;
+    align-items: center;
     justify-content: space-evenly;
     max-width: 1200px;
 }
@@ -35,6 +38,8 @@
     align-items: center;
     justify-content: center;
     max-width: 450px;
+    height: 70%;
+    position: relative !important;
 }
 .bullets_container{
     width: 40%;
@@ -46,7 +51,10 @@
     padding-bottom: 40px;
 }
 .img{
+    height: 100%;
     width: 100%;
+    object-fit: cover;
+    border-radius: 30px;    
 }
 .single_tab{
     height: 100px;

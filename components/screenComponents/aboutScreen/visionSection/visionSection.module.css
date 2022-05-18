@@ -1,5 +1,7 @@
 .vision_section{
-    height: 100vh;
+    height: fit-content;
+    padding-top: 50px;
+    padding-bottom: 50px;
     width: 100%;
     display: flex;
     justify-content: center;

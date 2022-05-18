@@ -26,7 +26,7 @@ function Dashboard() {
 
     <div className={classes.first_section_body}>
       <div className={classes.banner_img_container}>
-        {/* <div className={classes.overlay} /> */}
+        <div className={classes.overlay} />
         <Image
           src={banner_img}
           className={classes.banner_img}
@@ -42,7 +42,7 @@ function Dashboard() {
           Add Property for Sale or Rent
         </h3>
         <h2 style={{color: 'white'}}>
-          Enter your property details below and get it listed on our portal to recieve instant leads
+        Want to attract more buyers or tenants from all over Pakistan? Get in Touch with an Auqta specialist and digitalise your property to increase market potential.
         </h2>
         {/* <p data-aos="fade-right">Lorem ipsum is just a dummy text which is used to fill in spaces when you have nothing else to write over there</p> */}
       </div>

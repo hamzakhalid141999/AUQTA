@@ -3,8 +3,8 @@ import classes from "./forms.module.css";
 
 function ProjectForm() {
   const [categorySelected, setCategorySelected] = useState("buy");
-  const [featureArr, setFeatureArr] = useState([1]);
-  const [amenityArr, setAmenityArr] = useState([1]);
+  const [featureArr, setFeatureArr] = useState([1,2,3,4]);
+  const [amenityArr, setAmenityArr] = useState([1,2,3,4,5,6,7]);
   const handleCategorySelected = (value) => {
     setCategorySelected(value);
   };
@@ -53,13 +53,6 @@ function ProjectForm() {
           <p className={classes.label}>Project Description</p>
           <textarea
             style={{ height: "150px" }}
-            className={classes.input_field_single}
-          />
-        </div>
-        <div className={classes.single_row}>
-          <p className={classes.label}>Project</p>
-          <input
-            placeholder="Write about your project"
             className={classes.input_field_single}
           />
         </div>

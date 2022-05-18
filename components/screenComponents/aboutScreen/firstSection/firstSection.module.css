@@ -1,7 +1,7 @@
 .first_section_body {
     width: 100%;
-    height: 90vh;
-    min-height: 85vh;
+    height: 75vh;
+    min-height: 75vh;
     position: relative;
     padding: 150px;
     display: flex;
@@ -15,16 +15,16 @@
     border-bottom-left-radius: 200px;
     border-bottom-right-radius: 200px;
     z-index: 2;
-    max-height: 90vh;
+    max-height: 75vh;
   }
   .overlay {
     background-color: rgba(0, 0, 0, 0.651);
     z-index: 10;
     position: absolute;
     width: 100%;
-    height: 90vh;
-    min-height: 85vh;
-    max-height: 90vh;
+    height: 75vh;
+    min-height: 75vh;
+    max-height: 75vh;
     border-bottom-left-radius: 200px;
     border-bottom-right-radius: 200px;
   }
@@ -35,7 +35,7 @@
     width: 100%;
     object-fit: cover;
     /* max-height: 722px; */
-    min-height: 90vh;
+    min-height: 75vh;
     border-bottom-left-radius: 200px;
     border-bottom-right-radius: 200px;
     z-index: 10;

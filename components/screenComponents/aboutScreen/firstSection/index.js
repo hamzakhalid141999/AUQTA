@@ -7,7 +7,6 @@ import "aos/dist/aos.css";
 
 
 function FirstSection() {
-
   
   useEffect(()=>{
     AOS.init({

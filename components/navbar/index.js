@@ -10,6 +10,7 @@ import LoginSignupModal from "../modals/loginSignupModal";
 import { useRouter } from "next/router";
 import globe from "../../public/assets/globe.png";
 import login_icon from "../../public/assets/login.png";
+import globe_dark from "../../public/assets/globe-dark.png";
 
 function Navbar() {
   const router = useRouter();
@@ -23,28 +24,26 @@ function Navbar() {
   const onCloseModal = () => setOpen(false);
   let listener = null;
 
-  useEffect(()=>{
-    if (router.pathname){
+  useEffect(() => {
+    if (router.pathname) {
       console.log(router.pathname);
-      const page = router.pathname.split('/')
+      const page = router.pathname.split("/");
       setCurrentPage(page[1]);
     }
-  },[router.pathname])
+  }, [router.pathname]);
 
   const handleCategorySelected = (value) => {
     setCategorySelected(value);
   };
 
   useEffect(() => {
-    if (currentPage){
-      if (currentPage==="map" || currentPage==="invest"){
+    if (currentPage) {
+      if (currentPage === "map" || currentPage === "invest") {
         setIsNavbarVisibleFromTop(true);
-      }
-      else if (currentPage!=="map" || currentPage==="invest") {
+      } else if (currentPage !== "map" || currentPage === "invest") {
         setIsNavbarVisibleFromTop(false);
       }
     }
-    
   }, [currentPage]);
 
   // useEffect(() => {
@@ -56,7 +55,7 @@ function Navbar() {
   //       setIsNavbarVisibleFromTop(false);
   //     }
   //   }
-    
+
   // }, [currentPage]);
 
   const handleModal = () => {
@@ -264,6 +263,10 @@ function Navbar() {
           </p>
         </Link>
 
+        <Link href={"/contact"}>
+          <p className={classes.hover_underline_animation}>CONTACT US</p>
+        </Link>
+
         <Link href={"#"}>
           <div className={classes.dropdown_container}>
             <div className={classes.dropdown}>
@@ -289,18 +292,17 @@ function Navbar() {
               </div>
             </div>
             {/* <p className={classes.hover_underline_animation}>DASHBOARD</p> */}
-            <img src={globe.src} style={{width: '25px', height: '25px'}} />
+            <img src={ isNavbarVisisbleFromTop
+                  ? globe.src
+                  : backgroundColor === "transparent"
+                  ? globe.src
+                  : globe_dark.src} style={{ width: "25px", height: "25px" }} />
           </div>
-        </Link>
-        
-        <Link href={"/contact"}>
-          
-            <p className={classes.hover_underline_animation}>CONTACT US</p>
         </Link>
 
         <div onClick={handleModal} className={classes.login_btn}>
           <p>LOGIN</p>
-          <img src={login_icon.src} style={{width: '14px'}}/>
+          <img src={login_icon.src} style={{ width: "14px" }} />
         </div>
       </div>
     </div>

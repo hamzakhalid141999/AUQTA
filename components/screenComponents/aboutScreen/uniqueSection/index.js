@@ -39,7 +39,7 @@ function UniqueSection() {
                 </div>
               </div>
               <div className={classes.description_container}>
-                <h1>NEXTGENERATIONTECHNOLOGYINTEGRATION</h1>
+                <h1>NEXT GENERATION UI</h1>
                 <p>
                   A unique user interface designed by a team of world class
                   software developers.{" "}
@@ -92,7 +92,7 @@ function UniqueSection() {
             </div>
           </div>
           <div className={classes.image_container}>
-            <Image data-aos="fade-left" className={classes.img} src={img} />
+            <Image layout="fill" data-aos="fade-left" className={classes.img} src={img} />
           </div>
         </div>
       </div>

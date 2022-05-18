@@ -211,13 +211,13 @@
   align-items: center;
   border-radius: 100px;
   transition: ease-in-out 200ms;
-  box-shadow: 2px 1px 13px 3px #003983c7;
+  box-shadow: 2px 1px 13px 3px #1252a5da;
   cursor: pointer;
   column-gap: 10px;
 }
 .login_btn:hover{
   margin-bottom: 7px;
-  box-shadow: 2px 1px 23px 3px #003983c7;
+  box-shadow: 2px 1px 23px 3px #4585dada;
   background-color: #0d6ae4;
 }
 .login_btn p{

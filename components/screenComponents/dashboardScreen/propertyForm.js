@@ -209,6 +209,10 @@ function PropertyForm() {
             className={classes.input_field_single}
           />
         </div>
+        </div>
+
+        <div className={classes.section}>
+        <h1 className={classes.heading}>Salient Features</h1>
 
         <div className={classes.single_row}>
           <p className={classes.label}>Main Features</p>
@@ -331,7 +335,8 @@ function PropertyForm() {
           
          
         </div>
-      </div>
+        </div>
+
 
       <div className={classes.section}>
         <h1 className={classes.heading}>Contact Details</h1>
