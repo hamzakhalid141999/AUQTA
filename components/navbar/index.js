@@ -12,6 +12,8 @@ import globe from "../../public/assets/globe.png";
 import login_icon from "../../public/assets/login.png";
 import globe_dark from "../../public/assets/globe-dark.png";
 import { useAuth } from "../../contextAPI";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Navbar() {
   const router = useRouter();
@@ -29,6 +31,16 @@ function Navbar() {
 
   console.log("NAVBAR USER: ", user);
 
+  const signoutMessage = () =>
+  toast.info("User logged out", {
+    position: "bottom-center",
+    autoClose: 1000,
+    hideProgressBar: true,
+    closeOnClick: false,
+    pauseOnHover: false,
+    draggable: true,
+  });
+
   useEffect(() => {
     if (router.pathname) {
       const page = router.pathname.split("/");
@@ -42,7 +54,8 @@ function Navbar() {
 
   const handleSignOut = () => {
     removeUser();
-  }
+    signoutMessage();
+  };
 
   useEffect(() => {
     if (currentPage) {
@@ -103,6 +116,18 @@ function Navbar() {
           : classes.navbar_body
       }
     >
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
       <LoginSignupModal
         setOpen={setOpen}
         open={open}
