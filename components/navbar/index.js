@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import globe from "../../public/assets/globe.png";
 import login_icon from "../../public/assets/login.png";
 import globe_dark from "../../public/assets/globe-dark.png";
+import { useAuth } from "../../contextAPI";
 
 function Navbar() {
   const router = useRouter();
@@ -22,11 +23,14 @@ function Navbar() {
   const [open, setOpen] = useState();
   const [currentPage, setCurrentPage] = useState();
   const onCloseModal = () => setOpen(false);
+  const { user, removeUser } = useAuth();
+
   let listener = null;
+
+  console.log("NAVBAR USER: ", user);
 
   useEffect(() => {
     if (router.pathname) {
-      console.log(router.pathname);
       const page = router.pathname.split("/");
       setCurrentPage(page[1]);
     }
@@ -35,6 +39,10 @@ function Navbar() {
   const handleCategorySelected = (value) => {
     setCategorySelected(value);
   };
+
+  const handleSignOut = () => {
+    removeUser();
+  }
 
   useEffect(() => {
     if (currentPage) {
@@ -61,8 +69,6 @@ function Navbar() {
   const handleModal = () => {
     setOpen(true);
   };
-
-  console.log(isNavbarVisisbleFromTop, currentPage);
 
   useEffect(() => {
     document.addEventListener("scroll", () => {
@@ -97,7 +103,11 @@ function Navbar() {
           : classes.navbar_body
       }
     >
-      <LoginSignupModal open={open} onCloseModal={onCloseModal} />
+      <LoginSignupModal
+        setOpen={setOpen}
+        open={open}
+        onCloseModal={onCloseModal}
+      />
       <div
         className={
           isNavbarVisisbleFromTop
@@ -292,18 +302,37 @@ function Navbar() {
               </div>
             </div>
             {/* <p className={classes.hover_underline_animation}>DASHBOARD</p> */}
-            <img src={ isNavbarVisisbleFromTop
+            <img
+              src={
+                isNavbarVisisbleFromTop
                   ? globe.src
                   : backgroundColor === "transparent"
                   ? globe.src
-                  : globe_dark.src} style={{ width: "25px", height: "25px" }} />
+                  : globe_dark.src
+              }
+              style={{ width: "25px", height: "25px" }}
+            />
           </div>
         </Link>
 
-        <div onClick={handleModal} className={classes.login_btn}>
-          <p>LOGIN</p>
-          <img src={login_icon.src} style={{ width: "14px" }} />
-        </div>
+        {user ? (
+          <div onClick={handleSignOut} className={classes.login_btn}>
+            <>
+              <p>LOGOUT</p>
+              <div className={classes.img_placeholder}>
+                <p>{user?.username.charAt(0).toUpperCase()}</p>
+                <div className={classes.online_indicator}></div>
+              </div>
+            </>
+          </div>
+        ) : (
+          <div onClick={handleModal} className={classes.login_btn}>
+            <>
+              <p>LOGIN</p>
+              <img src={login_icon.src} style={{ width: "14px" }} />
+            </>
+          </div>
+        )}
       </div>
     </div>
   );

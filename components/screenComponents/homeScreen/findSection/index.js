@@ -28,8 +28,6 @@ function FindSection() {
     autoplaySpeed: 2000,
   };
 
-  console.log(width)
-
   return (
     <div className={classes.find_section_wrapper}>
       <div id="buy" className={classes.find_section_section}>

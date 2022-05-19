@@ -4,7 +4,6 @@ import Image from "next/image";
 
 function findSectionCards({ lower, icon, title, description, btn, maxWidth, minWidth, imgWidth, imgHeight, titleColor }) {
 
-  console.log(imgWidth, imgHeight, titleColor); 
   return (
     <div style={{maxWidth: maxWidth && maxWidth, minWidth: minWidth && minWidth }} className={classes.card_bg}>
       <div

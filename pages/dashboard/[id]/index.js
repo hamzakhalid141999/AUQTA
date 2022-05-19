@@ -13,7 +13,6 @@ function Dashboard() {
   const [dashboardType, setDashboardType] = useState();
   const router = useRouter();
   const {id} = router.query;
-  console.log(id);
 
   useEffect(()=>{
     if(id){

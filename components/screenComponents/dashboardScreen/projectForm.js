@@ -16,7 +16,6 @@ function ProjectForm() {
   const handleAddAmenity = () => {
     setAmenityArr((array) => [...array, amenityArr.length + 1]);
   };
-  console.log(featureArr);
 
   return (
     <div className={classes.form_body}>

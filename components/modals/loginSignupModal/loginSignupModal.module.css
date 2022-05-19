@@ -110,6 +110,11 @@
   margin-top: 15px;
   transition: ease-in-out 200ms;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  column-gap: 10px;
 }
 .btn:hover {
   background-color: #2280f3;
