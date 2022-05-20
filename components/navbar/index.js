@@ -29,17 +29,6 @@ function Navbar() {
 
   let listener = null;
 
-  console.log("NAVBAR USER: ", user);
-
-  const signoutMessage = () =>
-  toast.info("User logged out", {
-    position: "bottom-center",
-    autoClose: 1000,
-    hideProgressBar: true,
-    closeOnClick: false,
-    pauseOnHover: false,
-    draggable: true,
-  });
 
   useEffect(() => {
     if (router.pathname) {
@@ -54,7 +43,6 @@ function Navbar() {
 
   const handleSignOut = () => {
     removeUser();
-    signoutMessage();
   };
 
   useEffect(() => {
@@ -116,17 +104,7 @@ function Navbar() {
           : classes.navbar_body
       }
     >
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+
 
       <LoginSignupModal
         setOpen={setOpen}
