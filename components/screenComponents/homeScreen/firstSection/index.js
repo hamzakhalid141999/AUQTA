@@ -26,7 +26,7 @@ function FirstSection() {
         <div className={classes.banner_img_container}>
           <div className={classes.overlay} />
           <video
-            src="https://farbe9d3fb46190ad4564938d20f57a5ad372133227-test.s3.eu-central-1.amazonaws.com/public/compressed/first_section_banner_video.mp4"
+            src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/Auqta+Short+Final.mp4"
             className={classes.banner_img}
             alt="hero_banner_img"
             loop

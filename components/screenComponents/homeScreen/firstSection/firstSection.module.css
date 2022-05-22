@@ -70,6 +70,11 @@
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
+  transition: ease-in-out 200ms;
+  opacity: 0.4 !important;
+}
+.search_bar_container:hover{
+  opacity: 1 !important;
 }
 .tabs_container {
   display: flex;

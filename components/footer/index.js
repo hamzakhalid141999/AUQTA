@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./footer.module.css";
-import logo from "../../public/assets/logo.png";
+import logo from "../../public/assets/auqta-white.png";
 import Image from "next/image";
 import facebook from "../../public/assets/facebook.png";
 import twitter from "../../public/assets/twitter.png";
@@ -9,6 +9,7 @@ import linkedin from "../../public/assets/linkedin.png";
 import youtube from "../../public/assets/youtube.png";
 import call from "../../public/assets/call.png";
 import email from "../../public/assets/email.png";
+import pin_white from "../../public/assets/pin-locator-white.png";
 import { Link } from "react-scroll";
 
 function Footer() {
@@ -56,7 +57,7 @@ function Footer() {
           <h1>Contact</h1>
           <div className={classes.row}><img style={{height: "15px"}} src={email.src} className={classes.social_media_icon} /><p>aliasghar@auqta.com</p></div>
           <div className={classes.row}><img style={{height: "15px"}} src={call.src} className={classes.social_media_icon} /><p>+92 331 5008852</p></div>
-          <div className={classes.row}><img style={{height: "15px"}} src={facebook.src} className={classes.social_media_icon} /><p>
+          <div className={classes.row}><img style={{height: "15px"}} src={pin_white.src} className={classes.social_media_icon} /><p>
             Raj Heights, River View Commercial, Phase 7. Bahria Town, Islamabad
           </p>
           </div>

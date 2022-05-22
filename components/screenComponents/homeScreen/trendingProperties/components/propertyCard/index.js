@@ -7,7 +7,7 @@ import Link from "next/link";
 
 function PropertyCard({ picture, title, description, price, location, isProject }) {
   return (
-    <Link href={'/project'}>
+    <Link href={'/project_specific'}>
     <div className={classes.card_body}>
       <div className={classes.image_container}>
         <Image
