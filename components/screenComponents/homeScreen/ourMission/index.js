@@ -50,19 +50,14 @@ function OurMission() {
         </div>
         
         </div>
+
       
         <h1 style={{textTransform: 'uppercase'}} data-aos="fade-up">World{"’"}s First Immersive Real Estate Portal</h1>
         <p className={classes.subheading} data-aos="fade-up">
         Introducing Auqta the world’s first immersive real-estate trading portal. Immersive technologies include Augmented Reality and Virtual Reality, allowing the user to experience physical spaces in a digital environment. The property trading experience will become seamless as the user will have the convenience to visualise existing and investment architecture from anywhere around the world.         </p>
         <div className={classes.content_container}>
           <div className={classes.image_container}>
-            <Image
-            data-aos="fade-left"
-              src={our_mission}
-              alt="pic"
-              layout="responsive"
-              className={classes.img}
-            />
+          <iframe style={{borderRadius: '40px'}} src="/vr/Business_District_Bahria_Town_VR.html" height="90%" width="90%"/>
           </div>
           <div className={classes.values_container}>
             <div data-aos="fade-up" className={classes.single_tab}>
