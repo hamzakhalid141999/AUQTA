@@ -10,9 +10,16 @@ import icon3 from "../../../../public/assets/project_card_3d_plan_icon.png";
 
 function ProjectConentSection() {
   const [showMore, setShowMore] = useState(false);
+  const [isVideo, setIsVideo] = useState(true);
+
   const showContent = () => {
     setShowMore(!showMore);
   };
+
+  const toggleVideo = () => {
+    setIsVideo(!isVideo);
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.content_container}>
@@ -20,13 +27,24 @@ function ProjectConentSection() {
           style={{ flexDirection: "row-reverse" }}
           className={classes.services_container}
         >
-          <div className={classes.image_container}>
-            <iframe
-              style={{ borderRadius: "40px" }}
-              src="/vr/Business_District_Bahria_Town_VR.html"
-              height="100%"
-              width="100%"
-            />
+          <div onClick={toggleVideo} className={classes.image_container}>
+            {isVideo ? (
+              <video
+                playsInline
+                className={classes.video}
+                loop
+                muted
+                autoPlay
+                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/Digital+Transformation+on+actual+site.mp4"
+              />
+            ) : (
+              <iframe
+                style={{ borderRadius: "40px" }}
+                src="/vr/Business_District_Bahria_Town_VR.html"
+                height="100%"
+                width="100%"
+              />
+            )}
           </div>
           <div className={classes.description}>
             <h1>OVERVIEW OF THE PROJECT</h1>
