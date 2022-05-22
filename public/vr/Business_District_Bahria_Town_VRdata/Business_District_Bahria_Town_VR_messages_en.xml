@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano>
+
+<!-- ************************ -->
+<!--         Messages         -->
+<!-- ************************ -->
+
+  <data name="en_project_title"><![CDATA[Business District Bahria Town]]></data>
+  <data name="en_project_author_name"><![CDATA[MAPALYTICS]]></data>
+  <data name="en_project_author_url"><![CDATA[http://www.mapalytics.org]]></data>
+
+
+  <data name="en_panogroup639_title"><![CDATA[Exterior Panoramas]]></data>
+
+  <data name="en_pano642_title"><![CDATA[26]]></data>
+  <data name="en_pano638_title"><![CDATA[28]]></data>
+  <data name="en_pano644_title"><![CDATA[25]]></data>
+  <data name="en_pano646_title"><![CDATA[24]]></data>
+  <data name="en_pano648_title"><![CDATA[23]]></data>
+  <data name="en_pano650_title"><![CDATA[22]]></data>
+  <data name="en_pano652_title"><![CDATA[21]]></data>
+  <data name="en_pano696_title"><![CDATA[18]]></data>
+  <data name="en_pano700_title"><![CDATA[17]]></data>
+  <data name="en_pano704_title"><![CDATA[15]]></data>
+  <data name="en_pano706_title"><![CDATA[14]]></data>
+  <data name="en_pano708_title"><![CDATA[13]]></data>
+  <data name="en_pano3703_title"><![CDATA[11]]></data>
+  <data name="en_pano714_title"><![CDATA[10]]></data>
+  <data name="en_pano718_title"><![CDATA[8]]></data>
+  <data name="en_pano720_title"><![CDATA[7]]></data>
+  <data name="en_pano722_title"><![CDATA[6]]></data>
+  <data name="en_pano724_title"><![CDATA[5]]></data>
+  <data name="en_pano726_title"><![CDATA[4]]></data>
+  <data name="en_pano728_title"><![CDATA[3]]></data>
+  <data name="en_pano730_title"><![CDATA[2]]></data>
+  <data name="en_pano732_title"><![CDATA[1]]></data>
+
+  <data name="en_panogroup2894_title"><![CDATA[Residential Street]]></data>
+
+  <data name="en_pano734_title"><![CDATA[34]]></data>
+  <data name="en_pano736_title"><![CDATA[33]]></data>
+  <data name="en_pano738_title"><![CDATA[32]]></data>
+  <data name="en_pano740_title"><![CDATA[31]]></data>
+  <data name="en_pano742_title"><![CDATA[30]]></data>
+  <data name="en_pano744_title"><![CDATA[29]]></data>
+
+  <data name="en_panogroup1588_title"><![CDATA[Budapest's Sign Hotel]]></data>
+
+  <data name="en_pano1082_title"><![CDATA[360 Panorama (1)]]></data>
+  <data name="en_spotpoint1520_tooltip"><![CDATA[Enter]]></data>
+  <data name="en_pano1084_title"><![CDATA[360 Panorama (3)]]></data>
+  <data name="en_pano1085_title"><![CDATA[360 Panorama (4)]]></data>
+  <data name="en_pano1094_title"><![CDATA[Cam 2]]></data>
+  <data name="en_pano1095_title"><![CDATA[Cam 3]]></data>
+
+  <data name="en_panogroup1087_title"><![CDATA[Reception Lobby]]></data>
+
+  <data name="en_pano1096_title"><![CDATA[Reception]]></data>
+  <data name="en_spotpoint1521_tooltip"><![CDATA[Reception Cafe]]></data>
+  <data name="en_spotpoint1538_tooltip"><![CDATA[Outside]]></data>
+  <data name="en_spotpoint2344_tooltip"><![CDATA[Apartment]]></data>
+  <data name="en_pano1097_title"><![CDATA[Reception Cafe]]></data>
+  <data name="en_spotpoint1533_tooltip"><![CDATA[Reception]]></data>
+
+  <data name="en_panogroup1596_title"><![CDATA[First Floor]]></data>
+
+  <data name="en_pano1597_title"><![CDATA[Living Room]]></data>
+  <data name="en_spotpoint1598_tooltip"><![CDATA[Kitchen]]></data>
+  <data name="en_spotpoint1599_tooltip"><![CDATA[Reception]]></data>
+  <data name="en_spotpoint1600_tooltip"><![CDATA[Bedroom]]></data>
+  <data name="en_pano1601_title"><![CDATA[Kitchen]]></data>
+  <data name="en_spotpoint1602_tooltip"><![CDATA[Living Room]]></data>
+  <data name="en_spotpoint1603_tooltip"><![CDATA[Bedroom]]></data>
+  <data name="en_pano1604_title"><![CDATA[Bath]]></data>
+  <data name="en_spotpoint1605_tooltip"><![CDATA[Bedroom]]></data>
+  <data name="en_pano1606_title"><![CDATA[Bedroom]]></data>
+  <data name="en_spotpoint1607_tooltip"><![CDATA[Bath]]></data>
+  <data name="en_spotpoint1608_tooltip"><![CDATA[Living Room]]></data>
+
+  <data name="en_panogroup1652_title"><![CDATA[Second Floor]]></data>
+
+  <data name="en_pano1653_title"><![CDATA[Living Room]]></data>
+  <data name="en_spotpoint1654_tooltip"><![CDATA[Kitchen]]></data>
+  <data name="en_spotpoint1655_tooltip"><![CDATA[Reception]]></data>
+  <data name="en_spotpoint1656_tooltip"><![CDATA[Bedroom]]></data>
+  <data name="en_pano1657_title"><![CDATA[Kitchen]]></data>
+  <data name="en_spotpoint1658_tooltip"><![CDATA[Living Room]]></data>
+  <data name="en_spotpoint1659_tooltip"><![CDATA[Bedroom]]></data>
+  <data name="en_pano1660_title"><![CDATA[Bath]]></data>
+  <data name="en_spotpoint1661_tooltip"><![CDATA[Bedroom]]></data>
+  <data name="en_pano1662_title"><![CDATA[Bedroom]]></data>
+  <data name="en_spotpoint1663_tooltip"><![CDATA[Bath]]></data>
+  <data name="en_spotpoint1664_tooltip"><![CDATA[Living Room]]></data>
+
+  <data name="en_panogroup1690_title"><![CDATA[Third Floor]]></data>
+
+  <data name="en_pano1691_title"><![CDATA[Living Room]]></data>
+  <data name="en_spotpoint1692_tooltip"><![CDATA[Kitchen]]></data>
+  <data name="en_spotpoint1693_tooltip"><![CDATA[Reception]]></data>
+  <data name="en_spotpoint1694_tooltip"><![CDATA[Bedroom]]></data>
+  <data name="en_pano1695_title"><![CDATA[Kitchen]]></data>
+  <data name="en_spotpoint1696_tooltip"><![CDATA[Living Room]]></data>
+  <data name="en_spotpoint1697_tooltip"><![CDATA[Bedroom]]></data>
+  <data name="en_pano1698_title"><![CDATA[Bath]]></data>
+  <data name="en_spotpoint1699_tooltip"><![CDATA[Bedroom]]></data>
+  <data name="en_pano1700_title"><![CDATA[Bedroom]]></data>
+  <data name="en_spotpoint1701_tooltip"><![CDATA[Bath]]></data>
+  <data name="en_spotpoint1702_tooltip"><![CDATA[Living Room]]></data>
+
+
+
+
+
+	<data name="en_panogroup1087_floor_title"><![CDATA[Reception Lobby]]></data>
+	<data name="en_spotmap2215_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap2216_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap2235_tooltip"><![CDATA[]]></data>
+	<data name="en_panogroup1596_floor_title"><![CDATA[First Floor]]></data>
+	<data name="en_spotmap2221_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap2222_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap2223_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap2224_tooltip"><![CDATA[]]></data>
+	<data name="en_panogroup1652_floor_title"><![CDATA[Second Floor]]></data>
+	<data name="en_spotmap2226_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap2227_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap2228_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap2229_tooltip"><![CDATA[]]></data>
+	<data name="en_panogroup1690_floor_title"><![CDATA[Third Floor]]></data>
+	<data name="en_spotmap2231_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap2232_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap2233_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap2234_tooltip"><![CDATA[]]></data>
+
+  <data name="en_logo-modif1websiteurl"><![CDATA[http://www.auqta.com/]]></data>
+  <data name="en_logo-modif1tooltipText"><![CDATA[]]></data>
+  <data name="en_logo-modif1scenesP"><![CDATA[]]></data>
+  <data name="en_controlBar_classic_modifiedprevSceneTip"><![CDATA[Previous panorama]]></data>
+  <data name="en_controlBar_classic_modifiednextSceneTip"><![CDATA[Next panorama]]></data>
+  <data name="en_controlBar_classic_modifiedopenFsTip"><![CDATA[Enter fullscreen]]></data>
+  <data name="en_controlBar_classic_modifiedcloseFsTip"><![CDATA[Exit fullscreen]]></data>
+  <data name="en_controlBar_classic_modifiedautorotateOnTip"><![CDATA[Start autorotation]]></data>
+  <data name="en_controlBar_classic_modifiedautorotateOffTip"><![CDATA[Stop autorotation]]></data>
+  <data name="en_controlBar_classic_modifiedsoundsOnTip"><![CDATA[Start sounds]]></data>
+  <data name="en_controlBar_classic_modifiedsoundsOffTip"><![CDATA[Stop sounds]]></data>
+  <data name="en_controlBar_classic_modifiedshowThumbnailsTip"><![CDATA[Show thumbnails]]></data>
+  <data name="en_controlBar_classic_modifiedhideThumbnailsTip"><![CDATA[Hide thumbnails]]></data>
+  <data name="en_controlBar_classic_modifieddisplayFloorplanTip"><![CDATA[Show floorplan]]></data>
+  <data name="en_controlBar_classic_modifiedhideFloorplanTip"><![CDATA[Hide floorplan]]></data>
+  <data name="en_controlBar_classic_modifiedctrlmodeDragTip"><![CDATA[Change control mode]]></data>
+  <data name="en_controlBar_classic_modifiedctrlmodeMoveTip"><![CDATA[Change control mode]]></data>
+  <data name="en_context_logocontexturl"><![CDATA[www.mapalytics.org]]></data>
+  <data name="en_analyticsgoogle_tracking_id"><![CDATA[UA-xxxxxx-xx]]></data>
+  <data name="en_contextmenuopenFsLabel"><![CDATA[Enter Fullscreen]]></data>
+  <data name="en_contextmenucloseFsLabel"><![CDATA[Exit Fullscreen]]></data>
+  <data name="en_contextmenunormallabel"><![CDATA[Normal View]]></data>
+  <data name="en_contextmenuarchitecturallabel"><![CDATA[Architectural View]]></data>
+  <data name="en_contextmenulittleplanetlabel"><![CDATA[Little Planet View]]></data>
+  <data name="en_floorPlanmenu_label"><![CDATA[Select a floor plan]]></data>
+  <data name="en_floorPlandisplay_close_text"><![CDATA[Close]]></data>
+  <data name="en_buttontooltip"><![CDATA[]]></data>
+  <data name="en_callActionsOnTourEventspanoid1020"><![CDATA[pano642]]></data>
+  <data name="en_callActionsOnTourEventspanoid1020"><![CDATA[pano1096]]></data>
+
+
+  <data name="en_vr_setup_hmd0"><![CDATA[SELECT YOUR HMD]]></data>
+  <data name="en_vr_setup_advanced"><![CDATA[ADVANCED SETTINGS]]></data>
+  <data name="en_vr_setup_title"><![CDATA[WEB VR SETTINGS]]></data>
+  <data name="en_vr_setup_dvn1"><![CDATA[Device:]]></data>
+  <data name="en_vr_setup_siz1"><![CDATA[Screen size:]]></data>
+  <data name="en_vr_setup_ipd1"><![CDATA[IPD:]]></data>
+  <data name="en_vr_setup_hmd1"><![CDATA[HMD:]]></data>
+  <data name="en_vr_setup_hmd3"><![CDATA[Customize]]></data>
+  <data name="en_vr_setup_cal"><![CDATA[Calibrate gyroscope]]></data>
+  <data name="en_vr_setup_sav"><![CDATA[SAVE]]></data>
+  <data name="en_vr_setup_rst"><![CDATA[RESET]]></data>
+  <data name="en_vr_setup_simple"><![CDATA[SIMPLE]]></data>
+  <data name="en_vr_setup_cls"><![CDATA[CLOSE]]></data>
+  <data name="en_vr_setup_m31"><![CDATA[HMD SETTINGS]]></data>
+  <data name="en_vr_setup_fov1"><![CDATA[FOV:]]></data>
+  <data name="en_vr_setup_dst1"><![CDATA[Distortion:]]></data>
+  <data name="en_vr_setup_d2tx"><![CDATA[Distortion 2:]]></data>
+  <data name="en_vr_setup_vig1"><![CDATA[Vignette:]]></data>
+  <data name="en_vr_setup_cac1"><![CDATA[Chromatic aberration:]]></data>
+  <data name="en_vr_setup_olp1"><![CDATA[Overlap:]]></data>
+  <data name="en_vr_setup_m35"><![CDATA[RETURN]]></data>
+  <data name="en_vr_setup_cb1"><![CDATA[GYROSCOPE]]></data>
+  <data name="en_vr_setup_cb2"><![CDATA[Place the device on a flat and[br]stable surface and tab CALIBRATE[br]to correct a gyroscope drifting.]]></data>
+  <data name="en_vr_setup_cb3"><![CDATA[CALIBRATE]]></data>
+  <data name="en_vr_setup_cb4"><![CDATA[RESET]]></data>
+  <data name="en_vr_setup_cb5"><![CDATA[RETURN]]></data>
+  <data name="en_vr_setup_cb6"><![CDATA[Calibrating...]]></data>
+  <data name="en_vr_setup_cb7"><![CDATA[Successful calibration]]></data>
+  <data name="en_vr_setup_cb8"><![CDATA[Calibration failed]]></data>
+  <data name="en_vr_setup_unavailable"><![CDATA[VR mode[br]is unavailable on your device]]></data>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</krpano>
