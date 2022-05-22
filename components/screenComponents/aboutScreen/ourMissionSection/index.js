@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
 import classes from "./ourMission.module.css";
 import Image from "next/image";
-import our_story from "../../../../public/assets/about_our_story_img.png";
 import vision from "../../../../public/assets/vision_icon.png";
+import our_story from "../../../../public/assets/about_our_story_img.png";
 import mission from "../../../../public/assets/mission_icon.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
