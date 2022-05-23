@@ -86,7 +86,8 @@
 }
 
 .project_holder {
-  width: 255px;
+  width: 45%;
+  max-width: 250px;
   height: 260px;
   background-color: #f6f6fa;
   border: 1px solid #d3d3d3;

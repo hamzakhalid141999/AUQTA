@@ -94,7 +94,7 @@ function AgentForm() {
         <h1 className={classes.heading}>Add Project</h1>
         <div style={{ alignItems: "normal" }} className={classes.single_row}>
           <p className={classes.label}></p>
-          <div className={classes.image_holder_container}>
+          <div style={{columnGap: '15px'}} className={classes.image_holder_container}>
           <div className={classes.project_holder}>
             <p>Add Project</p>
             <div className={classes.add_btn_border_without_absolute}>
