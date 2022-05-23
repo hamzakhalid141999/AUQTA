@@ -320,6 +320,7 @@
   }
   .bg_pic{
     width: 45%;
+    max-width: 475px;
     position: absolute;
     top: 0;
     right: 0;

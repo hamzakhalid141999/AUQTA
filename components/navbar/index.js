@@ -47,25 +47,13 @@ function Navbar() {
 
   useEffect(() => {
     if (currentPage) {
-      if (currentPage === "map" || currentPage === "invest") {
+      if (currentPage === "map" || currentPage === "invest" || currentPage === "contact") {
         setIsNavbarVisibleFromTop(true);
-      } else if (currentPage !== "map" || currentPage === "invest") {
+      } else if (currentPage !== "map" || currentPage === "invest" || currentPage !== "contact") {
         setIsNavbarVisibleFromTop(false);
       }
     }
   }, [currentPage]);
-
-  // useEffect(() => {
-  //   if (currentPage){
-  //     if (currentPage === "invest") {
-  //       setIsNavbarVisibleFromTop(true);
-  //     }
-  //     else if (currentPage !== "invest") {
-  //       setIsNavbarVisibleFromTop(false);
-  //     }
-  //   }
-
-  // }, [currentPage]);
 
   const handleModal = () => {
     setOpen(true);
