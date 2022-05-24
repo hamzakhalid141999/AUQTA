@@ -184,7 +184,7 @@ function ProjectConentSection() {
         </div>
         <div className={classes.video_container}>
           <video
-            src="https://farbe9d3fb46190ad4564938d20f57a5ad372133227-test.s3.eu-central-1.amazonaws.com/public/compressed/first_section_banner_video.mp4"
+            src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/Cinematic+Video.mp4"
             className={classes.video}
             alt="hero_banner_img"
             loop
