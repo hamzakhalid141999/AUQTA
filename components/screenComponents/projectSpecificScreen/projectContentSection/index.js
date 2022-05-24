@@ -35,7 +35,7 @@ function ProjectConentSection() {
                 loop
                 muted
                 autoPlay
-                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/Digital+Transformation+on+actual+site.mp4"
+                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/For+Transition.mp4"
               />
             ) : (
               <iframe
