@@ -25,6 +25,7 @@
 .cards_container{
     width: 100%;
     display: flex;
+    max-height: 650px;
     flex-direction: row;
     justify-content: space-evenly;
     margin-top: 50px;

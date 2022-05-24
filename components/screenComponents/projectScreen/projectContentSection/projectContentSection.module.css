@@ -184,6 +184,7 @@
     width: 100%;
     height: fit-content;
     margin-top: 50px;
+    max-height: 650px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;

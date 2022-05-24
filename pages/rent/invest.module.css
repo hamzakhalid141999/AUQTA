@@ -1,8 +1,8 @@
 .cards_container{
     height: fit-content;
     width: 100%;
-    max-height: 650px;
     display: flex;
+    max-height: 650px;
     justify-content: center;
     align-items: center;
     margin-top: 100px;

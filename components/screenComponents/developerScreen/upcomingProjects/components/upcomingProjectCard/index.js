@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function UpcomingProjectCard({ image }) {
+function UpcomingProjectCard({ title, image }) {
   return (
     <div className={classes.card_body_bg}>
       <div className={classes.card_body}>
@@ -22,7 +22,7 @@ function UpcomingProjectCard({ image }) {
           />
         </div>
         <div className={classes.description_container}>
-          <p className={classes.title}>PROJECT 1</p>
+          <p className={classes.title}>PROJECT {title}</p>
           <div className={classes.location_row}>
             <FontAwesomeIcon
               className={classes.location_icon}

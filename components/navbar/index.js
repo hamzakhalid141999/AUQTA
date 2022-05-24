@@ -47,9 +47,9 @@ function Navbar() {
 
   useEffect(() => {
     if (currentPage) {
-      if (currentPage === "map" || currentPage === "invest" || currentPage === "contact") {
+      if (currentPage === "map" || currentPage === "invest" || currentPage === "contact" || currentPage === "rent") {
         setIsNavbarVisibleFromTop(true);
-      } else if (currentPage !== "map" || currentPage === "invest" || currentPage !== "contact") {
+      } else if (currentPage !== "map" || currentPage === "invest" || currentPage !== "contact" || currentPage !== "rent") {
         setIsNavbarVisibleFromTop(false);
       }
     }
@@ -252,7 +252,7 @@ function Navbar() {
             BUY
           </p>
         </Link>
-        <Link href={"#"}>
+        <Link href={"/rent"}>
           <p
             className={
               page.includes("rent")
