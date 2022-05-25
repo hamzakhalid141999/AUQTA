@@ -25,3 +25,8 @@ a {
   justify-content: center !important;
   align-items: center !important;
 }
+option{
+  height: 50px !important;
+  padding: 10px 15px !important; 
+  font-size: 15px !important;
+}

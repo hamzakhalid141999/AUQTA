@@ -35,9 +35,12 @@ function FirstSection() {
         <div className={classes.banner_btn}>
           <p>Logo</p>
         </div>
+        <Link href={"/developer"}>
         <div className={classes.banner_btn}>
           <p>Developer Name<span>{">"}</span></p>
         </div>
+        </Link>
+  
         </div>
         
       </div>
