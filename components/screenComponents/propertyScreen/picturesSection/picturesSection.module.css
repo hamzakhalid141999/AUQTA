@@ -1,0 +1,31 @@
+.picture_section{
+    width: 100%;
+    height: fit-content;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.carousel_container{
+    position: relative;
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+.carousel_card{
+    height: 500px;
+    width: 700px;
+    padding-top: "80px";
+    text-align: center;
+    background-color: aquamarine;
+    color: #FFF;
+    font-size: 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-size: cover;
+    display: flex;
+}

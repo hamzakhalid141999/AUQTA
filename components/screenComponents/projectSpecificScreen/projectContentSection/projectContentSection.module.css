@@ -28,7 +28,14 @@
 .video {
   object-fit: cover;
   max-width: 1250px;
-  height: 450px;
+  height: 700px;
+  width: 100%;
+  border-radius: 35px;
+}
+.video_card{
+  object-fit: cover;
+  max-width: 1250px;
+  height: 500px;
   width: 100%;
   border-radius: 35px;
 }
@@ -69,6 +76,7 @@
   max-width: 1440px;
   min-width: 1400px;
   height: fit-content;
+  padding-bottom: 70px;
   display: flex;
   flex-direction: row;
   /* align-items: center; */
@@ -205,7 +213,7 @@
 .augmented_reality_section {
   width: 90%;
   height: fit-content;
-  padding-top: 40px;
+  padding-top: 100px;
   padding-bottom: 20px;
   margin-top: 100px;
   display: flex;

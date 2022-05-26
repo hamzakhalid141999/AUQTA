@@ -4,18 +4,58 @@ import banner_img from "../../../../public/assets/project_banner_img.png";
 import Image from "next/image";
 import location_pointer from "../../../../public/assets/pin-locator-white.png";
 import Link from "next/link";
+import { Fade } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
+import hotel_1 from "../../../../public/assets/hotel_1.png";
+import hotel_2 from "../../../../public/assets/hotel_2.png";
+import hotel_3 from "../../../../public/assets/hotel_3.png";
+import hotel_4 from "../../../../public/assets/hotel_4.png";
+import hotel_5 from "../../../../public/assets/hotel_5.png";
+import hotel_6 from "../../../../public/assets/hotel_6.png";
+import { Slide } from 'react-slideshow-image';
+
 
 function FirstSection() {
+
+  const slideImages = [
+    '/assets/hotel_1.png',
+    '/assets/hotel_2.png',
+    '/assets/hotel_3.png',
+    '/assets/hotel_4.png',
+    '/assets/hotel_5.png',
+    '/assets/hotel_6.png'
+  ];
+
   return (
     <div className={classes.first_section_body}>
       <div className={classes.banner_img_container}>
         <div className={classes.overlay} />
-        <Image
-          src={banner_img}
-          className={classes.banner_img}
-          alt="hero_banner_img"
-          layout="fill"
-        />
+        <Fade arrows={false} style={{height: '100%'}} easing="ease">
+          <div className={classes.each_slide}>
+            <div style={{'backgroundImage': `url(${slideImages[0]})`}}>
+            </div>
+          </div>
+          <div className={classes.each_slide}>
+            <div style={{'backgroundImage': `url(${slideImages[1]})`}}>
+            </div>
+          </div>
+          <div className={classes.each_slide}>
+            <div style={{'backgroundImage': `url(${slideImages[2]})`}}>
+            </div>
+          </div>
+          <div className={classes.each_slide}>
+            <div style={{'backgroundImage': `url(${slideImages[3]})`}}>
+            </div>
+          </div>
+          <div className={classes.each_slide}>
+            <div style={{'backgroundImage': `url(${slideImages[4]})`}}>
+            </div>
+          </div>
+          <div className={classes.each_slide}>
+            <div style={{'backgroundImage': `url(${slideImages[5]})`}}>
+            </div>
+          </div>
+        </Fade>
       </div>
       <div className={classes.first_section_content_section}>
         <div className={classes.property_info}>

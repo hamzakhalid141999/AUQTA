@@ -31,7 +31,7 @@ function ProjectConentSection() {
             {isVideo ? (
               <video
                 playsInline
-                className={classes.video}
+                className={classes.video_card}
                 loop
                 muted
                 autoPlay
@@ -187,9 +187,8 @@ function ProjectConentSection() {
             src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/Cinematic+Video.mp4"
             className={classes.video}
             alt="hero_banner_img"
-            loop
-            autoPlay
             muted
+            controls
             playsInline={true}
           />
         </div>
