@@ -13,8 +13,8 @@ function Contact_Form() {
         <h1>SAY HELLO TO US!</h1>
         <h3>Let{"'"}s Talk</h3>
         <p>
-          To request a quote or want to meet up for coffee, contact us directly
-          or fill out the form and we will get back to you promptly.
+          Thank You for choosing Auqta. Please fill in the form below and one of
+          our representatives will get back to you shortly
         </p>
         <div className={classes.vertical_field_container}>
           <label className={classes.label}>Your name</label>
@@ -45,8 +45,8 @@ function Contact_Form() {
         >
           <label className={classes.label}>Your Message</label>
           <textarea
-            style={{ height: "200px", paddingTop: "20px" }}
-            placeholder="Enter phone"
+            style={{ height: "200px", paddingTop: "20px", fontFamily: "sans-serif" }}
+            placeholder="Enter message"
             className={classes.input_field_single}
           />
         </div>
@@ -63,7 +63,7 @@ function Contact_Form() {
               src={mail.src}
               style={{ maxWidth: "10%", maxHeight: "15px" }}
             />
-            <p>aliasghar@auqta.com</p>
+            <p>info@auqta.com</p>
           </div>
           <div className={classes.single_info}>
             <img

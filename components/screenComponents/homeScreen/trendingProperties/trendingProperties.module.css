@@ -1,5 +1,6 @@
 .trending_wrapper{
-    height: 100vh;
+    height: fit-content;
+    min-height: 600px;
     width: 100%;
 }
 .trending_container{
@@ -24,10 +25,20 @@
 .category_tabs_selected{
     font-weight: bolder;
     color: #0068ed;
+    transition: ease-in-out 200ms;
+    cursor: pointer;
+    height: fit-content;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #0068ed;
 }
 .category_tabs_unselected{
     color: black;
     font-weight: bolder;
+    transition: ease-in-out 200ms;
+    cursor: pointer;
+    height: fit-content;
+    padding-bottom: 10px;
+    border-bottom: transparent;
 }
 .property_cards_container{
     margin-top: 30px;

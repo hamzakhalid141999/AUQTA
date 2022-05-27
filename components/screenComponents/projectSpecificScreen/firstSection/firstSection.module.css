@@ -25,8 +25,15 @@
 }
 .btns_container{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 30%;
+  row-gap: 10px;
+  margin-top: 40px;
+}
+.upper_btns{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
   column-gap: 10px;
 }
 .property_stats {
@@ -62,6 +69,9 @@
   padding: 15px 20px;
   cursor: pointer;
   transition: ease-in-out 200ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid transparent !important;
 }
 .banner_btn:hover{
@@ -101,7 +111,7 @@
   color: white;
 }
 .overlay {
-  background-color: rgba(0, 0, 0, 0.781);
+  background-color: rgba(0, 0, 0, 0.581);
   z-index: 10;
   position: absolute;
   width: 100%;
@@ -123,7 +133,7 @@
   border-bottom-right-radius: 200px;
   z-index: 10;
 }
-.first_section_content_section {
+.info_and_btns{
   width: 90%;
   display: flex;
   flex-direction: row;
@@ -135,6 +145,57 @@
   max-width: 1350px;
   align-items: left;
   text-align: left;
+}
+.banner_btns_wrapper{
+  height: 150px;
+  display: flex;
+  width: 100%;
+  padding-left: 0px;
+
+}
+.banner_btns_container{
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.btn_body{
+  width: 110px;
+  height: 90%;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  justify-content: center;
+  align-items: center;
+  transition: ease-in-out 200ms;
+}
+.btn_body:hover{
+  border: 1px solid rgba(255, 255, 255, 0.295);
+  background-color: rgba(255, 255, 255, 0.253);
+  /* backdrop-filter: blur(5px); */
+}
+.btn_body p{
+  color: white;
+  font-size: 13px;
+}
+.first_section_content_section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 30;
+  column-gap: 20px;
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  max-width: 1350px;
+  align-items: left;
+  text-align: left;
+  row-gap: 40px;
+  margin-top: 120px;
 }
 /* .first_section_content_section h1 {
   font-size: 35px;

@@ -88,8 +88,20 @@
   min-height: 500px;
   justify-content: center;
   align-items: center;
+  position: relative;
+  transition: ease-in-out 200ms;
 }
+.image_container:hover .img{
+  opacity: 1;
+}
+.msg{
+  position: absolute;
+  bottom: -60px;
+  width: 80%;
+  opacity: 0;
+  transition: ease-in-out 200ms;
 
+}
 .see_more_btn{
     color: #535353;
     font-weight: bold;

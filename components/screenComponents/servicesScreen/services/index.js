@@ -1,6 +1,8 @@
 import React from "react";
 import classes from "./services.module.css";
 import Image from "next/image";
+import { Fade } from "react-slideshow-image";
+import "react-slideshow-image/dist/styles.css";
 import service1 from "../../../../public/assets/service_1_icon.png";
 import service2 from "../../../../public/assets/service_2_icon.png";
 import service3 from "../../../../public/assets/service_3_icon.png";
@@ -11,6 +13,7 @@ import logo3 from "../../../../public/assets/service_3_heading_icon.png";
 import logo4 from "../../../../public/assets/service_4_heading_icon.png";
 
 function Services() {
+
   return (
     <div className={classes.container}>
       <div className={classes.content_container}>

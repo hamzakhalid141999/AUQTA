@@ -9,7 +9,8 @@
 }
 .carousel_container{
     position: relative;
-    height: 90vh;
+    height: 700px;
+    max-height: 800px;
     width: 100%;
     display: flex;
     flex: 1;

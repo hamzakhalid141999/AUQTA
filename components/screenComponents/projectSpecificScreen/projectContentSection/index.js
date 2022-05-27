@@ -28,6 +28,10 @@ function ProjectConentSection() {
           className={classes.services_container}
         >
           <div onClick={toggleVideo} className={classes.image_container}>
+            {/* <p className={classes.msg}>
+              Click above to interact with our virtual tour and enjoy the
+              experience
+            </p> */}
             {isVideo ? (
               <video
                 playsInline

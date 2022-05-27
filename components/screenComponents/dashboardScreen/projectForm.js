@@ -82,6 +82,7 @@ function ProjectForm() {
               {featureArr?.map((feature, index) => (
                 <div
                   key={index}
+                  style={{width: '100%'}}
                   className={classes.looped_input_field_container}
                 >
                   <input
@@ -156,7 +157,7 @@ function ProjectForm() {
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>City</p>
             <input
-              placeholder="City Namw"
+              placeholder="City Name"
               className={classes.input_field_dual}
             />
           </div>
@@ -167,6 +168,23 @@ function ProjectForm() {
               className={classes.input_field_dual}
             />
           </div>
+        </div>
+
+        <div className={classes.single_row}>
+          <div className={classes.two_field_container}>
+            <p className={classes.label_dual}>Province</p>
+            <select
+              placeholder="City Name"
+              className={classes.input_field_dual}
+            >
+              <option>Punjab</option>
+              <option>Sindh</option>
+              <option>Baluchistan</option>
+              <option>KPK</option>
+              <option>Gilgit Baltistan</option>
+            </select>
+          </div>
+     
         </div>
 
         <div className={classes.single_row}>

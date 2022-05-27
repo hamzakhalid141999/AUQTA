@@ -37,12 +37,12 @@ function Dashboard() {
         <div className={classes.dashboard_heading}>
           <h1 data-aos="fade-right">WELCOME TO AUQTA{"'"}s {dashboardType} DASHBOARD</h1>
         </div>
-        <h3 style={{color: 'white'}}>
+        {/* <h3 style={{color: 'white'}}>
           Add Property for Sale or Rent
         </h3>
         <h2 style={{color: 'white'}}>
         Want to attract more buyers or tenants from all over Pakistan? Get in Touch with an Auqta specialist and digitalise your property to increase market potential.
-        </h2>
+        </h2> */}
         {/* <p data-aos="fade-right">Lorem ipsum is just a dummy text which is used to fill in spaces when you have nothing else to write over there</p> */}
       </div>
     </div>

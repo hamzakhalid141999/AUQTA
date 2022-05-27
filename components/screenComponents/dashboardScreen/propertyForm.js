@@ -123,32 +123,32 @@ function PropertyForm() {
           </div>
         </div>
         <div className={classes.single_row}>
-          <p className={classes.label}>Subtype</p>
-          <select
-            onChange={(e) => {
-              console.log(e.target.value);
-              setSubtype(e.target.value);
-            }}
-            className={classes.input_field_single}
-          >
-            {type === "residential"
-              ? residential_subtypes?.map((subtype, index) => (
-                  <option key={index}>{subtype}</option>
-                ))
-              : type === "commercial"
-              ? commercial_subtypes?.map((subtype, index) => (
-                  <option value={subtype} key={index}>
-                    {subtype}
-                  </option>
-                ))
-              : type === "plot" &&
-                plot_subtypes?.map((subtype, index) => (
-                  <option key={index}>{subtype}</option>
-                ))}
-          </select>
-        </div>
-
-        <div className={classes.single_row}>
+          <div className={classes.two_field_container}>
+            <p className={classes.label}>Subtype</p>
+            <select
+              onChange={(e) => {
+                console.log(e.target.value);
+                setSubtype(e.target.value);
+              }}
+              style={{ width: "100%" }}
+              className={classes.input_field_single}
+            >
+              {type === "residential"
+                ? residential_subtypes?.map((subtype, index) => (
+                    <option key={index}>{subtype}</option>
+                  ))
+                : type === "commercial"
+                ? commercial_subtypes?.map((subtype, index) => (
+                    <option value={subtype} key={index}>
+                      {subtype}
+                    </option>
+                  ))
+                : type === "plot" &&
+                  plot_subtypes?.map((subtype, index) => (
+                    <option key={index}>{subtype}</option>
+                  ))}
+            </select>
+          </div>
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>City</p>
             <input
@@ -156,12 +156,28 @@ function PropertyForm() {
               className={classes.input_field_dual}
             />
           </div>
+        </div>
+
+        <div className={classes.single_row}>
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>Location</p>
             <input
               placeholder="Location Area"
               className={classes.input_field_dual}
             />
+          </div>
+          <div className={classes.two_field_container}>
+            <p className={classes.label_dual}>Province</p>
+            <select
+              style={{ width: "100%" }}
+              className={classes.input_field_single}
+            >
+              <option>Punjab</option>
+              <option>Sindh</option>
+              <option>KPK</option>
+              <option>Baluchistan</option>
+              <option>Gilgit Baltistan</option>
+            </select>
           </div>
         </div>
 
@@ -223,7 +239,7 @@ function PropertyForm() {
         <div style={{ alignItems: "normal" }} className={classes.single_row}>
           <p className={classes.label}>Description</p>
           <textarea
-            style={{ height: "150px", paddingTop: '10px' }}
+            style={{ height: "150px", paddingTop: "10px" }}
             className={classes.input_field_single}
           />
         </div>
@@ -277,7 +293,10 @@ function PropertyForm() {
               </div>
             </div>
 
-            <div className={classes.single_row}>
+            <div
+              style={{ flexDirection: "column" }}
+              className={classes.single_row}
+            >
               <div className={classes.checkboxes_container}>
                 <div className={classes.checkbox_container}>
                   <input className={classes.checkbox} type="checkbox" />
@@ -317,25 +336,25 @@ function PropertyForm() {
                   <input className={classes.checkbox} type="checkbox" />
                   <p className={classes.checkbox_label}>Waste Disposal</p>
                 </div>
-                <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
-                  <p className={classes.checkbox_label}>
-                    Access to Nearby Public Transport
-                  </p>
-                </div>
-                <div
-                  style={{ width: "100%" }}
-                  className={classes.input_field_with_label_top_container}
-                >
-                  <p className={classes.top_label}>Other Main Features</p>
-                  <input className={classes.input_field_single} />
-                </div>
+              </div>
+              <div
+                style={{ width: "100%" }}
+                className={classes.input_field_with_label_top_container}
+              >
+                <p className={classes.top_label}>Other Features</p>
+                <input
+                  style={{ width: "30%" }}
+                  className={classes.input_field_single}
+                />
               </div>
             </div>
 
             <p className={classes.label}>Rooms</p>
 
-            <div className={classes.single_row}>
+            <div
+              style={{ flexDirection: "column" }}
+              className={classes.single_row}
+            >
               <div className={classes.checkboxes_container}>
                 <div className={classes.checkbox_container}>
                   <input className={classes.checkbox} type="checkbox" />
@@ -393,13 +412,16 @@ function PropertyForm() {
                   <input className={classes.checkbox} type="checkbox" />
                   <p className={classes.checkbox_label}>Servant Quarter</p>
                 </div>
-                <div
-                  style={{ width: "100%" }}
-                  className={classes.input_field_with_label_top_container}
-                >
-                  <p className={classes.top_label}>Other</p>
-                  <input className={classes.input_field_single} />
-                </div>
+              </div>
+              <div
+                style={{ width: "100%" }}
+                className={classes.input_field_with_label_top_container}
+              >
+                <p className={classes.top_label}>Other Features</p>
+                <input
+                  style={{ width: "30%" }}
+                  className={classes.input_field_single}
+                />
               </div>
             </div>
 
@@ -428,7 +450,10 @@ function PropertyForm() {
 
             <p className={classes.label}>Communication</p>
 
-            <div className={classes.single_row}>
+            <div
+              style={{ flexDirection: "column" }}
+              className={classes.single_row}
+            >
               <div className={classes.checkboxes_container}>
                 <div className={classes.checkbox_container}>
                   <input className={classes.checkbox} type="checkbox" />
@@ -444,19 +469,25 @@ function PropertyForm() {
                   <input className={classes.checkbox} type="checkbox" />
                   <p className={classes.checkbox_label}>Intercom</p>
                 </div>
-                <div
-                  style={{ width: "100%" }}
-                  className={classes.input_field_with_label_top_container}
-                >
-                  <p className={classes.top_label}>Other</p>
-                  <input className={classes.input_field_single} />
-                </div>
+              </div>
+              <div
+                style={{ width: "100%" }}
+                className={classes.input_field_with_label_top_container}
+              >
+                <p className={classes.top_label}>Other Features</p>
+                <input
+                  style={{ width: "30%" }}
+                  className={classes.input_field_single}
+                />
               </div>
             </div>
 
             <p className={classes.label}>Other Features/Facilities</p>
 
-            <div className={classes.single_row}>
+            <div
+              style={{ flexDirection: "column" }}
+              className={classes.single_row}
+            >
               <div className={classes.checkboxes_container}>
                 <div className={classes.checkbox_container}>
                   <input className={classes.checkbox} type="checkbox" />
@@ -476,361 +507,374 @@ function PropertyForm() {
                     Accessibility for Special or Elderly Persons
                   </p>
                 </div>
+              </div>
+              <div
+                style={{ width: "100%" }}
+                className={classes.input_field_with_label_top_container}
+              >
+                <p className={classes.top_label}>Other Features</p>
+                <input
+                  style={{ width: "30%" }}
+                  className={classes.input_field_single}
+                />
+              </div>
+            </div>
+          </>
+        ) : type === "commercial" ? (
+          <>
+            <p style={{ marginTop: "40px" }} className={classes.label}>
+              Main Features
+            </p>
+
+            <div className={classes.single_row}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                {subtype !== "Factory" && subtype !== "Warehouse" ? (
+                  <>
+                    <div
+                      style={{ width: "25%" }}
+                      className={classes.input_field_with_label_top_container}
+                    >
+                      <p className={classes.top_label}>Build Year</p>
+                      <input className={classes.input_field_single} />
+                    </div>
+
+                    <div
+                      style={{ width: "25%" }}
+                      className={classes.input_field_with_label_top_container}
+                    >
+                      <p className={classes.top_label}>Facing View</p>
+                      <input className={classes.input_field_single} />
+                    </div>
+
+                    <div
+                      style={{ width: "45%" }}
+                      className={classes.input_field_with_label_top_container}
+                    >
+                      <p className={classes.top_label}>Floors in Building</p>
+                      <input
+                        type="number"
+                        className={classes.input_field_single}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div
+                      style={{ width: "45%" }}
+                      className={classes.input_field_with_label_top_container}
+                    >
+                      <p className={classes.top_label}>Build Year</p>
+                      <input className={classes.input_field_single} />
+                    </div>
+
+                    <div
+                      style={{ width: "45%" }}
+                      className={classes.input_field_with_label_top_container}
+                    >
+                      <p className={classes.top_label}>Nearby Landmarks</p>
+                      <select className={classes.input_field_single}>
+                        {landmarks?.map((landmark, index) => (
+                          <option key={index}>{landmark}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+            {subtype !== "Factory" && subtype !== "Warehouse" && (
+              <div className={classes.single_row}>
                 <div
                   style={{ width: "100%" }}
                   className={classes.input_field_with_label_top_container}
                 >
-                  <p className={classes.top_label}>Other</p>
-                  <input className={classes.input_field_single} />
+                  <p className={classes.top_label}>Nearby Landmarks</p>
+                  <select className={classes.input_field_single}>
+                    {landmarks?.map((landmark, index) => (
+                      <option key={index}>{landmark}</option>
+                    ))}
+                  </select>
                 </div>
+              </div>
+            )}
+
+            <div style={{flexDirection: 'column'}} className={classes.single_row}>
+              <div className={classes.checkboxes_container}>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Parking</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Electricity Backup</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Elevator/Lift</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>
+                    Access to Nearby Public Transport
+                  </p>
+                </div>
+           
+              </div>
+              <div
+                    style={{ width: "100%" }}
+                    className={classes.input_field_with_label_top_container}
+                  >
+                    <p style={{ width: "30%" }} className={classes.top_label}>
+                      Other Features
+                    </p>
+                    <input className={classes.input_field_single} />
+                  </div>
+            </div>
+
+            {subtype !== "Factory" && subtype !== "Warehouse" && (
+              <>
+                <p className={classes.label}>Rooms</p>
+
+                <div
+                  style={{ flexDirection: "column" }}
+                  className={classes.single_row}
+                >
+                  <div className={classes.checkboxes_container}>
+                    <div className={classes.checkbox_container}>
+                      <input className={classes.checkbox} type="checkbox" />
+                      <p className={classes.checkbox_label}>Conference Room</p>
+                    </div>
+                    <div className={classes.checkbox_container}>
+                      <input className={classes.checkbox} type="checkbox" />
+                      <p className={classes.checkbox_label}>Media Room</p>
+                    </div>
+                    <div className={classes.checkbox_container}>
+                      <input className={classes.checkbox} type="checkbox" />
+                      <p className={classes.checkbox_label}>Cabin Room</p>
+                    </div>
+                    <div className={classes.checkbox_container}>
+                      <input className={classes.checkbox} type="checkbox" />
+                      <p className={classes.checkbox_label}>Kitchen</p>
+                    </div>
+                    <div className={classes.checkbox_container}>
+                      <input className={classes.checkbox} type="checkbox" />
+                      <p className={classes.checkbox_label}>Bathroom</p>
+                    </div>
+                    <div className={classes.checkbox_container}>
+                      <input className={classes.checkbox} type="checkbox" />
+                      <p className={classes.checkbox_label}>Store Room</p>
+                    </div>
+                  </div>
+                  <div
+                    style={{ width: "100%" }}
+                    className={classes.input_field_with_label_top_container}
+                  >
+                    <p style={{ width: "30%" }} className={classes.top_label}>
+                      Other Features
+                    </p>
+                    <input className={classes.input_field_single} />
+                  </div>
+                </div>
+              </>
+            )}
+
+            <p className={classes.label}>Utilities</p>
+
+            <div className={classes.single_row}>
+              <div className={classes.checkboxes_container}>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Electricity</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Gas</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Water</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Maintenance</p>
+                </div>
+              </div>
+            </div>
+
+            <p className={classes.label}>Communication</p>
+
+            <div
+              style={{ flexDirection: "column" }}
+              className={classes.single_row}
+            >
+              <div className={classes.checkboxes_container}>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Broadband Access</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>
+                    Sattelite or TV Cable Access
+                  </p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Intercom</p>
+                </div>
+              </div>
+              <div
+                style={{ width: "100%" }}
+                className={classes.input_field_with_label_top_container}
+              >
+                <p style={{ width: "30%" }} className={classes.top_label}>
+                  Other Features
+                </p>
+                <input className={classes.input_field_single} />
+              </div>
+            </div>
+
+            <p className={classes.label}>Other Features/Facilities</p>
+
+            <div
+              style={{ flexDirection: "column" }}
+              className={classes.single_row}
+            >
+              <div className={classes.checkboxes_container}>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Security Staff</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Maintenance Staff</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>CCTV</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>
+                    Accessibility for Special or Elderly Persons
+                  </p>
+                </div>
+              </div>
+              <div
+                style={{ width: "100%" }}
+                className={classes.input_field_with_label_top_container}
+              >
+                <p style={{ width: "30%" }} className={classes.top_label}>
+                  Other Features
+                </p>
+                <input className={classes.input_field_single} />
               </div>
             </div>
           </>
         ) : (
-          type === "commercial" ? (
-            <>
-              <p style={{ marginTop: "40px" }} className={classes.label}>
-                Main Features
-              </p>
-
-              <div className={classes.single_row}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    width: "100%",
-                  }}
-                >
-                  {subtype !== "Factory" && subtype !== "Warehouse" ? (
-                    <>
-                      <div
-                        style={{ width: "25%" }}
-                        className={classes.input_field_with_label_top_container}
-                      >
-                        <p className={classes.top_label}>Build Year</p>
-                        <input className={classes.input_field_single} />
-                      </div>
-
-                      <div
-                        style={{ width: "25%" }}
-                        className={classes.input_field_with_label_top_container}
-                      >
-                        <p className={classes.top_label}>Facing View</p>
-                        <input className={classes.input_field_single} />
-                      </div>
-
-                      <div
-                        style={{ width: "45%" }}
-                        className={classes.input_field_with_label_top_container}
-                      >
-                        <p className={classes.top_label}>Floors in Building</p>
-                        <input
-                          type="number"
-                          className={classes.input_field_single}
-                        />
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div
-                        style={{ width: "45%" }}
-                        className={classes.input_field_with_label_top_container}
-                      >
-                        <p className={classes.top_label}>Build Year</p>
-                        <input className={classes.input_field_single} />
-                      </div>
-
-                      <div
-                        style={{ width: "45%" }}
-                        className={classes.input_field_with_label_top_container}
-                      >
-                        <p className={classes.top_label}>Nearby Landmarks</p>
-                        <select className={classes.input_field_single}>
-                          {landmarks?.map((landmark, index) => (
-                            <option key={index}>{landmark}</option>
-                          ))}
-                        </select>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-              {subtype !== "Factory" && subtype !== "Warehouse" && (
-                <div className={classes.single_row}>
-                  <div
-                    style={{ width: "100%" }}
-                    className={classes.input_field_with_label_top_container}
-                  >
-                    <p className={classes.top_label}>Nearby Landmarks</p>
-                    <select className={classes.input_field_single}>
-                      {landmarks?.map((landmark, index) => (
-                        <option key={index}>{landmark}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              )}
-
-              <div className={classes.single_row}>
-                <div className={classes.checkboxes_container}>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>Parking</p>
-                  </div>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>Electricity Backup</p>
-                  </div>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>Elevator/Lift</p>
-                  </div>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>
-                      Access to Nearby Public Transport
-                    </p>
-                  </div>
-                  <div
-                    style={{ width: "100%" }}
-                    className={classes.input_field_with_label_top_container}
-                  >
-                    <p className={classes.top_label}>Other Main Features</p>
-                    <input className={classes.input_field_single} />
-                  </div>
-                </div>
-              </div>
-
-              {subtype !== "Factory" && subtype !== "Warehouse" && (
-                <>
-                  <p className={classes.label}>Rooms</p>
-
-                  <div className={classes.single_row}>
-                    <div className={classes.checkboxes_container}>
-                      <div className={classes.checkbox_container}>
-                        <input className={classes.checkbox} type="checkbox" />
-                        <p className={classes.checkbox_label}>
-                          Conference Room
-                        </p>
-                      </div>
-                      <div className={classes.checkbox_container}>
-                        <input className={classes.checkbox} type="checkbox" />
-                        <p className={classes.checkbox_label}>Media Room</p>
-                      </div>
-                      <div className={classes.checkbox_container}>
-                        <input className={classes.checkbox} type="checkbox" />
-                        <p className={classes.checkbox_label}>Cabin Room</p>
-                      </div>
-                      <div className={classes.checkbox_container}>
-                        <input className={classes.checkbox} type="checkbox" />
-                        <p className={classes.checkbox_label}>Kitchen</p>
-                      </div>
-                      <div className={classes.checkbox_container}>
-                        <input className={classes.checkbox} type="checkbox" />
-                        <p className={classes.checkbox_label}>Bathroom</p>
-                      </div>
-                      <div className={classes.checkbox_container}>
-                        <input className={classes.checkbox} type="checkbox" />
-                        <p className={classes.checkbox_label}>Store Room</p>
-                      </div>
-
-                      <div
-                        style={{ width: "100%" }}
-                        className={classes.input_field_with_label_top_container}
-                      >
-                        <p className={classes.top_label}>Other</p>
-                        <input className={classes.input_field_single} />
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
-
-              <p className={classes.label}>Utilities</p>
-
-              <div className={classes.single_row}>
-                <div className={classes.checkboxes_container}>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>Electricity</p>
-                  </div>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>Gas</p>
-                  </div>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>Water</p>
-                  </div>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>Maintenance</p>
-                  </div>
-                </div>
-              </div>
-
-              <p className={classes.label}>Communication</p>
-
-              <div className={classes.single_row}>
-                <div className={classes.checkboxes_container}>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>Broadband Access</p>
-                  </div>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>
-                      Sattelite or TV Cable Access
-                    </p>
-                  </div>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>Intercom</p>
-                  </div>
-                  <div
-                    style={{ width: "100%" }}
-                    className={classes.input_field_with_label_top_container}
-                  >
-                    <p className={classes.top_label}>Other</p>
-                    <input className={classes.input_field_single} />
-                  </div>
-                </div>
-              </div>
-
-              <p className={classes.label}>Other Features/Facilities</p>
-
-              <div className={classes.single_row}>
-                <div className={classes.checkboxes_container}>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>Security Staff</p>
-                  </div>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>Maintenance Staff</p>
-                  </div>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>CCTV</p>
-                  </div>
-                  <div className={classes.checkbox_container}>
-                    <input className={classes.checkbox} type="checkbox" />
-                    <p className={classes.checkbox_label}>
-                      Accessibility for Special or Elderly Persons
-                    </p>
-                  </div>
-                  <div
-                    style={{ width: "100%" }}
-                    className={classes.input_field_with_label_top_container}
-                  >
-                    <p className={classes.top_label}>Other</p>
-                    <input className={classes.input_field_single} />
-                  </div>
-                </div>
-              </div>
-            </>
-          )
-          :
           <>
-          <p style={{ marginTop: "40px" }} className={classes.label}>
-            Main Features
-          </p>
+            <p style={{ marginTop: "40px" }} className={classes.label}>
+              Main Features
+            </p>
 
-          <div className={classes.single_row}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: "100%",
-              }}
-            >
+            <div className={classes.single_row}>
               <div
-                style={{ width: "100%" }}
-                className={classes.input_field_with_label_top_container}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
               >
-                <p className={classes.top_label}>Nearby Landmarks</p>
-                <select className={classes.input_field_single}>
-                  {landmarks?.map((landmark, index) => (
-                    <option key={index}>{landmark}</option>
-                  ))}
-                </select>
+                <div
+                  style={{ width: "100%" }}
+                  className={classes.input_field_with_label_top_container}
+                >
+                  <p className={classes.top_label}>Nearby Landmarks</p>
+                  <select className={classes.input_field_single}>
+                    {landmarks?.map((landmark, index) => (
+                      <option key={index}>{landmark}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className={classes.single_row}>
-            <div className={classes.checkboxes_container}>
-              <div className={classes.checkbox_container}>
-                <input className={classes.checkbox} type="checkbox" />
-                <p className={classes.checkbox_label}>Possession</p>
-              </div>
-              <div className={classes.checkbox_container}>
-                <input className={classes.checkbox} type="checkbox" />
-                <p className={classes.checkbox_label}>Utilities Paid</p>
-              </div>
-              <div className={classes.checkbox_container}>
-                <input className={classes.checkbox} type="checkbox" />
-                <p className={classes.checkbox_label}>Solid Land</p>
-              </div>
-              <div className={classes.checkbox_container}>
-                <input className={classes.checkbox} type="checkbox" />
-                <p className={classes.checkbox_label}>Filled Land</p>
-              </div>
-              <div className={classes.checkbox_container}>
-                <input className={classes.checkbox} type="checkbox" />
-                <p className={classes.checkbox_label}>Corner</p>
-              </div>
-              <div className={classes.checkbox_container}>
-                <input className={classes.checkbox} type="checkbox" />
-                <p className={classes.checkbox_label}>Boulevard Facing</p>
-              </div>
-              <div className={classes.checkbox_container}>
-                <input className={classes.checkbox} type="checkbox" />
-                <p className={classes.checkbox_label}>
-                  Park Facing
-                </p>
-              </div>
-              <div className={classes.checkbox_container}>
-                <input className={classes.checkbox} type="checkbox" />
-                <p className={classes.checkbox_label}>Extra Land</p>
-              </div>
-              <div className={classes.checkbox_container}>
-                <input className={classes.checkbox} type="checkbox" />
-                <p className={classes.checkbox_label}>Boundary Wall</p>
-              </div>
-              <div className={classes.checkbox_container}>
-                <input className={classes.checkbox} type="checkbox" />
-                <p className={classes.checkbox_label}>
-                  Water Supply
-                </p>
-              </div>
-              <div className={classes.checkbox_container}>
-                <input className={classes.checkbox} type="checkbox" />
-                <p className={classes.checkbox_label}>
-                  Gas Supply
-                </p>
-              </div>
-              <div className={classes.checkbox_container}>
-                <input className={classes.checkbox} type="checkbox" />
-                <p className={classes.checkbox_label}>
-                   Access to Nearby Public Transport
-                </p>
+            <div style={{flexDirection: 'column'}} className={classes.single_row}>
+              <div className={classes.checkboxes_container}>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Possession</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Utilities Paid</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Solid Land</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Filled Land</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Corner</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Boulevard Facing</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Park Facing</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Extra Land</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Boundary Wall</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Water Supply</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>Gas Supply</p>
+                </div>
+                <div className={classes.checkbox_container}>
+                  <input className={classes.checkbox} type="checkbox" />
+                  <p className={classes.checkbox_label}>
+                    Access to Nearby Public Transport
+                  </p>
+                </div>
+              
               </div>
               <div
-                style={{ width: "100%" }}
-                className={classes.input_field_with_label_top_container}
-              >
-                <p className={classes.top_label}>Other Main Features</p>
-                <input className={classes.input_field_single} />
-              </div>
+                    style={{ width: "100%" }}
+                    className={classes.input_field_with_label_top_container}
+                  >
+                    <p style={{ width: "30%" }} className={classes.top_label}>
+                      Other Features
+                    </p>
+                    <input className={classes.input_field_single} />
+                  </div>
             </div>
-          </div>
           </>
         )}
 
-        <div style={{marginTop: '80px'}} className={classes.single_row}>
+        <div style={{ marginTop: "80px" }} className={classes.single_row}>
           <p className={classes.label}>Images</p>
 
           <div className={classes.container_with_top_label}>

@@ -14,7 +14,7 @@ function Description() {
           <Image src={img} className={classes.img} />
         </div>
         <div className={classes.description}>
-          <h1>DESCRIPTION OF THE PROPRERTY</h1>
+          <h1>DESCRIPTION OF THE PROPERTY</h1>
           <div className={classes.service_description_container}>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut
@@ -31,17 +31,27 @@ function Description() {
             <div className={classes.single_row}>
                 <div className={classes.input_field_container_dual}>
                     <label>TYPE</label>
-                    <input className={classes.input_field}/>
+                    <div className={classes.input_field}>
+                      <p>Residential</p>
+                    </div>
                 </div>
                 <div className={classes.input_field_container_dual}>
                     <label>SUBTYPE</label>
-                    <input className={classes.input_field}/>
+                    <div className={classes.input_field}>
+                      <p>Penthouse</p>
+                    </div>
                 </div>
             </div>
             <div className={classes.single_row}>
                 <div className={classes.input_field_container_dual}>
                     <label>BUILD YEAR</label>
-                    <input className={classes.input_field}/>
+                    <div className={classes.input_field}>
+                      <p>2021</p>
+                    </div>
+                    {/* <div className={classes.bullets_container}>
+                      <div className={classes.bullet}/>
+                      <p></p>
+                    </div> */}
                 </div>
             </div>
           </div>

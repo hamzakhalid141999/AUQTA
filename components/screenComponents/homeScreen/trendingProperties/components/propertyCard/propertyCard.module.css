@@ -6,6 +6,7 @@
     position: relative;
     transition: ease-in-out 200ms;
     border-bottom: 2px solid rgb(204, 204, 204);
+    cursor: pointer;
 }
 .card_body:hover{
     transform: translate3d(0px, -3px, 0px);

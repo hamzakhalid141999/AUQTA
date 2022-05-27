@@ -55,7 +55,7 @@ function Footer() {
         </div>
         <div className={classes.col_2}>
           <h1>Contact</h1>
-          <div className={classes.row}><img style={{height: "15px"}} src={email.src} className={classes.social_media_icon} /><p>aliasghar@auqta.com</p></div>
+          <div className={classes.row}><img style={{height: "15px"}} src={email.src} className={classes.social_media_icon} /><p>info@auqta.com</p></div>
           <div className={classes.row}><img style={{height: "15px"}} src={call.src} className={classes.social_media_icon} /><p>+92 331 5008852</p></div>
           <div className={classes.row}><img style={{height: "15px"}} src={pin_white.src} className={classes.social_media_icon} /><p>
             Raj Heights, River View Commercial, Phase 7. Bahria Town, Islamabad

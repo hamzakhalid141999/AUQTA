@@ -79,7 +79,7 @@ function OurMission() {
                 </div>
               </div>
               <div className={classes.description_container}>
-                <h1>CONVINIENT VIEWING</h1>
+                <h1>CONVENIENT VIEWING</h1>
                 <p>
                 Have the convenience of viewing and analysing projects/properties and their respected locations from your doorsteps.                 </p>
               </div>
