@@ -54,3 +54,33 @@
         width: 97%;
     }
 }
+@media screen and (max-width: 1000px) {
+    .trending_container h1{
+        font-size: 20px;
+        width: 90%;
+        text-align: center;
+    }
+    .category_tabs_container{
+        width: 70%;
+        min-width: 600px;
+        max-width: 600px;
+        overflow-x: scroll;
+        column-gap: 35px;
+        justify-content: initial;
+    }
+    .property_cards_container{
+        overflow-x: scroll;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        column-gap: 30px;
+        justify-content: initial;
+    }
+    .category_tabs_selected{
+        width: fit-content;
+        min-width: 120px;
+    }
+    .category_tabs_unselected{
+        width: fit-content;
+        min-width: 120px;
+    }
+}

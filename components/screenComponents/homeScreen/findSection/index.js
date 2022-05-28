@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./findSection.module.css";
 import Card from "./components/index";
 import CardsInfo from "../findSection/components/cardInfo";
@@ -11,13 +11,37 @@ import { useWindowSize } from "../../../../utils";
 
 function FindSection() {
   const {width} = useWindowSize();
-  
+  const [slidesToShow, setSlidesToShow] = useState(4);
+
   useEffect(() => {
     AOS.init({
       duration: 500,
     });
     AOS.refresh();
   }, []);
+
+  useEffect(()=>{
+    if (width){
+      if (width > 1390){
+        setSlidesToShow(4);
+        console.log("in 4");
+      }
+      if (width < 1390){
+        setSlidesToShow(3);
+        console.log("in 3");
+      }
+      if (width < 1024){
+        setSlidesToShow(2);
+        console.log("in 2");
+      }
+      if (width < 850){
+        setSlidesToShow(1);
+        console.log("in 1");
+      }
+    }
+  },[width])
+
+  console.log(width, slidesToShow)
 
   const settings = {
     dots: false,
@@ -34,7 +58,7 @@ function FindSection() {
         <h1 data-aos="fade-up">BENEFITS OF USING THIS PLATFORM</h1>
         <div data-aos="fade-up" className={classes.cards_container}>
           <div className={classes.overlay} />
-          <Slider slidesToShow={width > 1390 ? 4 : width < 1390 ? 3 : width < 1024 ? 2 : width < 850 && 1} {...settings}>
+          <Slider slidesToShow={slidesToShow} {...settings}>
             {CardsInfo?.map((card, index) => (
               <Card
                 key={index}

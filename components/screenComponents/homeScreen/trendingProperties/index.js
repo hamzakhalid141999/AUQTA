@@ -36,7 +36,7 @@ function TrendingProperties({ isProject, heading, noButtons }) {
             <p onClick={()=>{handleCitySelected("SINDH")}} className={citySelected === "SINDH" ? classes.category_tabs_selected : classes.category_tabs_unselected}>SINDH</p>
             <p onClick={()=>{handleCitySelected("BALUCHISTAN")}} className={citySelected === "BALUCHISTAN" ? classes.category_tabs_selected : classes.category_tabs_unselected}>BALOCHISTAN</p>
             <p onClick={()=>{handleCitySelected("KPK")}} className={citySelected === "KPK" ? classes.category_tabs_selected : classes.category_tabs_unselected}>
-              KHYBER PAKHTUNKHWA
+             KPK
             </p>
           </div>
         )}

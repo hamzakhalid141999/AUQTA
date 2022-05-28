@@ -181,3 +181,105 @@
 .social_media_icon{
     height: 20px;
 }
+.footer_content_mobile{
+    display: none;
+}
+@media screen and (max-width: 1000px) {
+    .footer_body{
+        border-top-left-radius: 60px;
+        border-top-right-radius: 60px;
+    }
+    .search_bar{
+        height: 60px;
+        font-size: 15px
+    }
+    .search_bar_container{
+        top: -30px;
+        width: 90%;
+    }
+    .search_btn{
+        top: 7px;
+        right: 7px;
+    }
+    .footer_content{
+        display: none;
+    }
+    .footer_content_mobile{
+        width: 95%;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 80px;
+    }
+    .logo_container_mobile{
+        width: 50%;
+        max-width: 300px;
+        min-width: 250px;
+        height: fit-content;
+        margin-bottom: 0px;
+    }
+    .footer_content_mobile h2{
+        color: white;
+        width: 100%;
+        text-align: center;
+        font-size: 25px;
+        line-height: 35px;
+        margin-bottom: 40px;
+    }
+    .footer_content_mobile p{
+        color: white;
+        font-size: 17px;
+    }
+    .logo_mobile{
+        width: 80%;
+    }
+    .contact_us_mobile_section{
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+    .socials_container_mobile{
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin-top: 60px;
+    }
+    .contact_tab{
+        display: flex;
+        flex-direction: column;
+        row-gap: 15px;
+        justify-content: center;
+        align-items: center;
+        text-transform: initial;
+    }
+    .contact_tab p{
+        color: white;
+        text-align: center;
+        font-size: 13px;
+    }
+    .social_media_icons{
+        display: none;
+    }
+    .lower_content{
+        width: 100%;
+    }
+    .left_content{
+        width: 100%;
+    }
+    .left_content > p:nth-child(2){
+        display: none;
+    }
+    .left_content > p:nth-child(3){
+        display: none;
+    }
+    .left_content > p:nth-child(4){
+        display: none;
+    }
+    .divider{
+        width: 100%;
+    }
+}

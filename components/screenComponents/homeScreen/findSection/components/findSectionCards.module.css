@@ -78,3 +78,8 @@
     color: white;
     transition: ease-in-out 200ms;
 }
+@media screen and (max-width: 1000px) {
+    .card_bg{
+        box-shadow: 8px 15px 35px 17px rgba(199, 223, 255, 0.589);
+    }
+}

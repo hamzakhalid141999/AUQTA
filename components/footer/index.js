@@ -40,27 +40,97 @@ function Footer() {
         </div>
         <div className={classes.col_2}>
           <h1>About</h1>
-          <div className={classes.row}><div className={classes.bullet}/><p>Our Story</p></div>
-          <div className={classes.row}><div className={classes.bullet}/><p>Our Vision</p></div>
-          <div className={classes.row}><div className={classes.bullet}/><p>Mission Statement</p></div>
-          <div className={classes.row}><div className={classes.bullet}/><p>Our Values</p></div>
-          <div className={classes.row}><div className={classes.bullet}/><p>What makes AUQTA unique</p></div>
+          <div className={classes.row}>
+            <div className={classes.bullet} />
+            <p>Our Story</p>
+          </div>
+          <div className={classes.row}>
+            <div className={classes.bullet} />
+            <p>Our Vision</p>
+          </div>
+          <div className={classes.row}>
+            <div className={classes.bullet} />
+            <p>Mission Statement</p>
+          </div>
+          <div className={classes.row}>
+            <div className={classes.bullet} />
+            <p>Our Values</p>
+          </div>
+          <div className={classes.row}>
+            <div className={classes.bullet} />
+            <p>What makes AUQTA unique</p>
+          </div>
         </div>
         <div className={classes.col_2}>
           <h1>Services</h1>
-          <div className={classes.row}><div className={classes.bullet}/><p>Architectural Visualisation</p></div>
-          <div className={classes.row}><div className={classes.bullet}/><p>Augmented Structures</p></div>
-          <div className={classes.row}><div className={classes.bullet}/><p>Virtual Reality</p></div>
-          <div className={classes.row}><div className={classes.bullet}/><p>Additional Services</p></div>
+          <div className={classes.row}>
+            <div className={classes.bullet} />
+            <p>Architectural Visualisation</p>
+          </div>
+          <div className={classes.row}>
+            <div className={classes.bullet} />
+            <p>Augmented Structures</p>
+          </div>
+          <div className={classes.row}>
+            <div className={classes.bullet} />
+            <p>Virtual Reality</p>
+          </div>
+          <div className={classes.row}>
+            <div className={classes.bullet} />
+            <p>Additional Services</p>
+          </div>
         </div>
         <div className={classes.col_2}>
           <h1>Contact</h1>
-          <div className={classes.row}><img style={{height: "15px"}} src={email.src} className={classes.social_media_icon} /><p>info@auqta.com</p></div>
-          <div className={classes.row}><img style={{height: "15px"}} src={call.src} className={classes.social_media_icon} /><p>+92 331 5008852</p></div>
-          <div className={classes.row}><img style={{height: "15px"}} src={pin_white.src} className={classes.social_media_icon} /><p>
-            Raj Heights, River View Commercial, Phase 7. Bahria Town, Islamabad
-          </p>
+          <div className={classes.row}>
+            <img
+              style={{ height: "15px" }}
+              src={email.src}
+              className={classes.social_media_icon}
+            />
+            <p>info@auqta.com</p>
           </div>
+          <div className={classes.row}>
+            <img
+              style={{ height: "15px" }}
+              src={call.src}
+              className={classes.social_media_icon}
+            />
+            <p>+92 331 5008852</p>
+          </div>
+          <div className={classes.row}>
+            <img
+              style={{ height: "15px" }}
+              src={pin_white.src}
+              className={classes.social_media_icon}
+            />
+            <p>
+              Raj Heights, River View Commercial, Phase 7. Bahria Town,
+              Islamabad
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className={classes.footer_content_mobile}>
+        <div className={classes.logo_container_mobile}>
+          <Image src={logo} className={classes.logo_mobile} alt="logo" />
+        </div>
+        <h2>World{"'"}s First Immersive Real-Estate Portal</h2>
+        <p>CONTACT US</p>
+        <div className={classes.contact_us_mobile_section}>
+          <div className={classes.contact_tab}>
+            <img src={email.src} style={{width: '23px'}}/>
+            <p>info@auqta.com</p>
+          </div>
+          <div className={classes.contact_tab}>
+            <img src={call.src} style={{width: '23px'}}/>
+            <p>+92 331 5008852</p>
+          </div>
+        </div>
+        <div className={classes.socials_container_mobile}>
+        <img src={facebook.src} className={classes.social_media_icon} />
+          <img src={instagram.src} className={classes.social_media_icon} />
+          <img src={twitter.src} className={classes.social_media_icon} />
         </div>
       </div>
       <div className={classes.divider} />
@@ -74,7 +144,7 @@ function Footer() {
           </div>
         </div>
         <div className={classes.social_media_icons}>
-          Follow us 
+          Follow us
           <img src={facebook.src} className={classes.social_media_icon} />
           <img src={instagram.src} className={classes.social_media_icon} />
           <img src={twitter.src} className={classes.social_media_icon} />
