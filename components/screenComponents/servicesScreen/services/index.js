@@ -13,19 +13,25 @@ import logo3 from "../../../../public/assets/service_3_heading_icon.png";
 import logo4 from "../../../../public/assets/service_4_heading_icon.png";
 
 function Services() {
-
   return (
     <div className={classes.container}>
       <div className={classes.content_container}>
         <div className={classes.description_container}>
           <h3>
-          Experience Architecture Digitalisation at Auqta and bring your vision to life
+            Experience Architecture Digitalisation at Auqta and bring your
+            vision to life
           </h3>
           {/* <div className={classes.btn}>
             <p>READ MORE</p>
           </div> */}
         </div>
 
+        <div className={classes.heading_mobile}>
+          <div className={classes.icon_container_mobile}>
+            <Image className={classes.img} src={logo1} />
+          </div>
+          <p>ARCHITECTURAL VISUALISATION</p>
+        </div>
         <div
           style={{ flexDirection: "row-reverse" }}
           className={classes.services_container}
@@ -97,6 +103,12 @@ function Services() {
             </div>
           </div>
         </div>
+        <div className={classes.heading_mobile}>
+        <div className={classes.icon_container_mobile}>
+            <Image className={classes.img} src={logo2} />
+          </div>
+          <p>AUGMENTED STRUCTURES</p>
+        </div>
         <div className={classes.services_container}>
           <div className={classes.image_container}>
             <Image src={service2} className={classes.img} />
@@ -152,6 +164,12 @@ function Services() {
             </div>
           </div>
         </div>
+        <div className={classes.heading_mobile}>
+        <div className={classes.icon_container_mobile}>
+            <Image className={classes.img} src={logo3} />
+          </div>
+          <p>VIRTUAL REALITY</p>
+        </div>
         <div
           style={{ flexDirection: "row-reverse" }}
           className={classes.services_container}
@@ -186,7 +204,9 @@ function Services() {
                 <div className={classes.bullets_container}>
                   <div className={classes.bullet}></div>
                   <p className={classes.bullet_text}>
-                  Have a real-time feel of how you will interact with the property as if you were there                  </p>
+                    Have a real-time feel of how you will interact with the
+                    property as if you were there{" "}
+                  </p>
                 </div>
                 <p></p>
               </div>
@@ -195,7 +215,8 @@ function Services() {
                 <div className={classes.bullets_container}>
                   <div className={classes.bullet}></div>
                   <p className={classes.bullet_text}>
-                  Deliver a unique and innovative property experience to your clients
+                    Deliver a unique and innovative property experience to your
+                    clients
                   </p>
                 </div>
               </div>
@@ -204,13 +225,18 @@ function Services() {
                 <div className={classes.bullets_container}>
                   <div className={classes.bullet}></div>
                   <p className={classes.bullet_text}>
-                  Elevate your client’s satisfaction and credibility
+                    Elevate your client’s satisfaction and credibility
                   </p>
                 </div>
               </div>
             </div>
-            
           </div>
+        </div>
+        <div className={classes.heading_mobile}>
+        <div className={classes.icon_container_mobile}>
+            <Image className={classes.img} src={logo4} />
+          </div>
+          <p>ADDITIONAL SERVICES</p>
         </div>
         <div className={classes.services_container}>
           <div className={classes.image_container}>
@@ -239,7 +265,8 @@ function Services() {
                 <div className={classes.bullets_container}>
                   <div className={classes.bullet}></div>
                   <p className={classes.bullet_text}>
-                  Capture real-time colours of your property. Our experts understand shot angles
+                    Capture real-time colours of your property. Our experts
+                    understand shot angles
                   </p>
                 </div>
               </div>
@@ -248,7 +275,8 @@ function Services() {
                 <div className={classes.bullets_container}>
                   <div className={classes.bullet}></div>
                   <p className={classes.bullet_text}>
-                  Professional photos increase customer trustworthiness and credibility
+                    Professional photos increase customer trustworthiness and
+                    credibility
                   </p>
                 </div>
               </div>
@@ -257,12 +285,10 @@ function Services() {
                 <div className={classes.bullets_container}>
                   <div className={classes.bullet}></div>
                   <p className={classes.bullet_text}>
-                  A great picture speaks a thousand words
+                    A great picture speaks a thousand words
                   </p>
                 </div>
               </div>
-
-              
             </div>
           </div>
         </div>
