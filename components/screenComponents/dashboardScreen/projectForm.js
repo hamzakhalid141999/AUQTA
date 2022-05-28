@@ -56,7 +56,7 @@ function ProjectForm() {
           />
         </div>
 
-        <div className={classes.single_row}>
+        {/* <div className={classes.single_row}>
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>Since</p>
             <input
@@ -68,7 +68,7 @@ function ProjectForm() {
             <p className={classes.label_dual}>Projects Developed</p>
             <input className={classes.input_field_dual} />
           </div>
-        </div>
+        </div> */}
 
         <div className={classes.single_row}>
           <div

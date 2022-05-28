@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import classes from "./ourMission.module.css";
 import Image from "next/image";
 import our_mission from "../../../../public/assets/our_mission.png";
@@ -11,6 +11,12 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 function OurMission() {
+
+  const [isVideo, setIsVideo] = useState(true);
+
+  const toggleVideo = () => {
+    setIsVideo(!isVideo);
+  };
 
   useEffect(()=>{
     AOS.init({
@@ -56,9 +62,24 @@ function OurMission() {
         <p className={classes.subheading} data-aos="fade-up">
         Introducing Auqta the world’s first immersive real-estate trading portal. Immersive technologies include Augmented Reality and Virtual Reality, allowing the user to experience physical spaces in a digital environment. The property trading experience will become seamless as the user will have the convenience to visualise existing and investment architecture from anywhere around the world.         </p>
         <div className={classes.content_container}>
-          <div className={classes.image_container}>
-          <iframe style={{borderRadius: '40px'}} src="/vr/Business_District_Bahria_Town_VR.html" height="90%" width="90%"/>
-          </div>
+          <div onClick={toggleVideo} className={classes.image_container}>
+          {isVideo ? (
+              <video
+                playsInline
+                className={classes.video_card}
+                loop
+                muted
+                autoPlay
+                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/Building+Recording.mp4"
+              />
+            ) : (
+              <iframe
+                style={{ borderRadius: "40px" }}
+                src="/vr/Business_District_Bahria_Town_VR.html"
+                height="500px"
+                width="100%"
+              />
+            )}          </div>
           <div className={classes.values_container}>
             <div data-aos="fade-up" className={classes.single_tab}>
               <div className={classes.icon_holder}>

@@ -11,10 +11,15 @@ import icon3 from "../../../../public/assets/project_card_3d_plan_icon.png";
 function ProjectConentSection() {
   const [showMore, setShowMore] = useState(false);
   const [isVideo, setIsVideo] = useState(true);
+  const [isLocationVideo, setIsLocationVideo] = useState(true);
 
   const showContent = () => {
     setShowMore(!showMore);
   };
+
+  const toggleLocationVideo = () => {
+    setIsLocationVideo(!isLocationVideo);
+  }
 
   const toggleVideo = () => {
     setIsVideo(!isVideo);
@@ -141,13 +146,27 @@ function ProjectConentSection() {
           </div>
         </div>
         <div className={classes.services_container}>
-          <div className={classes.image_container}>
+          <div onClick={toggleLocationVideo} className={classes.image_container}>
+            {
+              isLocationVideo ? (
+              <video
+              playsInline
+              className={classes.video_card}
+              loop
+              muted
+              autoPlay
+              src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/Location+Recording.mp4"
+            />
+          ) : (
             <iframe
               style={{ borderRadius: "40px" }}
               src="/vr/Business_District_Bahria_Town_VR.html"
               height="100%"
               width="100%"
             />
+          )
+            }
+           
           </div>
           <div className={classes.description}>
             <h1>VIRTUAL VIEW OF THE LOCATION</h1>
