@@ -61,4 +61,17 @@
     width: 80%;
     color: white;
   }
-  
+  @media screen and (min-height: 1000px) {
+    .banner_img {
+      border-bottom-left-radius: 60px !important;
+      border-bottom-right-radius: 60px !important;
+    }
+    .overlay {
+      border-bottom-left-radius: 60px !important;
+      border-bottom-right-radius: 60px !important;
+    }
+    .banner_img_container {
+      border-bottom-left-radius: 60px !important;
+      border-bottom-right-radius: 60px !important;
+    }
+  }

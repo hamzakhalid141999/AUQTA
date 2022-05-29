@@ -166,7 +166,7 @@
     background-color: #0050b9;
 }
 .heading_mobile{
-    display: flex;
+    display: none;
 }
 @media screen and (max-width: 1000px) {
     .services_container{

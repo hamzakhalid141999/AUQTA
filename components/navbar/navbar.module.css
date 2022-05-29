@@ -58,6 +58,11 @@
 }
 .icon {
   color: white;
+  transition: ease-in-out 200ms;
+}
+.icon_black{
+  color: black;
+  transition: ease-in-out 200ms;
 }
 .filter_panel_hidden{
   position: absolute;
@@ -274,4 +279,22 @@
 .hover_underline_animation:hover:after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+.right_panel_mobile{
+  display: none;
+}
+@media screen and (max-width: 1000px) {
+  .right_panel{
+    display: none;
+  }
+  .right_panel_mobile{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .left_panel{
+    padding-left: 0px;
+  }
 }

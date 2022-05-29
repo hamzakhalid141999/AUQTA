@@ -2,7 +2,7 @@
     height: 380px;
     min-height: 380px;
     max-width: 220px;
-    min-width: 150px;
+    min-width: 210px;
     border-radius: 25px;
     display: flex;
     justify-content: center;
@@ -78,4 +78,17 @@
 .btn p{
     color: white;
     transition: ease-in-out 200ms;
+}
+@media screen and (max-width: 1000px) {
+    .cards_container{
+        overflow-x: scroll;
+        justify-content: initial;
+        column-gap: 20px;
+    }
+    .content_container h1{
+        font-size: 24px;
+    }
+    .card_body{
+        box-shadow: 8px 15px 35px 17px rgba(199, 223, 255, 0.589);
+    }
 }

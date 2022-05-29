@@ -92,7 +92,7 @@ function UniqueSection() {
             </div>
           </div>
           <div className={classes.image_container}>
-            <Image layout="fill" data-aos="fade-left" className={classes.img} src={img} />
+            <img data-aos="fade-left" className={classes.img} src={img.src} />
           </div>
         </div>
       </div>

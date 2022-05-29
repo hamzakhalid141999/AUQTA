@@ -84,9 +84,10 @@
 }
 .cards_container{
     width: 90%;
-    height: 500px;
+    height: fit-content;
     margin-top: 100px;
     max-width: 1225px;
+    padding-bottom: 60px;
 }
 .icon_container{
     position: relative;
@@ -116,4 +117,56 @@
     font-weight: bolder;
     width: 50%;
     text-align: center;
+}
+@media screen and (max-width: 1000px) {
+    .content_content{
+        flex-direction: column;
+        row-gap: 30px;
+    }
+    .image_container{
+        width: 100%;
+        min-width: initial;
+        max-width: initial;
+    }
+    .description_container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .description_container p{
+        width: 90%;
+        text-align: center;
+    }
+    .vision_mission_content{
+        flex-direction: column;
+        row-gap: 30px;
+    }
+    .our_vision_card{
+        width: 100%;
+        border-radius: 30px;
+    }
+    .our_vision_card p{
+        width: 90%;
+        font-size: 14px;
+    }
+    .our_mission_card p{
+        width: 90%;
+        font-size: 14px;
+    }
+    .our_vision_card h1{
+        width: 90%;
+        text-align: center;
+        font-size: 20px;
+    }
+    .our_mission_card h1{
+        width: 90%;
+        text-align: center;
+        font-size: 20px;
+
+    }
+    .our_mission_card{
+        width: 100%;
+        border-radius: 30px;
+    }
 }

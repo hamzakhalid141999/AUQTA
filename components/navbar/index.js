@@ -3,8 +3,9 @@ import classes from "./navbar.module.css";
 import Image from "next/image";
 import logo from "../../public/assets/logo.png";
 import logo_black from "../../public/assets/logo_black.png";
+import NavbarModal from "../navbarModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import LoginSignupModal from "../modals/loginSignupModal";
 import { useRouter } from "next/router";
@@ -12,12 +13,15 @@ import globe from "../../public/assets/globe.png";
 import login_icon from "../../public/assets/login.png";
 import globe_dark from "../../public/assets/globe-dark.png";
 import { useAuth } from "../../contextAPI";
+import { useWindowSize } from "../../utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Navbar() {
   const router = useRouter();
+  const { width } = useWindowSize();
   const page = router.pathname;
+  const [displayModal, setDisplayModal] = useState(false);
   const [categorySelected, setCategorySelected] = useState("buy");
   const [backgroundColor, setBackgroundColor] = useState("transparent");
   const [showFilter, setShowFilter] = useState(false);
@@ -28,7 +32,6 @@ function Navbar() {
   const { user, removeUser } = useAuth();
 
   let listener = null;
-
 
   useEffect(() => {
     if (router.pathname) {
@@ -47,9 +50,19 @@ function Navbar() {
 
   useEffect(() => {
     if (currentPage) {
-      if (currentPage === "map" || currentPage === "invest" || currentPage === "contact" || currentPage === "rent") {
+      if (
+        currentPage === "map" ||
+        currentPage === "invest" ||
+        currentPage === "contact" ||
+        currentPage === "rent"
+      ) {
         setIsNavbarVisibleFromTop(true);
-      } else if (currentPage !== "map" || currentPage === "invest" || currentPage !== "contact" || currentPage !== "rent") {
+      } else if (
+        currentPage !== "map" ||
+        currentPage === "invest" ||
+        currentPage !== "contact" ||
+        currentPage !== "rent"
+      ) {
         setIsNavbarVisibleFromTop(false);
       }
     }
@@ -62,7 +75,7 @@ function Navbar() {
   useEffect(() => {
     document.addEventListener("scroll", () => {
       let scrolled = document.scrollingElement.scrollTop;
-      if (scrolled > 600) {
+      if (scrolled > 600 && width > 1000) {
         setShowFilter(true);
       } else {
         setShowFilter(false);
@@ -92,8 +105,10 @@ function Navbar() {
           : classes.navbar_body
       }
     >
-
-
+      <NavbarModal
+        displayModal={displayModal}
+        setDisplayModal={setDisplayModal}
+      />
       <LoginSignupModal
         setOpen={setOpen}
         open={open}
@@ -324,6 +339,19 @@ function Navbar() {
             </>
           </div>
         )}
+      </div>
+
+      <div className={classes.right_panel_mobile}>
+          <FontAwesomeIcon
+            className={
+              backgroundColor === "opaque" ? classes.icon_black : classes.icon
+            }
+            icon={faBars}
+            size={"2x"}
+            onClick={() => {
+              setDisplayModal(!displayModal);
+            }}
+          />
       </div>
     </div>
   );
