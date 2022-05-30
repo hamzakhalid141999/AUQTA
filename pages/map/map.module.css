@@ -15,6 +15,12 @@
     place-items: center;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+.iframe{
+    width: 100%;
+    border-bottom-left-radius: 180px;
+    border-bottom-right-radius: 180px;
+    height: 700px;
+}
 .categories_container{
     width: 85%;
     height: 60px;
@@ -41,5 +47,28 @@
         row-gap: 20px;
         place-items: center;
         grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  @media only screen and (max-width: 950px) {
+    .cards{
+        width: 95%;
+        display: grid;
+        row-gap: 20px;
+        place-items: center;
+        grid-template-columns: 1fr 1fr;
+    }
+    .iframe{
+        border-bottom-left-radius: 60px;
+        border-bottom-right-radius: 60px;
+        height: 600px;
+    }
+  }
+  @media only screen and (max-width: 640px) {
+    .cards{
+        width: 95%;
+        display: grid;
+        row-gap: 20px;
+        place-items: center;
+        grid-template-columns: 1fr 1fr;
     }
   }

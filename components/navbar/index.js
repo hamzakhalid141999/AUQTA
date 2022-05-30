@@ -310,11 +310,9 @@ function Navbar() {
             {/* <p className={classes.hover_underline_animation}>DASHBOARD</p> */}
             <img
               src={
-                isNavbarVisisbleFromTop
-                  ? globe.src
-                  : backgroundColor === "transparent"
-                  ? globe.src
-                  : globe_dark.src
+                backgroundColor === "opaque" || isNavbarVisisbleFromTop
+                  ? globe_dark.src
+                  : globe.src
               }
               style={{ width: "25px", height: "25px" }}
             />
@@ -344,7 +342,7 @@ function Navbar() {
       <div className={classes.right_panel_mobile}>
           <FontAwesomeIcon
             className={
-              backgroundColor === "opaque" ? classes.icon_black : classes.icon
+              backgroundColor === "opaque" || isNavbarVisisbleFromTop ? classes.icon_black : classes.icon
             }
             icon={faBars}
             size={"2x"}

@@ -297,4 +297,7 @@
   .left_panel{
     padding-left: 0px;
   }
+  .filter_panel{
+    display: none;
+  }
 }
