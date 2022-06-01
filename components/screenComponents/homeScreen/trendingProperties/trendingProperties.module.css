@@ -1,86 +1,113 @@
-.trending_wrapper{
-    height: fit-content;
-    min-height: 600px;
-    width: 100%;
+.trending_wrapper {
+  height: fit-content;
+  min-height: 600px;
+  width: 100%;
 }
-.trending_container{
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+.trending_container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
-.category_tabs_container{
-    margin-top: 50px;
-    width: 60%;
-    height: 60px;
-    display: flex;
-    flex-direction: row;
-    min-width: 940px;
-    max-width: 1200px;
-    justify-content: space-between;
+.category_tabs_container {
+  margin-top: 50px;
+  width: 60%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  min-width: 940px;
+  max-width: 1200px;
+  justify-content: space-between;
 }
-.category_tabs_selected{
-    font-weight: bolder;
-    color: #0068ed;
-    transition: ease-in-out 200ms;
-    cursor: pointer;
-    height: fit-content;
-    padding-bottom: 10px;
-    border-bottom: 3px solid #0068ed;
+.category_tabs_selected {
+  font-weight: bolder;
+  color: #0068ed;
+  transition: ease-in-out 200ms;
+  cursor: pointer;
+  height: fit-content;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #0068ed;
 }
-.category_tabs_unselected{
-    color: black;
-    font-weight: bolder;
-    transition: ease-in-out 200ms;
-    cursor: pointer;
-    height: fit-content;
-    padding-bottom: 10px;
-    border-bottom: transparent;
+.category_tabs_unselected {
+  color: black;
+  font-weight: bolder;
+  transition: ease-in-out 200ms;
+  cursor: pointer;
+  height: fit-content;
+  padding-bottom: 10px;
+  border-bottom: transparent;
 }
-.property_cards_container{
-    margin-top: 30px;
-    width: 80%;
-    max-width: 1500px;
-    height: fit-content;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+.property_cards_container {
+  margin-top: 30px;
+  width: 80%;
+  max-width: 1500px;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 @media screen and (max-width: 1415px) {
-    .property_cards_container{
-        width: 97%;
-    }
+  .property_cards_container {
+    width: 97%;
+  }
 }
 @media screen and (max-width: 1000px) {
-    .trending_container h1{
-        font-size: 20px;
-        width: 90%;
-        text-align: center;
-    }
-    .category_tabs_container{
-        width: 70%;
-        min-width: 600px;
-        max-width: 600px;
-        overflow-x: scroll;
-        column-gap: 35px;
-        justify-content: initial;
-    }
-    .property_cards_container{
-        overflow-x: scroll;
-        padding-top: 30px;
-        padding-bottom: 30px;
-        column-gap: 30px;
-        justify-content: initial;
-    }
-    .category_tabs_selected{
-        width: fit-content;
-        min-width: 120px;
-    }
-    .category_tabs_unselected{
-        width: fit-content;
-        min-width: 120px;
-    }
+  .trending_container h1 {
+    font-size: 20px;
+    width: 90%;
+    text-align: center;
+  }
+  .category_tabs_container {
+    height: fit-content;
+    overflow-x: scroll;
+    column-gap: 30px;
+    width: 100%;
+    justify-content: initial;
+    padding-left: 20px;
+    padding-right: 20px;
+    min-width: initial;
+    scrollbar-width: none !important;
+    /* Firefox - for hiding scrollbar */
+    -ms-overflow-style: none !important;
+  }
+
+  .category_tabs_container::-webkit-scrollbar {
+    /* WebKit for hiding scrollbar */
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .property_cards_container {
+    overflow-x: scroll;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    column-gap: 30px;
+    justify-content: initial;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-top: 10px;
+    scrollbar-width: none !important;
+    /* Firefox - for hiding scrollbar */
+    -ms-overflow-style: none !important;
+  }
+
+  .property_cards_container::-webkit-scrollbar {
+    /* WebKit for hiding scrollbar */
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .category_tabs_selected {
+    width: fit-content;
+    min-width: 120px;
+  }
+  .category_tabs_unselected {
+    width: fit-content;
+    /* min-width: 120px; */
+  }
+  .trending_wrapper {
+    min-height: initial;
+    padding-bottom: 40px;
+  }
 }

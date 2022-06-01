@@ -15,13 +15,8 @@ function FirstSection() {
         }}
       >
         <iframe
-          style={{
-            width: "100%",
-            borderBottomRightRadius: "180px",
-            borderBottomLeftRadius: "180px",
-          }}
+          className={classes.iframe_container}
           width="100%"
-          height="700"
           frameBorder="0"
           scrolling="no"
           marginHeight="0"

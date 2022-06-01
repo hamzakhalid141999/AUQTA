@@ -40,8 +40,7 @@ function Contact_Form() {
       </div>
       <div className={classes.section_full}>
         <div
-          style={{ width: "50%" }}
-          className={classes.vertical_field_container}
+          className={classes.textarea_field_container}
         >
           <label className={classes.label}>Your Message</label>
           <textarea

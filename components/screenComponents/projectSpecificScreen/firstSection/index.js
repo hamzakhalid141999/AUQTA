@@ -62,7 +62,7 @@ function FirstSection() {
               <h1 className={classes.price}> 65 lac - 2.75 cr</h1>
             </div>
             <div className={classes.row}>
-              <img src={location_pointer.src} style={{ height: "30px" }} />
+              <img src={location_pointer.src} className={classes.location_icon} />
               <p className={classes.property_location}>
                 Bahria Town, Islamabad
               </p>
@@ -90,15 +90,15 @@ function FirstSection() {
         <div className={classes.banner_btns_wrapper}>
           <div className={classes.banner_btns_container}>
             <div className={classes.btn_body}>
-              <img src={project_brochure.src} style={{ height: "40%" }} />
+              <img src={project_brochure.src} className={classes.img_icon} />
               <p>BROCHURE</p>
             </div>
             <div className={classes.btn_body}>
-              <img src={project_floorplan.src} style={{ height: "40%" }} />
+              <img src={project_floorplan.src} className={classes.img_icon} />
               <p>FLOOR PLAN</p>
             </div>
             <div className={classes.btn_body}>
-              <img src={project_price.src} style={{ height: "40%" }} />
+              <img src={project_price.src} className={classes.img_icon}/>
               <p>PRICE PLAN</p>
             </div>
           </div>

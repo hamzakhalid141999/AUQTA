@@ -241,3 +241,23 @@
     text-align: center;
     margin-top: 20px;
 }
+@media screen and (max-width: 768px) {
+  .createShowModal {
+    min-width: initial !important;
+    width: 90% !important;
+    border-radius: 15px !important;
+    margin-top: 80px !important;
+  }
+  .content_container {
+    width: 95%;
+  }
+  .signin_btn {
+    width: 35%;
+  }
+  .signup_btn {
+    width: 40%;
+  }
+  .professional_information_container h1{
+    font-size: 18px !important;
+  }
+}

@@ -30,3 +30,21 @@
     background-size: cover;
     display: flex;
 }
+@media screen and (max-width: 1080px) {
+    .carousel_card{
+        height: 300px;
+        width: 400px;
+    }
+    .carousel_container{
+        max-height: 400px;
+    }
+}
+@media screen and (max-width: 645px) {
+    .carousel_card{
+        height: 150px;
+        width: 200px;
+    }
+    .carousel_container{
+        max-height: 300px;
+    }
+}

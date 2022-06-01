@@ -99,3 +99,11 @@
     margin-left: 10px;
     margin-right: 15px;
 }
+@media screen and (max-height: 600px) {
+    .card_body{
+        height: 250px !important;
+        width: 220px !important;
+        min-width: initial !important;
+        box-shadow: 0 5px 30px 10px rgba(8, 72, 146, 0.24);
+    }
+}

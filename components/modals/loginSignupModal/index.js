@@ -34,34 +34,34 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
   };
 
   const success = () =>
-  toast.success("Signed in successfully!", {
-    position: "bottom-center",
-    autoClose: 1000,
-    hideProgressBar: true,
-    closeOnClick: false,
-    pauseOnHover: false,
-    draggable: true,
-  });
+    toast.success("Signed in successfully!", {
+      position: "bottom-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+    });
 
   const successSignup = () =>
-  toast.success("User Registered!", {
-    position: "bottom-center",
-    autoClose: 1000,
-    hideProgressBar: true,
-    closeOnClick: false,
-    pauseOnHover: false,
-    draggable: true,
-  });
+    toast.success("User Registered!", {
+      position: "bottom-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+    });
 
   const error = (message) =>
-  toast.error(message, {
-    position: "bottom-center",
-    autoClose: 1000,
-    hideProgressBar: true,
-    closeOnClick: false,
-    pauseOnHover: false,
-    draggable: true,
-  });
+    toast.error(message, {
+      position: "bottom-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+    });
 
   const signIn = async () => {
     try {
@@ -84,13 +84,12 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
       setLoading(false);
       setOpen(false);
     } catch (err) {
-      if (err.response){
+      if (err.response) {
         console.log(err.response.data?.message);
-        if (err.response.data?.message === "Invalid Password!"){
-          error("Invaid Password")
-        }
-        else if (err.response.data?.message === "User not found"){
-          error("User not found")
+        if (err.response.data?.message === "Invalid Password!") {
+          error("Invaid Password");
+        } else if (err.response.data?.message === "User not found") {
+          error("User not found");
         }
       }
       console.log(err);
@@ -105,20 +104,16 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
   }, [loggedInUser]);
 
   const onPressSignUp = async () => {
-
-    if (!firstName){
+    if (!firstName) {
       error("Enter First Name");
       return;
-    }
-    else if (!lastName){
+    } else if (!lastName) {
       error("Enter Last Name");
       return;
-    }
-    else if (!phone){
+    } else if (!phone) {
       error("Enter Phone Number");
       return;
-    }
-    else if (!city){
+    } else if (!city) {
       error("Enter City");
       return;
     }
@@ -135,7 +130,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
           userType: "admin",
           username: signupUsername,
           city: city,
-          phoneNo: phone
+          phoneNo: phone,
         },
         {
           headers: {
@@ -143,18 +138,17 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
           },
         }
       );
-      console.log(data)
-      successSignup()
+      console.log(data);
+      successSignup();
       setLoading(false);
       setCurrentState(1);
     } catch (err) {
-      if (err.response){
+      if (err.response) {
         console.log(err.response.data);
-        if (err.response.data.message === "Email is already in use"){
-          error("Email already registered")
-        }
-        else if (err.response.data.message === "Username is already taken"){
-          error ("Username unavailable")
+        if (err.response.data.message === "Email is already in use") {
+          error("Email already registered");
+        } else if (err.response.data.message === "Username is already taken") {
+          error("Username unavailable");
         }
       }
       console.log(err);
@@ -213,7 +207,6 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
 
   return (
     <>
-      
       <Modal
         classNames={{
           overlay: classes.customOverlay,
@@ -224,16 +217,16 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
         center
       >
         <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <div className={classes.main_container}>
           <div className={classes.content_container}>
             <h1>
@@ -321,7 +314,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
               </>
             ) : currentState === 2 ? (
               <>
-              <div className={classes.inputField}>
+                <div className={classes.inputField}>
                   <label>Username</label>
                   <input
                     onChange={(e) => {
@@ -456,7 +449,6 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                 <div onClick={onPressSignUp} className={classes.btn}>
                   <p>Continue</p>
                   {loading && <ClipLoader size={"20px"} color="white" />}
-
                 </div>
 
                 <div

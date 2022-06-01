@@ -102,3 +102,30 @@
     border-radius: 100px;
     background-color: #0050b9;
 }
+@media screen and (max-width: 1000px) {
+    .main_features_content{
+        width: 95%;
+        padding-left: 40px;
+        padding-right: 40px;
+    }   
+    .grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 30px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .main_features_content{
+        width: 90%;
+        padding-left: 40px;
+        padding-right: 40px;
+    }   
+    .main_features_section h1{
+        font-size: 24px;
+    }
+    .grid{
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-top: 30px;
+    }
+}

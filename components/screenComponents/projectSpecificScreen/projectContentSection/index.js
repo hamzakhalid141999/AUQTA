@@ -7,8 +7,10 @@ import FindSectionCards from "../../homeScreen/findSection/components";
 import icon1 from "../../../../public/assets/project_card_construction_site_icon.png";
 import icon2 from "../../../../public/assets/project_card_interactive_broucher_icon.png";
 import icon3 from "../../../../public/assets/project_card_3d_plan_icon.png";
+import { useWindowSize } from "../../../../utils";
 
 function ProjectConentSection() {
+  const {width} = useWindowSize();
   const [showMore, setShowMore] = useState(false);
   const [isVideo, setIsVideo] = useState(true);
   const [isLocationVideo, setIsLocationVideo] = useState(true);
@@ -29,14 +31,10 @@ function ProjectConentSection() {
     <div className={classes.container}>
       <div className={classes.content_container}>
         <div
-          style={{ flexDirection: "row-reverse" }}
+          style={{flexDirection: width < 1000 ? "column" : "row-reverse" }}
           className={classes.services_container}
         >
           <div onClick={toggleVideo} className={classes.image_container}>
-            {/* <p className={classes.msg}>
-              Click above to interact with our virtual tour and enjoy the
-              experience
-            </p> */}
             {isVideo ? (
               <video
                 playsInline

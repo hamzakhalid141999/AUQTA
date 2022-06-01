@@ -2,12 +2,15 @@ import React from "react";
 import classes from "./descriptionSection.module.css";
 import Image from "next/image";
 import img from "../../../../public/assets/service_1_icon.png";
+import { useWindowSize } from "../../../../utils";
 
 function Description() {
+  const {width} = useWindowSize();
+
   return (
     <div className={classes.description_section}>
       <div
-        style={{ flexDirection: "row-reverse" }}
+        style={{flexDirection: width < 1000 ? "column" : "row-reverse" }}
         className={classes.services_container}
       >
         <div className={classes.image_container}>
