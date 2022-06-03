@@ -1,6 +1,7 @@
 .card_body_bg {
   height: 320px;
   width: 250px;
+  min-width: 230px;
   max-width: 250px;
   border-radius: 30px;
   padding: 1px;

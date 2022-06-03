@@ -48,31 +48,57 @@ function FirstSection() {
                 onClick={() => {
                   handleTab("invest");
                 }}
-                style={{width: '40%', borderTopRightRadius: 0}}
+                style={{ width: "40%", borderTopRightRadius: 0 }}
                 className={classes.single_tab}
               >
-                <p style={{width: '65%', textAlign: 'right', color: activeTab === 'invest' ?  '#0068ed' : 'rgb(70, 70, 70)'}}>INVEST</p>
+                <p
+                  style={{
+                    width: "65%",
+                    textAlign: "right",
+                    color:
+                      activeTab === "invest" ? "#0068ed" : "rgb(70, 70, 70)",
+                  }}
+                >
+                  INVEST
+                </p>
               </div>
-              <div className={classes.divider_small}/>
+              <div className={classes.divider_small} />
               <div
                 onClick={() => {
                   handleTab("buy");
                 }}
-                style={{width: '20%', borderTopLeftRadius: 0, borderTopRightRadius: 0}}
+                style={{
+                  width: "20%",
+                  borderTopLeftRadius: 0,
+                  borderTopRightRadius: 0,
+                }}
                 className={classes.single_tab_mid}
               >
-                <p style={{color: activeTab === 'buy' ?  '#0068ed' : 'rgb(70, 70, 70)'}}>BUY</p>
+                <p
+                  style={{
+                    color: activeTab === "buy" ? "#0068ed" : "rgb(70, 70, 70)",
+                  }}
+                >
+                  BUY
+                </p>
               </div>
-              <div className={classes.divider_small}/>
+              <div className={classes.divider_small} />
               <div
                 onClick={() => {
                   handleTab("rent");
                 }}
-                style={{width: '40%', borderTopLeftRadius: 0}}
-                className={classes.single_tab
-                }
+                style={{ width: "40%", borderTopLeftRadius: 0 }}
+                className={classes.single_tab}
               >
-                <p style={{width: '65%', textAlign: 'left', color: activeTab === 'rent' ?  '#0068ed' : 'rgb(70, 70, 70)'}}>RENT</p>
+                <p
+                  style={{
+                    width: "65%",
+                    textAlign: "left",
+                    color: activeTab === "rent" ? "#0068ed" : "rgb(70, 70, 70)",
+                  }}
+                >
+                  RENT
+                </p>
               </div>
             </div>
             <div className={classes.search_bar}>
@@ -97,6 +123,36 @@ function FirstSection() {
               </div>
               <div className={classes.search_icon}>
                 <FontAwesomeIcon
+                  className={classes.icon}
+                  icon={faSearch}
+                  size={"1x"}
+                />
+              </div>
+            </div>
+            <div className={classes.search_bar_mobile}>
+              <div className={classes.single_row}>
+                <div className={classes.search_category_mobile}>
+                  <p>CITY</p>
+                  <h3>BALAKAN MOUNTAINS</h3>
+                </div>
+                <div className={classes.search_category_mobile}>
+                <p>LOCATION</p>
+                <h3>SOUTH EASTERN EUROPE</h3>
+                </div>
+              </div>
+              <div className={classes.single_row}>
+                <div className={classes.search_category_mobile}>
+                <p>PROPERTY TYPE</p>
+                <h3>PRIVATE HOUSE</h3>
+                </div>
+                <div className={classes.search_category_mobile}>
+                <p>PRICE RANGE</p>
+                <h3>$40000 - $60000</h3>
+                </div>
+              </div>
+              <div className={classes.search_mobile_btn}>
+                  <p>SEARCH</p>
+                  <FontAwesomeIcon
                   className={classes.icon}
                   icon={faSearch}
                   size={"1x"}

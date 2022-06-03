@@ -282,4 +282,7 @@
     .divider{
         width: 100%;
     }
+    .search_btn{
+        width: 45px;
+    }
 }

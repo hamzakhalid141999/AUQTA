@@ -286,26 +286,37 @@ function Navbar() {
         <Link href={"#"}>
           <div className={classes.dropdown_container}>
             <div className={classes.dropdown}>
-              <div className={classes.option}>
-                <Link href={"/dashboard/property"}>
-                  <p>Property</p>
-                </Link>
-              </div>
-              <div className={classes.option}>
-                <Link href={"/dashboard/agent"}>
-                  <p>Agent</p>
-                </Link>
-              </div>
-              <div className={classes.option}>
-                <Link href={"/dashboard/project"}>
-                  <p>Project</p>
-                </Link>
-              </div>
-              <div className={classes.option}>
-                <Link href={"/dashboard/developer"}>
-                  <p>Developer</p>
-                </Link>
-              </div>
+              {(user?.userType?.includes("agent") ||
+                user?.userType?.includes("developer")) && (
+                <div className={classes.option}>
+                  <Link href={"/dashboard/property"}>
+                    <p>Property</p>
+                  </Link>
+                </div>
+              )}
+
+              {user?.userType?.includes("agent") && (
+                <div className={classes.option}>
+                  <Link href={"/dashboard/agent"}>
+                    <p>Agent</p>
+                  </Link>
+                </div>
+              )}
+              {user?.userType?.includes("developer") && (
+                <div className={classes.option}>
+                  <Link href={"/dashboard/project"}>
+                    <p>Project</p>
+                  </Link>
+                </div>
+              )}
+
+              {user?.userType?.includes("developer") && (
+                <div className={classes.option}>
+                  <Link href={"/dashboard/developer"}>
+                    <p>Developer</p>
+                  </Link>
+                </div>
+              )}
             </div>
             {/* <p className={classes.hover_underline_animation}>DASHBOARD</p> */}
             <img
@@ -340,16 +351,18 @@ function Navbar() {
       </div>
 
       <div className={classes.right_panel_mobile}>
-          <FontAwesomeIcon
-            className={
-              backgroundColor === "opaque" || isNavbarVisisbleFromTop ? classes.icon_black : classes.icon
-            }
-            icon={faBars}
-            size={"2x"}
-            onClick={() => {
-              setDisplayModal(!displayModal);
-            }}
-          />
+        <FontAwesomeIcon
+          className={
+            backgroundColor === "opaque" || isNavbarVisisbleFromTop
+              ? classes.icon_black
+              : classes.icon
+          }
+          icon={faBars}
+          size={"2x"}
+          onClick={() => {
+            setDisplayModal(!displayModal);
+          }}
+        />
       </div>
     </div>
   );

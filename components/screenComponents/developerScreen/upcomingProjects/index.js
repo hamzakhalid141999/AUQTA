@@ -13,31 +13,14 @@ function UpcomingProjects() {
     <div className={classes.upcoming_projects_section}>
         <h1>Upcoming Projects</h1>
         <div className={classes.upcoming_projects_cards_container}>
-          {
-            width > 1228 ? 
+     
             <>
             <UpcomingProjectCard title={"1"} image = {img1}/>
             <UpcomingProjectCard title={"2"} image = {img2}/>
             <UpcomingProjectCard title={"3"} image = {img3}/>
             <UpcomingProjectCard title={"4"} image = {img4}/>
             </>
-            :
-            width < 1228 ?
-            <>
-            <UpcomingProjectCard title={"1"} image = {img1}/>
-            <UpcomingProjectCard title={"2"} image = {img2}/>
-            <UpcomingProjectCard title={"3"} image = {img3}/>
-            </>
-            :
-            width <800 ?
-            <>
-            <UpcomingProjectCard title={"1"} image = {img1}/>
-            <UpcomingProjectCard title={"2"} image = {img2}/>
-            </>
-            :
-            <UpcomingProjectCard title={"1"} image = {img1}/>
-          }
-           
+                   
         </div>
 
     </div>

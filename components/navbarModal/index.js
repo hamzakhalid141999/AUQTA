@@ -38,38 +38,28 @@ function NavbarModal({ displayModal = false, setDisplayModal = () => {} }) {
       </div>
       <div className={classes.nav_links_container}>
         <div onClick={closeNavModal}>
-          <Link href="/works">
+          <Link href="/about">
             <p>ABOUT</p>
           </Link>
         </div>
         <div onClick={closeNavModal}>
-          <Link href="/artists">
+          <Link href="/services">
             <p>SERVICES</p>
           </Link>
         </div>
         <div onClick={closeNavModal}>
-          <Link href="/galleries">
+          <Link href="/map">
             <p>BUY</p>
           </Link>
         </div>
         <div onClick={closeNavModal}>
-          <Link href="/galleries">
-            <p>SELL</p>
-          </Link>
-        </div>
-        <div onClick={closeNavModal}>
-          <Link href="/galleries">
+          <Link href="/rent">
             <p>RENT</p>
           </Link>
         </div>
         <div onClick={closeNavModal}>
-          <Link href="/galleries">
+          <Link href="/invest">
             <p>INVEST</p>
-          </Link>
-        </div>
-        <div onClick={closeNavModal}>
-          <Link href="/galleries">
-            <p>NEWS</p>
           </Link>
         </div>
         <img

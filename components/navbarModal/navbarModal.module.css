@@ -10,7 +10,7 @@
   transition: 0.5s;
 }
 .overlay_open {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   position: fixed;
   z-index: 1;
@@ -48,11 +48,11 @@
 
 .overlay_closed a:hover,
 .overlay_closed a:focus {
-  color: #f1f1f1;
+  color: #f1f1f1 !important;
 }
 .overlay_open a:hover,
 .overlay_open a:focus {
-  color: #f1f1f1;
+  color: #f1f1f1 !important;
 }
 .overlay_closed .closebtn {
   display: none;
@@ -61,7 +61,7 @@
   position: absolute;
   right: 20px;
   font-size: 80px;
-  color: white;
+  color: white !important;
 }
 .nav_links_container {
   width: 100%;
@@ -77,6 +77,9 @@
 }
 .nav_links_container p {
   font-size: 20px !important;
+  color: white !important;
+
+
 }
 .darkmode_toggle_btn_container {
   display: flex;

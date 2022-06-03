@@ -28,10 +28,13 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
   const [phone, setPhone] = useState();
   const { user, signUp } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [userType, setUserType] = useState();
   const [currentState, setCurrentState] = useState(1); //1=Login, 2=Signup, 3=Forget Password
   const toggleAuthScreen = (value) => {
     setActiveTab(value);
   };
+
+  console.log(user);
 
   const success = () =>
     toast.success("Signed in successfully!", {
@@ -127,7 +130,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
           password: signupPassword,
           firstName: firstName,
           lastName: lastName,
-          userType: "admin",
+          userType: userType,
           username: signupUsername,
           city: city,
           phoneNo: phone,
@@ -371,7 +374,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                       }}
                       type="checkbox"
                     />
-                    <p>I am a Real Estate Agent or Industrial Professional</p>
+                    <p>I am a Real Estate Developer or Agent</p>
                   </div>
                   <div className={classes.checkboxes_row}>
                     <input type="checkbox" />
@@ -393,9 +396,11 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                 {isUserAgent && (
                   <div className={classes.inputField}>
                     <label>Professional Type</label>
-                    <select>
-                      <option>Real estate/broker</option>
-                      <option>Invester</option>
+                    <select onChange={(e=>{
+                      setUserType(e.target.value);
+                    })}>
+                      <option value={"developer"}>Developer</option>
+                      <option value={"agent"}>Real Estate Agent</option>
                     </select>
                   </div>
                 )}

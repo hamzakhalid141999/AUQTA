@@ -76,4 +76,25 @@
     margin-left: 12px;
     transition: ease-in-out 200ms;
   }
-  
+  @media screen and (max-width: 1000px) {
+    .banner_img {
+      border-bottom-left-radius: 60px !important;
+      border-bottom-right-radius: 60px !important;
+    }
+    .overlay {
+      border-bottom-left-radius: 60px !important;
+      border-bottom-right-radius: 60px !important;
+    }
+    .banner_img_container {
+      border-bottom-left-radius: 60px !important;
+      border-bottom-right-radius: 60px !important;
+    }
+    .first_section_content_section h1{
+      text-align: center;
+      width: 100%;
+      font-size: 20px;
+    }
+    .first_section_content_section{
+      width: 100vw;
+    }
+  }

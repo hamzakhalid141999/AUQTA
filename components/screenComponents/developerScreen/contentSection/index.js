@@ -28,7 +28,6 @@ function ContentSection() {
     <div className={classes.container}>
       <div className={classes.content_container}>
         <div
-          style={{ flexDirection: "row-reverse" }}
           className={classes.services_container}
         >
           <div className={classes.image_container}>
@@ -55,11 +54,11 @@ function ContentSection() {
             </p>
 
             <div className={classes.developer_info_section}>
-                <div style={{width: '48%'}} className={classes.single_row}>
+                <div style={{width: '98%'}} className={classes.single_row}>
                     <p>Since:</p>
                     <p>2012</p>
                 </div>
-                <div style={{width: '48%'}} className={classes.single_row}>
+                <div style={{width: '98%'}} className={classes.single_row}>
                     <p>Projects Developed:</p>
                     <p>3</p>
                 </div>

@@ -9,10 +9,13 @@ import linkedin from "../../public/assets/linkedin.png";
 import youtube from "../../public/assets/youtube.png";
 import call from "../../public/assets/call.png";
 import email from "../../public/assets/email.png";
+import msg_icon from "../../public/assets/message_icon.png";
 import pin_white from "../../public/assets/pin-locator-white.png";
 import { Link } from "react-scroll";
+import { useWindowSize } from "../../utils";
 
 function Footer() {
+  const {width} = useWindowSize();
   return (
     <div className={classes.footer_body}>
       <div className={classes.search_bar_container}>
@@ -22,7 +25,12 @@ function Footer() {
             className={classes.search_bar}
           />
           <div className={classes.search_btn}>
-            <p>SUBSCRIBE</p>
+            {
+              width < 1000 ? 
+              <img src={msg_icon.src} style={{height: '20px', width: '20px'}}/>
+              :
+              <p>SUBSCRIBE</p>
+            }
           </div>
         </div>
       </div>

@@ -130,3 +130,8 @@
   font-size: 20px;
   font-weight: 400;
 }
+@media screen and (max-width: 1300px) {
+  .dashboard_container{
+    width: 94%;
+  }
+}
