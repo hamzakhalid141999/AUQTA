@@ -30,3 +30,11 @@ option{
   padding: 10px 15px !important; 
   font-size: 15px !important;
 }
+.img_input_field{
+  display: flex !important;
+  flex-direction: column !important;
+  display: none;
+}
+input[type="file"]::file-selector-button {
+  /* background-color: transparent; */
+}

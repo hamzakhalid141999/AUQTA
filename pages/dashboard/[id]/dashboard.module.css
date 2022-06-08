@@ -135,3 +135,9 @@
     width: 94%;
   }
 }
+@media screen and (max-width: 1010px) {
+  .dashboard_container{
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

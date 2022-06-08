@@ -62,6 +62,11 @@ function NavbarModal({ displayModal = false, setDisplayModal = () => {} }) {
             <p>INVEST</p>
           </Link>
         </div>
+        <div onClick={closeNavModal}>
+          <Link href="/contact">
+            <p>CONTACT</p>
+          </Link>
+        </div>
         <img
           src={globe.src}
           style={{ width: "25px", height: "25px" }}
