@@ -1,4 +1,5 @@
-.navbar_body, .navbar_body_opaque {
+.navbar_body,
+.navbar_body_opaque {
   height: 120px;
   width: 100%;
   top: 0;
@@ -23,6 +24,34 @@
   right: 20px;
   top: 0;
   box-shadow: 2px 1px 13px -1px #0050b9;
+}
+.add_btn {
+  width: 25px;
+  height: 25px;
+  border: 1px solid white;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: ease-in-out 200ms;
+}
+.add_btn_black {
+  width: 25px;
+  height: 25px;
+  border: 1px solid black;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: ease-in-out 200ms;
+}
+.add_btn_black p {
+  font-size: 25px !important;
+  color: white;
+}
+.add_btn p {
+  font-size: 25px !important;
+  color: white;
 }
 .search_category {
   width: fit-content;
@@ -60,18 +89,18 @@
   color: white;
   transition: ease-in-out 200ms;
 }
-.icon_black{
+.icon_black {
   color: black;
   transition: ease-in-out 200ms;
 }
-.filter_panel_hidden{
+.filter_panel_hidden {
   position: absolute;
   top: 0px;
   opacity: 0;
   transition: ease-in-out 200ms;
   pointer-events: none;
 }
-.filter_panel{
+.filter_panel {
   z-index: 20;
   position: absolute;
   width: 100%;
@@ -89,16 +118,16 @@
   justify-content: center;
   pointer-events: all;
 }
-.dropdown_container{
+.dropdown_container {
   position: relative;
 }
-.dropdown_container:hover .dropdown{
+.dropdown_container:hover .dropdown {
   opacity: 1;
   pointer-events: all !important;
   z-index: 90;
-  box-shadow: 4px 5px 19px -3px rgba(0,0,0,0.75);
+  box-shadow: 4px 5px 19px -3px rgba(0, 0, 0, 0.75);
 }
-.option{
+.option {
   height: 40px;
   width: 100%;
   width: 100%;
@@ -108,13 +137,13 @@
   transition: ease-in-out 200ms;
   cursor: pointer;
 }
-.option:hover{
+.option:hover {
   background-color: rgb(204, 229, 250);
 }
-.option p{
+.option p {
   color: black !important;
 }
-.img_placeholder{
+.img_placeholder {
   height: 23px;
   width: 23px;
   border-radius: 50px;
@@ -125,12 +154,12 @@
   align-items: center;
   position: relative;
 }
-.img_placeholder p{
+.img_placeholder p {
   color: rgb(78, 78, 78) !important;
   z-index: 10;
   font-weight: bold;
 }
-.online_indicator{
+.online_indicator {
   position: absolute;
   right: -2px;
   bottom: -2px;
@@ -139,7 +168,7 @@
   border-radius: 50px;
   background-color: greenyellow;
 }
-.dropdown{
+.dropdown {
   pointer-events: none;
   position: absolute;
   height: fit-content;
@@ -152,12 +181,12 @@
   transition: ease-in-out 200ms;
   background-color: rgba(255, 255, 255, 0.808);
 }
-.navbar_body_opaque{
+.navbar_body_opaque {
   background-color: rgba(255, 253, 250, 0.762);
   backdrop-filter: blur(8px);
   /* box-shadow: 0px 4px 18px 1px rgba(0,0,0,0.51); */
 }
-.filter_panel_content{
+.filter_panel_content {
   width: 85%;
   height: 100%;
   display: flex;
@@ -167,7 +196,7 @@
   max-width: 1235px;
   min-width: 1200px;
 }
-.btns_container{
+.btns_container {
   width: 30%;
   height: 55%;
   border: 1px solid rgba(73, 80, 97, 0.705);
@@ -177,21 +206,21 @@
   align-items: center;
   justify-content: space-evenly;
 }
-.filter_panel_btn_label_unselected{
+.filter_panel_btn_label_unselected {
   font-size: 13px;
   font-weight: bolder;
   color: rgb(105, 105, 105) !important;
 }
-.filter_panel_btn_label_selected{
+.filter_panel_btn_label_selected {
   font-size: 13px;
   font-weight: bolder;
   color: rgb(0, 99, 247) !important;
 }
-.filter_panel_btn{
+.filter_panel_btn {
   padding-left: 10px;
   padding-right: 10px;
 }
-.divider{
+.divider {
   height: 50%;
   background-color: grey;
   width: 1px !important;
@@ -213,7 +242,7 @@
   font-size: 13px;
   transition: ease-in-out 200ms;
 }
-.navbar_body_opaque p{
+.navbar_body_opaque p {
   color: black;
   font-size: 13px;
   transition: ease-in-out 200ms;
@@ -229,7 +258,7 @@
   max-width: 25%;
   cursor: pointer;
 }
-.login_btn{
+.login_btn {
   height: 40px;
   width: fit-content;
   padding-left: 20px;
@@ -246,15 +275,15 @@
   cursor: pointer;
   column-gap: 10px;
 }
-.login_btn:hover{
+.login_btn:hover {
   margin-bottom: 7px;
   box-shadow: 2px 1px 23px 3px #4585dada;
   background-color: #0d6ae4;
 }
-.login_btn p{
+.login_btn p {
   color: white;
 }
-.selected{
+.selected {
   font-weight: bold;
 }
 
@@ -264,7 +293,7 @@
   font-size: 14px !important;
 }
 .hover_underline_animation:after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   transform: scaleX(0);
@@ -280,24 +309,24 @@
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-.right_panel_mobile{
+.right_panel_mobile {
   display: none;
 }
 @media screen and (max-width: 1000px) {
-  .right_panel{
+  .right_panel {
     display: none;
   }
-  .right_panel_mobile{
+  .right_panel_mobile {
     width: 50%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
   }
-  .left_panel{
+  .left_panel {
     padding-left: 0px;
   }
-  .filter_panel{
+  .filter_panel {
     display: none;
   }
 }

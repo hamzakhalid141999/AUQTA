@@ -29,12 +29,11 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
   const { user, signUp } = useAuth();
   const [loading, setLoading] = useState(false);
   const [userType, setUserType] = useState();
+  const [termsServiceAgreed, setTermsServiceAgreed] = useState();
   const [currentState, setCurrentState] = useState(1); //1=Login, 2=Signup, 3=Forget Password
   const toggleAuthScreen = (value) => {
     setActiveTab(value);
   };
-
-  console.log(user);
 
   const success = () =>
     toast.success("Signed in successfully!", {
@@ -47,7 +46,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
     });
 
   const successSignup = () =>
-    toast.success("User Registered!", {
+    toast.success("Verification email sent!", {
       position: "bottom-center",
       autoClose: 1000,
       hideProgressBar: true,
@@ -88,11 +87,16 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
       setOpen(false);
     } catch (err) {
       if (err.response) {
-        console.log(err.response.data?.message);
+        console.log(err.response.data.message);
         if (err.response.data?.message === "Invalid Password!") {
           error("Invaid Password");
         } else if (err.response.data?.message === "User not found") {
           error("User not found");
+        } else if (
+          err.response.data?.message ===
+          "Pending account. Please verify your email!"
+        ) {
+          error("Verify your account");
         }
       }
       console.log(err);
@@ -119,6 +123,9 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
     } else if (!city) {
       error("Enter City");
       return;
+    } else if (!termsServiceAgreed) {
+      error("Verify terms of use check");
+      return;
     }
 
     try {
@@ -141,13 +148,12 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
           },
         }
       );
-      console.log(data);
       successSignup();
       setLoading(false);
       setCurrentState(1);
     } catch (err) {
       if (err.response) {
-        console.log(err.response.data);
+        console.log(err.response.data.message);
         if (err.response.data.message === "Email is already in use") {
           error("Email already registered");
         } else if (err.response.data.message === "Username is already taken") {
@@ -396,9 +402,11 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                 {isUserAgent && (
                   <div className={classes.inputField}>
                     <label>Professional Type</label>
-                    <select onChange={(e=>{
-                      setUserType(e.target.value);
-                    })}>
+                    <select
+                      onChange={(e) => {
+                        setUserType(e.target.value);
+                      }}
+                    >
                       <option value={"developer"}>Developer</option>
                       <option value={"agent"}>Real Estate Agent</option>
                     </select>
@@ -464,7 +472,12 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                     alignItems: "center",
                   }}
                 >
-                  <input type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setTermsServiceAgreed(e.target.checked);
+                    }}
+                    type="checkbox"
+                  />
                   <p className={classes.forgot_password}>
                     I accept Auqta{"'"}s terms of use
                   </p>

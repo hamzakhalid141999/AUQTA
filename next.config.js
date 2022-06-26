@@ -1,11 +1,30 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
 module.exports = {
   images: {
-    disableStaticImages: true
-  }
-}
+    domains: ["auqta-bucket.s3.ap-southeast-1.amazonaws.com", "localhost"],
+  },
 
-module.exports = nextConfig
+  rules: [
+    {
+      test: /\.less$/,
+      use: [
+        {
+          loader: "style-loader",
+        },
+        {
+          loader: "less-loader",
+          options: {
+            lessOptions: {
+              modifyVars: {
+                "primary-color": "#000000",
+                "border-radius-base": "3px",
+              },
+              javascriptEnabled: true,
+            },
+          },
+        },
+      ],
+      // ...other rules
+    },
+  ],
+  // ...other config
+};

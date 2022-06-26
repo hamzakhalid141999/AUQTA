@@ -7,9 +7,9 @@
   transition: ease-in-out 200ms;
   position: relative;
 }
-.card_body:hover{
-    transform: translate3d(0px, -3px, 0px);
-    box-shadow: 0 5px 30px 10px rgba(8, 72, 146, 0.24);
+.card_body:hover {
+  transform: translate3d(0px, -3px, 0px);
+  box-shadow: 0 5px 30px 10px rgba(8, 72, 146, 0.24);
 }
 .card_body:hover .like {
   opacity: 1;
@@ -27,12 +27,12 @@
 .image_container {
   height: 70%;
   width: 100%;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  border-radius: 30px !important;
   position: relative;
 }
 
 .property_picture {
+  border-radius: 30px !important;
   width: 100%;
   object-fit: fill;
 }
@@ -114,13 +114,13 @@
     transition: ease-in-out 200ms;
     position: relative;
   }
-  .title{
+  .title {
     font-size: 13px;
   }
   .location_icon {
     height: 10px;
   }
-  .price{
+  .price {
     font-size: 10px;
   }
 }

@@ -46,6 +46,7 @@ function Navbar() {
 
   const handleSignOut = () => {
     removeUser();
+    router.push("/");
   };
 
   useEffect(() => {
@@ -54,14 +55,16 @@ function Navbar() {
         currentPage === "map" ||
         currentPage === "invest" ||
         currentPage === "contact" ||
-        currentPage === "rent"
+        currentPage === "rent" ||
+        currentPage === "confirmUser"
       ) {
         setIsNavbarVisibleFromTop(true);
       } else if (
         currentPage !== "map" ||
         currentPage === "invest" ||
         currentPage !== "contact" ||
-        currentPage !== "rent"
+        currentPage !== "rent" ||
+        currentPage !== "confirmUser"
       ) {
         setIsNavbarVisibleFromTop(false);
       }
@@ -245,43 +248,22 @@ function Navbar() {
             SERVICES
           </p>
         </Link>
-        <Link href={"/invest"}>
-          <p
-            className={
-              page.includes("invest")
-                ? classes.selected
-                : classes.hover_underline_animation
-            }
-          >
-            INVEST
-          </p>
-        </Link>
-        <Link href={"/map"}>
-          <p
-            className={
-              page.includes("map")
-                ? classes.selected
-                : classes.hover_underline_animation
-            }
-          >
-            BUY
-          </p>
-        </Link>
-        <Link href={"/rent"}>
-          <p
-            className={
-              page.includes("rent")
-                ? classes.selected
-                : classes.hover_underline_animation
-            }
-          >
-            RENT
-          </p>
-        </Link>
 
         <Link href={"/contact"}>
           <p className={classes.hover_underline_animation}>CONTACT US</p>
         </Link>
+
+        {user && (
+          <Link
+            href={
+              user?.userType?.includes("agent")
+                ? "/dashboard/agent"
+                : "/dashboard/developer"
+            }
+          >
+            <p className={classes.hover_underline_animation}>PROFILE</p>
+          </Link>
+        )}
 
         <Link href={"#"}>
           <div className={classes.dropdown_container}>
@@ -295,13 +277,6 @@ function Navbar() {
                 </div>
               )}
 
-              {user?.userType?.includes("agent") && (
-                <div className={classes.option}>
-                  <Link href={"/dashboard/agent"}>
-                    <p>Agent</p>
-                  </Link>
-                </div>
-              )}
               {user?.userType?.includes("developer") && (
                 <div className={classes.option}>
                   <Link href={"/dashboard/project"}>
@@ -309,24 +284,19 @@ function Navbar() {
                   </Link>
                 </div>
               )}
-
-              {user?.userType?.includes("developer") && (
-                <div className={classes.option}>
-                  <Link href={"/dashboard/developer"}>
-                    <p>Developer</p>
-                  </Link>
-                </div>
-              )}
             </div>
-            {/* <p className={classes.hover_underline_animation}>DASHBOARD</p> */}
-            <img
-              src={
-                backgroundColor === "opaque" || isNavbarVisisbleFromTop
-                  ? globe_dark.src
-                  : globe.src
-              }
-              style={{ width: "25px", height: "25px" }}
-            />
+
+            {user && (
+              <div
+                className={
+                  backgroundColor === "opaque"
+                    ? classes.add_btn_black
+                    : classes.add_btn
+                }
+              >
+                <p>+</p>
+              </div>
+            )}
           </div>
         </Link>
 

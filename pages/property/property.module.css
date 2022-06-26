@@ -1,5 +1,14 @@
-.property_section{
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
+.property_section {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+.loader_container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  justify-content: center;
+  align-items: center;
 }

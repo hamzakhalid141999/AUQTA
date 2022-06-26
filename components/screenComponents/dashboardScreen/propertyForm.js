@@ -14,6 +14,10 @@ import { useWindowSize } from "../../../utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ClipLoader from "react-spinners/ClipLoader";
+import ReactTagInput from "@pathofdev/react-tag-input";
+import "@pathofdev/react-tag-input/build/index.css";
+import Select, { components } from "react-select";
+import { getAllCities } from "../../../pages/utils";
 
 function PropertyForm() {
   const [loading, setLoading] = useState(false);
@@ -103,9 +107,139 @@ function PropertyForm() {
   const [otherCommunicationFeature, setOtherCommunicationFeature] = useState();
   const [facilitiesOtherFeatures, setFacilitiesOtherFeatures] = useState();
 
-  console.log(subtype);
+  const [imagesKeysArr, setImagesKeysArr] = useState([]);
+  const [imagesBlobArr, setImagesBlobArr] = useState([]);
+  const [imagesUrl, setImagesUrl] = useState([]);
+  const [landmarkArr, setLandmarkArr] = useState([]);
+  const [landmarksFinalArray, setLandmarksFinalArray] = useState([]);
+  const [citiesAndLocations, setCitiesAndLocations] = useState();
+
+  const [cities, setCities] = useState([]);
+  const [locations, setLocations] = useState([]);
+
+  const nearbyLandmarksObject = (landmark, name) => ({
+    label: landmark,
+    value: name,
+  });
+
+  useEffect(async () => {
+    const data = await getAllCities();
+    setCitiesAndLocations(data);
+    data?.map((cityObject) =>
+      setCities((city) => [...city, cityObject?.cityName])
+    );
+    console.log(data);
+  }, []);
+
+  useEffect(() => {
+    if (cities?.length > 0) {
+      setCity(cities[0]);
+    }
+  }, [cities]);
+
+  console.log(location);
+  console.log(city);
+
+  useEffect(() => {
+    if (city) {
+      console.log(citiesAndLocations);
+      for (var i = 0; i < citiesAndLocations?.length; i++) {
+        if (citiesAndLocations[i]?.cityName === city) {
+          setLocations(citiesAndLocations[i]?.areas);
+        }
+      }
+    }
+  }, [city]);
+
+  console.log(locations);
+
+  const Option = (props) => {
+    return (
+      <div>
+        {" "}
+        <components.Option {...props}>
+          {" "}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              columnGap: "10px",
+              height: "100%",
+            }}
+          >
+            <input
+              type="checkbox"
+              checked={props.isSelected}
+              onChange={(e) => null}
+            />{" "}
+            <label>{props?.label}</label>
+          </div>{" "}
+        </components.Option>{" "}
+      </div>
+    );
+  };
+
+  useEffect(() => {
+    landmarks?.map((landmark) =>
+      setLandmarkArr((single) => [
+        ...single,
+        nearbyLandmarksObject(landmark, landmark),
+      ])
+    );
+  }, [landmarks]);
 
   const handleAddProperty = async () => {
+    if (!title) {
+      missingCredError("title");
+      return;
+    } else if (!purposeSelected) {
+      missingCredError("purpose");
+      return;
+    } else if (!type) {
+      missingCredError("type");
+      return;
+    } else if (!subtype) {
+      missingCredError("sub-type");
+      return;
+    } else if (!city) {
+      missingCredError("city");
+      return;
+    } else if (!location) {
+      missingCredError("location");
+      return;
+    } else if (!province) {
+      missingCredError("province");
+      return;
+    } else if (!address) {
+      missingCredError("address");
+      return;
+    } else if (!price) {
+      missingCredError("price");
+      return;
+    } else if (!size) {
+      missingCredError("size");
+      return;
+    } else if (!bathroom) {
+      missingCredError("bathroom");
+      return;
+    } else if (!bedroom) {
+      missingCredError("bedroom");
+      return;
+    } else if (!description) {
+      missingCredError("description");
+      return;
+    } else if (!builtYear) {
+      missingCredError("built year");
+      return;
+    } else if (!facingView) {
+      missingCredError("facing view");
+      return;
+    } else if (nearbyLandmarks?.length === 0) {
+      missingCredError("nearby landmarks");
+      return;
+    }
+
     setLoading(true);
     try {
       const data = await axios.post(
@@ -118,16 +252,17 @@ function PropertyForm() {
           price: price,
           size: size,
           address: address,
+          province: province,
           location: location,
           city: city,
           noOfBedrooms: bedroom,
           noOfBathrooms: bathroom,
           subtype: subtype,
           // country: country,
-          // images: imgArr,
-          userId: "62990b56ce95ea1954228f94",
+          images: imgArr,
+          userId: user?.id,
           hasBasement: "false",
-          images: [],
+          // images: [],
         },
         {
           headers: {
@@ -135,7 +270,8 @@ function PropertyForm() {
           },
         }
       );
-      console.log(data?.data?.proplisting?._id);
+      console.log(data);
+      setImagesKeysArr(data?.data?.proplisting?.images);
       setPropertyId(data?.data?.proplisting?._id);
     } catch (err) {
       setLoading(false);
@@ -151,6 +287,53 @@ function PropertyForm() {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    if (imagesKeysArr.length > 0) {
+      var imagesUrlTempArr = [];
+      for (var i = 0; i < imagesKeysArr?.length; i++) {
+        console.log("files from frontend", imagesKeysArr[i], imagesBlobArr[i]);
+        const data = {
+          fileKey: imagesKeysArr[i],
+        };
+        axios
+          .post(baseURL + "/api/s3/getUrlWithKey", data, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((url) => {
+            const blobUrl = URL.createObjectURL(imagesBlobArr[i], {
+              type: "image/png",
+            });
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", blobUrl, true);
+            xhr.responseType = "blob";
+            xhr.onload = async function (e) {
+              if (this.status === 200) {
+                var myBlob = this.response;
+                const myHeaders = new Headers({ "Content-Type": "image/*" });
+                const response = await fetch(url.data.body.presigned_url, {
+                  method: "PUT",
+                  headers: myHeaders,
+                  body: myBlob,
+                });
+                const s3Url = response?.url?.split("?")[0];
+                imagesUrlTempArr.push(s3Url);
+                setImagesUrl((imagesArr) => [...imagesArr, s3Url]);
+                console.log("response ", s3Url);
+              }
+            };
+            xhr.send();
+          });
+      }
+      console.log("ARRRRRRRRRRRRR:", imagesUrlTempArr);
+      setImagesUrl(imagesUrlTempArr);
+    }
+  }, [imagesKeysArr]);
+
+  console.log(imagesUrl);
 
   useEffect(() => {
     const handleAddPropertySalientFeaturesById = async () => {
@@ -170,7 +353,7 @@ function PropertyForm() {
               doubleGlazedWindows: doubleGlazedWindows,
               electricityBackup: electricityBackup,
               wasteDisposal: wasteDisposal,
-              nearbyLandmarks: [],
+              nearbyLandmarks: landmarksFinalArray,
               accessToNearbyPublicTransport: accessToNearbyPublicTransport,
               // country: country,
               // images: imgArr,
@@ -225,22 +408,13 @@ function PropertyForm() {
               },
             }
           );
-          console.log(data);
           setLoading(false);
           success();
           window.location.reload();
-          // setPropertyId(data?.data?.proplisting?._id);
         } catch (err) {
           setLoading(false);
           error();
-          // if (err.response) {
-          //   console.log(err.response.data?.message);
-          //   if (err.response.data?.message === "Invalid Password!") {
-          //     error("Invaid Password");
-          //   } else if (err.response.data?.message === "User not found") {
-          //     error("User not found");
-          //   }
-          // }
+
           console.log(err);
         }
       }
@@ -274,91 +448,56 @@ function PropertyForm() {
     });
   }
 
-  console.log(basementIncluded);
-
   const handleImg1 = async (event) => {
-    // const file = event?.target?.files[0];;
-    // var reader = new FileReader();
-    // reader.onload = function (){
-    //   console.log(reader.result);
-    //   if(typeof window !==undefined){
-    //     var blob = window.dataURLtoBlob(reader.result);
-    //   }
-    //   console.log(blob, newFile([blob], "image.png"), {
-    //     type: "image/png"
-    //   })
-    // };
-    // reader.readAsDataURL(file);
-
-    if (event?.target?.files) {
-      setImg1(event?.target?.files[0]);
-      const blobUrl = URL.createObjectURL(event?.target?.files[0], {
-        type: "image/png",
-      });
-      var file = new File([blobUrl], "imagefile");
-      imgArr.push(file);
+    if (event) {
+      setImg1(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
     }
   };
 
   const handleImg2 = async (event) => {
-    if (event?.target?.files) {
-      setImg2(event?.target?.files[0]);
-      const blobUrl = URL.createObjectURL(event?.target?.files[0], {
-        type: "image/png",
-      });
-      var file = new File([blobUrl], "imagefile");
-      imgArr.push(file);
+    if (event) {
+      setImg2(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
     }
   };
 
   const handleImg3 = async (event) => {
-    if (event?.target?.files) {
-      setImg3(event?.target?.files[0]);
-      const blobUrl = URL.createObjectURL(event?.target?.files[0], {
-        type: "image/png",
-      });
-      var file = new File([blobUrl], "imagefile");
-      imgArr.push(file);
+    if (event) {
+      setImg3(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
     }
   };
 
   const handleImg4 = async (event) => {
-    if (event?.target?.files) {
-      setImg4(event?.target?.files[0]);
-      const blobUrl = URL.createObjectURL(event?.target?.files[0], {
-        type: "image/png",
-      });
-      var file = new File([blobUrl], "imagefile");
-      imgArr.push(file);
+    if (event) {
+      setImg4(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
     }
   };
 
   const handleImg5 = async (event) => {
-    if (event?.target?.files) {
-      setImg5(event?.target?.files[0]);
-      const blobUrl = URL.createObjectURL(event?.target?.files[0], {
-        type: "image/png",
-      });
-      var file = new File([blobUrl], "imagefile");
-      imgArr.push(file);
+    if (event) {
+      setImg5(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
     }
   };
 
   const handleImg6 = async (event) => {
-    if (event?.target?.files) {
-      setImg6(event?.target?.files[0]);
-      const blobUrl = URL.createObjectURL(event?.target?.files[0], {
-        type: "image/png",
-      });
-      var file = new File([blobUrl], "imagefile");
-      imgArr.push(file);
+    if (event) {
+      setImg6(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
     }
   };
 
-  console.log("Array: ", imgArr);
-
   const success = () =>
-    toast.success("Property added!", {
+    toast.success("Project added!", {
       position: "bottom-center",
       autoClose: 1000,
       hideProgressBar: true,
@@ -377,6 +516,21 @@ function PropertyForm() {
       draggable: true,
     });
 
+  const missingCredError = (value) =>
+    toast.error("Enter " + value, {
+      position: "bottom-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+    });
+
+  const addLandmarks = (landMarkArr) => {
+    const temp = [];
+    landMarkArr?.map((landmark) => temp.push(landmark?.value));
+    setLandmarksFinalArray(temp);
+  };
   return (
     <div className={classes.form_body}>
       <ToastContainer
@@ -507,7 +661,6 @@ function PropertyForm() {
             <p className={classes.label}>Subtype</p>
             <select
               onChange={(e) => {
-                console.log(e.target.value);
                 setSubtype(e.target.value);
               }}
               style={{ width: "100%" }}
@@ -535,26 +688,37 @@ function PropertyForm() {
           </div>
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>City</p>
-            <input
+            <select
+              className={classes.input_field_dual}
               onChange={(e) => {
                 setCity(e.target.value);
               }}
-              placeholder="City Name"
-              className={classes.input_field_dual}
-            />
+            >
+              {cities?.map((city, index) => (
+                <option key={index} value={city}>
+                  {city}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
         <div className={classes.single_row}>
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>Location</p>
-            <input
+
+            <select
+              className={classes.input_field_dual}
               onChange={(e) => {
                 setLocation(e.target.value);
               }}
-              placeholder="Location Area"
-              className={classes.input_field_dual}
-            />
+            >
+              {locations?.map((location, index) => (
+                <option key={index} value={location}>
+                  {location}
+                </option>
+              ))}
+            </select>
           </div>
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>Province</p>
@@ -716,18 +880,22 @@ function PropertyForm() {
                   className={classes.input_field_with_label_top_container}
                 >
                   <p className={classes.top_label}>Nearby Landmarks</p>
-                  <select
-                    onChange={(e) => {
-                      nearbyLandmarks.push(e.target.value);
-                    }}
+
+                  <Select
                     className={classes.input_field_single}
-                  >
-                    {landmarks?.map((landmark, index) => (
-                      <option value={landmark} key={index}>
-                        {landmark}
-                      </option>
-                    ))}
-                  </select>
+                    components={{ Option }}
+                    hideSelectedOptions={false}
+                    options={landmarkArr}
+                    closeMenuOnSelect={false}
+                    placeholder=" "
+                    isMulti
+                    isClearable
+                    onChange={(e) => {
+                      // addArtist(e);
+                      console.log(e);
+                      addLandmarks(e);
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -1577,19 +1745,22 @@ function PropertyForm() {
                     src={img1 && URL.createObjectURL(img1)}
                   />
                 ) : (
-                  <label className={classes.custom_file_upload}>
+                  <>
+                    <div className={classes.add_btn_label}>
+                      <h1>+</h1>
+                    </div>
                     <input
                       className={classes.img_input_field}
                       style={{ display: "flex", flexDirection: "column" }}
                       onChange={(e) => {
-                        handleImg1(e, "files");
+                        handleImg1(e.target.files[0], "files");
                       }}
                       id="image_input"
                       type="file"
                       name="fileToUpload"
                       accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
                     />
-                  </label>
+                  </>
                 )}
               </div>
               <div className={classes.image_holder}>
@@ -1599,17 +1770,22 @@ function PropertyForm() {
                     src={img2 && URL.createObjectURL(img2)}
                   />
                 ) : (
-                  <input
-                    className={classes.img_input_field}
-                    style={{ display: "flex", flexDirection: "column" }}
-                    onChange={(e) => {
-                      handleImg2(e, "files");
-                    }}
-                    id="image_input"
-                    type="file"
-                    name="fileToUpload"
-                    accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
-                  />
+                  <>
+                    <div className={classes.add_btn_label}>
+                      <h1>+</h1>
+                    </div>
+                    <input
+                      className={classes.img_input_field}
+                      style={{ display: "flex", flexDirection: "column" }}
+                      onChange={(e) => {
+                        handleImg2(e.target.files[0], "files");
+                      }}
+                      id="image_input"
+                      type="file"
+                      name="fileToUpload"
+                      accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                    />
+                  </>
                 )}
               </div>
               <div className={classes.image_holder}>
@@ -1619,17 +1795,22 @@ function PropertyForm() {
                     src={img3 && URL.createObjectURL(img3)}
                   />
                 ) : (
-                  <input
-                    className={classes.img_input_field}
-                    style={{ display: "flex", flexDirection: "column" }}
-                    onChange={(e) => {
-                      handleImg3(e, "files");
-                    }}
-                    id="image_input"
-                    type="file"
-                    name="fileToUpload"
-                    accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
-                  />
+                  <>
+                    <div className={classes.add_btn_label}>
+                      <h1>+</h1>
+                    </div>
+                    <input
+                      className={classes.img_input_field}
+                      style={{ display: "flex", flexDirection: "column" }}
+                      onChange={(e) => {
+                        handleImg3(e.target.files[0], "files");
+                      }}
+                      id="image_input"
+                      type="file"
+                      name="fileToUpload"
+                      accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                    />
+                  </>
                 )}
               </div>
               <div className={classes.image_holder}>
@@ -1639,17 +1820,22 @@ function PropertyForm() {
                     src={img4 && URL.createObjectURL(img4)}
                   />
                 ) : (
-                  <input
-                    className={classes.img_input_field}
-                    style={{ display: "flex", flexDirection: "column" }}
-                    onChange={(e) => {
-                      handleImg4(e, "files");
-                    }}
-                    id="image_input"
-                    type="file"
-                    name="fileToUpload"
-                    accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
-                  />
+                  <>
+                    <div className={classes.add_btn_label}>
+                      <h1>+</h1>
+                    </div>
+                    <input
+                      className={classes.img_input_field}
+                      style={{ display: "flex", flexDirection: "column" }}
+                      onChange={(e) => {
+                        handleImg4(e.target.files[0], "files");
+                      }}
+                      id="image_input"
+                      type="file"
+                      name="fileToUpload"
+                      accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                    />
+                  </>
                 )}
               </div>
               <div className={classes.image_holder}>
@@ -1659,17 +1845,22 @@ function PropertyForm() {
                     src={img5 && URL.createObjectURL(img5)}
                   />
                 ) : (
-                  <input
-                    className={classes.img_input_field}
-                    style={{ display: "flex", flexDirection: "column" }}
-                    onChange={(e) => {
-                      handleImg5(e, "files");
-                    }}
-                    id="image_input"
-                    type="file"
-                    name="fileToUpload"
-                    accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
-                  />
+                  <>
+                    <div className={classes.add_btn_label}>
+                      <h1>+</h1>
+                    </div>
+                    <input
+                      className={classes.img_input_field}
+                      style={{ display: "flex", flexDirection: "column" }}
+                      onChange={(e) => {
+                        handleImg5(e.target.files[0], "files");
+                      }}
+                      id="image_input"
+                      type="file"
+                      name="fileToUpload"
+                      accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                    />
+                  </>
                 )}
               </div>
               <div className={classes.image_holder}>
@@ -1679,17 +1870,22 @@ function PropertyForm() {
                     src={img6 && URL.createObjectURL(img6)}
                   />
                 ) : (
-                  <input
-                    className={classes.img_input_field}
-                    style={{ display: "flex", flexDirection: "column" }}
-                    onChange={(e) => {
-                      handleImg6(e, "files");
-                    }}
-                    id="image_input"
-                    type="file"
-                    name="fileToUpload"
-                    accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
-                  />
+                  <>
+                    <div className={classes.add_btn_label}>
+                      <h1>+</h1>
+                    </div>
+                    <input
+                      className={classes.img_input_field}
+                      style={{ display: "flex", flexDirection: "column" }}
+                      onChange={(e) => {
+                        handleImg6(e.target.files[0], "files");
+                      }}
+                      id="image_input"
+                      type="file"
+                      name="fileToUpload"
+                      accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                    />
+                  </>
                 )}
               </div>
             </div>

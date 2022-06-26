@@ -104,7 +104,7 @@ function Services() {
           </div>
         </div>
         <div className={classes.heading_mobile}>
-        <div className={classes.icon_container_mobile}>
+          <div className={classes.icon_container_mobile}>
             <Image className={classes.img} src={logo2} />
           </div>
           <p>AUGMENTED STRUCTURES</p>
@@ -160,134 +160,6 @@ function Services() {
                   brochures which contain interactive floor plans of your
                   structure and creative content.
                 </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={classes.heading_mobile}>
-        <div className={classes.icon_container_mobile}>
-            <Image className={classes.img} src={logo3} />
-          </div>
-          <p>VIRTUAL REALITY</p>
-        </div>
-        <div
-          style={{ flexDirection: "row-reverse" }}
-          className={classes.services_container}
-        >
-          <div className={classes.image_container}>
-            <Image src={service3} className={classes.img} />
-          </div>
-          <div className={classes.description}>
-            <div className={classes.heading_container}>
-              <div className={classes.left_panel} />
-              <div className={classes.icon_container}>
-                <Image className={classes.img} src={logo3} />
-              </div>
-              <div className={classes.title_container}>
-                <p>VIRTUAL REALITY</p>
-              </div>
-            </div>
-            <div className={classes.service_description_container}>
-              <p>
-                Virtual reality is a digital environment created through
-                computing models and graphical simulations. This enables the
-                user to experience the virtual world and immerse into the
-                digital environment of an architecture.
-              </p>
-              <p>
-                Auqta offers a complete virtual walkthrough where the user can
-                interact with the property’s exterior/interior environment in
-                real-time.{" "}
-              </p>
-
-              <div className={classes.bullet_point}>
-                <div className={classes.bullets_container}>
-                  <div className={classes.bullet}></div>
-                  <p className={classes.bullet_text}>
-                    Have a real-time feel of how you will interact with the
-                    property as if you were there{" "}
-                  </p>
-                </div>
-                <p></p>
-              </div>
-
-              <div className={classes.bullet_point}>
-                <div className={classes.bullets_container}>
-                  <div className={classes.bullet}></div>
-                  <p className={classes.bullet_text}>
-                    Deliver a unique and innovative property experience to your
-                    clients
-                  </p>
-                </div>
-              </div>
-
-              <div className={classes.bullet_point}>
-                <div className={classes.bullets_container}>
-                  <div className={classes.bullet}></div>
-                  <p className={classes.bullet_text}>
-                    Elevate your client’s satisfaction and credibility
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={classes.heading_mobile}>
-        <div className={classes.icon_container_mobile}>
-            <Image className={classes.img} src={logo4} />
-          </div>
-          <p>ADDITIONAL SERVICES</p>
-        </div>
-        <div className={classes.services_container}>
-          <div className={classes.image_container}>
-            <Image src={service4} className={classes.img} />
-          </div>
-          <div className={classes.description}>
-            <div className={classes.heading_container}>
-              <div className={classes.left_panel} />
-              <div className={classes.icon_container}>
-                <Image className={classes.img} src={logo4} />
-              </div>
-              <div className={classes.title_container}>
-                <p>ADDITIONAL SERVICES</p>
-              </div>
-            </div>
-            <div className={classes.service_description_container}>
-              <p>
-                We offer additional services for property holders to elevate
-                their trading experience. These services include high end
-                photography of existing properties done by our team of
-                visualisation experts so that clients can showcase a complete
-                pictorial representation on a budget.
-              </p>
-
-              <div className={classes.bullet_point}>
-                <div className={classes.bullets_container}>
-                  <div className={classes.bullet}></div>
-                  <p className={classes.bullet_text}>
-                    Capture real-time colours of your property. Our experts
-                    understand shot angles
-                  </p>
-                </div>
-              </div>
-
-              <div className={classes.bullet_point}>
-                <div className={classes.bullets_container}>
-                  <div className={classes.bullet}></div>
-                  <p className={classes.bullet_text}>
-                    Professional photos increase customer trustworthiness and
-                    credibility
-                  </p>
-                </div>
-              </div>
-
-              <div className={classes.bullet_point}>
-                <div className={classes.bullets_container}>
-                  <div className={classes.bullet}></div>
-                  <p className={classes.bullet_text}>
-                    A great picture speaks a thousand words
-                  </p>
-                </div>
               </div>
             </div>
           </div>

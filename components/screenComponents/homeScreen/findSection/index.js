@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick.css";
 import { useWindowSize } from "../../../../utils";
 
 function FindSection() {
-  const {width} = useWindowSize();
+  const { width } = useWindowSize();
   const [slidesToShow, setSlidesToShow] = useState(4);
 
   useEffect(() => {
@@ -20,28 +20,22 @@ function FindSection() {
     AOS.refresh();
   }, []);
 
-  useEffect(()=>{
-    if (width){
-      if (width > 1390){
+  useEffect(() => {
+    if (width) {
+      if (width > 1390) {
         setSlidesToShow(4);
-        console.log("in 4");
       }
-      if (width < 1390){
+      if (width < 1390) {
         setSlidesToShow(3);
-        console.log("in 3");
       }
-      if (width < 1024){
+      if (width < 1024) {
         setSlidesToShow(2);
-        console.log("in 2");
       }
-      if (width < 850){
+      if (width < 850) {
         setSlidesToShow(1);
-        console.log("in 1");
       }
     }
-  },[width])
-
-  console.log(width, slidesToShow)
+  }, [width]);
 
   const settings = {
     dots: false,

@@ -14,7 +14,7 @@
   margin-top: 30px;
   margin-bottom: 30px;
 }
-.infinite_input_fields_container{
+.infinite_input_fields_container {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -114,12 +114,31 @@
   border: 1px solid #d3d3d3;
   border-radius: 10px;
   padding-top: 3px;
+  position: relative;
   padding-bottom: 2px;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.add_btn_label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  width: 28px;
+  border-radius: 100px;
+  border: 1px solid rgb(145, 145, 145);
+}
+.add_btn_label h1 {
+  color: rgb(145, 145, 145);
+  margin-top: 0px;
+  font-size: 28px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+  height: fit-content;
 }
 .image_holder p {
   font-size: 12px;
@@ -133,6 +152,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
+  column-gap: 10px;
   justify-content: space-between;
 }
 .container_with_top_label {
@@ -162,24 +182,47 @@
   border-radius: 5px;
   padding-left: 20px;
   padding-right: 20px;
+  position: relative;
 }
-.add_field{
+.add_field_working {
   cursor: pointer;
   color: rgb(131, 140, 156);
 }
-.looped_input_field_container{
+.add_field {
+  pointer-events: none;
+  cursor: pointer;
+  color: rgb(131, 140, 156);
+}
+.looped_input_field_container {
   position: relative;
   width: 32%;
   margin-bottom: 20px;
   height: 52px;
 }
-.data_input_container{
+.companyLogo {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.data_input_container {
   position: relative;
   width: 31%;
   margin-bottom: 20px;
   height: 52px;
+  /* width: 80%; */
+  height: 52px;
+  display: flex;
+  align-items: center;
+  background-color: #f6f6fa;
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
-.add_btn_border{
+.add_btn_border_working {
   width: 20px;
   height: 20px;
   display: flex;
@@ -192,7 +235,21 @@
   top: 15px;
   cursor: pointer;
 }
-.add_btn_border_without_absolute{
+.add_btn_border {
+  pointer-events: none;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 200px;
+  border: 2px solid rgb(131, 140, 156);
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+}
+.add_btn_border_without_absolute {
   width: 20px;
   height: 20px;
   display: flex;
@@ -228,7 +285,7 @@
   max-width: 100px;
   color: rgb(56, 56, 56);
 }
-.data_tabs_container{
+.data_tabs_container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -267,22 +324,16 @@
   background-color: grey;
   width: 1px !important;
 }
-#image_input{
+#image_input {
   display: flex;
   flex-direction: column;
 }
-.img{
+.img {
   height: 100%;
   max-width: 100%;
   object-fit: contain;
 }
-/* .custom_file_upload{
-  border: 1px solid #ccc;
-  display: inline-block;
-  padding: 6px 12px;
-  cursor: pointer;
-} */
-.btn{
+.btn {
   height: 40px;
   width: 20%;
   padding-left: 25px;
@@ -297,11 +348,27 @@
   border: none;
   border-radius: 100px;
   font-size: 12px;
+  cursor: pointer;
   box-shadow: 0 10px 20px 5px rgba(8, 72, 146, 0.329);
+}
+.image_holder input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer !important;
+  height: 100% !important;
+}
+.data_input_container input[type="file"] {
+  position: absolute;
+  right: 0;
+  top: 13px;
+  opacity: 0;
+  width: 50px;
 }
 
 @media screen and (max-width: 1010px) {
-  .btn{
+  .btn {
     width: 100%;
   }
   .top_label {
@@ -314,10 +381,11 @@
   .filter_panel_btn_label_selected {
     font-size: 12px;
   }
-  .heading{
+  .heading {
     font-size: 14px;
   }
-  .label, .label_dual{
+  .label,
+  .label_dual {
     font-size: 12px;
     width: 20%;
     max-width: 60px;
@@ -328,51 +396,51 @@
     height: 35px;
   }
 
-  .single_row{
+  .single_row {
     flex-direction: column;
     width: 100%;
     row-gap: 20px;
     align-items: initial;
   }
-  .input_field_single{
+  .input_field_single {
     width: 100% !important;
   }
-  .image_holder_container{
+  .image_holder_container {
     overflow-x: scroll;
     justify-content: initial;
     column-gap: 20px;
     padding-left: 30px;
   }
-  .image_holder{
+  .image_holder {
     min-width: 113px;
   }
-  .checkboxes_container{
+  .checkboxes_container {
     display: grid;
     grid-template-columns: 48% 48%;
   }
-  .input_field_single{
+  .input_field_single {
     max-width: 100%;
   }
-  .input_field_dual{
+  .input_field_dual {
     width: 100%;
   }
-  .input_field{
+  .input_field {
     flex-direction: column;
     justify-content: initial;
     align-items: initial;
     row-gap: 10px;
   }
-  .two_field_container{
+  .two_field_container {
     width: 100%;
     flex-direction: column;
     justify-content: initial;
     align-items: initial;
     row-gap: 10px;
   }
-  .input_field_three{
+  .input_field_three {
     width: 100%;
   }
-  .three_field_container{
+  .three_field_container {
     width: 100%;
     flex-direction: column;
     justify-content: initial;
@@ -389,4 +457,3 @@
     width: 15px;
   }
 }
-

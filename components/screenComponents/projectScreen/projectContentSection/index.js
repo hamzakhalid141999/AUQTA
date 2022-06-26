@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./projectContentSection.module.css";
 import Image from "next/image";
 import img1 from "../../../../public/assets/project_overview_img.png";
@@ -8,7 +8,13 @@ import icon1 from "../../../../public/assets/project_card_construction_site_icon
 import icon2 from "../../../../public/assets/project_card_interactive_broucher_icon.png";
 import icon3 from "../../../../public/assets/project_card_3d_plan_icon.png";
 
-function ProjectConentSection() {
+function ProjectConentSection({ features, amenities, address }) {
+  const [showMore, setShowMore] = useState(false);
+
+  console.log(features, amenities);
+  const showContent = () => {
+    setShowMore(!showMore);
+  };
   return (
     <div className={classes.container}>
       <div className={classes.content_container}>
@@ -22,49 +28,38 @@ function ProjectConentSection() {
           <div className={classes.description}>
             <h1>OVERVIEW OF THE PROJECT</h1>
             <div className={classes.service_description_container}>
-              <div className={classes.bullet_point}>
-                <div className={classes.bullets_container}>
-                  <div className={classes.bullet}></div>
-                  <p className={classes.bullet_text}>
-                    INTERIOR/EXTERIOR RENDERINGS
-                  </p>
-                </div>
-                <p>Photorealistic depiction of your architectural design</p>
-              </div>
+              <p>
+                Budapest Sign Hotel redefines the hotel industry in Pakistan.
+                Experience five-star services from our team of highly trained
+                hotel management individuals.
+              </p>
+              <div className={classes.bullet_points_container}>
+                <p className={classes.bullet_text}>Main Features</p>
+                {features?.map((feature, index) => (
+                  <div key={index} className={classes.bullets_container}>
+                    <div className={classes.bullet} />
+                    <p>{feature}</p>
+                  </div>
+                ))}
 
-              <div className={classes.bullet_point}>
-                <div className={classes.bullets_container}>
-                  <div className={classes.bullet}></div>
-                  <p className={classes.bullet_text}>
-                    DYNAMIC VIRTUAL TOUR (INTERIOR)
-                  </p>
-                </div>
-                <p>
-                  Complete walkthrough of your interior through specific
-                  pinpoints
+                <p className={classes.see_more_btn} onClick={showContent}>
+                  {showMore ? "See less" : "See more"}
                 </p>
               </div>
 
-              <div className={classes.bullet_point}>
-                <div className={classes.bullets_container}>
-                  <div className={classes.bullet}></div>
-                  <p className={classes.bullet_text}>LOCALITY TOUR</p>
+              <div
+                style={{ display: showMore ? "flex" : "none" }}
+                className={classes.bullet_points_container}
+              >
+                <p className={classes.bullet_text}>Amenities</p>
+                <div className={classes.bullet_points_grid}>
+                  {amenities?.map((amenity, index) => (
+                    <div key={index} className={classes.bullets_container}>
+                      <div className={classes.bullet} />
+                      <p>{amenity}</p>
+                    </div>
+                  ))}
                 </div>
-                <p>
-                  Complete walkthrough of the real-time surrounding location of
-                  the architecture
-                </p>
-              </div>
-
-              <div className={classes.bullet_point}>
-                <div className={classes.bullets_container}>
-                  <div className={classes.bullet}></div>
-                  <p className={classes.bullet_text}>CINEMATIC VIRTUAL VIDEO</p>
-                </div>
-                <p>
-                  Experience your project in a cinematic video tour showcasing
-                  its exterior, interior and surrounding
-                </p>
               </div>
             </div>
           </div>
@@ -117,6 +112,13 @@ function ProjectConentSection() {
                   brouchers which contain interact floor plans of your structure
                   and creative content
                 </p>
+              </div>
+              <div className={classes.bullet_points_container}>
+                <p className={classes.bullet_text}>Address</p>
+                <div className={classes.bullets_container}>
+                  <div className={classes.bullet} />
+                  <p>{address}</p>
+                </div>
               </div>
             </div>
           </div>

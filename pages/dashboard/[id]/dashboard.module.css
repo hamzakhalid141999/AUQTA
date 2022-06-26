@@ -1,4 +1,4 @@
-.main_container{
+.main_container {
   width: 100%;
   height: 1900px;
   display: flex;
@@ -53,7 +53,7 @@
   z-index: 2;
   max-height: 700px;
 }
-.dashboard_container{
+.dashboard_container {
   /* max-height: 1700px;
   height: 1700px;
   overflow-y: scroll; */
@@ -81,7 +81,6 @@
   height: 0 !important;
 }
 
-
 .first_section_content_section {
   position: absolute;
   top: 170px;
@@ -102,42 +101,69 @@
   color: white;
   text-transform: uppercase;
 }
-.dashboard_heading{
+.dashboard_heading {
   width: 100%;
   height: 100px;
   border-radius: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 2px 15px 2px rgba(201,243,253,0.75) inset;
+  box-shadow: 0px 2px 15px 2px rgba(201, 243, 253, 0.75) inset;
   background-color: rgba(187, 228, 255, 0.178);
   backdrop-filter: blur(7px);
 }
-.dashboard_heading h1{
+.dashboard_heading h1 {
   font-size: 30px;
 }
 .first_section_content_section p {
   width: 60%;
   color: white;
 }
-.first_section_content_section h3{
+.first_section_content_section h3 {
   margin-top: 50px;
   font-size: 25px;
   font-weight: 400;
 }
-.first_section_content_section h2{
+.first_section_content_section h2 {
   margin-top: 10px;
   font-size: 20px;
   font-weight: 400;
 }
 @media screen and (max-width: 1300px) {
-  .dashboard_container{
+  .dashboard_container {
     width: 94%;
   }
 }
 @media screen and (max-width: 1010px) {
-  .dashboard_container{
+  .dashboard_container {
     padding-left: 16px;
     padding-right: 16px;
+  }
+  .overlay {
+    border-bottom-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+    max-height: 500px;
+    min-height: 500px;
+  }
+  .banner_img_container {
+    border-bottom-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+    max-height: 500px;
+    min-height: 500px;
+  }
+  .banner_img {
+    border-bottom-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+    max-height: 500px;
+    min-height: 500px;
+  }
+  .dashboard_heading h1 {
+    font-size: 15px;
+  }
+  .dashboard_heading {
+    width: 90%;
+  }
+  .dashboard_container {
+    top: 400px;
   }
 }

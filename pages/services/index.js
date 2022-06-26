@@ -9,7 +9,7 @@ function services() {
     <div className={classes.services_section}>
       <FirstSection />
       <Services />
-      <DeveloperSection />
+      {/* <DeveloperSection /> */}
     </div>
   );
 }

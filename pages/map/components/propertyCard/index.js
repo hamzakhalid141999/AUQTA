@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 
-function PropertyCard({ picture, title, description, price, location }) {
+function PropertyCard({ picture, title, description, price, location, city }) {
   return (
     <Link href={"/property"}>
       <div className={classes.card_body}>
@@ -33,20 +33,16 @@ function PropertyCard({ picture, title, description, price, location }) {
               icon={faMapMarker}
               size={"1x"}
             />
-            <p className={classes.location}>{location}</p>
+            <p className={classes.location}>
+              {location}, {city}
+            </p>
           </div>
           <div className={classes.property_description_container}>
             <p className={classes.price}>{price}</p>
           </div>
-          {/* <div className={classes.bottom_description_container}>
-        <FontAwesomeIcon className={classes.location_icon} icon={faBed} size={"0.5x"} />
-        <p>2 Beds</p>
-        <FontAwesomeIcon className={classes.location_icon} icon={faBath} size={"0.5x"} />
-        <p>2 Bath</p>
-        </div> */}
         </div>
       </div>
-      </Link>
+    </Link>
   );
 }
 

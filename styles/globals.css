@@ -16,25 +16,62 @@ a {
   padding: 0;
   box-sizing: border-box;
 }
-.slick-list{
+.slick-list {
   padding-top: 30px !important;
   height: 550px !important;
 }
-.slick-initialized .slick-slide{
+.slick-initialized .slick-slide {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
 }
-option{
+option {
   height: 50px !important;
-  padding: 10px 15px !important; 
+  padding: 10px 15px !important;
   font-size: 15px !important;
 }
-.img_input_field{
+.img_input_field {
   display: flex !important;
   flex-direction: column !important;
   display: none;
 }
 input[type="file"]::file-selector-button {
   /* background-color: transparent; */
+}
+.css-1s2u09g-control {
+  background-color: transparent !important;
+  border: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 50px !important;
+  overflow-y: scroll !important;
+  scrollbar-width: none !important;
+  /* Firefox - for hiding scrollbar */
+  -ms-overflow-style: none !important;
+}
+
+.css-1s2u09g-control::-webkit-scrollbar {
+  /* WebKit for hiding scrollbar */
+  width: 0 !important;
+  height: 0 !important;
+}
+.css-1pahdxg-control {
+  border-color: transparent !important;
+  border-style: none !important;
+  background-color: transparent !important;
+  border-width: 0px !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  height: 100 !important;
+  max-height: 50px !important;
+  overflow-y: scroll !important;
+  scrollbar-width: none !important;
+  /* Firefox - for hiding scrollbar */
+  -ms-overflow-style: none !important;
+}
+
+.css-1pahdxg-control::-webkit-scrollbar {
+  /* WebKit for hiding scrollbar */
+  width: 0 !important;
+  height: 0 !important;
 }

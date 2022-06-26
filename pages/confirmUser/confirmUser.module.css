@@ -1,0 +1,72 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 120px;
+}
+.form_container {
+  width: 60%;
+  height: 70%;
+  border-radius: 40px;
+  border: 1px dashed grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.form_container h2 {
+  color: rgb(59, 59, 59);
+  font-size: 40px;
+}
+.confirm_btn {
+  cursor: pointer;
+  height: 50px;
+  right: 20px;
+  width: 200px;
+  border-radius: 100px;
+  background-color: #0068ed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: ease-in-out 200ms;
+}
+.confirm_btn p {
+  color: white;
+}
+.confirm_btn:hover {
+  background-color: #3d8ef8;
+}
+@media screen and (max-width: 786px) {
+  .form_container {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .form_container {
+    width: 90%;
+  }
+  .form_container h2 {
+    font-size: 20px !important;
+  }
+  .confirm_btn {
+    cursor: pointer;
+    height: 40px;
+    right: 20px;
+    width: 130px;
+    border-radius: 100px;
+    background-color: #0068ed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease-in-out 200ms;
+  }
+  .confirm_btn p {
+    color: white;
+  }
+  .confirm_btn:hover {
+    background-color: #3d8ef8;
+  }
+}
