@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { baseURL } from "../../constants";
 
-function confirmUser() {
+function ConfirmUser() {
   const router = useRouter();
   const [code, setCode] = useState();
 
@@ -76,4 +76,4 @@ function confirmUser() {
   );
 }
 
-export default confirmUser;
+export default ConfirmUser;
