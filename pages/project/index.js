@@ -9,7 +9,7 @@ import ProjectTimelineSection from "../../components/screenComponents/projectScr
 import { useAuth } from "../../contextAPI";
 import { ClipLoader } from "react-spinners";
 
-function project() {
+function Project() {
   const [project, setProject] = useState();
   const { user } = useAuth();
   const [projectOwnerId, setProjectOwnerId] = useState();
@@ -130,4 +130,4 @@ function project() {
   );
 }
 
-export default project;
+export default Project;

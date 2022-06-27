@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import { baseURL } from "../../constants";
 import { PuffLoader } from "react-spinners";
 
-function invest() {
+function Invest() {
   const router = useRouter();
   const searchBox = useRef();
   const [loading, setLoading] = useState(true);
@@ -169,4 +169,4 @@ function invest() {
   );
 }
 
-export default invest;
+export default Invest;

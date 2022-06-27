@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { PuffLoader } from "react-spinners";
 import { baseURL } from "../../constants";
 
-function map() {
+function Map() {
   const router = useRouter();
   const searchBox = useRef();
   const [loading, setLoading] = useState(true);
@@ -183,4 +183,4 @@ function map() {
   );
 }
 
-export default map;
+export default Map;
