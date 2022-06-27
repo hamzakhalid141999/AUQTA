@@ -24,8 +24,9 @@ function PictureSection({ images }) {
       <div className={classes.carousel_container}>
         <ReactCardCarousel autoplay={true} autoplay_speed={2500}>
           {images?.length > 0 ? (
-            images?.map((image) => (
+            images?.map((image, index) => (
               <div
+                key={index}
                 style={{
                   backgroundImage: `url(${image})`,
                 }}

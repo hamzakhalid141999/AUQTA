@@ -143,8 +143,10 @@ function FirstSection() {
                   }}
                   className={classes.input_field}
                 >
-                  {cities?.map((city) => (
-                    <option value={city}>{city}</option>
+                  {cities?.map((city, index) => (
+                    <option key={index} value={city}>
+                      {city}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -157,8 +159,10 @@ function FirstSection() {
                   }}
                   className={classes.input_field}
                 >
-                  {locations?.map((location) => (
-                    <option value={location}>{location}</option>
+                  {locations?.map((location, index) => (
+                    <option key={index} value={location}>
+                      {location}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -172,8 +176,10 @@ function FirstSection() {
                   }}
                   className={classes.input_field}
                 >
-                  {all_subtypes?.map((type) => (
-                    <option value={type}>{type}</option>
+                  {all_subtypes?.map((type, index) => (
+                    <option key={index} value={type}>
+                      {type}
+                    </option>
                   ))}
                 </select>
               </div>

@@ -39,8 +39,8 @@ function FirstSection({ images, propertyDetails, ownerDetails }) {
         <div className={classes.overlay} />
         <Fade arrows={false} style={{ height: "100%" }} easing="ease">
           {images?.length > 0 ? (
-            images?.map((image) => (
-              <div className={classes.each_slide}>
+            images?.map((image, index) => (
+              <div key={index} className={classes.each_slide}>
                 <div style={{ backgroundImage: `url(${image})` }}></div>
               </div>
             ))

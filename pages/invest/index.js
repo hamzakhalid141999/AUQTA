@@ -36,30 +36,34 @@ function Invest() {
 
   console.log(searchedParams);
 
-  useEffect(async () => {
-    if (filteredProperties?.length > 0) {
-      var longlatTempArr = [];
-      for (var i = 0; i < filteredProperties?.length; i++) {
-        if (filteredProperties[i]?.address) {
-          const url =
-            "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-            filteredProperties[i]?.address +
-            "&key=" +
-            GEOCODING_API;
+  useEffect(() => {
+    const fetchFilteredProperties = async () => {
+      if (filteredProperties?.length > 0) {
+        var longlatTempArr = [];
+        for (var i = 0; i < filteredProperties?.length; i++) {
+          if (filteredProperties[i]?.address) {
+            const url =
+              "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+              filteredProperties[i]?.address +
+              "&key=" +
+              GEOCODING_API;
 
-          const data = await axios.get(url);
+            const data = await axios.get(url);
 
-          if (data?.data?.results.length > 0) {
-            longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
-          } else {
-            setLoading(false);
+            if (data?.data?.results.length > 0) {
+              longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
+            } else {
+              setLoading(false);
+            }
+            console.log(data);
           }
-          console.log(data);
         }
+        setLoading(false);
+        setLongLatArr(longlatTempArr);
       }
-      setLoading(false);
-      setLongLatArr(longlatTempArr);
-    }
+    };
+
+    fetchFilteredProperties();
   }, [filteredProperties]);
 
   console.log(longLatArr);
@@ -121,8 +125,9 @@ function Invest() {
         }}
         mapContainerClassName={classes.map_container}
       >
-        {longLatArr?.map((location) => (
+        {longLatArr?.map((location, index) => (
           <Marker
+            key={index}
             icon={
               "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/assets/pin-without-shadow.png"
             }
