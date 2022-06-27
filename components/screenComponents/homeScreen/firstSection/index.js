@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { getAllCities } from "../../../../pages/utils";
+import { getAllCities } from "../../../utils";
 import { all_subtypes } from "../../dashboardScreen/dropdowns/dropdowns";
 import Link from "next/link";
 

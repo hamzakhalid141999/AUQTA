@@ -17,7 +17,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import ReactTagInput from "@pathofdev/react-tag-input";
 import "@pathofdev/react-tag-input/build/index.css";
 import Select, { components } from "react-select";
-import { getAllCities } from "../../../pages/utils";
+import { getAllCities } from "../../utils";
 
 function PropertyForm() {
   const [loading, setLoading] = useState(false);

@@ -6,7 +6,7 @@ import { ClipLoader } from "react-spinners";
 import { amenities } from "./dropdowns/dropdowns";
 import Select, { components } from "react-select";
 import { useAuth } from "../../../contextAPI";
-import { getAllCities } from "../../../pages/utils";
+import { getAllCities } from "../../utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
