@@ -28,7 +28,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
   const [phone, setPhone] = useState();
   const { user, signUp } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [userType, setUserType] = useState();
+  const [userType, setUserType] = useState("agent");
   const [termsServiceAgreed, setTermsServiceAgreed] = useState();
   const [currentState, setCurrentState] = useState(1); //1=Login, 2=Signup, 3=Forget Password
   const toggleAuthScreen = (value) => {
@@ -402,13 +402,14 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                 {isUserAgent && (
                   <div className={classes.inputField}>
                     <label>Professional Type</label>
+
                     <select
                       onChange={(e) => {
                         setUserType(e.target.value);
                       }}
                     >
-                      <option value={"developer"}>Developer</option>
                       <option value={"agent"}>Real Estate Agent</option>
+                      <option value={"developer"}>Developer</option>
                     </select>
                   </div>
                 )}
