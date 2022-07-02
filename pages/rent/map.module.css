@@ -9,6 +9,7 @@
   flex-direction: column;
 }
 .cards {
+  margin-top: 60px;
   width: 90%;
   display: grid;
   row-gap: 20px;

@@ -167,16 +167,7 @@ function Map() {
       </div>
 
       <div className={classes.cards_container}>
-        <div className={classes.categories_container}>
-          <div className={classes.left_panel}>
-            <p>Off-the-grid</p>
-            <p>Farms</p>
-            <p>Kezhans</p>
-            <p>Beach Front</p>
-            <p>Tiny Homes</p>
-            <p>More</p>
-          </div>
-        </div>
+        <h1>Similar Properties</h1>
         <div className={classes.cards}>
           {filteredProperties
             ?.filter((property, index) => index < 4)
