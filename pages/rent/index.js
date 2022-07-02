@@ -71,15 +71,6 @@ function Map() {
     fetchFilteredProperties();
   }, [filteredProperties]);
 
-  // useEffect(async () => {
-  //   const url =
-  //     "https://maps.googleapis.com/maps/api/geocode/json?address=niazi street, g12&key=" +
-  //     GEOCODING_API;
-
-  //   const data = await axios.get(url);
-  //   console.log(data);
-  // }, []);
-
   useEffect(() => {
     const fetchSearchedProperties = async () => {
       if (searchedParams?.city) {
@@ -96,6 +87,7 @@ function Map() {
                 location: searchedParams?.location,
                 pageNumber: 1,
                 nPerPage: 100,
+                propertytype: searchedParams?.type,
               },
             },
             {
@@ -104,6 +96,7 @@ function Map() {
               },
             }
           );
+          console.log(data?.data);
           setFilteredProperties(data?.data);
           if (data?.data?.length === 0) {
             setLoading(false);
