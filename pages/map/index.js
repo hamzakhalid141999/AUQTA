@@ -41,16 +41,16 @@ function Map() {
         var longlatTempArr = [];
         for (var i = 0; i < filteredProperties?.length; i++) {
           let url;
-          if (searchedParams?.location) {
+          if (searchedParams?.type) {
             url =
               "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-              filteredProperties[i]?.address +
+              filteredProperties[i]?.propertyListing?.address +
               "&key=" +
               GEOCODING_API;
           } else {
             url =
               "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-              filteredProperties[i]?.propertyListing?.address +
+              filteredProperties[i]?.address +
               "&key=" +
               GEOCODING_API;
           }
@@ -98,6 +98,9 @@ function Map() {
           );
           console.log(data);
           setFilteredProperties(data?.data);
+          if (data?.data?.length === 0) {
+            setLoading(false);
+          }
           // setLoading(false);
         } catch (err) {
           console.log(err);
@@ -155,7 +158,7 @@ function Map() {
             <p>Fetching properties..</p>
             <PuffLoader size={"80px"} color="#0068ed" />
           </div>
-        ) : longLatArr?.length === 0 ? (
+        ) : filteredProperties?.length === 0 ? (
           <div className={classes.loader_container}>
             <p>No Properties Found</p>
           </div>
@@ -182,27 +185,27 @@ function Map() {
               <PropertyCard
                 key={index}
                 title={
-                  !searchedParams?.location
+                  searchedParams?.type
                     ? property?.propertyListing?.title
                     : property?.title
                 }
                 price={
-                  !searchedParams?.location
+                  searchedParams?.type
                     ? property?.propertyListing?.price
                     : property?.price
                 }
                 location={
-                  !searchedParams?.location
+                  searchedParams?.type
                     ? property?.propertyListing?.location
                     : property?.location
                 }
                 city={
-                  !searchedParams?.location
+                  searchedParams?.type
                     ? property?.propertyListing?.city
                     : property?.city
                 }
                 picture={
-                  !searchedParams?.location
+                  searchedParams?.type
                     ? property?.propertyListing?.images[0]
                     : property?.images?.length > 0 && property?.images[0]
                 }

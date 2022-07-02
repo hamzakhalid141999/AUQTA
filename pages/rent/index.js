@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import classes from "./map.module.css";
-import PropertyCard from "./components/propertyCard";
+import PropertyCard from "../map/components/propertyCard";
 import img from "../../public/assets/map_property_img.png";
 import {
   GoogleMap,
@@ -41,16 +41,16 @@ function Map() {
         var longlatTempArr = [];
         for (var i = 0; i < filteredProperties?.length; i++) {
           let url;
-          if (searchedParams?.location) {
+          if (searchedParams?.type) {
             url =
               "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-              filteredProperties[i]?.address +
+              filteredProperties[i]?.propertyListing?.address +
               "&key=" +
               GEOCODING_API;
           } else {
             url =
               "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-              filteredProperties[i]?.propertyListing?.address +
+              filteredProperties[i]?.address +
               "&key=" +
               GEOCODING_API;
           }
@@ -82,11 +82,7 @@ function Map() {
 
   useEffect(() => {
     const fetchSearchedProperties = async () => {
-      if (
-        searchedParams?.purpose &&
-        searchedParams?.city &&
-        searchedParams?.location
-      ) {
+      if (searchedParams?.city) {
         try {
           const data = await axios.get(
             baseURL + "/api/property/filter",
@@ -109,6 +105,9 @@ function Map() {
             }
           );
           setFilteredProperties(data?.data);
+          if (data?.data?.length === 0) {
+            setLoading(false);
+          }
         } catch (err) {
           console.log(err);
         }
@@ -165,7 +164,7 @@ function Map() {
             <p>Fetching properties..</p>
             <PuffLoader size={"80px"} color="#0068ed" />
           </div>
-        ) : longLatArr?.length === 0 ? (
+        ) : filteredProperties?.length === 0 ? (
           <div className={classes.loader_container}>
             <p>No Properties Found</p>
           </div>
@@ -186,30 +185,38 @@ function Map() {
           </div>
         </div>
         <div className={classes.cards}>
-          <PropertyCard
-            title={"Title goes here"}
-            price={"PKR 230,000"}
-            location={"Islamabad, Pakistan"}
-            picture={img}
-          />
-          <PropertyCard
-            title={"Title goes here"}
-            price={"PKR 230,000"}
-            location={"Islamabad, Pakistan"}
-            picture={img}
-          />
-          <PropertyCard
-            title={"Title goes here"}
-            price={"PKR 230,000"}
-            location={"Islamabad, Pakistan"}
-            picture={img}
-          />
-          <PropertyCard
-            title={"Title goes here"}
-            price={"PKR 230,000"}
-            location={"Islamabad, Pakistan"}
-            picture={img}
-          />
+          {filteredProperties
+            ?.filter((property, index) => index < 4)
+            ?.map((property, index) => (
+              <PropertyCard
+                key={index}
+                title={
+                  searchedParams?.type
+                    ? property?.propertyListing?.title
+                    : property?.title
+                }
+                price={
+                  searchedParams?.type
+                    ? property?.propertyListing?.price
+                    : property?.price
+                }
+                location={
+                  searchedParams?.type
+                    ? property?.propertyListing?.location
+                    : property?.location
+                }
+                city={
+                  searchedParams?.type
+                    ? property?.propertyListing?.city
+                    : property?.city
+                }
+                picture={
+                  searchedParams?.type
+                    ? property?.propertyListing?.images[0]
+                    : property?.images?.length > 0 && property?.images[0]
+                }
+              />
+            ))}
         </div>
       </div>
     </div>
