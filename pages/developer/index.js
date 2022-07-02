@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { baseURL } from "../../constants";
 
-function developer() {
+function Developer() {
   const router = useRouter();
   const [developer, setDeveloper] = useState();
   const [developerDetails, setDeveloperDetails] = useState();
@@ -50,4 +50,4 @@ function developer() {
   );
 }
 
-export default developer;
+export default Developer;

@@ -27,6 +27,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
   const [city, setCity] = useState();
   const [phone, setPhone] = useState();
   const { user, signUp } = useAuth();
+  const [confirmPassword, setConfirmPassword] = useState();
   const [loading, setLoading] = useState(false);
   const [userType, setUserType] = useState("agent");
   const [termsServiceAgreed, setTermsServiceAgreed] = useState();
@@ -127,6 +128,14 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
       error("Verify terms of use check");
       return;
     }
+    if (signupPassword !== confirmPassword) {
+      error("Passwords don't match");
+      return;
+    }
+    if (signupPassword.length < 8) {
+      error("Password less than 8 characters");
+      return;
+    }
 
     try {
       setLoading(true);
@@ -188,22 +197,10 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
   }
 
   const handlePassword = (value) => {
-    if (value.length < 8) {
-      setIsMinLength(false);
-    } else {
-      setIsMinLength(true);
-    }
-    if (!validateCode(value)) {
-      setIsMix(false);
-    } else {
-      setIsMix(true);
-    }
-    if (!validateSpecialCharacter(value)) {
-      setIsSpecialCharacter(false);
-    } else {
-      setIsSpecialCharacter(true);
-    }
     setSignupPassword(value);
+  };
+  const handleConfirmPassword = (value) => {
+    setConfirmPassword(value);
   };
 
   const handleStateChange = (state) => {
@@ -353,23 +350,14 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                   <input type="password" placeholder="Enter password" />
                 </div>
 
-                <div className={classes.password_constraints}>
-                  <p className={isMinLength ? classes.no_error : classes.error}>
-                    At least 8 characters
-                  </p>
-                  <p className={isMix ? classes.no_error : classes.error}>
-                    Mix of letters and numbers
-                  </p>
-                  <p
-                    className={
-                      isSpecialCharacter ? classes.no_error : classes.error
-                    }
-                  >
-                    At least 1 special character
-                  </p>
-                  <p className={classes.no_error}>
-                    At least 1 upper case and 1 lower case
-                  </p>
+                <div
+                  onChange={(e) => {
+                    handleConfirmPassword(e.target.value);
+                  }}
+                  className={classes.inputField}
+                >
+                  <label>Confirm Password</label>
+                  <input type="password" placeholder="Enter password" />
                 </div>
 
                 <div className={classes.checkboxes_container}>
