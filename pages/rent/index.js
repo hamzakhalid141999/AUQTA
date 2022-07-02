@@ -40,11 +40,20 @@ function Map() {
       if (filteredProperties?.length > 0) {
         var longlatTempArr = [];
         for (var i = 0; i < filteredProperties?.length; i++) {
-          const url =
-            "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-            filteredProperties[i]?.address +
-            "&key=" +
-            GEOCODING_API;
+          let url;
+          if (searchedParams?.location) {
+            url =
+              "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+              filteredProperties[i]?.address +
+              "&key=" +
+              GEOCODING_API;
+          } else {
+            url =
+              "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+              filteredProperties[i]?.propertyListing?.address +
+              "&key=" +
+              GEOCODING_API;
+          }
 
           const data = await axios.get(url);
 
@@ -53,7 +62,6 @@ function Map() {
           } else {
             setLoading(false);
           }
-          console.log(data);
         }
         setLoading(false);
         setLongLatArr(longlatTempArr);
@@ -62,8 +70,6 @@ function Map() {
 
     fetchFilteredProperties();
   }, [filteredProperties]);
-
-  console.log(longLatArr);
 
   // useEffect(async () => {
   //   const url =
@@ -103,8 +109,6 @@ function Map() {
             }
           );
           setFilteredProperties(data?.data);
-
-          console.log("Properties searched: ", data?.data);
         } catch (err) {
           console.log(err);
         }

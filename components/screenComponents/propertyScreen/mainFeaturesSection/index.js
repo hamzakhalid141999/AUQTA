@@ -119,26 +119,12 @@ function MainFeaturesSection({ features }) {
         <div className={classes.section}>
           <label>Nearby Landmarks</label>
           <div className={classes.grid}>
-            <div className={classes.bullets_container}>
-              <div className={classes.bullet} />
-              <p>Bahria Town Eiffel Tower</p>
-            </div>
-            <div className={classes.bullets_container}>
-              <div className={classes.bullet} />
-              <p>Grand Mosque</p>
-            </div>
-            <div className={classes.bullets_container}>
-              <div className={classes.bullet} />
-              <p>Family Club</p>
-            </div>
-            <div className={classes.bullets_container}>
-              <div className={classes.bullet} />
-              <p>IMAX</p>
-            </div>
-            <div className={classes.bullets_container}>
-              <div className={classes.bullet} />
-              <p>Mega Mall</p>
-            </div>
+            {features?.mainFeatures?.nearbyLandmarks?.map((landmark, index) => (
+              <div key={index} className={classes.bullets_container}>
+                <div className={classes.bullet} />
+                <p>{landmark}</p>
+              </div>
+            ))}
           </div>
         </div>
 

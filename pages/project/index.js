@@ -38,7 +38,7 @@ function Project() {
 
       const lengthOfProjectsArr = projects?.data?.length;
 
-      const data = projects?.data[lengthOfProjectsArr - 1];
+      const data = projects?.data[lengthOfProjectsArr - 2];
       setProjectOwnerId(data?.userId);
 
       for (var i = 0; i < data?.floorPlan?.length; i++) {
@@ -123,7 +123,7 @@ function Project() {
             address={project?.address}
           />
           <SimilarPropertySection />
-          <ProjectTimelineSection />
+          <ProjectTimelineSection project={project} />
         </>
       )}
     </div>

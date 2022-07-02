@@ -6,6 +6,7 @@ import { useAuth } from "../../../contextAPI";
 import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Select, { components } from "react-select";
 
 function DeveloperForm() {
   const [developer, setDeveloper] = useState();
@@ -23,12 +24,73 @@ function DeveloperForm() {
   const [logoKey, setLogoKey] = useState(logoKey);
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
+  const [socialsArr, setSocialsArr] = useState([]);
 
   const [name, setName] = useState(developer?.username);
 
+  const socials = [
+    {
+      label: "Facebook",
+      value: "Facebook",
+    },
+    {
+      label: "YouTube",
+      value: "YouTube",
+    },
+    {
+      label: "Instagram",
+      value: "Instagram",
+    },
+    {
+      label: "Twitter",
+      value: "Twitter",
+    },
+    {
+      label: "WhatsApp",
+      value: "WhatsApp",
+    },
+    {
+      label: "LinkedIn",
+      value: "LinkedIn",
+    },
+  ];
+
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
-  const success = () =>
+  const Option = (props) => {
+    return (
+      <div>
+        {" "}
+        <components.Option {...props}>
+          {" "}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              columnGap: "10px",
+              height: "100%",
+            }}
+          >
+            <input
+              type="checkbox"
+              checked={props.isSelected}
+              onChange={(e) => null}
+            />{" "}
+            <label>{props?.label}</label>
+          </div>{" "}
+        </components.Option>{" "}
+      </div>
+    );
+  };
+
+  const addSocials = (socialsArr) => {
+    const temp = [];
+    socialsArr?.map((socials) => temp.push(socials?.value));
+    setSocialsArr(temp);
+  };
+
+  const success = async () =>
     toast.success("Profile Updated", {
       position: "bottom-center",
       autoClose: 1000,
@@ -58,7 +120,6 @@ function DeveloperForm() {
           },
         }
       );
-      console.log(data?.data);
       setDeveloper(data?.data);
     } catch (err) {
       console.log(err);
@@ -76,9 +137,6 @@ function DeveloperForm() {
       setImgName(event?.name);
     }
   };
-
-  console.log(imgName);
-  console.log(developer?.developerLogo);
 
   const getUpdatedData = () => {
     let userData = {};
@@ -109,13 +167,14 @@ function DeveloperForm() {
     if (imgName) {
       userData = { ...userData, developerLogo: imgName };
     }
+    if (socialsArr?.length > 0) {
+      userData = { ...userData, socialMedia: socialsArr };
+    }
     return userData;
   };
 
   const handleEditUserInformation = async () => {
     const updatedData = getUpdatedData();
-
-    console.log(updatedData);
 
     try {
       setLoading(true);
@@ -130,10 +189,10 @@ function DeveloperForm() {
           },
         }
       );
-      success();
-      console.log(data);
+      await success();
       setLogoKey(data?.data?.user?.developerLogo);
       setLoading(false);
+      // await delay(2000);
       window.location.reload();
     } catch (err) {
       error();
@@ -309,14 +368,20 @@ function DeveloperForm() {
           </div>
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>Social Media</p>
-            <select
-              placeholder="Location Area"
+
+            <Select
               className={classes.input_field_dual}
-            >
-              <option>Facebook</option>
-              <option>Twitter</option>
-              <option>Instagram</option>
-            </select>
+              components={{ Option }}
+              hideSelectedOptions={false}
+              options={socials}
+              closeMenuOnSelect={false}
+              placeholder=" "
+              isMulti
+              isClearable
+              onChange={(e) => {
+                addSocials(e);
+              }}
+            />
           </div>
         </div>
         <div className={classes.single_row}>

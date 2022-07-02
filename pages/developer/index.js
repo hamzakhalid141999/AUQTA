@@ -3,36 +3,48 @@ import classes from "./developer.module.css";
 import FirstSection from "../../components/screenComponents/developerScreen/firstSection";
 import ContentSection from "../../components/screenComponents/developerScreen/contentSection";
 import UpcomingProjects from "../../components/screenComponents/developerScreen/upcomingProjects";
+import { useRouter } from "next/router";
+import axios from "axios";
+import { baseURL } from "../../constants";
 
 function developer() {
-  // const [developer, setDeveloper] = useState();
+  const router = useRouter();
+  const [developer, setDeveloper] = useState();
+  const [developerDetails, setDeveloperDetails] = useState();
 
-  // const fetchDeveloperDetails = async () => {
-  //   try {
-  //     const data = await axios.get(
-  //       baseURL + "/user/profilebyid/6299050a03ba683caaea666d",
-  //       {},
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-  //     console.log(data);
-  //     setProject(data?.data[0]);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  useEffect(() => {
+    if (router) {
+      setDeveloper(router.query?.developerId);
+    }
+  }, [router]);
 
-  // useEffect(() => {
-  //   fetchDeveloperDetails();
-  // }, []);
+  const fetchDeveloperDetails = async () => {
+    try {
+      const data = await axios.get(
+        baseURL + "/api/user/profilebyid/" + developer,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(data);
+      setDeveloperDetails(data?.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (developer) {
+      fetchDeveloperDetails();
+    }
+  }, [developer]);
 
   return (
     <div className={classes.developer_section}>
       <FirstSection />
-      <ContentSection />
+      <ContentSection developerDetails={developerDetails} />
       <UpcomingProjects />
     </div>
   );

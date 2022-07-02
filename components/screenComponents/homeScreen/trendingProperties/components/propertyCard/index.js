@@ -9,6 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
+import placeholder from "../../../../../../public/assets/placeholder-company.png";
 
 function PropertyCard({
   picture,
@@ -19,7 +20,13 @@ function PropertyCard({
   isProject,
   city,
 }) {
+  const [source, setSource] = useState();
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
+
+  useState(() => {
+    setSource(baseS3Url + picture);
+  }, [picture]);
+
   const [formattedPrice, setFormattedPrice] = useState();
 
   useEffect(() => {
@@ -40,7 +47,10 @@ function PropertyCard({
           <Image
             layout="fill"
             className={classes.property_picture}
-            src={baseS3Url + picture}
+            src={picture ? source : placeholder}
+            onError={() => {
+              setSource(placeholder);
+            }}
             alt="picture"
           />
         </div>

@@ -35,7 +35,6 @@ function AgentForm() {
           },
         }
       );
-      console.log(data?.data);
       setAgent(data?.data);
     } catch (err) {
       console.log(err);
@@ -105,8 +104,6 @@ function AgentForm() {
 
   const handleEditUserInformation = async () => {
     const updatedData = getUpdatedData();
-
-    console.log(updatedData);
 
     try {
       setLoading(true);

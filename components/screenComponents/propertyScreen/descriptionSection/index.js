@@ -7,7 +7,6 @@ import { useWindowSize } from "../../../../utils";
 function Description({ property }) {
   const { width } = useWindowSize();
 
-  console.log(property);
   return (
     <div className={classes.description_section}>
       <div

@@ -25,6 +25,7 @@ function PropertyForm() {
   const { user } = useAuth();
   const { width } = useWindowSize();
   const [propertyId, setPropertyId] = useState();
+  const [unit, setUnit] = useState();
   const [type, setType] = useState("residential");
   const [subtype, setSubtype] = useState();
   const [purposeSelected, setPurposeSelected] = useState("sell");
@@ -101,11 +102,13 @@ function PropertyForm() {
     accessibilityForSpecialOrElderlyPerson,
     setAccessibilityForSpecialOrElderlyPerson,
   ] = useState(false);
-  const [otherMainFeature, setOtherMainFeature] = useState();
-  const [otherRoomFeature, setOtherRoomFeature] = useState();
-  const [utilityOtherFeature, setUtilityOtherFeature] = useState();
-  const [otherCommunicationFeature, setOtherCommunicationFeature] = useState();
-  const [facilitiesOtherFeatures, setFacilitiesOtherFeatures] = useState();
+  const [otherMainFeature, setOtherMainFeature] = useState([]);
+  const [otherRoomFeature, setOtherRoomFeature] = useState([]);
+  const [utilityOtherFeature, setUtilityOtherFeature] = useState([]);
+  const [otherCommunicationFeature, setOtherCommunicationFeature] = useState(
+    []
+  );
+  const [facilitiesOtherFeatures, setFacilitiesOtherFeatures] = useState([]);
 
   const [imagesKeysArr, setImagesKeysArr] = useState([]);
   const [imagesBlobArr, setImagesBlobArr] = useState([]);
@@ -113,6 +116,8 @@ function PropertyForm() {
   const [landmarkArr, setLandmarkArr] = useState([]);
   const [landmarksFinalArray, setLandmarksFinalArray] = useState([]);
   const [citiesAndLocations, setCitiesAndLocations] = useState();
+
+  const [isImageUploadCompleted, setIsImageUploadCompleted] = useState(false);
 
   const [cities, setCities] = useState([]);
   const [locations, setLocations] = useState([]);
@@ -128,7 +133,6 @@ function PropertyForm() {
     data?.map((cityObject) =>
       setCities((city) => [...city, cityObject?.cityName])
     );
-    console.log(data);
   }, []);
 
   useEffect(() => {
@@ -137,12 +141,8 @@ function PropertyForm() {
     }
   }, [cities]);
 
-  console.log(location);
-  console.log(city);
-
   useEffect(() => {
     if (city) {
-      console.log(citiesAndLocations);
       for (var i = 0; i < citiesAndLocations?.length; i++) {
         if (citiesAndLocations[i]?.cityName === city) {
           setLocations(citiesAndLocations[i]?.areas);
@@ -150,8 +150,6 @@ function PropertyForm() {
       }
     }
   }, [city]);
-
-  console.log(locations);
 
   const Option = (props) => {
     return (
@@ -235,7 +233,7 @@ function PropertyForm() {
     } else if (!facingView) {
       missingCredError("facing view");
       return;
-    } else if (nearbyLandmarks?.length === 0) {
+    } else if (landmarksFinalArray?.length === 0) {
       missingCredError("nearby landmarks");
       return;
     }
@@ -250,7 +248,7 @@ function PropertyForm() {
           title: title,
           description: description,
           price: price,
-          size: size,
+          size: size.toString() + " " + unit,
           address: address,
           province: province,
           location: location,
@@ -262,6 +260,7 @@ function PropertyForm() {
           images: imgArr,
           userId: user?.id,
           hasBasement: "false",
+          nearbyLandmarks: landmarksFinalArray,
           // images: [],
         },
         {
@@ -270,7 +269,6 @@ function PropertyForm() {
           },
         }
       );
-      console.log(data);
       setImagesKeysArr(data?.data?.proplisting?.images);
       setPropertyId(data?.data?.proplisting?._id);
     } catch (err) {
@@ -292,7 +290,6 @@ function PropertyForm() {
     if (imagesKeysArr.length > 0) {
       var imagesUrlTempArr = [];
       for (var i = 0; i < imagesKeysArr?.length; i++) {
-        console.log("files from frontend", imagesKeysArr[i], imagesBlobArr[i]);
         const data = {
           fileKey: imagesKeysArr[i],
         };
@@ -321,19 +318,27 @@ function PropertyForm() {
                 });
                 const s3Url = response?.url?.split("?")[0];
                 imagesUrlTempArr.push(s3Url);
-                setImagesUrl((imagesArr) => [...imagesArr, s3Url]);
                 console.log("response ", s3Url);
+                if (i === imagesKeysArr?.length - 1) {
+                  setIsImageUploadCompleted(true);
+                }
               }
             };
             xhr.send();
           });
       }
-      console.log("ARRRRRRRRRRRRR:", imagesUrlTempArr);
-      setImagesUrl(imagesUrlTempArr);
     }
   }, [imagesKeysArr]);
 
   console.log(imagesUrl);
+
+  useEffect(() => {
+    if (isImageUploadCompleted) {
+      setLoading(false);
+      success();
+      window.location.reload();
+    }
+  }, [isImageUploadCompleted]);
 
   useEffect(() => {
     const handleAddPropertySalientFeaturesById = async () => {
@@ -388,7 +393,6 @@ function PropertyForm() {
               broadbandAccess: broadbandAccess,
               satelliteOrTvCableAccess: satelliteOrCableAccess,
               intercom: intercom,
-              otherCommunicationFeatures: otherCommunicationFeature,
               securityStaff: securityStaff,
               maintenanceStaff: maintenanceStaff,
               cctv: cctv,
@@ -397,7 +401,7 @@ function PropertyForm() {
                 accessibilityForSpecialOrElderlyPerson,
 
               otherMainFeatures: otherMainFeature,
-              otherRoomFeatures: otherMainFeature,
+              otherRoomFeatures: otherRoomFeature,
               otherRecreationalFeatures: "random feature",
               otherCommunicationFeatures: otherCommunicationFeature,
               otherOtherFeatures: facilitiesOtherFeatures,
@@ -408,9 +412,6 @@ function PropertyForm() {
               },
             }
           );
-          setLoading(false);
-          success();
-          window.location.reload();
         } catch (err) {
           setLoading(false);
           error();
@@ -666,6 +667,7 @@ function PropertyForm() {
               style={{ width: "100%" }}
               className={classes.input_field_single}
             >
+              <option>Select Subtype</option>
               {type === "residential"
                 ? residential_subtypes?.map((subtype, index) => (
                     <option value={subtype} key={index}>
@@ -694,6 +696,7 @@ function PropertyForm() {
                 setCity(e.target.value);
               }}
             >
+              <option>Select City</option>
               {cities?.map((city, index) => (
                 <option key={index} value={city}>
                   {city}
@@ -713,6 +716,7 @@ function PropertyForm() {
                 setLocation(e.target.value);
               }}
             >
+              <option>Select Location</option>
               {locations?.map((location, index) => (
                 <option key={index} value={location}>
                   {location}
@@ -729,6 +733,8 @@ function PropertyForm() {
               style={{ width: "100%" }}
               className={classes.input_field_single}
             >
+              <option>Select Province</option>
+              <option value={"kpk"}>Islamabad</option>
               <option value={"punjab"}>Punjab</option>
               <option value={"sindh"}>Sindh</option>
               <option value={"kpk"}>KPK</option>
@@ -738,13 +744,12 @@ function PropertyForm() {
           </div>
         </div>
 
-        <div style={{ alignItems: "normal" }} className={classes.single_row}>
+        <div className={classes.single_row}>
           <p className={classes.label}>Address</p>
-          <textarea
+          <input
             onChange={(e) => {
               setAddress(e.target.value);
             }}
-            style={{ height: "150px", paddingTop: "10px" }}
             className={classes.input_field_single}
           />
         </div>
@@ -781,15 +786,23 @@ function PropertyForm() {
               onChange={(e) => {
                 setSize(e.target.value);
               }}
-              placeholder="City Name"
+              type="number"
+              placeholder="Property Size"
               className={classes.input_field_three}
             />
           </div>
           <div className={classes.three_field_container}>
             <p className={classes.label_dual}>Unit</p>
-            <select className={classes.input_field_three}>
+            <select
+              onChange={(e) => {
+                setUnit(e.target.value);
+              }}
+              className={classes.input_field_three}
+            >
               {unit_subtypes?.map((unit_subtype, index) => (
-                <option key={index}>{unit_subtype}</option>
+                <option value={unit_subtype} key={index}>
+                  {unit_subtype}
+                </option>
               ))}
             </select>
           </div>
@@ -802,12 +815,14 @@ function PropertyForm() {
               onChange={(e) => {
                 setBedroom(e.target.value);
               }}
+              type="number"
               className={classes.input_field_dual}
             />
           </div>
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>Bathrooms</p>
             <input
+              type="number"
               onChange={(e) => {
                 setBathroom(e.target.value);
               }}
@@ -864,12 +879,18 @@ function PropertyForm() {
                   className={classes.input_field_with_label_top_container}
                 >
                   <p className={classes.top_label}>Facing View</p>
-                  <input
+                  <select
                     onChange={(e) => {
                       setFacingView(e.target.value);
                     }}
                     className={classes.input_field_single}
-                  />
+                  >
+                    <option>Select</option>
+                    <option value="East">East</option>
+                    <option value="West">West</option>
+                    <option value="North">North</option>
+                    <option value="South">South</option>
+                  </select>
                 </div>
 
                 <div
@@ -1003,12 +1024,18 @@ function PropertyForm() {
                 className={classes.input_field_with_label_top_container}
               >
                 <p className={classes.top_label}>Other Features</p>
-                <input
-                  onChange={(e) => {
-                    setOtherMainFeature(e.target.value);
-                  }}
-                  style={{ width: "30%" }}
+
+                <ReactTagInput
+                  tags={otherMainFeature}
+                  maxTags={50}
                   className={classes.input_field_single}
+                  removeOnBackspace={true}
+                  placeholder="Type and press enter"
+                  onChange={(newTags) => {
+                    var arr = newTags.filter((e) => String(e).trim());
+                    setOtherMainFeature(arr);
+                    // setErrorCode(-1);
+                  }}
                 />
               </div>
             </div>
@@ -1166,12 +1193,17 @@ function PropertyForm() {
                 className={classes.input_field_with_label_top_container}
               >
                 <p className={classes.top_label}>Other Features</p>
-                <input
-                  onChange={(e) => {
-                    setOtherRoomFeature(e.target.value);
-                  }}
-                  style={{ width: "30%" }}
+                <ReactTagInput
+                  tags={otherRoomFeature}
+                  maxTags={50}
                   className={classes.input_field_single}
+                  removeOnBackspace={true}
+                  placeholder="Type and press enter"
+                  onChange={(newTags) => {
+                    var arr = newTags.filter((e) => String(e).trim());
+                    setOtherRoomFeature(arr);
+                    // setErrorCode(-1);
+                  }}
                 />
               </div>
             </div>
@@ -1268,12 +1300,17 @@ function PropertyForm() {
                 className={classes.input_field_with_label_top_container}
               >
                 <p className={classes.top_label}>Other Features</p>
-                <input
-                  onChange={(e) => {
-                    setOtherCommunicationFeature(e.target.value);
-                  }}
-                  style={{ width: "30%" }}
+                <ReactTagInput
+                  tags={otherCommunicationFeature}
+                  maxTags={50}
                   className={classes.input_field_single}
+                  removeOnBackspace={true}
+                  placeholder="Type and press enter"
+                  onChange={(newTags) => {
+                    var arr = newTags.filter((e) => String(e).trim());
+                    setOtherCommunicationFeature(arr);
+                    // setErrorCode(-1);
+                  }}
                 />
               </div>
             </div>
@@ -1333,12 +1370,17 @@ function PropertyForm() {
                 className={classes.input_field_with_label_top_container}
               >
                 <p className={classes.top_label}>Other Features</p>
-                <input
-                  onChange={(e) => {
-                    setFacilitiesOtherFeatures(e.target.value);
-                  }}
-                  style={{ width: "30%" }}
+                <ReactTagInput
+                  tags={facilitiesOtherFeatures}
+                  maxTags={50}
                   className={classes.input_field_single}
+                  removeOnBackspace={true}
+                  placeholder="Type and press enter"
+                  onChange={(newTags) => {
+                    var arr = newTags.filter((e) => String(e).trim());
+                    setFacilitiesOtherFeatures(arr);
+                    // setErrorCode(-1);
+                  }}
                 />
               </div>
             </div>
@@ -1417,18 +1459,21 @@ function PropertyForm() {
                       className={classes.input_field_with_label_top_container}
                     >
                       <p className={classes.top_label}>Nearby Landmarks</p>
-                      <select
-                        onChange={(e) => {
-                          setNearbyLandmarks(e.target.value);
-                        }}
+                      <Select
                         className={classes.input_field_single}
-                      >
-                        {landmarks?.map((landmark, index) => (
-                          <option value={landmark} key={index}>
-                            {landmark}
-                          </option>
-                        ))}
-                      </select>
+                        components={{ Option }}
+                        hideSelectedOptions={false}
+                        options={landmarkArr}
+                        closeMenuOnSelect={false}
+                        placeholder=" "
+                        isMulti
+                        isClearable
+                        onChange={(e) => {
+                          // addArtist(e);
+                          console.log(e);
+                          addLandmarks(e);
+                        }}
+                      />
                     </div>
                   </>
                 )}
@@ -1441,18 +1486,21 @@ function PropertyForm() {
                   className={classes.input_field_with_label_top_container}
                 >
                   <p className={classes.top_label}>Nearby Landmarks</p>
-                  <select
-                    onChange={(e) => {
-                      setNearbyLandmarks(e.target.value);
-                    }}
+                  <Select
                     className={classes.input_field_single}
-                  >
-                    {landmarks?.map((landmark, index) => (
-                      <option value={landmark} key={index}>
-                        {landmark}
-                      </option>
-                    ))}
-                  </select>
+                    components={{ Option }}
+                    hideSelectedOptions={false}
+                    options={landmarkArr}
+                    closeMenuOnSelect={false}
+                    placeholder=" "
+                    isMulti
+                    isClearable
+                    onChange={(e) => {
+                      // addArtist(e);
+                      console.log(e);
+                      addLandmarks(e);
+                    }}
+                  />
                 </div>
               </div>
             )}
@@ -1628,7 +1676,18 @@ function PropertyForm() {
                 <p style={{ width: "30%" }} className={classes.top_label}>
                   Other Features
                 </p>
-                <input className={classes.input_field_single} />
+                <ReactTagInput
+                  tags={facilitiesOtherFeatures}
+                  maxTags={50}
+                  className={classes.input_field_single}
+                  removeOnBackspace={true}
+                  placeholder="Type and press enter"
+                  onChange={(newTags) => {
+                    var arr = newTags.filter((e) => String(e).trim());
+                    setFacilitiesOtherFeatures(arr);
+                    // setErrorCode(-1);
+                  }}
+                />
               </div>
             </div>
           </>
@@ -1652,11 +1711,21 @@ function PropertyForm() {
                   className={classes.input_field_with_label_top_container}
                 >
                   <p className={classes.top_label}>Nearby Landmarks</p>
-                  <select className={classes.input_field_single}>
-                    {landmarks?.map((landmark, index) => (
-                      <option key={index}>{landmark}</option>
-                    ))}
-                  </select>
+                  <Select
+                    className={classes.input_field_single}
+                    components={{ Option }}
+                    hideSelectedOptions={false}
+                    options={landmarkArr}
+                    closeMenuOnSelect={false}
+                    placeholder=" "
+                    isMulti
+                    isClearable
+                    onChange={(e) => {
+                      // addArtist(e);
+                      console.log(e);
+                      addLandmarks(e);
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -1730,13 +1799,12 @@ function PropertyForm() {
           </>
         )}
 
-        <div style={{ marginTop: "80px" }} className={classes.single_row}>
-          <p className={classes.label}>Images</p>
+        <p style={{ marginTop: "80px" }} className={classes.label}>
+          Images
+        </p>
 
+        <div style={{ marginTop: "30px" }} className={classes.single_row}>
           <div className={classes.container_with_top_label}>
-            <p className={classes.small_label}>
-              Upload at least 570x570 resolution images
-            </p>
             <div className={classes.image_holder_container}>
               <div className={classes.image_holder}>
                 {img1 ? (
@@ -1889,6 +1957,9 @@ function PropertyForm() {
                 )}
               </div>
             </div>
+            <p className={classes.small_label}>
+              Upload at least 570x570 resolution images
+            </p>
           </div>
         </div>
       </div>

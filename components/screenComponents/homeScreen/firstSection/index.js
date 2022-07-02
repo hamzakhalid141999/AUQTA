@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import classes from "./firstSection.module.css";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSearch,
+  faAngleDown,
+  faAngleUp,
+} from "@fortawesome/free-solid-svg-icons";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { getAllCities } from "../../../utils";
@@ -19,6 +23,12 @@ function FirstSection() {
   const [location, setLocation] = useState();
   const [priceBracket, setPriceBracket] = useState();
 
+  const [showMobileFilterPanel, setShowMobileFilterPanel] = useState(true);
+
+  const handleToggleMobileFilterPanel = () => {
+    setShowMobileFilterPanel(!showMobileFilterPanel);
+  };
+
   useEffect(() => {
     AOS.init({
       duration: 500,
@@ -31,7 +41,6 @@ function FirstSection() {
       data?.map((cityObject) =>
         setCities((city) => [...city, cityObject?.cityName])
       );
-      console.log(data);
     };
     fetchAllCities();
   }, []);
@@ -42,11 +51,8 @@ function FirstSection() {
     }
   }, [cities]);
 
-  console.log(activeTab);
-
   useEffect(() => {
     if (city) {
-      console.log(citiesAndLocations);
       for (var i = 0; i < citiesAndLocations?.length; i++) {
         if (citiesAndLocations[i]?.cityName === city) {
           setLocations(citiesAndLocations[i]?.areas);
@@ -143,6 +149,8 @@ function FirstSection() {
                   }}
                   className={classes.input_field}
                 >
+                  <option>Select City</option>
+
                   {cities?.map((city, index) => (
                     <option key={index} value={city}>
                       {city}
@@ -159,6 +167,7 @@ function FirstSection() {
                   }}
                   className={classes.input_field}
                 >
+                  <option>Select Location</option>
                   {locations?.map((location, index) => (
                     <option key={index} value={location}>
                       {location}
@@ -176,11 +185,10 @@ function FirstSection() {
                   }}
                   className={classes.input_field}
                 >
-                  {all_subtypes?.map((type, index) => (
-                    <option key={index} value={type}>
-                      {type}
-                    </option>
-                  ))}
+                  <option>Select Type</option>
+                  <option value="residential">Residential</option>
+                  <option value="plot">Plot</option>
+                  <option value="commercial">Commercial</option>
                 </select>
               </div>
               <div className={classes.divider} />
@@ -192,6 +200,7 @@ function FirstSection() {
                   }}
                   className={classes.input_field}
                 >
+                  <option>Select Price</option>
                   <option value="1000000-2000000">10 lacs-20 lacs</option>
                   <option value="3000000-4000000">30 lacs-40 lacs</option>
                   <option value="4000000-5000000">40 lacs-50 lacs</option>
@@ -216,6 +225,7 @@ function FirstSection() {
                     city: city,
                     location: location,
                     priceRange: priceBracket,
+                    type: type,
                   },
                 }}
               >
@@ -228,48 +238,128 @@ function FirstSection() {
                 </div>
               </Link>
             </div>
-            <div className={classes.search_bar_mobile}>
-              <div className={classes.single_row}>
-                <div className={classes.search_category_mobile}>
-                  <p>CITY</p>
-                  <h3>BALAKAN MOUNTAINS</h3>
-                </div>
-                <div className={classes.search_category_mobile}>
-                  <p>LOCATION</p>
-                  <h3>SOUTH EASTERN EUROPE</h3>
-                </div>
-              </div>
-              <div className={classes.single_row}>
-                <div className={classes.search_category_mobile}>
-                  <p>PROPERTY TYPE</p>
-                  <h3>PRIVATE HOUSE</h3>
-                </div>
-                <div className={classes.search_category_mobile}>
-                  <p>PRICE RANGE</p>
-                  <h3>$40000 - $60000</h3>
-                </div>
-              </div>
+            <div
+              style={{ padding: !showMobileFilterPanel && "0px" }}
+              className={classes.search_bar_mobile}
+            >
+              {showMobileFilterPanel && (
+                <>
+                  <div className={classes.single_row}>
+                    <div className={classes.search_category_mobile}>
+                      <p>CITY</p>
+                      <select
+                        onChange={(e) => {
+                          setCity(e.target.value);
+                        }}
+                        className={classes.input_field}
+                      >
+                        <option>Select City</option>
 
-              <Link
-                href={{
-                  pathname: "/map",
-                  query: {
-                    purpose: activeTab,
-                    city: city,
-                    location: location,
-                  },
-                }}
-              >
-                <div className={classes.search_mobile_btn}>
-                  <p>SEARCH</p>
+                        {cities?.map((city, index) => (
+                          <option key={index} value={city}>
+                            {city}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
-                  <FontAwesomeIcon
-                    className={classes.icon}
-                    icon={faSearch}
-                    size={"1x"}
-                  />
-                </div>
-              </Link>
+                    <div className={classes.search_category_mobile}>
+                      <p>LOCATION</p>
+                      <select
+                        onChange={(e) => {
+                          setLocation(e.target.value);
+                        }}
+                        className={classes.input_field}
+                      >
+                        <option>Select Location</option>
+                        {locations?.map((location, index) => (
+                          <option key={index} value={location}>
+                            {location}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div className={classes.single_row}>
+                    <div className={classes.search_category_mobile}>
+                      <p>PROPERTY TYPE</p>
+                      <select
+                        disabled={activeTab === "invest" ? true : false}
+                        onChange={(e) => {
+                          setType(e.target.value);
+                        }}
+                        className={classes.input_field}
+                      >
+                        <option>Select Type</option>
+                        <option value="residential">Residential</option>
+                        <option value="plot">Plot</option>
+                        <option value="commercial">Commercial</option>
+                      </select>
+                    </div>
+                    <div className={classes.search_category_mobile}>
+                      <p>PRICE RANGE</p>
+                      <select
+                        onChange={(e) => {
+                          setPriceBracket(e.target.value);
+                        }}
+                        className={classes.input_field}
+                      >
+                        <option>Select Price</option>
+                        <option value="1000000-2000000">10 lacs-20 lacs</option>
+                        <option value="3000000-4000000">30 lacs-40 lacs</option>
+                        <option value="4000000-5000000">40 lacs-50 lacs</option>
+                        <option value="5000000-6000000">50 lacs-60 lacs</option>
+                        <option value="6000000-7000000">60 lacs-70 lacs</option>
+                        <option value="7000000-8000000">70 lacs-80 lacs</option>
+                        <option value="8000000-9000000">80 lacs-90 lacs</option>
+                        <option value="9000000-10000000">
+                          90 lacs-100 lacs
+                        </option>
+                        <option value="10000000-nill">100 lacs +</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <Link
+                    href={{
+                      pathname:
+                        activeTab === "buy"
+                          ? "/map"
+                          : activeTab === "rent"
+                          ? "/rent"
+                          : activeTab === "invest" && "/invest",
+                      query: {
+                        purpose: activeTab,
+                        city: city,
+                        location: location,
+                        priceRange: priceBracket,
+                        type: type,
+                      },
+                    }}
+                  >
+                    <div className={classes.search_mobile_btn}>
+                      <p>SEARCH</p>
+
+                      <FontAwesomeIcon
+                        className={classes.icon}
+                        icon={faSearch}
+                        size={"1x"}
+                      />
+                    </div>
+                  </Link>
+                </>
+              )}
+            </div>
+            <div
+              onClick={handleToggleMobileFilterPanel}
+              className={classes.mobile_filter_toggler}
+            >
+              <FontAwesomeIcon
+                style={{ color: "#0068ed" }}
+                className={classes.icon}
+                icon={showMobileFilterPanel ? faAngleUp : faAngleDown}
+                size={"1x"}
+              />
             </div>
           </div>
         </div>

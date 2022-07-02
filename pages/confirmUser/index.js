@@ -37,7 +37,6 @@ function ConfirmUser() {
           "Content-Type": "application/json",
         },
       });
-      console.log(data);
       success();
       router.push("/");
     } catch (err) {
@@ -50,7 +49,6 @@ function ConfirmUser() {
     const url = window.location.href.split("?");
     const codeSplitted = url[1].split("=")[1];
     setCode(codeSplitted);
-    console.log(codeSplitted);
   }, []);
 
   return (

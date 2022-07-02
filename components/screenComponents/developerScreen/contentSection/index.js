@@ -4,7 +4,8 @@ import classes from "./contentSection.module.css";
 import img from "../../../../public/assets/developer_section_img.png";
 import { useWindowSize } from "../../../../utils";
 
-function ContentSection() {
+function ContentSection({ developerDetails }) {
+  console.log(developerDetails);
   const [showMore, setShowMore] = useState(false);
   const { width } = useWindowSize();
   const description = `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
@@ -27,9 +28,7 @@ function ContentSection() {
   return (
     <div className={classes.container}>
       <div className={classes.content_container}>
-        <div
-          className={classes.services_container}
-        >
+        <div className={classes.services_container}>
           <div className={classes.image_container}>
             <Image src={img} className={classes.img} />
           </div>
@@ -54,33 +53,106 @@ function ContentSection() {
             </p>
 
             <div className={classes.developer_info_section}>
-                <div style={{width: '98%'}} className={classes.single_row}>
-                    <p>Since:</p>
+              <div style={{ width: "98%" }} className={classes.single_row}>
+                <div
+                  style={{
+                    width: "48%",
+                    display: "flex",
+                    flexDirection: "row",
+                    columnGap: "15px",
+                    alignContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <p>Since</p>
+                  <div className={classes.values_container}>
+                    <p>{developerDetails?.since}</p>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    width: "48%",
+                    display: "flex",
+                    flexDirection: "row",
+                    columnGap: "15px",
+                    alignContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <p>Projects Developed</p>
+                  <div className={classes.values_container}>
+                    <p>{developerDetails?.projectsDeveloped}</p>
+                  </div>
+                </div>
+              </div>
+              <div style={{ width: "98%" }} className={classes.single_row}>
+                <div
+                  style={{
+                    width: "48%",
+                    display: "flex",
+                    flexDirection: "row",
+                    columnGap: "15px",
+                    alignContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <p>City</p>
+                  <div className={classes.values_container}>
+                    <p>{developerDetails?.user?.city}</p>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    width: "48%",
+                    display: "flex",
+                    flexDirection: "row",
+                    columnGap: "15px",
+                    alignContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <p>Social Media</p>
+                  <div className={classes.values_container}>
                     <p>2012</p>
+                  </div>
                 </div>
-                <div style={{width: '98%'}} className={classes.single_row}>
-                    <p>Projects Developed:</p>
-                    <p>3</p>
+              </div>
+              <div style={{ width: "100%" }} className={classes.single_row}>
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    rowGap: "15px",
+                    // alignContent: "center",
+                    // alignItems: "center",
+                  }}
+                >
+                  <p>Website URL</p>
+                  <div className={classes.values_container}>
+                    <p>{developerDetails?.user?.websiteURL}</p>
+                  </div>
                 </div>
-                <div style={{width: '98%'}} className={classes.single_row}>
-                    <p>Website URL:</p>
-                    <p>https://www.google.com</p>
-                </div>
-                <div style={{width: '98%'}} className={classes.single_row}>
-                    <p>Social Media:</p>
-                    <p>Facebook</p>
-                </div>
+              </div>
 
-                <div style={{width: '98%'}} className={classes.single_row}>
-                    <p>Address:</p>
-                    <p>Street 2, Block 1, Phase 2</p>
+              <div style={{ width: "100%" }} className={classes.single_row}>
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    rowGap: "15px",
+                    // alignContent: "center",
+                    // alignItems: "center",
+                  }}
+                >
+                  <p>Corporate Address</p>
+                  <div className={classes.values_container}>
+                    <p>{developerDetails?.corporateAddress}</p>
+                  </div>
                 </div>
-                <div style={{width: '48%'}} className={classes.single_row}>
-                    <p>City:</p>
-                    <p>Rawalpindi</p>
-                </div>
+              </div>
             </div>
-
           </div>
         </div>
       </div>

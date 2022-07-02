@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./propertyCard.module.css";
 import {
   faBath,
@@ -9,8 +9,42 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
+import placeholder from "../../../../public/assets/placeholder-company.png";
 
 function PropertyCard({ picture, title, description, price, location, city }) {
+  const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
+
+  const [formattedPrice, setFormattedPrice] = useState();
+  const [source, setSource] = useState();
+
+  function numDifferentiation(value) {
+    var val = Math.abs(value);
+    if (val >= 10000000) {
+      val = "PKR " + (val / 10000000).toFixed(2) + " Crores";
+    } else if (val >= 100000) {
+      val = "PKR " + (val / 100000).toFixed(2) + " Lac";
+    }
+    return val;
+  }
+
+  useState(() => {
+    setSource(baseS3Url + picture);
+  }, [picture]);
+
+  useEffect(() => {
+    if (price) {
+      if (parseInt(price) < 100000) {
+        let number = price;
+        setFormattedPrice(
+          number.toLocaleString("ur-PK", { currency: "PKR", style: "currency" })
+        ); // or en-PK
+      } else {
+        const convertedPrice = numDifferentiation(price);
+        setFormattedPrice(convertedPrice);
+      }
+    }
+  }, [price]);
+
   return (
     <Link href={"/property"}>
       <div className={classes.card_body}>
@@ -19,7 +53,10 @@ function PropertyCard({ picture, title, description, price, location, city }) {
           <Image
             layout="fill"
             className={classes.property_picture}
-            src={picture}
+            src={source}
+            onError={() => {
+              setSource(placeholder);
+            }}
             alt="picture"
           />
         </div>
@@ -38,7 +75,7 @@ function PropertyCard({ picture, title, description, price, location, city }) {
             </p>
           </div>
           <div className={classes.property_description_container}>
-            <p className={classes.price}>{price}</p>
+            <p className={classes.price}>{formattedPrice}</p>
           </div>
         </div>
       </div>

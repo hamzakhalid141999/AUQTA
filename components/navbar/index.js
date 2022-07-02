@@ -5,7 +5,12 @@ import logo from "../../public/assets/logo.png";
 import logo_black from "../../public/assets/logo_black.png";
 import NavbarModal from "../navbarModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSearch,
+  faBars,
+  faAngleDown,
+  faAngleUp,
+} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import LoginSignupModal from "../modals/loginSignupModal";
 import { useRouter } from "next/router";
@@ -16,6 +21,7 @@ import { useAuth } from "../../contextAPI";
 import { useWindowSize } from "../../utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getAllCities } from "../utils";
 
 function Navbar() {
   const router = useRouter();
@@ -30,8 +36,42 @@ function Navbar() {
   const [currentPage, setCurrentPage] = useState();
   const onCloseModal = () => setOpen(false);
   const { user, removeUser } = useAuth();
+  const [isDropDown, setIsDropDown] = useState(false);
+  const [type, setType] = useState();
+  const [priceBracket, setPriceBracket] = useState();
+
+  const [citiesAndLocations, setCitiesAndLocations] = useState();
+  const [cities, setCities] = useState([]);
+  const [city, setCity] = useState();
+  const [location, setLocation] = useState();
+  const [locations, setLocations] = useState([]);
+
+  const handleDropDown = () => {
+    setIsDropDown(!isDropDown);
+  };
 
   let listener = null;
+
+  useEffect(() => {
+    const fetchAllCities = async () => {
+      const data = await getAllCities();
+      setCitiesAndLocations(data);
+      data?.map((cityObject) =>
+        setCities((city) => [...city, cityObject?.cityName])
+      );
+    };
+    fetchAllCities();
+  }, []);
+
+  useEffect(() => {
+    if (city && citiesAndLocations) {
+      for (var i = 0; i < citiesAndLocations?.length; i++) {
+        if (citiesAndLocations[i]?.cityName === city) {
+          setLocations(citiesAndLocations[i]?.areas);
+        }
+      }
+    }
+  }, [city, citiesAndLocations]);
 
   useEffect(() => {
     if (router.pathname) {
@@ -130,6 +170,23 @@ function Navbar() {
           <div className={classes.btns_container}>
             <div
               onClick={() => {
+                handleCategorySelected("invest");
+              }}
+              className={classes.filter_panel_btn}
+            >
+              <p
+                className={
+                  categorySelected === "invest"
+                    ? classes.filter_panel_btn_label_selected
+                    : classes.filter_panel_btn_label_unselected
+                }
+              >
+                INVEST
+              </p>
+            </div>
+            <div className={classes.divider} />
+            <div
+              onClick={() => {
                 handleCategorySelected("buy");
               }}
               className={classes.filter_panel_btn}
@@ -141,7 +198,7 @@ function Navbar() {
                     : classes.filter_panel_btn_label_unselected
                 }
               >
-                INVEST
+                BUY
               </p>
             </div>
             <div className={classes.divider} />
@@ -158,23 +215,6 @@ function Navbar() {
                     : classes.filter_panel_btn_label_unselected
                 }
               >
-                BUY
-              </p>
-            </div>
-            <div className={classes.divider} />
-            <div
-              onClick={() => {
-                handleCategorySelected("invest");
-              }}
-              className={classes.filter_panel_btn}
-            >
-              <p
-                className={
-                  categorySelected === "invest"
-                    ? classes.filter_panel_btn_label_selected
-                    : classes.filter_panel_btn_label_unselected
-                }
-              >
                 RENT
               </p>
             </div>
@@ -182,30 +222,100 @@ function Navbar() {
           <div className={classes.search_bar}>
             <div className={classes.search_category}>
               <p>CITY</p>
-              <h3>BALAKAN MOUNTAINS</h3>
+              <select
+                onChange={(e) => {
+                  setCity(e.target.value);
+                }}
+                className={classes.input_field}
+              >
+                <option>Select City</option>
+
+                {cities?.map((city, index) => (
+                  <option key={index} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className={classes.divider2} />
             <div className={classes.search_category}>
               <p>LOCATION</p>
-              <h3>SOUTH EASTERN EUROPE</h3>
+              <select
+                onChange={(e) => {
+                  setLocation(e.target.value);
+                }}
+                className={classes.input_field}
+              >
+                <option>Select Location</option>
+                {locations?.map((location, index) => (
+                  <option key={index} value={location}>
+                    {location}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className={classes.divider2} />
             <div className={classes.search_category}>
               <p>PROPERTY TYPE</p>
-              <h3>PRIVATE HOUSE</h3>
+              <select
+                disabled={categorySelected === "invest" ? true : false}
+                onChange={(e) => {
+                  setType(e.target.value);
+                }}
+                className={classes.input_field}
+              >
+                <option>Select Type</option>
+                <option value="residential">Residential</option>
+                <option value="plot">Plot</option>
+                <option value="commercial">Commercial</option>
+              </select>
             </div>
             <div className={classes.divider2} />
             <div className={classes.search_category}>
               <p>PRICE RANGE</p>
-              <h3>$40000 - $60000</h3>
+              <select
+                onChange={(e) => {
+                  setPriceBracket(e.target.value);
+                }}
+                className={classes.input_field}
+              >
+                <option>Select Price</option>
+                <option value="1000000-2000000">10 lacs-20 lacs</option>
+                <option value="3000000-4000000">30 lacs-40 lacs</option>
+                <option value="4000000-5000000">40 lacs-50 lacs</option>
+                <option value="5000000-6000000">50 lacs-60 lacs</option>
+                <option value="6000000-7000000">60 lacs-70 lacs</option>
+                <option value="7000000-8000000">70 lacs-80 lacs</option>
+                <option value="8000000-9000000">80 lacs-90 lacs</option>
+                <option value="9000000-10000000">90 lacs-100 lacs</option>
+                <option value="10000000-nill">100 lacs +</option>
+              </select>
             </div>
-            <div className={classes.search_icon}>
-              <FontAwesomeIcon
-                className={classes.icon}
-                icon={faSearch}
-                size={"1x"}
-              />
-            </div>
+            <Link
+              href={{
+                pathname:
+                  categorySelected === "buy"
+                    ? "/map"
+                    : categorySelected === "rent"
+                    ? "/rent"
+                    : categorySelected === "invest" && "/invest",
+                query: {
+                  purpose: categorySelected,
+                  city: city,
+                  location: location,
+                  priceRange: priceBracket,
+                  type: type,
+                },
+              }}
+            >
+              <div className={classes.search_icon}>
+                <FontAwesomeIcon
+                  className={classes.icon}
+                  icon={faSearch}
+                  size={"1x"}
+                />
+              </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -253,18 +363,6 @@ function Navbar() {
           <p className={classes.hover_underline_animation}>CONTACT US</p>
         </Link>
 
-        {user && (
-          <Link
-            href={
-              user?.userType?.includes("agent")
-                ? "/dashboard/agent"
-                : "/dashboard/developer"
-            }
-          >
-            <p className={classes.hover_underline_animation}>PROFILE</p>
-          </Link>
-        )}
-
         <Link href={"#"}>
           <div className={classes.dropdown_container}>
             <div className={classes.dropdown}>
@@ -301,12 +399,40 @@ function Navbar() {
         </Link>
 
         {user ? (
-          <div onClick={handleSignOut} className={classes.login_btn}>
+          <div onClick={handleDropDown} className={classes.login_btn}>
             <>
-              <p>LOGOUT</p>
+              <p>{user?.username}</p>
               <div className={classes.img_placeholder}>
                 <p>{user?.username.charAt(0).toUpperCase()}</p>
                 <div className={classes.online_indicator}></div>
+              </div>
+              <FontAwesomeIcon
+                className={classes.icon}
+                style={{ transition: "ease-in-out 200ms" }}
+                icon={isDropDown ? faAngleUp : faAngleDown}
+                size={"1x"}
+              />
+              <div
+                className={
+                  isDropDown
+                    ? classes.profile_dropdown_show
+                    : classes.profile_dropdown_hidden
+                }
+              >
+                <div className={classes.option}>
+                  <Link
+                    href={
+                      user?.usertype === "agent"
+                        ? "/dashboard/agent"
+                        : "/dashboard/developer"
+                    }
+                  >
+                    <p>Profile</p>
+                  </Link>
+                </div>
+                <div onClick={handleSignOut} className={classes.option}>
+                  <p>Logout</p>
+                </div>
               </div>
             </>
           </div>

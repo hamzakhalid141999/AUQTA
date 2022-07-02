@@ -1,16 +1,17 @@
 .main_container {
   width: 100%;
-  height: 1900px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   position: relative;
+  row-gap: 100px;
+  padding-bottom: 100px;
 }
 .first_section_body {
   width: 100%;
-  height: 700px;
-  max-height: 700px;
+  height: 450px;
+  max-height: 450px;
   position: relative;
   padding: 150px;
   display: flex;
@@ -21,16 +22,15 @@
 .overlay {
   background: rgba(0, 0, 0, 0.596);
   z-index: 10;
-  position: absolute;
   width: 100%;
   height: 90vh;
-  min-height: 700px;
-  max-height: 700px;
+  min-height: 450px;
+  max-height: 450px;
   border-bottom-left-radius: 200px;
   border-bottom-right-radius: 200px;
-  height: 700px;
-  min-height: 700px;
-  max-height: 700px;
+  height: 450px;
+  min-height: 450px;
+  max-height: 450px;
 }
 .banner_img_container {
   position: absolute;
@@ -38,9 +38,8 @@
   left: 0px;
   width: 100%;
   object-fit: cover;
-  /* max-height: 722px; */
-  min-height: 700px;
-  max-height: 700px;
+  min-height: 450px;
+  max-height: 450px;
   border-bottom-left-radius: 200px;
   border-bottom-right-radius: 200px;
   z-index: 10;
@@ -51,14 +50,10 @@
   border-bottom-left-radius: 200px;
   border-bottom-right-radius: 200px;
   z-index: 2;
-  max-height: 700px;
+  max-height: 450px;
 }
 .dashboard_container {
-  /* max-height: 1700px;
-  height: 1700px;
-  overflow-y: scroll; */
-  overflow-y: scroll;
-  height: 1100px;
+  height: fit-content;
   padding-top: 90px;
   padding-bottom: 60px;
   padding-left: 80px;
@@ -66,10 +61,8 @@
   width: 70%;
   box-shadow: 0 5px 50px 20px rgba(8, 72, 146, 0.24);
   z-index: 100;
-  position: absolute;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   top: 600px;
   border-radius: 40px;

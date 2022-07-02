@@ -9,12 +9,15 @@ import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import { baseURL } from "../../constants";
 import { useAuth } from "../../contextAPI";
+import { getPropertiesByProvince } from "../../components/utils/fetchPropertiesByProvince";
+import SimilarProperties from "../../components/screenComponents/similarProperties";
 
 function Property() {
   const [property, setProperty] = useState();
   const [propertyOwnerId, setPropertyOwnerId] = useState();
   const [propertyOwnerDetails, setPropertyOwnerDetails] = useState();
   const [loading, setLoading] = useState(true);
+  const [similarProperties, setSimilarProperties] = useState();
   const { user } = useAuth();
 
   useEffect(() => {
@@ -22,6 +25,21 @@ function Property() {
       fetchProperty();
     }
   }, [user]);
+
+  useEffect(() => {
+    const fetchPropertiesByLocation = async () => {
+      if (property) {
+        console.log(property);
+        const data = await getPropertiesByProvince(
+          property?.propertyListing?.province
+        );
+        console.log(data);
+        setSimilarProperties(data);
+      }
+    };
+
+    fetchPropertiesByLocation();
+  }, [property]);
 
   const bucketBaseUrl = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
@@ -46,12 +64,10 @@ function Property() {
       }
       setProperty(data);
       setPropertyOwnerId(data?.propertyListing?.userId);
-      // console.log(data?.data);
     } catch (err) {
       console.log(err);
     }
   };
-  console.log(propertyOwnerDetails);
 
   useEffect(() => {
     const fetchDeveloperDetails = async () => {
@@ -89,12 +105,13 @@ function Property() {
           <FirstSection
             images={property?.propertyListing?.images}
             propertyDetails={property?.propertyListing}
+            propertyListingDetails={property}
             ownerDetails={propertyOwnerDetails}
           />
           <PictureSection images={property?.propertyListing?.images} />
           <Description property={property} />
           <MainFeaturesSection features={property?.resSalientFeatures} />
-          <TrendingProperties noButtons={true} heading={"SIMILAR PROPERTIES"} />
+          <SimilarProperties properties={similarProperties} />
         </>
       )}
     </div>

@@ -75,3 +75,32 @@ input[type="file"]::file-selector-button {
   width: 0 !important;
   height: 0 !important;
 }
+.firstSection_input_field__qia1P {
+  font-size: 16px !important;
+  color: #0068ed !important;
+  font-weight: bolder !important;
+}
+.navbar_input_field___g1A7 {
+  font-size: 14px !important;
+  color: #0068ed !important;
+  font-weight: bolder !important;
+}
+.react-tag-input {
+  width: 100% !important;
+  height: 52px !important;
+  background-color: #f6f6fa !important;
+  border: 1px solid #d3d3d3 !important;
+  border-radius: 5px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  /* padding-top: 10px; */
+  font-family: sans-serif;
+}
+
+@media screen and (max-width: 910px) {
+  .firstSection_input_field__qia1P {
+    font-size: 13px !important;
+    color: #0068ed !important;
+    font-weight: bolder !important;
+  }
+}

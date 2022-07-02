@@ -6,17 +6,12 @@ import location_pointer from "../../../../public/assets/pin-locator-white.png";
 import Link from "next/link";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-import hotel_1 from "../../../../public/assets/hotel_1.png";
-import hotel_2 from "../../../../public/assets/hotel_2.png";
-import hotel_3 from "../../../../public/assets/hotel_3.png";
-import hotel_4 from "../../../../public/assets/hotel_4.png";
-import hotel_5 from "../../../../public/assets/hotel_5.png";
-import hotel_6 from "../../../../public/assets/hotel_6.png";
-import { Slide } from "react-slideshow-image";
-import axios from "axios";
+
 import project_brochure from "../../../../public/assets/project_brochure.png";
 import project_floorplan from "../../../../public/assets/project_floorplan.png";
 import project_price from "../../../../public/assets/project_price.png";
+import project_image from "../../../../public/assets/projct-imagewhite.png";
+import ProjectImagesModal from "../../../modals/projectImagesModal.js";
 
 function FirstSection({
   projectDetails,
@@ -27,8 +22,9 @@ function FirstSection({
   projectBrochure,
   ownerDetails,
 }) {
-  console.log(ownerDetails);
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
+
+  console.log(projectDetails);
 
   const slideImages = [
     "/assets/hotel_1.png",
@@ -41,31 +37,60 @@ function FirstSection({
 
   const [priceLowerBound, setPriceLowerBound] = useState();
   const [priceUpperBound, setPriceUpperBound] = useState();
+  const [open, setOpen] = useState();
+  const handleModal = () => {
+    setOpen(true);
+  };
 
-  console.log(images);
-  console.log(shopAvailability);
-  console.log(pricePlan);
-  console.log(floorPlan);
-  console.log(projectBrochure);
+  const onCloseModal = () => setOpen(false);
+
+  function numDifferentiation(value) {
+    var val = Math.abs(value);
+    if (val >= 10000000) {
+      val = (val / 10000000).toFixed(2) + " Crores";
+    } else if (val >= 100000) {
+      val = (val / 100000).toFixed(2) + " Lac";
+    }
+    return val;
+  }
 
   useEffect(() => {
     if (projectDetails?.priceRangeFrom) {
-      let lower = projectDetails?.priceRangeFrom;
-      let upper = projectDetails?.priceRangeTo;
-      setPriceLowerBound(
-        lower.toLocaleString("ur-PK", { currency: "PKR", style: "currency" })
-      ); // or en-PK
-      setPriceUpperBound(
-        upper.toLocaleString("ur-PK", { currency: "PKR", style: "currency" })
-      );
-    } else {
-      setPriceUpperBound("-");
-      setPriceLowerBound("-");
+      if (parseInt(projectDetails?.priceRangeFrom) < 100000) {
+        let lower = projectDetails?.priceRangeFrom;
+        setPriceLowerBound(
+          lower.toLocaleString("ur-PK", { currency: "PKR", style: "currency" })
+        ); // or en-PK
+      } else {
+        const lowerBoundFormatted = numDifferentiation(
+          projectDetails?.priceRangeFrom
+        );
+        setPriceLowerBound(lowerBoundFormatted);
+      }
+
+      if (parseInt(projectDetails?.priceRangeFrom) < 100000) {
+        let upper = projectDetails?.priceRangeTo;
+
+        setPriceUpperBound(
+          upper.toLocaleString("ur-PK", { currency: "PKR", style: "currency" })
+        );
+      } else {
+        const upperBoundFormatted = numDifferentiation(
+          projectDetails?.priceRangeTo
+        );
+        setPriceUpperBound(upperBoundFormatted);
+      }
     }
   }, [projectDetails]);
 
   return (
     <div className={classes.first_section_body}>
+      <ProjectImagesModal
+        setOpen={setOpen}
+        open={open}
+        onCloseModal={onCloseModal}
+        pictures={images}
+      />
       <div className={classes.banner_img_container}>
         <div className={classes.overlay} />
         <Fade arrows={false} style={{ height: "100%" }} easing="ease">
@@ -120,7 +145,14 @@ function FirstSection({
                 src={baseS3Url + ownerDetails?.developerLogo}
                 className={classes.developer_logo}
               />
-              <Link href={"/developer"}>
+              <Link
+                href={{
+                  pathname: "/developer",
+                  query: {
+                    developerId: projectDetails?.userId,
+                  },
+                }}
+              >
                 <div className={classes.banner_btn}>
                   <p>
                     {ownerDetails?.user?.username}
@@ -153,6 +185,10 @@ function FirstSection({
               <a href={pricePlan} target="_blank" rel="noreferrer">
                 PRICE PLAN
               </a>
+            </div>
+            <div onClick={handleModal} className={classes.btn_body}>
+              <img src={project_image.src} className={classes.img_icon} />
+              <a href="#">IMAGES</a>
             </div>
           </div>
         </div>

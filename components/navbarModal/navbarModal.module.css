@@ -22,7 +22,10 @@
   display: flex;
   flex-direction: column;
 }
-
+.input_field {
+  background-color: transparent;
+  border: none;
+}
 .overlay_content {
   height: 100%;
   text-align: center;
@@ -78,8 +81,6 @@
 .nav_links_container p {
   font-size: 20px !important;
   color: white !important;
-
-
 }
 .darkmode_toggle_btn_container {
   display: flex;

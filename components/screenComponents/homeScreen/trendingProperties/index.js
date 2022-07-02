@@ -15,8 +15,6 @@ function TrendingProperties({
   const { width } = useWindowSize();
   const [citySelected, setCitySelected] = useState("ISLAMABAD");
 
-  console.log(investmentProjects);
-
   useEffect(() => {
     AOS.init({
       duration: 500,

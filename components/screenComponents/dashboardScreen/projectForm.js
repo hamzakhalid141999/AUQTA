@@ -7,10 +7,12 @@ import { amenities } from "./dropdowns/dropdowns";
 import Select, { components } from "react-select";
 import { useAuth } from "../../../contextAPI";
 import { getAllCities } from "../../utils";
+import { useWindowSize } from "../../../utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function ProjectForm() {
+  const { width } = useWindowSize();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
   const [categorySelected, setCategorySelected] = useState("buy");
@@ -71,13 +73,26 @@ function ProjectForm() {
   const [secondMilestoneImageKey, setSecondMilestoneImageKey] = useState();
   const [thirdMilestoneImageKey, setThirdMilestoneImageKey] = useState();
 
+  const [isImagesUploaded, setIsImagesUploaded] = useState(false);
+  const [isFirstMilestoneImageUploaded, setIsFirstMilestoneImageUploaded] =
+    useState(false);
+  const [isSecondMilestoneImageUploaded, setIsSecondMilestoneImageUploaded] =
+    useState(false);
+  const [isThirdMilestoneImageUploaded, setIsThirdMilestoneImageUploaded] =
+    useState(false);
+  const [isBrochureImageUploaded, setIsBrochureImageUploaded] = useState(false);
+  const [isPricePlanImageUploaded, setIsPriceplanImageUplaoded] =
+    useState(false);
+  const [isFloorPlanImageUplaoded, setIsFloorPlanImageUploaded] =
+    useState(false);
+  const [isShopImageUploaded, setIsShopImageUploaded] = useState(false);
+
   useEffect(async () => {
     const data = await getAllCities();
     setCitiesAndLocations(data);
     data?.map((cityObject) =>
       setCities((city) => [...city, cityObject?.cityName])
     );
-    console.log(data);
   }, []);
 
   useEffect(() => {
@@ -243,9 +258,6 @@ function ProjectForm() {
     } else if (!province) {
       missingCredError("province");
       return;
-    } else if (!isGovApproved) {
-      missingCredError("government approved");
-      return;
     } else if (!approvalBody) {
       missingCredError("approval body name");
       return;
@@ -263,6 +275,15 @@ function ProjectForm() {
       return;
     } else if (!thirdMilestone) {
       missingCredError("third milestone date");
+      return;
+    } else if (!firstMilestoneImage) {
+      missingCredError("first milestone image");
+      return;
+    } else if (!secondMilestoneImage) {
+      missingCredError("second milestone second");
+      return;
+    } else if (!thirdMilestoneImage) {
+      missingCredError("third milestone third");
       return;
     }
 
@@ -307,7 +328,6 @@ function ProjectForm() {
           },
         }
       );
-      console.log(data?.data?.newproject);
       setImgsKeysArr(data?.data?.newproject?.images);
       setPriceImgKeysArr(data?.data?.newproject?.pricePlan);
       setBrochureImgKeysArr(data?.data?.newproject?.projectBrochure);
@@ -318,10 +338,6 @@ function ProjectForm() {
         data?.data?.newproject?.secondMilestone?.image
       );
       setThirdMilestoneImageKey(data?.data?.newproject?.thirdMilestone?.image);
-
-      success();
-      setLoading(false);
-      window.location.reload();
     } catch (err) {
       setLoading(false);
 
@@ -331,13 +347,6 @@ function ProjectForm() {
 
   useEffect(() => {
     if (firstMilestoneImageKey) {
-      console.log("FIRST MILESTONE IMAGE!!!!!!!!!!!!!!!!!!!!!!");
-
-      console.log(
-        "files from frontend",
-        firstMilestoneImageKey,
-        firstMilestoneBlob
-      );
       const data = {
         fileKey: firstMilestoneImageKey,
       };
@@ -366,6 +375,7 @@ function ProjectForm() {
               });
               const s3Url = response?.url?.split("?")[0];
               console.log("response ", s3Url);
+              setIsFirstMilestoneImageUploaded(true);
             }
           };
           xhr.send();
@@ -375,13 +385,6 @@ function ProjectForm() {
 
   useEffect(() => {
     if (secondMilestoneImageKey) {
-      console.log("SECOND MILESTONE IMAGE!!!!!!!!!!!!!!!!!!!!!!");
-
-      console.log(
-        "files from frontend",
-        secondMilestoneImageKey,
-        secondMilestoneBlob
-      );
       const data = {
         fileKey: secondMilestoneImageKey,
       };
@@ -410,6 +413,7 @@ function ProjectForm() {
               });
               const s3Url = response?.url?.split("?")[0];
               console.log("response ", s3Url);
+              setIsSecondMilestoneImageUploaded(true);
             }
           };
           xhr.send();
@@ -419,12 +423,6 @@ function ProjectForm() {
 
   useEffect(() => {
     if (thirdMilestoneImageKey) {
-      console.log("THIRD MILESTONE IMAGE!!!!!!!!!!!!!!!!!!!!!!");
-      console.log(
-        "files from frontend",
-        thirdMilestoneImageKey,
-        thirdMilestoneBlob
-      );
       const data = {
         fileKey: thirdMilestoneImageKey,
       };
@@ -453,6 +451,7 @@ function ProjectForm() {
               });
               const s3Url = response?.url?.split("?")[0];
               console.log("response ", s3Url);
+              setIsThirdMilestoneImageUploaded(true);
             }
           };
           xhr.send();
@@ -491,7 +490,9 @@ function ProjectForm() {
                 });
                 const s3Url = response?.url?.split("?")[0];
                 console.log("response ", s3Url);
-                setLoading(false);
+                if (i === imgsKeysArr?.length - 1) {
+                  setIsImagesUploaded(true);
+                }
               }
             };
             xhr.send();
@@ -531,6 +532,7 @@ function ProjectForm() {
                 });
                 const s3Url = response?.url?.split("?")[0];
                 console.log("response ", s3Url);
+                setIsFloorPlanImageUploaded(true);
               }
             };
             xhr.send();
@@ -542,11 +544,6 @@ function ProjectForm() {
   useEffect(() => {
     if (priceImgKeysArr.length > 0) {
       for (var i = 0; i < priceImgKeysArr?.length; i++) {
-        console.log(
-          "files from frontend",
-          priceImgKeysArr[i],
-          priceImgBlobArr[i]
-        );
         const data = {
           fileKey: priceImgKeysArr[i],
         };
@@ -575,6 +572,7 @@ function ProjectForm() {
                 });
                 const s3Url = response?.url?.split("?")[0];
                 console.log("response ", s3Url);
+                setIsPriceplanImageUplaoded(true);
               }
             };
             xhr.send();
@@ -614,6 +612,7 @@ function ProjectForm() {
                 });
                 const s3Url = response?.url?.split("?")[0];
                 console.log("response ", s3Url);
+                setIsBrochureImageUploaded(true);
               }
             };
             xhr.send();
@@ -653,6 +652,7 @@ function ProjectForm() {
                 });
                 const s3Url = response?.url?.split("?")[0];
                 console.log("response ", s3Url);
+                setIsShopImageUploaded(true);
               }
             };
             xhr.send();
@@ -661,13 +661,38 @@ function ProjectForm() {
     }
   }, [shopImgKeysArr]);
 
+  useEffect(() => {
+    if (
+      isImagesUploaded &&
+      isBrochureImageUploaded &&
+      isFirstMilestoneImageUploaded &&
+      isSecondMilestoneImageUploaded &&
+      isThirdMilestoneImageUploaded &&
+      isFloorPlanImageUplaoded &&
+      isPricePlanImageUploaded &&
+      isShopImageUploaded
+    ) {
+      success();
+      setLoading(false);
+      window.location.reload();
+    }
+  }, [
+    isImagesUploaded,
+    isBrochureImageUploaded,
+    isFirstMilestoneImageUploaded,
+    isSecondMilestoneImageUploaded,
+    isThirdMilestoneImageUploaded,
+    isFloorPlanImageUplaoded,
+    isPricePlanImageUploaded,
+    isShopImageUploaded,
+  ]);
+
   const handleFeaturesInputChange = (value, id) => {
     featuresArr[id] = value;
   };
 
   const handleAmenitiesInputChange = (value, id) => {
     amenitiesArr[id] = value;
-    console.log(amenitiesArr);
   };
 
   const success = () =>
@@ -709,28 +734,36 @@ function ProjectForm() {
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>Price Range (PKR) </p>
             <div
-              style={{ width: "35%" }}
-              className={classes.input_field_with_label_top_container}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
             >
-              <p className={classes.top_label}>From</p>
-              <input
-                onChange={(e) => {
-                  setPriceLowerBound(e.target.value);
-                }}
-                className={classes.input_field_single}
-              />
-            </div>
-            <div
-              style={{ width: "35%" }}
-              className={classes.input_field_with_label_top_container}
-            >
-              <p className={classes.top_label}>To</p>
-              <input
-                onChange={(e) => {
-                  setPriceUpperBound(e.target.value);
-                }}
-                className={classes.input_field_single}
-              />
+              <div
+                style={{ width: "48%" }}
+                className={classes.input_field_with_label_top_container}
+              >
+                <p className={classes.top_label}>From</p>
+                <input
+                  onChange={(e) => {
+                    setPriceLowerBound(e.target.value);
+                  }}
+                  className={classes.input_field_single}
+                />
+              </div>
+              <div
+                style={{ width: "48%" }}
+                className={classes.input_field_with_label_top_container}
+              >
+                <p className={classes.top_label}>To</p>
+                <input
+                  onChange={(e) => {
+                    setPriceUpperBound(e.target.value);
+                  }}
+                  className={classes.input_field_single}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -896,7 +929,15 @@ function ProjectForm() {
         </div>
 
         <div className={classes.single_row}>
-          <div style={{ width: "25%" }} className={classes.two_field_container}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: width < 1011 ? "row-reverse" : "row",
+              columnGap: width < 1011 && "15px",
+              width: width < 1011 ? "100%" : "25%",
+            }}
+            className={classes.two_field_container}
+          >
             <p
               style={{
                 width: "95%",
@@ -908,7 +949,7 @@ function ProjectForm() {
               Government Approved
             </p>
             <input
-              setIsGovApproved={(e) => {
+              onChange={(e) => {
                 setIsGovApproved(e.target.checked);
               }}
               style={{ width: "10%" }}
@@ -916,7 +957,12 @@ function ProjectForm() {
               className={classes.checkbox}
             />
           </div>
-          <div style={{ width: "60%" }} className={classes.two_field_container}>
+          <div
+            style={{
+              width: width < 1011 ? "100%" : "60%",
+            }}
+            className={classes.two_field_container}
+          >
             <p
               style={{
                 width: "30%",
@@ -1036,156 +1082,218 @@ function ProjectForm() {
       <div className={classes.section}>
         <h1 className={classes.heading}>Project Timelines</h1>
         <div className={classes.single_row}>
-          <div style={{ width: "65%" }} className={classes.two_field_container}>
+          <div
+            style={{ width: width < 1011 ? "100%" : "65%" }}
+            className={classes.two_field_container}
+          >
             <p className={classes.label}>Start Date</p>
             <div
-              style={{ marginBottom: "0px", width: "40%" }}
-              className={classes.data_input_container}
-            >
-              <p>Image</p>
-              <input placeholder="Image" type="file" />
-              <div className={classes.add_btn_border}>
-                <h3 className={classes.add_field}>+</h3>
-              </div>
-            </div>
-            <input
-              onChange={(e) => {
-                setStartDate(e.target.value);
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: width < 1011 ? "100%" : "80%",
               }}
-              style={{ width: "35%", paddingRight: "20px" }}
-              type="date"
-              className={classes.input_field_dual}
-            />
+            >
+              <div
+                style={{ marginBottom: "0px", width: "48%" }}
+                className={classes.data_input_container}
+              >
+                <p>Image</p>
+                <input placeholder="Image" type="file" />
+                <div className={classes.add_btn_border}>
+                  <h3 className={classes.add_field}>+</h3>
+                </div>
+              </div>
+              <input
+                onChange={(e) => {
+                  setStartDate(e.target.value);
+                }}
+                style={{ width: "48%", paddingRight: "20px" }}
+                type="date"
+                className={classes.input_field_dual}
+              />
+            </div>
           </div>
         </div>
 
         <div className={classes.single_row}>
-          <div style={{ width: "65%" }} className={classes.two_field_container}>
+          <div
+            style={{ width: width < 1011 ? "100%" : "65%" }}
+            className={classes.two_field_container}
+          >
             <p className={classes.label}>End Date</p>
             <div
-              style={{ marginBottom: "0px", width: "40%" }}
-              className={classes.data_input_container}
-            >
-              <p>Image</p>
-
-              <input
-                style={{ width: "100%" }}
-                type="file"
-                placeholder="Image"
-              />
-              <div className={classes.add_btn_border}>
-                <h3 className={classes.add_field}>+</h3>
-              </div>
-            </div>
-            <input
-              onChange={(e) => {
-                setEndDate(e.target.value);
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: width < 1011 ? "100%" : "80%",
               }}
-              style={{ width: "35%", paddingRight: "20px" }}
-              type="date"
-              className={classes.input_field_dual}
-            />
+            >
+              <div
+                style={{ marginBottom: "0px", width: "48%" }}
+                className={classes.data_input_container}
+              >
+                <p>Image</p>
+
+                <input
+                  style={{ width: "100%" }}
+                  type="file"
+                  placeholder="Image"
+                />
+                <div className={classes.add_btn_border}>
+                  <h3 className={classes.add_field}>+</h3>
+                </div>
+              </div>
+              <input
+                onChange={(e) => {
+                  setEndDate(e.target.value);
+                }}
+                style={{ width: "48%", paddingRight: "20px" }}
+                type="date"
+                className={classes.input_field_dual}
+              />
+            </div>
           </div>
         </div>
 
         <div className={classes.single_row}>
-          <div style={{ width: "65%" }} className={classes.two_field_container}>
+          <div
+            style={{ width: width < 1011 ? "100%" : "65%" }}
+            className={classes.two_field_container}
+          >
             <p className={classes.label}>
               1st <br /> Milestone
             </p>
             <div
-              style={{ marginBottom: "0px", width: "40%" }}
-              className={classes.data_input_container}
-            >
-              <p>Image</p>
-
-              <input
-                style={{ width: "100%" }}
-                type="file"
-                placeholder="Image"
-                onChange={(e) => {
-                  handleFirstMilestoneImage(e.target.files);
-                }}
-              />
-              <div className={classes.add_btn_border}>
-                <h3 className={classes.add_field}>+</h3>
-              </div>
-            </div>
-            <input
-              onChange={(e) => {
-                setFirstMilestone(e.target.value);
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: width < 1011 ? "100%" : "80%",
               }}
-              style={{ width: "35%", paddingRight: "20px" }}
-              type="date"
-              className={classes.input_field_dual}
-            />
+            >
+              <div
+                style={{ marginBottom: "0px", width: "48%" }}
+                className={classes.data_input_container}
+              >
+                <p>Image</p>
+
+                <input
+                  style={{ width: "100%" }}
+                  type="file"
+                  placeholder="Image"
+                  onChange={(e) => {
+                    handleFirstMilestoneImage(e.target.files);
+                  }}
+                />
+                <div className={classes.add_btn_border}>
+                  <h3 className={classes.add_field}>+</h3>
+                </div>
+              </div>
+              <input
+                onChange={(e) => {
+                  setFirstMilestone(e.target.value);
+                }}
+                style={{ width: "48%", paddingRight: "20px" }}
+                type="date"
+                className={classes.input_field_dual}
+              />
+            </div>
           </div>
         </div>
 
         <div className={classes.single_row}>
-          <div style={{ width: "65%" }} className={classes.two_field_container}>
+          <div
+            style={{ width: width < 1011 ? "100%" : "65%" }}
+            className={classes.two_field_container}
+          >
             <p className={classes.label}>
               2nd <br /> Milestone
             </p>
-            <div
-              style={{ marginBottom: "0px", width: "40%" }}
-              className={classes.data_input_container}
-            >
-              <p>Image</p>
 
-              <input
-                style={{ width: "100%" }}
-                placeholder="Image"
-                type="file"
-                onChange={(e) => {
-                  handleSecondMilestoneImage(e.target.files);
-                }}
-              />
-              <div className={classes.add_btn_border}>
-                <h3 className={classes.add_field}>+</h3>
-              </div>
-            </div>
-            <input
-              onChange={(e) => {
-                setSecondMilestone(e.target.value);
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: width < 1011 ? "100%" : "80%",
               }}
-              style={{ width: "35%", paddingRight: "20px" }}
-              type="date"
-              className={classes.input_field_dual}
-            />
+            >
+              <div
+                style={{ marginBottom: "0px", width: "48%" }}
+                className={classes.data_input_container}
+              >
+                <p>Image</p>
+
+                <input
+                  style={{ width: "100%" }}
+                  placeholder="Image"
+                  type="file"
+                  onChange={(e) => {
+                    handleSecondMilestoneImage(e.target.files);
+                  }}
+                />
+                <div className={classes.add_btn_border}>
+                  <h3 className={classes.add_field}>+</h3>
+                </div>
+              </div>
+              <input
+                onChange={(e) => {
+                  setSecondMilestone(e.target.value);
+                }}
+                style={{ width: "48%", paddingRight: "20px" }}
+                type="date"
+                className={classes.input_field_dual}
+              />
+            </div>
           </div>
         </div>
 
         <div className={classes.single_row}>
-          <div style={{ width: "65%" }} className={classes.two_field_container}>
+          <div
+            style={{ width: width < 1011 ? "100%" : "65%" }}
+            className={classes.two_field_container}
+          >
             <p className={classes.label}>
               3rd <br /> Milestone
             </p>
+
             <div
-              style={{ marginBottom: "0px", width: "40%" }}
-              className={classes.data_input_container}
-            >
-              <p>Image</p>
-              <input
-                style={{ width: "100%" }}
-                placeholder="Image"
-                type="file"
-                onChange={(e) => {
-                  handleThirdMilestoneImage(e.target.files);
-                }}
-              />
-              <div className={classes.add_btn_border}>
-                <h3 className={classes.add_field}>+</h3>
-              </div>
-            </div>
-            <input
-              onChange={(e) => {
-                setThirdMilestone(e.target.value);
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: width < 1011 ? "100%" : "80%",
               }}
-              style={{ width: "35%", paddingRight: "20px" }}
-              type="date"
-              className={classes.input_field_dual}
-            />
+            >
+              <div
+                style={{ marginBottom: "0px", width: "48%" }}
+                className={classes.data_input_container}
+              >
+                <p>Image</p>
+                <input
+                  style={{ width: "100%" }}
+                  placeholder="Image"
+                  type="file"
+                  onChange={(e) => {
+                    handleThirdMilestoneImage(e.target.files);
+                  }}
+                />
+                <div className={classes.add_btn_border}>
+                  <h3 className={classes.add_field}>+</h3>
+                </div>
+              </div>
+              <input
+                onChange={(e) => {
+                  setThirdMilestone(e.target.value);
+                }}
+                style={{ width: "48%", paddingRight: "20px" }}
+                type="date"
+                className={classes.input_field_dual}
+              />
+            </div>
           </div>
         </div>
       </div>

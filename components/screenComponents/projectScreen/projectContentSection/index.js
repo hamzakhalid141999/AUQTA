@@ -11,7 +11,6 @@ import icon3 from "../../../../public/assets/project_card_3d_plan_icon.png";
 function ProjectConentSection({ features, amenities, address }) {
   const [showMore, setShowMore] = useState(false);
 
-  console.log(features, amenities);
   const showContent = () => {
     setShowMore(!showMore);
   };

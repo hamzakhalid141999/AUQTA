@@ -106,4 +106,16 @@
     max-height: 600px;
     min-height: 600px;
   }
+  .first_section_content_section {
+    max-width: initial;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .first_section_content_section h1 {
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+  }
 }

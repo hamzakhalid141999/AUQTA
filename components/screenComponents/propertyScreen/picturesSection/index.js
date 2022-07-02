@@ -17,8 +17,6 @@ function PictureSection({ images }) {
     "/assets/hotel_6.png",
   ];
 
-  console.log(images);
-
   return (
     <div className={classes.picture_section}>
       <div className={classes.carousel_container}>
@@ -36,18 +34,6 @@ function PictureSection({ images }) {
           ) : (
             <></>
           )}
-          <div
-            style={{
-              backgroundImage: `url(${slideImages[0]})`,
-            }}
-            className={classes.carousel_card}
-          ></div>
-          <div
-            style={{
-              backgroundImage: `url(${slideImages[1]})`,
-            }}
-            className={classes.carousel_card}
-          ></div>
         </ReactCardCarousel>
       </div>
     </div>

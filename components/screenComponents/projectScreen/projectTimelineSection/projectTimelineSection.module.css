@@ -1,21 +1,76 @@
-.container{
-    height: 550px;
-    width: 100%;
-    display: flex;
-    margin-top: 70px;
-    flex-direction: column;
-    align-items: center;
+.container {
+  height: 550px;
+  width: 100%;
+  display: flex;
+  margin-top: 70px;
+  flex-direction: column;
+  align-items: center;
 }
-.content_container{
-    width: 90%;
-    height: fit-content;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    /* justify-content: center; */
-    flex-direction: column;
-    position: relative;
+.content_container {
+  width: 90%;
+  height: fit-content;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: column;
+  position: relative;
 }
-.timeline_img{
-    width: 100%;
+.timeline_img {
+  width: 100%;
+  position: relative;
+}
+.timeline_section {
+  position: relative;
+}
+.startTimeSection {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  background-color: #f1f7f9;
+  height: 30%;
+  width: 10%;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.endTimeSection {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  background-color: #f1f7f9;
+  height: 30%;
+  width: 10%;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.secondMilestoneSection {
+  position: absolute;
+  left: 41%;
+  top: 0px;
+  background-color: #f1f7f9;
+  height: 40%;
+  width: 15%;
+  z-index: 100;
+}
+.firstMilestoneSection {
+  position: absolute;
+  left: 18%;
+  bottom: 0px;
+  background-color: #f1f7f9;
+  height: 40%;
+  width: 15%;
+  z-index: 100;
+}
+.thirdMilestoneSection {
+  position: absolute;
+  right: 21%;
+  bottom: 0px;
+  background-color: #f1f7f9;
+  height: 40%;
+  width: 15%;
+  z-index: 100;
 }

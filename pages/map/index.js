@@ -27,7 +27,6 @@ function Map() {
     googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
   });
 
-  console.log(filteredProperties);
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
   useEffect(() => {
@@ -41,14 +40,24 @@ function Map() {
       if (filteredProperties?.length > 0) {
         var longlatTempArr = [];
         for (var i = 0; i < filteredProperties?.length; i++) {
-          const url =
-            "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-            filteredProperties[i]?.address +
-            "&key=" +
-            GEOCODING_API;
+          let url;
+          if (searchedParams?.location) {
+            url =
+              "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+              filteredProperties[i]?.address +
+              "&key=" +
+              GEOCODING_API;
+          } else {
+            url =
+              "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+              filteredProperties[i]?.propertyListing?.address +
+              "&key=" +
+              GEOCODING_API;
+          }
 
+          console.log(filteredProperties[i]);
           const data = await axios.get(url);
-
+          console.log(data);
           if (data?.data?.results.length > 0) {
             longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
           } else {
@@ -62,24 +71,21 @@ function Map() {
     fetchFilteredProperties();
   }, [filteredProperties]);
 
+  console.log(searchedParams);
+
   useEffect(() => {
     const fetchSearchedProperties = async () => {
-      if (
-        searchedParams?.purpose &&
-        searchedParams?.city &&
-        searchedParams?.location
-      ) {
+      if (searchedParams?.city) {
+        console.log("IN FILTER PROPS", searchedParams);
         try {
           const data = await axios.get(
             baseURL + "/api/property/filter",
             {
               params: {
-                purpose:
-                  searchedParams?.purpose === "buy"
-                    ? "sell"
-                    : searchedParams?.purpose === "rent" && "rent",
+                purpose: "sell",
                 city: searchedParams?.city,
                 location: searchedParams?.location,
+                propertytype: searchedParams?.type,
                 pageNumber: 1,
                 nPerPage: 100,
               },
@@ -90,6 +96,7 @@ function Map() {
               },
             }
           );
+          console.log(data);
           setFilteredProperties(data?.data);
           // setLoading(false);
         } catch (err) {
@@ -178,7 +185,7 @@ function Map() {
                 price={property?.price}
                 location={property?.location}
                 city={property?.city}
-                picture={baseS3Url + property?.images[0]}
+                picture={property?.images && property?.images[0]}
               />
             ))}
         </div>

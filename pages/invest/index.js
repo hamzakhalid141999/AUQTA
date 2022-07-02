@@ -26,15 +26,11 @@ function Invest() {
     googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
   });
 
-  console.log(filteredProperties);
-
   useEffect(() => {
     if (router) {
       setSearchedParams(router.query);
     }
   }, [router]);
-
-  console.log(searchedParams);
 
   useEffect(() => {
     const fetchFilteredProperties = async () => {
@@ -55,7 +51,6 @@ function Invest() {
             } else {
               setLoading(false);
             }
-            console.log(data);
           }
         }
         setLoading(false);
@@ -66,8 +61,6 @@ function Invest() {
     fetchFilteredProperties();
   }, [filteredProperties]);
 
-  console.log(longLatArr);
-
   useEffect(() => {
     const fetchSearchedProperties = async () => {
       if (
@@ -76,7 +69,6 @@ function Invest() {
         searchedParams?.location
       ) {
         try {
-          console.log("SEARCHED PARAMSS: ", searchedParams?.priceRange);
           const lowerLimit = searchedParams?.priceRange?.split("-")[0];
           const upperLimit = searchedParams?.priceRange?.split("-")[1];
 
@@ -98,7 +90,6 @@ function Invest() {
             }
           );
           setFilteredProperties(data?.data);
-          console.log("Properties searched: ", data?.data);
         } catch (err) {
           console.log(err);
         }

@@ -258,6 +258,45 @@
   max-width: 25%;
   cursor: pointer;
 }
+.input_field {
+  background-color: transparent;
+  border: none;
+}
+.profile_dropdown_hidden {
+  position: absolute;
+  height: fit-content;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.81);
+  bottom: -86px;
+  opacity: 0;
+  transition: ease-in-out 200ms;
+  transition-delay: 100ms;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  z-index: 1000;
+}
+.profile_dropdown_show {
+  position: absolute;
+  height: fit-content;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.81);
+  bottom: -86px;
+  opacity: 1;
+  transition: ease-in-out 200ms;
+  transition-delay: 100ms;
+  display: flex;
+  flex-direction: column;
+  pointer-events: all;
+  z-index: 1000;
+  box-shadow: 4px 5px 19px -3px rgba(0, 0, 0, 0.75);
+}
+/* .login_btn:hover .profile_dropdown {
+  transition-delay: 100ms;
+  pointer-events: all;
+  opacity: 1;
+  transition: ease-in-out 200ms;
+} */
 .login_btn {
   height: 40px;
   width: fit-content;
@@ -266,6 +305,7 @@
   border: 0.5px solid rgba(255, 255, 255, 0.274);
   background-color: #0050b9;
   display: flex;
+  position: relative;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -276,7 +316,7 @@
   column-gap: 10px;
 }
 .login_btn:hover {
-  margin-bottom: 7px;
+  /* margin-bottom: 7px; */
   box-shadow: 2px 1px 23px 3px #4585dada;
   background-color: #0d6ae4;
 }

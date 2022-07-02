@@ -26,7 +26,7 @@ function NavbarModal({ displayModal = false, setDisplayModal = () => {} }) {
       id="myNav"
       className={displayModal ? classes.overlay_open : classes.overlay_closed}
     >
-          <LoginSignupModal
+      <LoginSignupModal
         setOpen={setOpen}
         open={open}
         onCloseModal={onCloseModal}
@@ -67,10 +67,7 @@ function NavbarModal({ displayModal = false, setDisplayModal = () => {} }) {
             <p>CONTACT</p>
           </Link>
         </div>
-        <img
-          src={globe.src}
-          style={{ width: "25px", height: "25px" }}
-        />
+        <img src={globe.src} style={{ width: "25px", height: "25px" }} />
         {user ? (
           <div onClick={handleSignOut} className={classes.login_btn}>
             <>

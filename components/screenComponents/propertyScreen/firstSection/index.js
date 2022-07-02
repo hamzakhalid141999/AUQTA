@@ -6,8 +6,17 @@ import location_pointer from "../../../../public/assets/pin-locator-white.png";
 import Link from "next/link";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
+import bathroom from "../../../../public/assets/bathroom.png";
+import bedroom from "../../../../public/assets/bedroom.png";
+import size from "../../../../public/assets/size.png";
+import ProjectImagesModal from "../../../modals/projectImagesModal.js";
 
-function FirstSection({ images, propertyDetails, ownerDetails }) {
+function FirstSection({
+  images,
+  propertyDetails,
+  ownerDetails,
+  propertyListingDetails,
+}) {
   const [formattedPrice, setFormattedPrice] = useState();
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
@@ -20,16 +29,27 @@ function FirstSection({ images, propertyDetails, ownerDetails }) {
     "/assets/hotel_6.png",
   ];
 
-  console.log(ownerDetails);
+  function numDifferentiation(value) {
+    var val = Math.abs(value);
+    if (val >= 10000000) {
+      val = (val / 10000000).toFixed(2) + " Crores";
+    } else if (val >= 100000) {
+      val = (val / 100000).toFixed(2) + " Lac";
+    }
+    return val;
+  }
 
   useEffect(() => {
     if (propertyDetails?.price) {
-      let number = propertyDetails?.price;
-      setFormattedPrice(
-        number.toLocaleString("ur-PK", { currency: "PKR", style: "currency" })
-      ); // or en-PK
-    } else {
-      setFormattedPrice("-");
+      if (parseInt(propertyDetails?.price) < 100000) {
+        let number = propertyDetails?.price;
+        setFormattedPrice(
+          number.toLocaleString("ur-PK", { currency: "PKR", style: "currency" })
+        ); // or en-PK
+      } else {
+        const convertedPrice = numDifferentiation(propertyDetails?.price);
+        setFormattedPrice(convertedPrice);
+      }
     }
   }, [propertyDetails]);
 
@@ -96,7 +116,20 @@ function FirstSection({ images, propertyDetails, ownerDetails }) {
           </div>
         </div>
         <div className={classes.banner_btns_wrapper}>
-          <div className={classes.banner_btns_container}></div>
+          <div className={classes.banner_btns_container}>
+            <div className={classes.btn_body}>
+              <img src={size.src} className={classes.img_icon} />
+              {propertyDetails?.size}
+            </div>
+            <div className={classes.btn_body}>
+              <img src={bathroom.src} className={classes.img_icon} />
+              {propertyListingDetails?.noOfBathrooms}
+            </div>
+            <div className={classes.btn_body}>
+              <img src={bedroom.src} className={classes.img_icon} />
+              {propertyListingDetails?.noOfBedrooms}
+            </div>
+          </div>
         </div>
       </div>
     </div>
