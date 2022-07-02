@@ -71,7 +71,7 @@ function Map() {
     fetchFilteredProperties();
   }, [filteredProperties]);
 
-  console.log(searchedParams);
+  console.log(filteredProperties);
 
   useEffect(() => {
     const fetchSearchedProperties = async () => {
@@ -181,11 +181,31 @@ function Map() {
             ?.map((property, index) => (
               <PropertyCard
                 key={index}
-                title={property?.title}
-                price={property?.price}
-                location={property?.location}
-                city={property?.city}
-                picture={property?.images && property?.images[0]}
+                title={
+                  !searchedParams?.location
+                    ? property?.propertyListing?.title
+                    : property?.title
+                }
+                price={
+                  !searchedParams?.location
+                    ? property?.propertyListing?.price
+                    : property?.price
+                }
+                location={
+                  !searchedParams?.location
+                    ? property?.propertyListing?.location
+                    : property?.location
+                }
+                city={
+                  !searchedParams?.location
+                    ? property?.propertyListing?.city
+                    : property?.city
+                }
+                picture={
+                  !searchedParams?.location
+                    ? property?.propertyListing?.images[0]
+                    : property?.images?.length > 0 && property?.images[0]
+                }
               />
             ))}
         </div>

@@ -41,7 +41,7 @@ function PropertyCard({
   }, [price]);
 
   return (
-    <Link href={"/project_specific"}>
+    <Link href={"/project"}>
       <div className={classes.card_body}>
         <div className={classes.image_container}>
           <Image

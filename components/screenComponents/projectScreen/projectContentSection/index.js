@@ -7,9 +7,18 @@ import FindSectionCards from "../../homeScreen/findSection/components";
 import icon1 from "../../../../public/assets/project_card_construction_site_icon.png";
 import icon2 from "../../../../public/assets/project_card_interactive_broucher_icon.png";
 import icon3 from "../../../../public/assets/project_card_3d_plan_icon.png";
+import { useWindowSize } from "../../../../utils";
 
-function ProjectConentSection({ features, amenities, address }) {
+function ProjectConentSection({
+  features,
+  amenities,
+  address,
+  projectDetails,
+}) {
   const [showMore, setShowMore] = useState(false);
+  const { width } = useWindowSize();
+
+  console.log(projectDetails);
 
   const showContent = () => {
     setShowMore(!showMore);
@@ -18,7 +27,7 @@ function ProjectConentSection({ features, amenities, address }) {
     <div className={classes.container}>
       <div className={classes.content_container}>
         <div
-          style={{ flexDirection: "row-reverse" }}
+          style={{ flexDirection: width < 1000 ? "column" : "row-reverse" }}
           className={classes.services_container}
         >
           <div className={classes.image_container}>
@@ -27,11 +36,7 @@ function ProjectConentSection({ features, amenities, address }) {
           <div className={classes.description}>
             <h1>OVERVIEW OF THE PROJECT</h1>
             <div className={classes.service_description_container}>
-              <p>
-                Budapest Sign Hotel redefines the hotel industry in Pakistan.
-                Experience five-star services from our team of highly trained
-                hotel management individuals.
-              </p>
+              <p>{projectDetails?.projectDescription}</p>
               <div className={classes.bullet_points_container}>
                 <p className={classes.bullet_text}>Main Features</p>
                 {features?.map((feature, index) => (

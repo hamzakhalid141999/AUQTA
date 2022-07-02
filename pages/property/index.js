@@ -57,7 +57,6 @@ function Property() {
       );
       const propertyArrLength = property?.data?.length;
       const data = property?.data[propertyArrLength - 1];
-      // const propertyArrLength = data?.data?.length;
       for (var i = 0; i < data?.propertyListing?.images?.length; i++) {
         data.propertyListing.images[i] =
           bucketBaseUrl + data?.propertyListing?.images[i];
