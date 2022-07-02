@@ -8,8 +8,9 @@ function SimilarProperties({ properties }) {
       <div className={classes.trending_container}>
         <h1 style={{ marginBottom: "30px" }}>SIMILAR PROPERTIES</h1>
         <div className={classes.property_cards_container}>
-          {properties?.map((property) => (
+          {properties?.map((property, index) => (
             <PropertyCard
+              key={index}
               city={property?.city}
               location={property?.location}
               price={property?.price}
