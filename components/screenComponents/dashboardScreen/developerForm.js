@@ -432,7 +432,7 @@ function DeveloperForm() {
       </div>
 
       <div className={classes.btn} onClick={handleEditUserInformation}>
-        <p>Edit Details</p>
+        <p>Add Details</p>
         {loading && <ClipLoader size={"20px"} color="white" />}
       </div>
     </div>
