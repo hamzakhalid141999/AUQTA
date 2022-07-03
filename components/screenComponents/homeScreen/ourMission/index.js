@@ -33,18 +33,6 @@ function OurMission() {
           // data-aos="fade-up"
           className={classes.typewriter_container}
         >
-          {/* <h1>World{"’"}s First Immersive Real Estate Portal</h1> */}
-          {/* <div style={{display: "flex", flexDirection: 'row'}}>
-        <Typewriter             
-            words={['Worlds First Immersive Real Estate Portal']}
-            loop
-            cursor
-            cursorStyle='|'
-            typeSpeed={70}
-            deleteSpeed={50}
-            delaySpeed={1000}/>
-        </div> */}
-
           <br />
           <div className={classes.typewriter_row}>
             <p className={classes.experience}>Experience </p>
@@ -70,11 +58,14 @@ function OurMission() {
         <h1
           className={classes.heading}
           style={{ textTransform: "uppercase" }}
-          data-aos="fade-up"
+          // data-aos="fade-up"
         >
           World{"’"}s First Immersive Real Estate Portal
         </h1>
-        <p className={classes.subheading} data-aos="fade-up">
+        <p
+          className={classes.subheading}
+          // data-aos="fade-up"
+        >
           Introducing Auqta the world’s first immersive real-estate trading
           portal. Immersive technologies include Augmented Reality and Virtual
           Reality, allowing the user to experience physical spaces in a digital
@@ -96,7 +87,7 @@ function OurMission() {
             ) : (
               <iframe
                 className={classes.video_card}
-                style={{ borderRadius: "40px" }}
+                style={{ borderRadius: "40px", objectFit: "initial" }}
                 src="/vr/Business_District_Bahria_Town_VR.html"
                 // height="500px"
                 // width="100%"
@@ -104,7 +95,10 @@ function OurMission() {
             )}{" "}
           </div>
           <div className={classes.values_container}>
-            <div data-aos="fade-up" className={classes.single_tab}>
+            <div
+              // data-aos="fade-up"
+              className={classes.single_tab}
+            >
               <div className={classes.icon_holder}>
                 <div className={classes.icon_container}>
                   <Image src={icon1} className={classes.tab_icon} alt="icon" />
@@ -118,7 +112,10 @@ function OurMission() {
                 </p>
               </div>
             </div>
-            <div data-aos="fade-up" className={classes.single_tab}>
+            <div
+              // data-aos="fade-up"
+              className={classes.single_tab}
+            >
               <div className={classes.icon_holder}>
                 <div className={classes.icon_container}>
                   <Image src={icon2} className={classes.tab_icon} alt="icon" />
@@ -133,7 +130,10 @@ function OurMission() {
                 </p>
               </div>
             </div>
-            <div data-aos="fade-up" className={classes.single_tab}>
+            <div
+              // data-aos="fade-up"
+              className={classes.single_tab}
+            >
               <div className={classes.icon_holder}>
                 <div className={classes.icon_container}>
                   <Image src={icon3} className={classes.tab_icon} alt="icon" />
@@ -148,7 +148,10 @@ function OurMission() {
                 </p>
               </div>
             </div>
-            <div data-aos="fade-up" className={classes.single_tab}>
+            <div
+              // data-aos="fade-up"
+              className={classes.single_tab}
+            >
               <div className={classes.icon_holder}>
                 <div className={classes.icon_container}>
                   <Image src={icon4} className={classes.tab_icon} alt="icon" />

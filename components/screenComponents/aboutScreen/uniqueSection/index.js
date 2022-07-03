@@ -20,8 +20,14 @@ function UniqueSection() {
   return (
     <div className={classes.unique_section}>
       <div className={classes.content_container}>
-        <h1 data-aos="fade-up">WHAT MAKES US UNIQUE</h1>
-        <p data-aos="fade-up">
+        <h1
+        // data-aos="fade-up"
+        >
+          WHAT MAKES US UNIQUE
+        </h1>
+        <p
+        // data-aos="fade-up"
+        >
           Digital property portals exist everywhere where the user filters out
           interested properties based upon location, size, price preferences
           etc. The use of pictorial architecture in the form of photos and
@@ -32,7 +38,10 @@ function UniqueSection() {
         </p>
         <div className={classes.media_container}>
           <div className={classes.bullets_container}>
-            <div data-aos="fade-up" className={classes.single_tab}>
+            <div
+              // data-aos="fade-up"
+              className={classes.single_tab}
+            >
               <div className={classes.icon_holder}>
                 <div className={classes.icon_container}>
                   <Image src={icon1} className={classes.tab_icon} alt="icon" />
@@ -47,7 +56,10 @@ function UniqueSection() {
               </div>
             </div>
 
-            <div data-aos="fade-up" className={classes.single_tab}>
+            <div
+              // data-aos="fade-up"
+              className={classes.single_tab}
+            >
               <div className={classes.icon_holder}>
                 <div className={classes.icon_container}>
                   <Image src={icon2} className={classes.tab_icon} alt="icon" />
@@ -62,7 +74,10 @@ function UniqueSection() {
               </div>
             </div>
 
-            <div data-aos="fade-up" className={classes.single_tab}>
+            <div
+              // data-aos="fade-up"
+              className={classes.single_tab}
+            >
               <div className={classes.icon_holder}>
                 <div className={classes.icon_container}>
                   <Image src={icon3} className={classes.tab_icon} alt="icon" />
@@ -77,7 +92,10 @@ function UniqueSection() {
               </div>
             </div>
 
-            <div data-aos="fade-up" className={classes.single_tab}>
+            <div
+              // data-aos="fade-up"
+              className={classes.single_tab}
+            >
               <div className={classes.icon_holder}>
                 <div className={classes.icon_container}>
                   <Image src={icon4} className={classes.tab_icon} alt="icon" />
@@ -92,7 +110,11 @@ function UniqueSection() {
             </div>
           </div>
           <div className={classes.image_container}>
-            <img data-aos="fade-left" className={classes.img} src={img.src} />
+            <img
+              //  data-aos="fade-left"
+              className={classes.img}
+              src={img.src}
+            />
           </div>
         </div>
       </div>

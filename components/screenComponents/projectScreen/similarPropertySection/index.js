@@ -10,8 +10,15 @@ function SimilarPropertySection() {
   return (
     <div className={classes.container}>
       <div className={classes.content_container}>
-        <h1 data-aos="fade-up">SIMILAR PROPERTIES</h1>
-        <div data-aos="fade-up" className={classes.property_cards_container}>
+        <h1
+        // data-aos="fade-up"
+        >
+          SIMILAR PROPERTIES
+        </h1>
+        <div
+          // data-aos="fade-up"
+          className={classes.property_cards_container}
+        >
           {cardInfo
             ?.filter((property, index) => (width < 1177 ? index < 3 : 4))
             .map((property, index) => (

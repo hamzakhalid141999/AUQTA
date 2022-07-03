@@ -33,7 +33,9 @@ function Dashboard() {
         </div>
         <div className={classes.first_section_content_section}>
           <div className={classes.dashboard_heading}>
-            <h1 data-aos="fade-right">
+            <h1
+            // data-aos="fade-right"
+            >
               WELCOME TO AUQTA{"'"}s {dashboardType} DASHBOARD
             </h1>
           </div>

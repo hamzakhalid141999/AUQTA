@@ -1,19 +1,17 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
 import classes from "./firstSection.module.css";
-import Image from 'next/image';
+import Image from "next/image";
 import banner_img from "../../../../public/assets/about_page_banner_bg.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-
 function FirstSection() {
-  
-  useEffect(()=>{
+  useEffect(() => {
     AOS.init({
       duration: 500,
     });
     AOS.refresh();
-  },[])
+  }, []);
 
   return (
     <div id="home" className={classes.first_section_body}>
@@ -27,10 +25,14 @@ function FirstSection() {
         />
       </div>
       <div className={classes.first_section_content_section}>
-        <h1 data-aos="fade-right">ABOUT US</h1>
+        <h1
+        // data-aos="fade-right"
+        >
+          ABOUT US
+        </h1>
       </div>
     </div>
-  )
+  );
 }
 
-export default FirstSection
+export default FirstSection;
