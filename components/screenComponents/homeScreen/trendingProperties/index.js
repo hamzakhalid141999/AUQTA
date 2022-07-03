@@ -17,6 +17,8 @@ function TrendingProperties({
 
   useEffect(() => {
     AOS.init({
+      startEvent: "load",
+      disableMutationObserver: false,
       duration: 500,
     });
     AOS.refresh();
