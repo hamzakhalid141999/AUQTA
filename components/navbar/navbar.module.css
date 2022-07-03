@@ -259,6 +259,7 @@
   cursor: pointer;
 }
 .input_field {
+  -webkit-appearance: none;
   background-color: transparent;
   border: none;
 }

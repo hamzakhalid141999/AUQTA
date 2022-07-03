@@ -90,6 +90,9 @@ function Invest() {
             }
           );
           setFilteredProperties(data?.data);
+          if (data?.data?.length === 0) {
+            setLoading(false);
+          }
         } catch (err) {
           console.log(err);
         }
@@ -146,7 +149,7 @@ function Invest() {
             <p>Fetching Investment Opportunities..</p>
             <PuffLoader size={"80px"} color="#0068ed" />
           </div>
-        ) : longLatArr?.length === 0 ? (
+        ) : filteredProperties?.length === 0 ? (
           <div className={classes.loader_container}>
             <p>No Properties Found</p>
           </div>
@@ -155,12 +158,14 @@ function Invest() {
         )}
       </div>
 
-      <div className={classes.cards_container}>
-        <TrendingProperties
-          investmentProjects={filteredProperties}
-          isProject={true}
-        />
-      </div>
+      {filteredProperties?.length > 0 && (
+        <div className={classes.cards_container}>
+          <TrendingProperties
+            investmentProjects={filteredProperties}
+            isProject={true}
+          />
+        </div>
+      )}
     </div>
   );
 }

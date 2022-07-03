@@ -167,43 +167,45 @@ function Map() {
         )}
       </div>
 
-      <div className={classes.cards_container}>
-        <h1>Similar Properties</h1>
-        <div className={classes.cards}>
-          {filteredProperties
-            ?.filter((property, index) => index < 4)
-            ?.map((property, index) => (
-              <PropertyCard
-                key={index}
-                title={
-                  searchedParams?.type
-                    ? property?.propertyListing?.title
-                    : property?.title
-                }
-                price={
-                  searchedParams?.type
-                    ? property?.propertyListing?.price
-                    : property?.price
-                }
-                location={
-                  searchedParams?.type
-                    ? property?.propertyListing?.location
-                    : property?.location
-                }
-                city={
-                  searchedParams?.type
-                    ? property?.propertyListing?.city
-                    : property?.city
-                }
-                picture={
-                  searchedParams?.type
-                    ? property?.propertyListing?.images[0]
-                    : property?.images?.length > 0 && property?.images[0]
-                }
-              />
-            ))}
+      {filteredProperties?.length > 0 && (
+        <div className={classes.cards_container}>
+          <h1>Similar Properties</h1>
+          <div className={classes.cards}>
+            {filteredProperties
+              ?.filter((property, index) => index < 4)
+              ?.map((property, index) => (
+                <PropertyCard
+                  key={index}
+                  title={
+                    searchedParams?.type
+                      ? property?.propertyListing?.title
+                      : property?.title
+                  }
+                  price={
+                    searchedParams?.type
+                      ? property?.propertyListing?.price
+                      : property?.price
+                  }
+                  location={
+                    searchedParams?.type
+                      ? property?.propertyListing?.location
+                      : property?.location
+                  }
+                  city={
+                    searchedParams?.type
+                      ? property?.propertyListing?.city
+                      : property?.city
+                  }
+                  picture={
+                    searchedParams?.type
+                      ? property?.propertyListing?.images[0]
+                      : property?.images?.length > 0 && property?.images[0]
+                  }
+                />
+              ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

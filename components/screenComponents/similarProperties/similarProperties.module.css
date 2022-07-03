@@ -102,7 +102,7 @@
   }
   .category_tabs_selected {
     width: fit-content;
-    min-width: 120px;
+    /* min-width: 120px; */
   }
   .category_tabs_unselected {
     width: fit-content;

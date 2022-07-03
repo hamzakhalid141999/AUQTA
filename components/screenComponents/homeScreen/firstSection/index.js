@@ -23,7 +23,7 @@ function FirstSection() {
   const [location, setLocation] = useState();
   const [priceBracket, setPriceBracket] = useState();
 
-  const [showMobileFilterPanel, setShowMobileFilterPanel] = useState(true);
+  const [showMobileFilterPanel, setShowMobileFilterPanel] = useState(false);
 
   const handleToggleMobileFilterPanel = () => {
     setShowMobileFilterPanel(!showMobileFilterPanel);
@@ -154,8 +154,6 @@ function FirstSection() {
                   }}
                   className={classes.input_field}
                 >
-                  <option>Select City</option>
-
                   {cities?.map((city, index) => (
                     <option key={index} value={city}>
                       {city}
@@ -258,8 +256,6 @@ function FirstSection() {
                         }}
                         className={classes.input_field}
                       >
-                        <option>Select City</option>
-
                         {cities?.map((city, index) => (
                           <option key={index} value={city}>
                             {city}

@@ -20,6 +20,7 @@
   max-height: 90vh;
 }
 .input_field {
+  -webkit-appearance: none;
   background-color: transparent;
   border: none;
 }
