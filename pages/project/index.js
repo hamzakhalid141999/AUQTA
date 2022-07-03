@@ -15,6 +15,7 @@ function Project() {
   const [projectOwnerId, setProjectOwnerId] = useState();
   const [projectOwnerDetails, setProjectOwnerDetails] = useState();
   const [loading, setLoading] = useState(true);
+  const [isNoProject, setIsNoProject] = useState(false);
 
   const baseUrl = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
@@ -38,29 +39,58 @@ function Project() {
 
       const lengthOfProjectsArr = projects?.data?.length;
 
-      const data = projects?.data[lengthOfProjectsArr - 1];
-      setProjectOwnerId(data?.userId);
+      if (projects?.data?.length === 0) {
+        setIsNoProject(true);
+        setLoading(false);
+      } else if (projects?.data?.length === 1) {
+        const data = projects?.data[0];
+        setProjectOwnerId(data?.userId);
 
-      for (var i = 0; i < data?.floorPlan?.length; i++) {
-        data.floorPlan[i] = baseUrl + data.floorPlan[i];
-      }
+        for (var i = 0; i < data?.floorPlan?.length; i++) {
+          data.floorPlan[i] = baseUrl + data.floorPlan[i];
+        }
 
-      for (var i = 0; i < data?.images?.length; i++) {
-        data.images[i] = baseUrl + data.images[i];
-      }
+        for (var i = 0; i < data?.images?.length; i++) {
+          data.images[i] = baseUrl + data.images[i];
+        }
 
-      for (var i = 0; i < data?.pricePlan?.length; i++) {
-        data.pricePlan[i] = baseUrl + data?.pricePlan[i];
-      }
+        for (var i = 0; i < data?.pricePlan?.length; i++) {
+          data.pricePlan[i] = baseUrl + data?.pricePlan[i];
+        }
 
-      for (var i = 0; i < data?.projectBrochure?.length; i++) {
-        data.projectBrochure[i] = baseUrl + data?.projectBrochure[i];
-      }
+        for (var i = 0; i < data?.projectBrochure?.length; i++) {
+          data.projectBrochure[i] = baseUrl + data?.projectBrochure[i];
+        }
 
-      for (var i = 0; i < data?.shopAvailability?.length; i++) {
-        data.shopAvailability[i] = baseUrl + data?.shopAvailability[i];
+        for (var i = 0; i < data?.shopAvailability?.length; i++) {
+          data.shopAvailability[i] = baseUrl + data?.shopAvailability[i];
+        }
+        setProject(data);
+      } else if (projects?.data?.length > 1) {
+        const data = projects?.data[lengthOfProjectsArr - 1];
+        setProjectOwnerId(data?.userId);
+
+        for (var i = 0; i < data?.floorPlan?.length; i++) {
+          data.floorPlan[i] = baseUrl + data.floorPlan[i];
+        }
+
+        for (var i = 0; i < data?.images?.length; i++) {
+          data.images[i] = baseUrl + data.images[i];
+        }
+
+        for (var i = 0; i < data?.pricePlan?.length; i++) {
+          data.pricePlan[i] = baseUrl + data?.pricePlan[i];
+        }
+
+        for (var i = 0; i < data?.projectBrochure?.length; i++) {
+          data.projectBrochure[i] = baseUrl + data?.projectBrochure[i];
+        }
+
+        for (var i = 0; i < data?.shopAvailability?.length; i++) {
+          data.shopAvailability[i] = baseUrl + data?.shopAvailability[i];
+        }
+        setProject(data);
       }
-      setProject(data);
     } catch (err) {
       console.log(err);
     }
@@ -101,10 +131,18 @@ function Project() {
 
   return (
     <div className={classes.project_section}>
-      {loading ? (
+      {!user ? (
+        <div className={classes.message_container}>
+          <p>No User Logged In</p>
+        </div>
+      ) : loading ? (
         <div className={classes.loader_container}>
           <p>Loading project..</p>
           <ClipLoader size={"20px"} color="black" />
+        </div>
+      ) : !project ? (
+        <div className={classes.message_container}>
+          <p>No Project</p>
         </div>
       ) : (
         <>

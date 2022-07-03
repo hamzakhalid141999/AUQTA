@@ -19,6 +19,7 @@ function Property() {
   const [loading, setLoading] = useState(true);
   const [similarProperties, setSimilarProperties] = useState();
   const { user } = useAuth();
+  const [isNoProperty, setIsNoProperty] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -56,13 +57,26 @@ function Property() {
         }
       );
       const propertyArrLength = property?.data?.length;
-      const data = property?.data[propertyArrLength - 1];
-      for (var i = 0; i < data?.propertyListing?.images?.length; i++) {
-        data.propertyListing.images[i] =
-          bucketBaseUrl + data?.propertyListing?.images[i];
+      if (property?.data?.length === 0) {
+        setIsNoProperty(true);
+        setLoading(false);
+      } else if (property?.data?.length === 1) {
+        const data = property?.data[0];
+        for (var i = 0; i < data?.propertyListing?.images?.length; i++) {
+          data.propertyListing.images[i] =
+            bucketBaseUrl + data?.propertyListing?.images[i];
+        }
+        setProperty(data);
+        setPropertyOwnerId(data?.propertyListing?.userId);
+      } else if (property?.data?.length > 1) {
+        const data = property?.data[propertyArrLength - 1];
+        for (var i = 0; i < data?.propertyListing?.images?.length; i++) {
+          data.propertyListing.images[i] =
+            bucketBaseUrl + data?.propertyListing?.images[i];
+        }
+        setProperty(data);
+        setPropertyOwnerId(data?.propertyListing?.userId);
       }
-      setProperty(data);
-      setPropertyOwnerId(data?.propertyListing?.userId);
     } catch (err) {
       console.log(err);
     }
@@ -94,10 +108,18 @@ function Property() {
 
   return (
     <div className={classes.property_section}>
-      {loading ? (
+      {!user ? (
+        <div className={classes.message_container}>
+          <p>No User Logged In</p>
+        </div>
+      ) : loading ? (
         <div className={classes.loader_container}>
           <p>Loading property..</p>
           <ClipLoader size={"20px"} color="black" />
+        </div>
+      ) : !property ? (
+        <div className={classes.message_container}>
+          <p>No Property</p>
         </div>
       ) : (
         <>
