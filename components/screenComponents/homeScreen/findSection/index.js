@@ -14,12 +14,12 @@ function FindSection() {
   const [slidesToShow, setSlidesToShow] = useState(4);
 
   useEffect(() => {
-    AOS.init({
-      startEvent: "load",
-      disableMutationObserver: false,
-      duration: 500,
-    });
-    AOS.refresh();
+    // AOS.init({
+    //   startEvent: "load",
+    //   disableMutationObserver: false,
+    //   duration: 500,
+    // });
+    // AOS.refresh();
   }, []);
 
   useEffect(() => {
@@ -51,8 +51,15 @@ function FindSection() {
   return (
     <div className={classes.find_section_wrapper}>
       <div id="buy" className={classes.find_section_section}>
-        <h1 data-aos="fade-up">BENEFITS OF USING THIS PLATFORM</h1>
-        <div data-aos="fade-up" className={classes.cards_container}>
+        <h1
+        //  data-aos="fade-up"
+        >
+          BENEFITS OF USING THIS PLATFORM
+        </h1>
+        <div
+          //  data-aos="fade-up"
+          className={classes.cards_container}
+        >
           <div className={classes.overlay} />
           <Slider slidesToShow={slidesToShow} {...settings}>
             {CardsInfo?.map((card, index) => (

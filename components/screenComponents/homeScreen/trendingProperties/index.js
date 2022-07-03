@@ -16,12 +16,12 @@ function TrendingProperties({
   const [citySelected, setCitySelected] = useState("ISLAMABAD");
 
   useEffect(() => {
-    AOS.init({
-      startEvent: "load",
-      disableMutationObserver: false,
-      duration: 500,
-    });
-    AOS.refresh();
+    // AOS.init({
+    //   startEvent: "load",
+    //   disableMutationObserver: false,
+    //   duration: 500,
+    // });
+    // AOS.refresh();
   }, []);
 
   const handleCitySelected = (value) => {
@@ -40,7 +40,7 @@ function TrendingProperties({
                 ? "0px"
                 : "0px",
           }}
-          data-aos="fade-up"
+          // data-aos="fade-up"
         >
           {heading ? heading : "TOP INVESTMENT OPPORTUNITIES"}
         </h1>
@@ -112,7 +112,10 @@ function TrendingProperties({
           </div>
         )}
 
-        <div data-aos="fade-up" className={classes.property_cards_container}>
+        <div
+          // data-aos="fade-up"
+          className={classes.property_cards_container}
+        >
           {investmentProjects
             ?.filter((project, index) => (width < 1177 ? index < 3 : index < 4))
             .map((project, index) => (

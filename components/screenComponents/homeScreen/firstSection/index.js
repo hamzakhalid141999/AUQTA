@@ -30,12 +30,12 @@ function FirstSection() {
   };
 
   useEffect(() => {
-    AOS.init({
-      startEvent: "load",
-      disableMutationObserver: false,
-      duration: 500,
-    });
-    AOS.refresh();
+    // AOS.init({
+    //   startEvent: "load",
+    //   disableMutationObserver: false,
+    //   duration: 500,
+    // });
+    // AOS.refresh();
 
     const fetchAllCities = async () => {
       const data = await getAllCities();
@@ -83,7 +83,10 @@ function FirstSection() {
           />
         </div>
         <div className={classes.first_section_content_section}>
-          <div data-aos="fade-up" className={classes.search_bar_container}>
+          <div
+            // data-aos="fade-up"
+            className={classes.search_bar_container}
+          >
             <div className={classes.tabs_container}>
               <div
                 onClick={() => {
