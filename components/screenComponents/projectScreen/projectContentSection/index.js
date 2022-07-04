@@ -72,7 +72,10 @@ function ProjectConentSection({
           <div className={classes.image_container}>
             <Image src={img2} className={classes.img} />
           </div>
-          <div className={classes.description}>
+          <div
+            style={{ maxHeight: "initial", overflowY: "initial" }}
+            className={classes.description}
+          >
             <h1>VIRTUAL VIEW OF THE LOCATION</h1>
             <div className={classes.service_description_container}>
               <p>

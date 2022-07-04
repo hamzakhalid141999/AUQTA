@@ -256,7 +256,7 @@ function PropertyForm() {
           noOfBedrooms: bedroom,
           noOfBathrooms: bathroom,
           subtype: subtype,
-          // country: country,
+          dateAdded: Math.floor(Date.now() / 1000),
           images: imgArr,
           userId: user?.id,
           hasBasement: "false",

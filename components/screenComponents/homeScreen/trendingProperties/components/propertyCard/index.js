@@ -19,6 +19,7 @@ function PropertyCard({
   location,
   isProject,
   city,
+  id,
 }) {
   const [source, setSource] = useState();
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
@@ -41,7 +42,14 @@ function PropertyCard({
   }, [price]);
 
   return (
-    <Link href={"/project"}>
+    <Link
+      href={{
+        pathname: "/project",
+        query: {
+          projectId: id,
+        },
+      }}
+    >
       <div className={classes.card_body}>
         <div className={classes.image_container}>
           <Image

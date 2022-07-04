@@ -14,6 +14,11 @@
   /* justify-content: center; */
   flex-direction: column;
 }
+.bullet_points_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 15px;
+}
 .video_container {
   width: 100%;
   height: 550px;
@@ -314,6 +319,14 @@
     text-align: center !important;
     font-size: 12px;
   }
+  .service_description_container > p:nth-child(2) {
+    text-align: center !important;
+    font-size: 12px;
+  }
+  .service_description_container > p:nth-child(3) {
+    text-align: center !important;
+    font-size: 12px;
+  }
   .service_description_container p {
     text-align: left !important;
     font-size: 12px;
@@ -332,5 +345,15 @@
     padding-top: 0px;
     border-radius: 0px;
     margin-top: 30px;
+  }
+  @media screen and (max-width: 550px) {
+    .bullet_points_grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .bullet_points_grid {
+      grid-template-columns: 1fr;
+    }
   }
 }

@@ -309,6 +309,7 @@ function ProjectForm() {
           images: imgArr,
           address: address,
           province: province,
+          dateAdded: Math.floor(Date.now() / 1000),
           currentScenario: "ongoing",
           projectStartDate: startDate,
           projectEndDate: endDate,
@@ -875,6 +876,7 @@ function ProjectForm() {
                 setCity(e.target.value);
               }}
             >
+              <option>Select</option>
               {cities?.map((city, index) => (
                 <option key={index} value={city}>
                   {city}
@@ -890,6 +892,7 @@ function ProjectForm() {
                 setLocation(e.target.value);
               }}
             >
+              <option>Select</option>
               {locations?.map((location, index) => (
                 <option key={index} value={location}>
                   {location}
@@ -920,6 +923,7 @@ function ProjectForm() {
                 setProvince(e.target.value);
               }}
             >
+              <option>Select</option>
               <option value={"Punjab"}>Punjab</option>
               <option value={"Baluchistan"}>Baluchistan</option>
               <option value={"KPK"}>KPK</option>

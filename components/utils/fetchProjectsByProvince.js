@@ -8,7 +8,8 @@ async function getHomePageProjects() {
       {
         params: {
           pageNumber: 1,
-          nPerPage: 4,
+          nPerPage: 100,
+          sortType: "datedescending",
         },
       },
       {

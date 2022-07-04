@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import classes from "./invest.module.css";
 import TrendingProperties from "../../components/screenComponents/homeScreen/trendingProperties";
 import {
@@ -7,6 +7,7 @@ import {
   Marker,
   StandaloneSearchBox,
   LoadScript,
+  InfoWindow,
 } from "@react-google-maps/api";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -17,14 +18,31 @@ function Invest() {
   const router = useRouter();
   const searchBox = useRef();
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [searchedParams, setSearchedParams] = useState();
   const [longLatArr, setLongLatArr] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState();
+  const [activeMarker, setActiveMarker] = useState(null);
+
+  const handleActiveMarker = (marker) => {
+    if (marker === activeMarker) {
+      return;
+    }
+    setActiveMarker(marker);
+  };
+
   const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
   });
+
+  const handleToggleOpen = () => {
+    setIsOpen(true);
+  };
+  const handleToggleClose = () => {
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     if (router) {
@@ -102,15 +120,17 @@ function Invest() {
     fetchSearchedProperties();
   }, [searchedParams]);
 
+  const center = useMemo(
+    () => ({ lat: longLatArr[0]?.lat, lng: longLatArr[0]?.lng }),
+    [longLatArr]
+  );
+
   function RenderMap() {
     return (
       <GoogleMap
         // className={classes.iframe}
         zoom={10}
-        center={{
-          lat: longLatArr[0]?.lat ? longLatArr[0]?.lat : 44,
-          lng: longLatArr[0]?.lng ? longLatArr[0]?.lng : -80,
-        }}
+        center={center}
         style={{
           height: "700px",
           borderBottomLeftRadius: "180px",
@@ -125,8 +145,24 @@ function Invest() {
             icon={
               "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/assets/pin-without-shadow.png"
             }
-            position={{ lat: location?.lat, lng: location?.lng }}
-          />
+            position={{
+              lat: location?.lat,
+              lng: location?.lng,
+            }}
+            onClick={() => handleActiveMarker(index)}
+          >
+            {activeMarker === index && (
+              <InfoWindow
+                position={{
+                  lat: location?.lat,
+                  lng: location?.lng,
+                }}
+                onCloseClick={() => setActiveMarker(null)}
+              >
+                <span>Something</span>
+              </InfoWindow>
+            )}
+          </Marker>
         ))}
       </GoogleMap>
     );

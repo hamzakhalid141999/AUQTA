@@ -128,6 +128,7 @@ function TrendingProperties({
                 city={project.city}
                 picture={project.images[0]}
                 key={index}
+                id={project?._id}
               />
             ))}
         </div>
