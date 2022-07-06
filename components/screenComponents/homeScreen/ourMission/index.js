@@ -82,7 +82,7 @@ function OurMission() {
                 loop
                 muted
                 autoPlay
-                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/Building+Recording.mp4"
+                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/card_video_2.mp4"
               />
             ) : (
               <iframe

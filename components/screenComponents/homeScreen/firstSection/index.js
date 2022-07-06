@@ -12,8 +12,10 @@ import "aos/dist/aos.css";
 import { getAllCities } from "../../../utils";
 import { all_subtypes } from "../../dashboardScreen/dropdowns/dropdowns";
 import Link from "next/link";
+import { useWindowSize } from "../../../../utils";
 
 function FirstSection() {
+  const { width } = useWindowSize();
   const [activeTab, setActiveTab] = useState("buy");
   const [type, setType] = useState();
   const [cities, setCities] = useState([]);
@@ -73,7 +75,11 @@ function FirstSection() {
         <div className={classes.banner_img_container}>
           <div className={classes.overlay} />
           <video
-            src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/Auqta+Short+Final.mp4"
+            src={
+              width < 768
+                ? "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/landing_page_mobile.mp4"
+                : "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/Auqta+Short+Final.mp4"
+            }
             className={classes.banner_img}
             alt="hero_banner_img"
             loop

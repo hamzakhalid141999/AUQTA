@@ -20,7 +20,7 @@ function SimilarPropertySection() {
           className={classes.property_cards_container}
         >
           {cardInfo
-            ?.filter((property, index) => (width < 1177 ? index < 3 : 4))
+            // ?.filter((property, index) => (width < 1177 ? index < 3 : 4))
             .map((property, index) => (
               <PropertyCard
                 key={index}

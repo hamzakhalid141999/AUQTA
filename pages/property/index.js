@@ -11,8 +11,10 @@ import { baseURL } from "../../constants";
 import { useAuth } from "../../contextAPI";
 import { getPropertiesByProvince } from "../../components/utils/fetchPropertiesByProvince";
 import SimilarProperties from "../../components/screenComponents/similarProperties";
+import { useRouter } from "next/router";
 
 function Property() {
+  const router = useRouter();
   const [property, setProperty] = useState();
   const [propertyOwnerId, setPropertyOwnerId] = useState();
   const [propertyOwnerDetails, setPropertyOwnerDetails] = useState();
@@ -20,12 +22,20 @@ function Property() {
   const [similarProperties, setSimilarProperties] = useState();
   const { user } = useAuth();
   const [isNoProperty, setIsNoProperty] = useState(false);
+  const [propertyId, setPropertyId] = useState();
 
   useEffect(() => {
-    if (user) {
+    if (propertyId) {
       fetchProperty();
     }
-  }, [user]);
+  }, [propertyId]);
+
+  useEffect(() => {
+    if (router?.query?.propertyId) {
+      console.log(router?.query?.propertyId);
+      setPropertyId(router?.query?.propertyId);
+    }
+  }, [router]);
 
   useEffect(() => {
     const fetchPropertiesByLocation = async () => {
@@ -34,7 +44,6 @@ function Property() {
         const data = await getPropertiesByProvince(
           property?.propertyListing?.province
         );
-        console.log(data);
         setSimilarProperties(data);
       }
     };
@@ -42,13 +51,14 @@ function Property() {
     fetchPropertiesByLocation();
   }, [property]);
 
+  console.log(property);
+
   const bucketBaseUrl = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
   const fetchProperty = async () => {
     try {
       const property = await axios.get(
-        // baseURL + "/api/property/allpropertylistings/id/" + user,
-        baseURL + "/api/property/allpropertylistings/id/" + user?.id,
+        baseURL + "/api/property/" + propertyId,
         {},
         {
           headers: {
@@ -56,27 +66,15 @@ function Property() {
           },
         }
       );
-      const propertyArrLength = property?.data?.length;
-      if (property?.data?.length === 0) {
-        setIsNoProperty(true);
-        setLoading(false);
-      } else if (property?.data?.length === 1) {
-        const data = property?.data[0];
-        for (var i = 0; i < data?.propertyListing?.images?.length; i++) {
-          data.propertyListing.images[i] =
-            bucketBaseUrl + data?.propertyListing?.images[i];
-        }
-        setProperty(data);
-        setPropertyOwnerId(data?.propertyListing?.userId);
-      } else if (property?.data?.length > 1) {
-        const data = property?.data[propertyArrLength - 1];
-        for (var i = 0; i < data?.propertyListing?.images?.length; i++) {
-          data.propertyListing.images[i] =
-            bucketBaseUrl + data?.propertyListing?.images[i];
-        }
-        setProperty(data);
-        setPropertyOwnerId(data?.propertyListing?.userId);
+      console.log(property?.data);
+      const data = property?.data;
+      setLoading(false);
+      for (var i = 0; i < data?.propertyListing?.images?.length; i++) {
+        data.propertyListing.images[i] =
+          bucketBaseUrl + data?.propertyListing?.images[i];
       }
+      setProperty(data);
+      setPropertyOwnerId(data?.propertyListing?.userId);
     } catch (err) {
       console.log(err);
     }
@@ -84,9 +82,12 @@ function Property() {
 
   useEffect(() => {
     const fetchDeveloperDetails = async () => {
+      console.log(property?.propertyListing);
       try {
         const data = await axios.get(
-          baseURL + "/api/user/profilebyid/" + user?.id,
+          baseURL +
+            "/api/user/profilebyid/" +
+            property?.propertyListing?.userId?._id,
           {
             headers: {
               "Content-Type": "application/json",
@@ -101,18 +102,14 @@ function Property() {
       }
     };
 
-    if (propertyOwnerId) {
+    if (property) {
       fetchDeveloperDetails();
     }
-  }, [propertyOwnerId]);
+  }, [property]);
 
   return (
     <div className={classes.property_section}>
-      {!user ? (
-        <div className={classes.message_container}>
-          <p>No User Logged In</p>
-        </div>
-      ) : loading ? (
+      {loading ? (
         <div className={classes.loader_container}>
           <p>Loading property..</p>
           <ClipLoader size={"20px"} color="black" />

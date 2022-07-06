@@ -11,7 +11,15 @@ import Image from "next/image";
 import Link from "next/link";
 import placeholder from "../../../../public/assets/placeholder-company.png";
 
-function PropertyCard({ picture, title, description, price, location, city }) {
+function PropertyCard({
+  picture,
+  title,
+  description,
+  price,
+  location,
+  city,
+  propertyId,
+}) {
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
   const [formattedPrice, setFormattedPrice] = useState();
@@ -46,7 +54,14 @@ function PropertyCard({ picture, title, description, price, location, city }) {
   }, [price]);
 
   return (
-    <Link href={"/property"}>
+    <Link
+      href={{
+        pathname: "/property",
+        query: {
+          propertyId: propertyId,
+        },
+      }}
+    >
       <div className={classes.card_body}>
         <FontAwesomeIcon className={classes.like} icon={faHeart} size={"1x"} />
         <div className={classes.image_container}>

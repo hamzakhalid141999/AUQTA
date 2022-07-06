@@ -47,7 +47,37 @@ function NavbarModal({ displayModal = false, setDisplayModal = () => {} }) {
             <p>SERVICES</p>
           </Link>
         </div>
-        <div onClick={closeNavModal}>
+        {user && (
+          <div onClick={closeNavModal}>
+            <Link
+              href={
+                user?.userType === "agent"
+                  ? "/dashboard/agent"
+                  : "/dashboard/developer"
+              }
+            >
+              <p>PROFILE</p>
+            </Link>
+          </div>
+        )}
+
+        {(user?.userType === "agent" || user?.userType === "developer") && (
+          <div onClick={closeNavModal}>
+            <Link href="/dashboard/property">
+              <p>ADD PROPERTY</p>
+            </Link>
+          </div>
+        )}
+
+        {user?.userType === "developer" && (
+          <div onClick={closeNavModal}>
+            <Link href="/dashboard/project">
+              <p>ADD PROJECT</p>
+            </Link>
+          </div>
+        )}
+
+        {/* <div onClick={closeNavModal}>
           <Link href="/map">
             <p>BUY</p>
           </Link>
@@ -61,13 +91,13 @@ function NavbarModal({ displayModal = false, setDisplayModal = () => {} }) {
           <Link href="/invest">
             <p>INVEST</p>
           </Link>
-        </div>
+        </div> */}
         <div onClick={closeNavModal}>
           <Link href="/contact">
             <p>CONTACT</p>
           </Link>
         </div>
-        <img src={globe.src} style={{ width: "25px", height: "25px" }} />
+        {/* <img src={globe.src} style={{ width: "25px", height: "25px" }} /> */}
         {user ? (
           <div onClick={handleSignOut} className={classes.login_btn}>
             <>
