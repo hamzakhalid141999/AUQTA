@@ -76,7 +76,6 @@ function NavbarModal({ displayModal = false, setDisplayModal = () => {} }) {
             </Link>
           </div>
         )}
-
         {/* <div onClick={closeNavModal}>
           <Link href="/map">
             <p>BUY</p>

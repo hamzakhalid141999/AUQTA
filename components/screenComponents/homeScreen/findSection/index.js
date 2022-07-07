@@ -33,7 +33,7 @@ function FindSection() {
       if (width < 1024) {
         setSlidesToShow(2);
       }
-      if (width < 850) {
+      if (width < 754) {
         setSlidesToShow(1);
       }
     }
