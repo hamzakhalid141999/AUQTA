@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import classes from "./firstScreen.module.css";
 import Image from "next/image";
