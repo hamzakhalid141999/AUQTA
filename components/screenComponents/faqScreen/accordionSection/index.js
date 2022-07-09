@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import classes from "./accordionSection.module.css";
 import Faq from "react-faq-component";
