@@ -23,7 +23,7 @@ function OurMission() {
           className={classes.image_container}
         >
           <Image
-            data-aos="fade-left"
+            // data-aos="fade-left"
             src={our_story}
             alt="pic"
             layout="responsive"

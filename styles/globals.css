@@ -96,11 +96,41 @@ input[type="file"]::file-selector-button {
   /* padding-top: 10px; */
   font-family: sans-serif;
 }
-
+.styles_faq-row-wrapper__3vA1D {
+  width: 100%;
+  background-color: transparent !important;
+}
+.styles_faq-row-wrapper__3vA1D .styles_faq-row__2YF3c {
+  padding: 20px !important;
+}
+.styles_faq-row-wrapper__3vA1D .styles_faq-row__2YF3c {
+  margin-top: 38px !important;
+  box-shadow: 8px 15px 35px 17px rgba(171, 195, 226, 0.589);
+  border: 5px solid rgba(255, 255, 255, 0.292) !important;
+  border-radius: 12px !important;
+}
+.styles_faq-row-wrapper__3vA1D
+  .styles_row-body__1NvUo
+  .styles_faq-row__2YF3c
+  .styles_row-title__1YiiY
+  .styles_row-title-text__1MuhU {
+  font-weight: 600 !important;
+  font-size: 22px !important;
+}
 @media screen and (max-width: 910px) {
   .firstSection_input_field__qia1P {
     font-size: 13px !important;
     color: #0068ed !important;
     font-weight: bolder !important;
+  }
+}
+@media screen and (max-width: 786px) {
+  .styles_faq-row-wrapper__3vA1D
+    .styles_row-body__1NvUo
+    .styles_faq-row__2YF3c
+    .styles_row-title__1YiiY
+    .styles_row-title-text__1MuhU {
+    font-weight: 600 !important;
+    font-size: 16px !important;
   }
 }
