@@ -20,6 +20,7 @@ function PropertyCard({
   isProject,
   city,
   id,
+  openEdit,
 }) {
   const [source, setSource] = useState();
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
@@ -29,6 +30,8 @@ function PropertyCard({
   }, [picture]);
 
   const [formattedPrice, setFormattedPrice] = useState();
+
+  console.log("OPEN EDIT: ", openEdit);
 
   useEffect(() => {
     if (price) {
@@ -44,7 +47,7 @@ function PropertyCard({
   return (
     <Link
       href={{
-        pathname: "/project",
+        pathname: openEdit === true ? "/dashboard/edit_project" : "/project",
         query: {
           projectId: id,
         },

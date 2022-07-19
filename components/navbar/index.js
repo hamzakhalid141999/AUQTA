@@ -91,12 +91,14 @@ function Navbar() {
 
   useEffect(() => {
     if (currentPage) {
+      console.log(currentPage);
       if (
         currentPage === "map" ||
         currentPage === "invest" ||
         currentPage === "contact" ||
         currentPage === "rent" ||
-        currentPage === "confirmUser"
+        currentPage === "confirmUser" ||
+        currentPage === "dashboard"
       ) {
         setIsNavbarVisibleFromTop(true);
       } else if (
@@ -104,7 +106,8 @@ function Navbar() {
         currentPage === "invest" ||
         currentPage !== "contact" ||
         currentPage !== "rent" ||
-        currentPage !== "confirmUser"
+        currentPage !== "confirmUser" ||
+        currentPage !== "dashboard"
       ) {
         setIsNavbarVisibleFromTop(false);
       }
@@ -165,6 +168,7 @@ function Navbar() {
             ? classes.filter_panel
             : classes.filter_panel_hidden
         }
+        style={{ display: currentPage === "dashboard" && "none" }}
       >
         <div className={classes.filter_panel_content}>
           <div className={classes.btns_container}>

@@ -10,7 +10,7 @@ import icon3 from "../../../../public/assets/project_card_3d_plan_icon.png";
 import { useWindowSize } from "../../../../utils";
 
 function ProjectConentSection() {
-  const {width} = useWindowSize();
+  const { width } = useWindowSize();
   const [showMore, setShowMore] = useState(false);
   const [isVideo, setIsVideo] = useState(true);
   const [isLocationVideo, setIsLocationVideo] = useState(true);
@@ -21,7 +21,7 @@ function ProjectConentSection() {
 
   const toggleLocationVideo = () => {
     setIsLocationVideo(!isLocationVideo);
-  }
+  };
 
   const toggleVideo = () => {
     setIsVideo(!isVideo);
@@ -31,7 +31,7 @@ function ProjectConentSection() {
     <div className={classes.container}>
       <div className={classes.content_container}>
         <div
-          style={{flexDirection: width < 1000 ? "column" : "row-reverse" }}
+          style={{ flexDirection: width < 1000 ? "column" : "row-reverse" }}
           className={classes.services_container}
         >
           <div onClick={toggleVideo} className={classes.image_container}>
@@ -47,7 +47,7 @@ function ProjectConentSection() {
             ) : (
               <iframe
                 style={{ borderRadius: "40px" }}
-                src="/vr/Business_District_Bahria_Town_VR.html"
+                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/vr/Business_District_Bahria_Town_VR.html"
                 height="100%"
                 width="100%"
               />
@@ -144,27 +144,27 @@ function ProjectConentSection() {
           </div>
         </div>
         <div className={classes.services_container}>
-          <div onClick={toggleLocationVideo} className={classes.image_container}>
-            {
-              isLocationVideo ? (
+          <div
+            onClick={toggleLocationVideo}
+            className={classes.image_container}
+          >
+            {isLocationVideo ? (
               <video
-              playsInline
-              className={classes.video_card}
-              loop
-              muted
-              autoPlay
-              src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/Location+Recording.mp4"
-            />
-          ) : (
-            <iframe
-              style={{ borderRadius: "40px" }}
-              src="/vr/Business_District_Bahria_Town_VR.html"
-              height="100%"
-              width="100%"
-            />
-          )
-            }
-           
+                playsInline
+                className={classes.video_card}
+                loop
+                muted
+                autoPlay
+                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/Location+Recording.mp4"
+              />
+            ) : (
+              <iframe
+                style={{ borderRadius: "40px" }}
+                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/vr/Business_District_Bahria_Town_VR.html"
+                height="100%"
+                width="100%"
+              />
+            )}
           </div>
           <div className={classes.description}>
             <h1>VIRTUAL VIEW OF THE LOCATION</h1>

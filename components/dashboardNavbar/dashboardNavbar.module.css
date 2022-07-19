@@ -1,0 +1,36 @@
+.navbar_body {
+  width: 100%;
+  height: 80px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 200;
+  transition: background-color 300ms linear;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.right_panel,
+.left_panel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+}
+.right_panel {
+  width: 50%;
+  max-width: 300px;
+  justify-content: space-evenly;
+}
+.logo {
+  min-width: 135px;
+  max-width: 25%;
+  cursor: pointer;
+}
+.icon {
+  max-width: 25%;
+  cursor: pointer;
+}

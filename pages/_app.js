@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
       <MainLayout>
         <Head></Head>
         <Layout>
-          <Component {...pageProps} />;
+          <Component {...pageProps} />
         </Layout>
       </MainLayout>
     </AuthProvider>

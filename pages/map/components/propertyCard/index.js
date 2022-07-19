@@ -19,6 +19,7 @@ function PropertyCard({
   location,
   city,
   propertyId,
+  openEdit,
 }) {
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
@@ -56,7 +57,7 @@ function PropertyCard({
   return (
     <Link
       href={{
-        pathname: "/property",
+        pathname: openEdit === true ? "/dashboard/edit_property" : "/property",
         query: {
           propertyId: propertyId,
         },

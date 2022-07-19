@@ -7,9 +7,11 @@ import axios from "axios";
 import { useAuth } from "../../../contextAPI";
 import ClipLoader from "react-spinners/ClipLoader";
 import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/router";
 import "react-toastify/dist/ReactToastify.css";
 
 function LoginSignupModal({ setOpen, open, onCloseModal }) {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("signin");
   const [loggedInUser, setLoggedInUser] = useState();
   const [signupPassword, setSignupPassword] = useState();
@@ -86,6 +88,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
       success();
       setLoading(false);
       setOpen(false);
+      router.push("/dashboard/developer");
     } catch (err) {
       if (err.response) {
         console.log(err.response.data.message);
