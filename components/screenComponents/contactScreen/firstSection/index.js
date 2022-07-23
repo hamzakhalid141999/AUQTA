@@ -16,11 +16,7 @@ function FirstSection() {
       >
         <iframe
           className={classes.iframe_container}
-          allowfullscreen="allowfullscreen"
-          mozallowfullscreen="mozallowfullscreen"
-          msallowfullscreen="msallowfullscreen"
-          oallowfullscreen="oallowfullscreen"
-          webkitallowfullscreen="webkitallowfullscreen"
+          allowFullScreen
           width="100%"
           frameBorder="0"
           scrolling="no"
