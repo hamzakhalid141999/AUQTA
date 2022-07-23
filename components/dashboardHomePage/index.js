@@ -85,7 +85,7 @@ function DashboardHomePage() {
               <PropertyCard
                 openEdit={true}
                 key={index}
-                propertyId={property?._id}
+                propertyId={property?.propertyListing?._id}
                 title={property?.propertyListing?.title}
                 price={property?.propertyListing?.price}
                 location={property?.propertyListing?.location}

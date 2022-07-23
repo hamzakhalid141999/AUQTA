@@ -88,7 +88,12 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
       success();
       setLoading(false);
       setOpen(false);
-      router.push("/dashboard/developer");
+      console.log(data?.data);
+      if (data?.data?.userType === "developer") {
+        router.push("/dashboard/developer");
+      } else if (data?.data?.userType === "agent") {
+        router.push("/dashboard/agent");
+      }
     } catch (err) {
       if (err.response) {
         console.log(err.response.data.message);

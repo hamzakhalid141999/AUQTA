@@ -47,6 +47,11 @@ function ProjectConentSection() {
             ) : (
               <iframe
                 style={{ borderRadius: "40px" }}
+                allowfullscreen="allowfullscreen"
+                mozallowfullscreen="mozallowfullscreen"
+                msallowfullscreen="msallowfullscreen"
+                oallowfullscreen="oallowfullscreen"
+                webkitallowfullscreen="webkitallowfullscreen"
                 src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/vr/Business_District_Bahria_Town_VR.html"
                 height="100%"
                 width="100%"
@@ -160,6 +165,11 @@ function ProjectConentSection() {
             ) : (
               <iframe
                 style={{ borderRadius: "40px" }}
+                allowfullscreen="allowfullscreen"
+                mozallowfullscreen="mozallowfullscreen"
+                msallowfullscreen="msallowfullscreen"
+                oallowfullscreen="oallowfullscreen"
+                webkitallowfullscreen="webkitallowfullscreen"
                 src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/vr/Business_District_Bahria_Town_VR.html"
                 height="100%"
                 width="100%"

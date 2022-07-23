@@ -18,9 +18,13 @@ import ReactTagInput from "@pathofdev/react-tag-input";
 import "@pathofdev/react-tag-input/build/index.css";
 import Select, { components } from "react-select";
 import { getAllCities } from "../../utils";
+import { useRouter } from "next/router";
+import { getPropertyDetailsById } from "../../utils/fetchPropertyById";
 
 function EditPropertyForm() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [propertyDetails, setPropertyDetails] = useState();
 
   const { user } = useAuth();
   const { width } = useWindowSize();
@@ -142,6 +146,32 @@ function EditPropertyForm() {
   }, [cities]);
 
   useEffect(() => {
+    if (router.query) {
+      setPropertyId(router.query.propertyId);
+    }
+  }, [router.query]);
+
+  useEffect(() => {
+    const getPropertyDetails = async () => {
+      if (propertyId) {
+        const data = await getPropertyDetailsById(propertyId);
+        console.log(data);
+        setPropertyDetails(data);
+      }
+    };
+
+    getPropertyDetails();
+  }, [propertyId]);
+
+  useEffect(() => {
+    if (propertyDetails) {
+      setPurposeSelected(propertyDetails?.propertyListing?.purpose);
+      setType(propertyDetails?.propertyListing?.type);
+      setSubtype(propertyDetails?.subtype);
+    }
+  }, [propertyDetails]);
+
+  useEffect(() => {
     if (city) {
       for (var i = 0; i < citiesAndLocations?.length; i++) {
         if (citiesAndLocations[i]?.cityName === city) {
@@ -186,105 +216,6 @@ function EditPropertyForm() {
       ])
     );
   }, [landmarks]);
-
-  const handleAddProperty = async () => {
-    if (!title) {
-      missingCredError("title");
-      return;
-    } else if (!purposeSelected) {
-      missingCredError("purpose");
-      return;
-    } else if (!type) {
-      missingCredError("type");
-      return;
-    } else if (!subtype) {
-      missingCredError("sub-type");
-      return;
-    } else if (!city) {
-      missingCredError("city");
-      return;
-    } else if (!location) {
-      missingCredError("location");
-      return;
-    } else if (!province) {
-      missingCredError("province");
-      return;
-    } else if (!address) {
-      missingCredError("address");
-      return;
-    } else if (!price) {
-      missingCredError("price");
-      return;
-    } else if (!size) {
-      missingCredError("size");
-      return;
-    } else if (!bathroom) {
-      missingCredError("bathroom");
-      return;
-    } else if (!bedroom) {
-      missingCredError("bedroom");
-      return;
-    } else if (!description) {
-      missingCredError("description");
-      return;
-    } else if (!builtYear) {
-      missingCredError("built year");
-      return;
-    } else if (!facingView) {
-      missingCredError("facing view");
-      return;
-    } else if (landmarksFinalArray?.length === 0) {
-      missingCredError("nearby landmarks");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const data = await axios.post(
-        baseURL + "/api/property/add",
-        {
-          purpose: purposeSelected,
-          type: type,
-          title: title,
-          description: description,
-          price: price,
-          size: size.toString() + " " + unit,
-          address: address,
-          province: province,
-          location: location,
-          city: city,
-          noOfBedrooms: bedroom,
-          noOfBathrooms: bathroom,
-          subtype: subtype,
-          dateAdded: Math.floor(Date.now() / 1000),
-          images: imgArr,
-          userId: user?.id,
-          hasBasement: "false",
-          nearbyLandmarks: landmarksFinalArray,
-          // images: [],
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      setImagesKeysArr(data?.data?.proplisting?.images);
-      setPropertyId(data?.data?.proplisting?._id);
-    } catch (err) {
-      setLoading(false);
-      error();
-      // if (err.response) {
-      //   console.log(err.response.data?.message);
-      //   if (err.response.data?.message === "Invalid Password!") {
-      //     error("Invaid Password");
-      //   } else if (err.response.data?.message === "User not found") {
-      //     error("User not found");
-      //   }
-      // }
-      console.log(err);
-    }
-  };
 
   useEffect(() => {
     if (imagesKeysArr.length > 0) {
@@ -670,19 +601,37 @@ function EditPropertyForm() {
               <option>Select Subtype</option>
               {type === "residential"
                 ? residential_subtypes?.map((subtype, index) => (
-                    <option value={subtype} key={index}>
+                    <option
+                      selected={
+                        propertyDetails && propertyDetails?.subtype === subtype
+                      }
+                      value={subtype}
+                      key={index}
+                    >
                       {subtype}
                     </option>
                   ))
                 : type === "commercial"
                 ? commercial_subtypes?.map((subtype, index) => (
-                    <option value={subtype} key={index}>
+                    <option
+                      selected={
+                        propertyDetails && propertyDetails?.subtype === subtype
+                      }
+                      value={subtype}
+                      key={index}
+                    >
                       {subtype}
                     </option>
                   ))
                 : type === "plot" &&
                   plot_subtypes?.map((subtype, index) => (
-                    <option value={subtype} key={index}>
+                    <option
+                      selected={
+                        propertyDetails && propertyDetails?.subtype === subtype
+                      }
+                      value={subtype}
+                      key={index}
+                    >
                       {subtype}
                     </option>
                   ))}
@@ -698,7 +647,14 @@ function EditPropertyForm() {
             >
               <option>Select City</option>
               {cities?.map((city, index) => (
-                <option key={index} value={city}>
+                <option
+                  selected={
+                    propertyDetails &&
+                    propertyDetails?.propertyListing?.city === city
+                  }
+                  key={index}
+                  value={city}
+                >
                   {city}
                 </option>
               ))}
@@ -718,7 +674,14 @@ function EditPropertyForm() {
             >
               <option>Select Location</option>
               {locations?.map((location, index) => (
-                <option key={index} value={location}>
+                <option
+                  selected={
+                    propertyDetails &&
+                    propertyDetails?.propertyListing?.location === location
+                  }
+                  key={index}
+                  value={location}
+                >
                   {location}
                 </option>
               ))}
@@ -734,12 +697,52 @@ function EditPropertyForm() {
               className={classes.input_field_single}
             >
               <option>Select Province</option>
-              <option value={"kpk"}>Islamabad</option>
-              <option value={"punjab"}>Punjab</option>
-              <option value={"sindh"}>Sindh</option>
-              <option value={"kpk"}>KPK</option>
-              <option value={"baluchistan"}>Baluchistan</option>
-              <option value={"gilgit"}>Gilgit Baltistan</option>
+              <option
+                selected={
+                  propertyDetails?.propertyListing?.province === "islamabad"
+                }
+                value={"islamabad"}
+              >
+                Islamabad
+              </option>
+              <option
+                selected={
+                  propertyDetails?.propertyListing?.province === "punjab"
+                }
+                value={"punjab"}
+              >
+                Punjab
+              </option>
+              <option
+                selected={
+                  propertyDetails?.propertyListing?.province === "sindh"
+                }
+                value={"sindh"}
+              >
+                Sindh
+              </option>
+              <option
+                selected={propertyDetails?.propertyListing?.province === "kpk"}
+                value={"kpk"}
+              >
+                KPK
+              </option>
+              <option
+                selected={
+                  propertyDetails?.propertyListing?.province === "baluchistan"
+                }
+                value={"baluchistan"}
+              >
+                Baluchistan
+              </option>
+              <option
+                selected={
+                  propertyDetails?.propertyListing?.province === "gilgit"
+                }
+                value={"gilgit"}
+              >
+                Gilgit Baltistan
+              </option>
             </select>
           </div>
         </div>
@@ -751,6 +754,9 @@ function EditPropertyForm() {
               setAddress(e.target.value);
             }}
             className={classes.input_field_single}
+            placeholder={
+              propertyDetails && propertyDetails?.propertyListing?.address
+            }
           />
         </div>
       </div>
@@ -764,8 +770,12 @@ function EditPropertyForm() {
             onChange={(e) => {
               setTitle(e.target.value);
             }}
-            placeholder="Enter title"
             className={classes.input_field_single}
+            placeholder={
+              propertyDetails
+                ? propertyDetails?.propertyListing?.title
+                : "Enter title"
+            }
           />
         </div>
 
@@ -776,7 +786,11 @@ function EditPropertyForm() {
               onChange={(e) => {
                 setPrice(e.target.value);
               }}
-              placeholder="Price (PKR)  "
+              placeholder={
+                propertyDetails
+                  ? propertyDetails?.propertyListing?.price
+                  : "Enter Price"
+              }
               className={classes.input_field_three}
             />
           </div>
@@ -816,6 +830,7 @@ function EditPropertyForm() {
                 setBedroom(e.target.value);
               }}
               type="number"
+              placeholder={propertyDetails && propertyDetails?.noOfBedrooms}
               className={classes.input_field_dual}
             />
           </div>
@@ -827,6 +842,7 @@ function EditPropertyForm() {
                 setBathroom(e.target.value);
               }}
               className={classes.input_field_dual}
+              placeholder={propertyDetails && propertyDetails?.noOfBathrooms}
             />
           </div>
         </div>
@@ -838,6 +854,9 @@ function EditPropertyForm() {
             }}
             style={{ height: "150px", paddingTop: "10px" }}
             className={classes.input_field_single}
+            placeholder={
+              propertyDetails && propertyDetails?.propertyListing?.description
+            }
           />
         </div>
       </div>
@@ -871,6 +890,11 @@ function EditPropertyForm() {
                       setBuiltYear(e.target.value);
                     }}
                     className={classes.input_field_single}
+                    placeholder={
+                      propertyDetails &&
+                      propertyDetails?.resSalientFeatures?.mainFeatures
+                        ?.builtYear
+                    }
                   />
                 </div>
 
@@ -2001,7 +2025,7 @@ function EditPropertyForm() {
           </div>
         </div>
       </div>
-      <div className={classes.btn} onClick={handleAddProperty}>
+      <div className={classes.btn}>
         <p>Add property</p>
         {loading && <ClipLoader size={"20px"} color="white" />}
       </div>

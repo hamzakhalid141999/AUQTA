@@ -57,6 +57,7 @@ function PropertyForm() {
   const [facingView, setFacingView] = useState();
   const [basementIncluded, setBasementIncluded] = useState(false);
   const [parkingSpaces, setParkingSpaces] = useState(false);
+  const [parking, setParking] = useState(false);
   const [centralHeating, setCentralHeating] = useState(false);
   const [centralCooling, setCentralCooling] = useState(false);
   const [furnished, setFurnished] = useState(false);
@@ -68,6 +69,22 @@ function PropertyForm() {
   const [accessToNearbyPublicTransport, setAccessToNearbyPublicTransport] =
     useState(false);
   const [tvLongue, setTvLongue] = useState(false);
+  const [conferenceRoom, setConferenceRoom] = useState(false);
+  const [mediaRoom, setMediaRoom] = useState(false);
+  const [cabinRoom, setCabinRoom] = useState(false);
+  const [isBathroom, setIsBathroom] = useState(false);
+  const [possession, setPossession] = useState(false);
+  const [utilitiesPaid, setUtlitiesPaid] = useState(false);
+  const [solidLand, setSolidLand] = useState(false);
+  const [filledLand, setFilledLand] = useState(false);
+  const [corner, setCorner] = useState(false);
+  const [boulevardFacing, setBoulevardFacing] = useState(false);
+  const [parkFacing, setParkFacing] = useState(false);
+  const [extraLand, setExtraLand] = useState(false);
+  const [boundaryWall, setBoundaryWall] = useState(false);
+  const [waterSupply, setWaterSupply] = useState(false);
+  const [gasSupply, setGasSupply] = useState(false);
+
   const [diningRoom, setDiningRoom] = useState(false);
   const [drawingRoom, setDrawingRoom] = useState(false);
   const [kitchen, setKitchen] = useState(false);
@@ -108,6 +125,7 @@ function PropertyForm() {
   const [otherCommunicationFeature, setOtherCommunicationFeature] = useState(
     []
   );
+  const [elevatorOrLift, setElevatorOrLift] = useState(false);
   const [facilitiesOtherFeatures, setFacilitiesOtherFeatures] = useState([]);
 
   const [imagesKeysArr, setImagesKeysArr] = useState([]);
@@ -370,6 +388,22 @@ function PropertyForm() {
               storeroom: storeRoom,
               ironingRoom: ironingRoom,
               powderRoom: powderRoom,
+
+              possession: possession,
+              utilitiesPaid: utilitiesPaid,
+              solidLand: solidLand,
+              filledLand: filledLand,
+              corner: corner,
+              boulevardFacing: boulevardFacing,
+              parkFacing: parkFacing,
+              extraLand: extraLand,
+              boundaryWall: boundaryWall,
+              waterSupply: waterSupply,
+              gasSupply: gasSupply,
+
+              electricityBackup: electricityBackup,
+              elevator: elevatorOrLift,
+              parking: parking,
 
               laundryRoom: laundryRoom,
               studyRoom: studyRoom,
@@ -773,6 +807,7 @@ function PropertyForm() {
           <div className={classes.three_field_container}>
             <p className={classes.label_dual}>Price</p>
             <input
+              type={"number"}
               onChange={(e) => {
                 setPrice(e.target.value);
               }}
@@ -1420,12 +1455,18 @@ function PropertyForm() {
                       className={classes.input_field_with_label_top_container}
                     >
                       <p className={classes.top_label}>Facing View</p>
-                      <input
+                      <select
                         onChange={(e) => {
                           setFacingView(e.target.value);
                         }}
                         className={classes.input_field_single}
-                      />
+                      >
+                        <option>Select</option>
+                        <option value="East">East</option>
+                        <option value="West">West</option>
+                        <option value="North">North</option>
+                        <option value="South">South</option>
+                      </select>
                     </div>
 
                     <div
@@ -1511,11 +1552,23 @@ function PropertyForm() {
             >
               <div className={classes.checkboxes_container}>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setParking(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Parking</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setElectricityBackup(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Electricity Backup</p>
                 </div>
                 <div className={classes.checkbox_container}>
@@ -1523,7 +1576,13 @@ function PropertyForm() {
                   <p className={classes.checkbox_label}>Elevator/Lift</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setAccessToNearbyPublicTransport(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>
                     Access to Nearby Public Transport
                   </p>
@@ -1536,7 +1595,18 @@ function PropertyForm() {
                 <p style={{ width: "30%" }} className={classes.top_label}>
                   Other Features
                 </p>
-                <input className={classes.input_field_single} />
+                <ReactTagInput
+                  tags={otherMainFeature}
+                  maxTags={50}
+                  className={classes.input_field_single}
+                  removeOnBackspace={true}
+                  placeholder="Type and press enter"
+                  onChange={(newTags) => {
+                    var arr = newTags.filter((e) => String(e).trim());
+                    setOtherMainFeature(arr);
+                    // setErrorCode(-1);
+                  }}
+                />
               </div>
             </div>
 
@@ -1550,7 +1620,13 @@ function PropertyForm() {
                 >
                   <div className={classes.checkboxes_container}>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        onChange={(e) => {
+                          setConferenceRoom(e.target.checked);
+                        }}
+                        className={classes.checkbox}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>Conference Room</p>
                     </div>
                     <div className={classes.checkbox_container}>
@@ -1581,7 +1657,18 @@ function PropertyForm() {
                     <p style={{ width: "30%" }} className={classes.top_label}>
                       Other Features
                     </p>
-                    <input className={classes.input_field_single} />
+                    <ReactTagInput
+                      tags={otherMainFeature}
+                      maxTags={50}
+                      className={classes.input_field_single}
+                      removeOnBackspace={true}
+                      placeholder="Type and press enter"
+                      onChange={(newTags) => {
+                        var arr = newTags.filter((e) => String(e).trim());
+                        setOtherRoomFeature(arr);
+                        // setErrorCode(-1);
+                      }}
+                    />
                   </div>
                 </div>
               </>
@@ -1639,7 +1726,18 @@ function PropertyForm() {
                 <p style={{ width: "30%" }} className={classes.top_label}>
                   Other Features
                 </p>
-                <input className={classes.input_field_single} />
+                <ReactTagInput
+                  tags={otherMainFeature}
+                  maxTags={50}
+                  className={classes.input_field_single}
+                  removeOnBackspace={true}
+                  placeholder="Type and press enter"
+                  onChange={(newTags) => {
+                    var arr = newTags.filter((e) => String(e).trim());
+                    setOtherCommunicationFeature(arr);
+                    // setErrorCode(-1);
+                  }}
+                />
               </div>
             </div>
 
@@ -1736,51 +1834,123 @@ function PropertyForm() {
             >
               <div className={classes.checkboxes_container}>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setPossession(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Possession</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setUtlitiesPaid(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Utilities Paid</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setSolidLand(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Solid Land</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setFilledLand(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Filled Land</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setCorner(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Corner</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setBoulevardFacing(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Boulevard Facing</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setParkFacing(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Park Facing</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setExtraLand(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Extra Land</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setBoundaryWall(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Boundary Wall</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setWaterSupply(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Water Supply</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setGasSupply(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Gas Supply</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setAccessToNearbyPublicTransport(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>
                     Access to Nearby Public Transport
                   </p>
@@ -1793,7 +1963,18 @@ function PropertyForm() {
                 <p style={{ width: "30%" }} className={classes.top_label}>
                   Other Features
                 </p>
-                <input className={classes.input_field_single} />
+                <ReactTagInput
+                  tags={otherMainFeature}
+                  maxTags={50}
+                  className={classes.input_field_single}
+                  removeOnBackspace={true}
+                  placeholder="Type and press enter"
+                  onChange={(newTags) => {
+                    var arr = newTags.filter((e) => String(e).trim());
+                    setOtherMainFeature(arr);
+                    // setErrorCode(-1);
+                  }}
+                />
               </div>
             </div>
           </>

@@ -88,6 +88,11 @@ function OurMission() {
               <iframe
                 className={classes.video_card}
                 style={{ borderRadius: "40px", objectFit: "initial" }}
+                allowfullscreen="allowfullscreen"
+                mozallowfullscreen="mozallowfullscreen"
+                msallowfullscreen="msallowfullscreen"
+                oallowfullscreen="oallowfullscreen"
+                webkitallowfullscreen="webkitallowfullscreen"
                 src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/vr/Business_District_Bahria_Town_VR.html"
                 // height="500px"
                 // width="100%"
