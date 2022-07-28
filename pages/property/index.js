@@ -23,6 +23,7 @@ function Property() {
   const { user } = useAuth();
   const [isNoProperty, setIsNoProperty] = useState(false);
   const [propertyId, setPropertyId] = useState();
+  const [salientFeatures, setSalientFeatures] = useState();
 
   useEffect(() => {
     if (propertyId) {
@@ -104,6 +105,13 @@ function Property() {
 
     if (property) {
       fetchDeveloperDetails();
+      if (property?.resSalientFeatures) {
+        setSalientFeatures(property?.resSalientFeatures);
+      } else if (property?.commSalientFeatures) {
+        setSalientFeatures(property?.commSalientFeatures);
+      } else if (property?.plotSalientFeatures) {
+        setSalientFeatures(property?.plotSalientFeatures);
+      }
     }
   }, [property]);
 
@@ -128,7 +136,7 @@ function Property() {
           />
           <PictureSection images={property?.propertyListing?.images} />
           <Description property={property} />
-          <MainFeaturesSection features={property?.resSalientFeatures} />
+          <MainFeaturesSection features={salientFeatures} />
           <SimilarProperties properties={similarProperties} />
         </>
       )}

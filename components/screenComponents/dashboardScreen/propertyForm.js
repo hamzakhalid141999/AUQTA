@@ -245,12 +245,16 @@ function PropertyForm() {
     } else if (!description) {
       missingCredError("description");
       return;
-    } else if (!builtYear) {
-      missingCredError("built year");
-      return;
-    } else if (!facingView) {
-      missingCredError("facing view");
-      return;
+    } else if (type !== "plot") {
+      if (!builtYear) {
+        missingCredError("built year");
+        return;
+      }
+    } else if (type !== "plot") {
+      if (!facingView) {
+        missingCredError("facing view");
+        return;
+      }
     } else if (landmarksFinalArray?.length === 0) {
       missingCredError("nearby landmarks");
       return;
@@ -532,7 +536,7 @@ function PropertyForm() {
   };
 
   const success = () =>
-    toast.success("Project added!", {
+    toast.success("Property added!", {
       position: "bottom-center",
       autoClose: 1000,
       hideProgressBar: true,
@@ -1392,6 +1396,10 @@ function PropertyForm() {
                     onChange={(e) => {
                       setAccessToNearbyPublicTransport(e.target.checked);
                     }}
+                    defaultChecked={
+                      salientFeatures?.otherFeatures
+                        ?.accessibilityForSpecialOrElderlyPersons
+                    }
                     className={classes.checkbox}
                     type="checkbox"
                   />
@@ -1761,7 +1769,19 @@ function PropertyForm() {
                   <p className={classes.checkbox_label}>CCTV</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setAccessibilityForSpecialOrElderlyPerson(
+                        e.target.checked
+                      );
+                    }}
+                    defaultChecked={
+                      salientFeatures?.otherFeatures
+                        ?.accessibilityForSpecialOrElderlyPersons
+                    }
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>
                     Accessibility for Special or Elderly Persons
                   </p>

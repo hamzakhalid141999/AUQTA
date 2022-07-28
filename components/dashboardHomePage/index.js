@@ -10,6 +10,8 @@ import { getProjectsByUserId } from "../utils/fetchProjectsByUserId";
 import axios from "axios";
 import PropertyCard from "../../pages/map/components/propertyCard";
 import ProjectCard from "../screenComponents/homeScreen/trendingProperties/components/propertyCard";
+import phone from "../../public/assets/phone_call.png";
+import email from "../../public/assets/email_icon.png";
 
 function DashboardHomePage() {
   const { width } = useWindowSize();
@@ -72,8 +74,42 @@ function DashboardHomePage() {
       <p className={classes.subheading}>Auqta Developer Control System</p>
 
       <div className={classes.calls_msgs_tab_container}>
-        <div className={classes.tab}></div>
-        <div className={classes.tab}></div>
+        <div className={classes.tab}>
+          <img src={phone.src} style={{ height: "80%" }} />
+          <div className={classes.tab_heading}>
+            <h1>COMPLETED CALLS</h1>
+            <p>23</p>
+          </div>
+          <div className={classes.inbound_outbound}>
+            <p className={classes.inbound_outbound_text}>
+              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>13</span>{" "}
+              INBOUND
+            </p>
+            <p className={classes.inbound_outbound_text}>
+              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>13</span>{" "}
+              OUTBOUND
+            </p>
+            <p>VIEW ALL</p>
+          </div>
+        </div>
+        <div className={classes.tab}>
+          <img src={email.src} style={{ height: "80%" }} />
+          <div className={classes.tab_heading}>
+            <h1>COMPLETED CALLS</h1>
+            <p>23</p>
+          </div>
+          <div className={classes.inbound_outbound}>
+            <p className={classes.inbound_outbound_text}>
+              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>13</span>{" "}
+              INBOUND
+            </p>
+            <p className={classes.inbound_outbound_text}>
+              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>13</span>{" "}
+              OUTBOUND
+            </p>
+            <p>VIEW ALL</p>
+          </div>
+        </div>
       </div>
 
       <div className={classes.property_section}>

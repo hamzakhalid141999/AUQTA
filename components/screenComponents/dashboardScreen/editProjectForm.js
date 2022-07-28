@@ -9,10 +9,16 @@ import { useAuth } from "../../../contextAPI";
 import { getAllCities } from "../../utils";
 import { useWindowSize } from "../../../utils";
 import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/router";
 import "react-toastify/dist/ReactToastify.css";
+import { getProjectDetailsById } from "../../utils/fetchProjectById";
 
-function EditProjectForm() {
+function EditProjectForm({ _setProjectId, setIsProjectActive }) {
+  const router = useRouter();
   const { width } = useWindowSize();
+  const [projectDetails, setProjectDetails] = useState();
+  const [projectId, setProjectId] = useState();
+  const [loadingInfo, setLoadingInfo] = useState(true);
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
   const [categorySelected, setCategorySelected] = useState("buy");
@@ -55,7 +61,7 @@ function EditProjectForm() {
   const [floorPlanImgKeysArr, setFloorPlanImgKeysArr] = useState([]);
   const [shopImgKeysArr, setShopImgKeysArr] = useState([]);
 
-  const [featuresArr, setFeaturesArr] = useState(featureArr);
+  const [featuresArr, setFeaturesArr] = useState([]);
   const [amenitiesArr, setAmenitiesArr] = useState([]);
   const [amenitiesArrFinal, setAmenitiesArrFinal] = useState();
   const [cities, setCities] = useState([]);
@@ -101,6 +107,122 @@ function EditProjectForm() {
     }
   }, [cities]);
 
+  const getUpdatedData = () => {
+    let userData = {};
+    if (name) {
+      userData = { ...userData, projectName: name };
+    }
+    if (description) {
+      userData = { ...userData, projectDescription: description };
+    }
+    if (priceLowerBound) {
+      userData = { ...userData, priceRangeFrom: priceLowerBound };
+    }
+    if (priceUpperBound) {
+      userData = { ...userData, priceRangeTo: priceUpperBound };
+    }
+    if (city) {
+      userData = { ...userData, city: city };
+    }
+    if (location) {
+      userData = { ...userData, location: location };
+    }
+    if (approvalBody) {
+      userData = { ...userData, approvalBodyName: approvalBody };
+    }
+    if (address) {
+      userData = { ...userData, address: address };
+    }
+    if (province) {
+      userData = { ...userData, province: province };
+    }
+    if (startDate) {
+      userData = { ...userData, projectStartDate: startDate };
+    }
+    if (endDate) {
+      userData = { ...userData, projectEndDate: endDate };
+    }
+    if (firstMilestone) {
+      userData = { ...userData, firstMilestone: firstMilestone };
+    }
+    if (secondMilestone) {
+      userData = { ...userData, secondMilestone: secondMilestone };
+    }
+    if (thirdMilestone) {
+      userData = { ...userData, thirdMilestone: thirdMilestone };
+    }
+    if (firstMilestoneImage) {
+      userData = { ...userData, contactEmail: firstMilestoneImage };
+    }
+    if (secondMilestoneImage) {
+      userData = { ...userData, secondMilestoneImage: secondMilestoneImage };
+    }
+    if (thirdMilestoneImage) {
+      userData = { ...userData, contactPhoneHome: thirdMilestoneImage };
+    }
+    userData = { ...userData, govtApproved: isGovApproved };
+    userData = { ...userData, features: featuresArr };
+    return userData;
+  };
+
+  const success = () =>
+    toast.success("Property updated", {
+      position: "bottom-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+    });
+
+  const error = () =>
+    toast.error("Error occured!", {
+      position: "bottom-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+    });
+
+  const handleEditProperty = async () => {
+    const updatedData = getUpdatedData();
+
+    setLoading(true);
+    try {
+      const data = await axios.post(
+        baseURL + "/api/newproject/edit/" + projectId,
+        {
+          ...updatedData,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setLoading(false);
+      success();
+      window.location.reload();
+    } catch (err) {
+      setLoading(false);
+      error();
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (projectDetails) {
+      setIsProjectActive(projectDetails?.isActive);
+      setFeaturesArr(projectDetails?.features);
+      setFirstMilestone(projectDetails?.firstMilestone?.date);
+      setSecondMilestone(projectDetails?.secondMilestone?.date);
+      setThirdMilestone(projectDetails?.thirdMilestone?.date);
+      setIsGovApproved(projectDetails?.govtApproved);
+    }
+  }, [projectDetails]);
+
   useEffect(() => {
     if (city) {
       for (var i = 0; i < citiesAndLocations?.length; i++) {
@@ -111,15 +233,24 @@ function EditProjectForm() {
     }
   }, [city]);
 
-  const missingCredError = (value) =>
-    toast.error("Enter " + value, {
-      position: "bottom-center",
-      autoClose: 1000,
-      hideProgressBar: true,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: true,
-    });
+  useEffect(() => {
+    if (router.query) {
+      setProjectId(router.query.projectId);
+      _setProjectId(router.query.projectId);
+    }
+  }, [router.query]);
+
+  useEffect(() => {
+    const getPropertyDetails = async () => {
+      if (projectId) {
+        const data = await getProjectDetailsById(projectId);
+        setProjectDetails(data);
+        setLoadingInfo(false);
+      }
+    };
+
+    getPropertyDetails();
+  }, [projectId]);
 
   const Option = (props) => {
     return (
@@ -170,7 +301,7 @@ function EditProjectForm() {
   };
 
   const handleAddField = () => {
-    setFeatureArr((array) => [...array, featureArr.length + 1]);
+    setFeaturesArr((array) => [...array, featuresArr.length + 1]);
   };
 
   const handleAddAmenity = () => {
@@ -227,125 +358,6 @@ function EditProjectForm() {
     setThirdMilestoneBlob(file[0]);
   };
 
-  const handleAddProject = async () => {
-    if (!name) {
-      missingCredError("project name");
-      return;
-    } else if (!priceLowerBound) {
-      missingCredError("price lower bound");
-      return;
-    } else if (!priceUpperBound) {
-      missingCredError("price upper bound");
-      return;
-    } else if (!description) {
-      missingCredError("description");
-      return;
-    } else if (featuresArr?.length === 0) {
-      missingCredError("features");
-      return;
-    } else if (amenitiesArrFinal?.length === 0) {
-      missingCredError("amenities");
-      return;
-    } else if (!city) {
-      missingCredError("city");
-      return;
-    } else if (!location) {
-      missingCredError("location");
-      return;
-    } else if (!address) {
-      missingCredError("address");
-      return;
-    } else if (!province) {
-      missingCredError("province");
-      return;
-    } else if (!approvalBody) {
-      missingCredError("approval body name");
-      return;
-    } else if (!startDate) {
-      missingCredError("start date");
-      return;
-    } else if (!endDate) {
-      missingCredError("end date");
-      return;
-    } else if (!firstMilestone) {
-      missingCredError("first milestone date");
-      return;
-    } else if (!secondMilestone) {
-      missingCredError("second milestone date");
-      return;
-    } else if (!thirdMilestone) {
-      missingCredError("third milestone date");
-      return;
-    } else if (!firstMilestoneImage) {
-      missingCredError("first milestone image");
-      return;
-    } else if (!secondMilestoneImage) {
-      missingCredError("second milestone second");
-      return;
-    } else if (!thirdMilestoneImage) {
-      missingCredError("third milestone third");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const data = await axios.post(
-        baseURL + "/api/newproject/add",
-        {
-          projectName: name,
-          projectDescription: description,
-          priceRangeFrom: priceLowerBound,
-          priceRangeTo: priceUpperBound,
-          city: city,
-          location: location,
-          features: featuresArr,
-          amenities: amenitiesArrFinal,
-          govtApproved: isGovApproved,
-          approvalBodyName: approvalBody,
-          projectBrochure: brochureImgArr,
-          floorPlan: floorplanImgArr,
-          pricePlan: priceImgArr,
-          shopAvailability: shopImgArr,
-          images: imgArr,
-          address: address,
-          province: province,
-          dateAdded: Math.floor(Date.now() / 1000),
-          currentScenario: "ongoing",
-          projectStartDate: startDate,
-          projectEndDate: endDate,
-          firstMilestone: firstMilestone,
-          secondMilestone: secondMilestone,
-          thirdMilestone: thirdMilestone,
-          startDateImage: "startDate",
-          endDateImage: "endDateImage",
-          firstMilestoneImage: firstMilestoneImage,
-          secondMilestoneImage: secondMilestoneImage,
-          thirdMilestoneImage: thirdMilestoneImage,
-          userId: user?.id,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      setImgsKeysArr(data?.data?.newproject?.images);
-      setPriceImgKeysArr(data?.data?.newproject?.pricePlan);
-      setBrochureImgKeysArr(data?.data?.newproject?.projectBrochure);
-      setFloorPlanImgKeysArr(data?.data?.newproject?.floorPlan);
-      setShopImgKeysArr(data?.data?.newproject?.shopAvailability);
-      setFirstMilestoneImageKey(data?.data?.newproject?.firstMilestone?.image);
-      setSecondMilestoneImageKey(
-        data?.data?.newproject?.secondMilestone?.image
-      );
-      setThirdMilestoneImageKey(data?.data?.newproject?.thirdMilestone?.image);
-    } catch (err) {
-      setLoading(false);
-
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
     if (firstMilestoneImageKey) {
       const data = {
@@ -375,7 +387,6 @@ function EditProjectForm() {
                 body: myBlob,
               });
               const s3Url = response?.url?.split("?")[0];
-              console.log("response ", s3Url);
               setIsFirstMilestoneImageUploaded(true);
             }
           };
@@ -413,7 +424,6 @@ function EditProjectForm() {
                 body: myBlob,
               });
               const s3Url = response?.url?.split("?")[0];
-              console.log("response ", s3Url);
               setIsSecondMilestoneImageUploaded(true);
             }
           };
@@ -451,7 +461,6 @@ function EditProjectForm() {
                 body: myBlob,
               });
               const s3Url = response?.url?.split("?")[0];
-              console.log("response ", s3Url);
               setIsThirdMilestoneImageUploaded(true);
             }
           };
@@ -490,7 +499,6 @@ function EditProjectForm() {
                   body: myBlob,
                 });
                 const s3Url = response?.url?.split("?")[0];
-                console.log("response ", s3Url);
                 if (i === imgsKeysArr?.length - 1) {
                   setIsImagesUploaded(true);
                 }
@@ -532,7 +540,6 @@ function EditProjectForm() {
                   body: myBlob,
                 });
                 const s3Url = response?.url?.split("?")[0];
-                console.log("response ", s3Url);
                 setIsFloorPlanImageUploaded(true);
               }
             };
@@ -572,7 +579,6 @@ function EditProjectForm() {
                   body: myBlob,
                 });
                 const s3Url = response?.url?.split("?")[0];
-                console.log("response ", s3Url);
                 setIsPriceplanImageUplaoded(true);
               }
             };
@@ -612,7 +618,6 @@ function EditProjectForm() {
                   body: myBlob,
                 });
                 const s3Url = response?.url?.split("?")[0];
-                console.log("response ", s3Url);
                 setIsBrochureImageUploaded(true);
               }
             };
@@ -652,7 +657,6 @@ function EditProjectForm() {
                   body: myBlob,
                 });
                 const s3Url = response?.url?.split("?")[0];
-                console.log("response ", s3Url);
                 setIsShopImageUploaded(true);
               }
             };
@@ -696,16 +700,6 @@ function EditProjectForm() {
     amenitiesArr[id] = value;
   };
 
-  const success = () =>
-    toast.success("Property added!", {
-      position: "bottom-center",
-      autoClose: 1000,
-      hideProgressBar: true,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: true,
-    });
-
   return (
     <div className={classes.form_body}>
       <ToastContainer
@@ -719,592 +713,675 @@ function EditProjectForm() {
         draggable
         pauseOnHover
       />
-      <div className={classes.section}>
-        <h1 className={classes.heading}>Project Information</h1>
-        <div className={classes.single_row}>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Project Name</p>
-            <input
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-              placeholder="Project Name"
-              className={classes.input_field_dual}
-            />
-          </div>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Price Range (PKR) </p>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <div
-                style={{ width: "48%" }}
-                className={classes.input_field_with_label_top_container}
-              >
-                <p className={classes.top_label}>From</p>
+      {loadingInfo ? (
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ClipLoader size={"20px"} color="black" />
+        </div>
+      ) : (
+        <>
+          <div className={classes.section}>
+            <h1 className={classes.heading}>Project Information</h1>
+            <div className={classes.single_row}>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>Project Name</p>
                 <input
                   onChange={(e) => {
-                    setPriceLowerBound(e.target.value);
+                    setName(e.target.value);
                   }}
+                  placeholder={
+                    projectDetails
+                      ? projectDetails?.projectName
+                      : "Project Name"
+                  }
+                  className={classes.input_field_dual}
+                />
+              </div>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>Price Range (PKR) </p>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div
+                    style={{ width: "48%" }}
+                    className={classes.input_field_with_label_top_container}
+                  >
+                    <p className={classes.top_label}>From</p>
+                    <input
+                      placeholder={
+                        projectDetails ? projectDetails?.priceRangeFrom : " "
+                      }
+                      onChange={(e) => {
+                        setPriceLowerBound(e.target.value);
+                      }}
+                      className={classes.input_field_single}
+                    />
+                  </div>
+                  <div
+                    style={{ width: "48%" }}
+                    className={classes.input_field_with_label_top_container}
+                  >
+                    <p className={classes.top_label}>To</p>
+                    <input
+                      placeholder={
+                        projectDetails ? projectDetails?.priceRangeTo : " "
+                      }
+                      onChange={(e) => {
+                        setPriceUpperBound(e.target.value);
+                      }}
+                      className={classes.input_field_single}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{ alignItems: "normal" }}
+              className={classes.single_row}
+            >
+              <p className={classes.label}>Project Description</p>
+              <textarea
+                placeholder={
+                  projectDetails ? projectDetails?.projectDescription : " "
+                }
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+                style={{ height: "150px", paddingTop: "10px" }}
+                className={classes.input_field_single}
+              />
+            </div>
+
+            {/* <div className={classes.single_row}>
+        <div className={classes.two_field_container}>
+          <p className={classes.label_dual}>Since</p>
+          <input
+            placeholder="Type Year"
+            className={classes.input_field_dual}
+          />
+        </div>
+        <div className={classes.two_field_container}>
+          <p className={classes.label_dual}>Projects Developed</p>
+          <input className={classes.input_field_dual} />
+        </div>
+      </div> */}
+
+            <div className={classes.single_row}>
+              <div
+                style={{ width: "100%", alignItems: "normal" }}
+                className={classes.two_field_container}
+              >
+                <p style={{ marginTop: "17px" }} className={classes.label}>
+                  Features
+                </p>
+                <div className={classes.infinite_input_fields_container}>
+                  {featuresArr?.map((feature, index) => (
+                    <div
+                      key={index}
+                      style={{ width: "100%" }}
+                      className={classes.looped_input_field_container}
+                    >
+                      <input
+                        style={{ width: "100%", marginBottom: "20px" }}
+                        disabled={
+                          featuresArr?.length === index + 1 ? true : false
+                        }
+                        onChange={(e) => {
+                          handleFeaturesInputChange(e.target.value, index);
+                        }}
+                        on
+                        placeholder={
+                          featuresArr?.length === index + 1
+                            ? "Add more"
+                            : feature
+                        }
+                        className={classes.input_field_dual}
+                      />
+                      {featuresArr?.length === index + 1 && (
+                        <div className={classes.add_btn_border_working}>
+                          <h3
+                            onClick={() => {
+                              handleAddField();
+                            }}
+                            className={classes.add_field_working}
+                          >
+                            +
+                          </h3>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className={classes.single_row}>
+              <div
+                style={{ width: "100%", alignItems: "normal" }}
+                className={classes.single_row}
+              >
+                <p style={{ marginTop: "17px" }} className={classes.label}>
+                  Amenities
+                </p>
+
+                <Select
                   className={classes.input_field_single}
+                  components={{ Option }}
+                  hideSelectedOptions={false}
+                  options={amenitiesArr}
+                  closeMenuOnSelect={false}
+                  placeholder=" "
+                  isMulti
+                  isClearable
+                  onChange={(e) => {
+                    // addArtist(e);
+                    addAmenities(e);
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className={classes.single_row}>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>City</p>
+                <select
+                  className={classes.input_field_dual}
+                  onChange={(e) => {
+                    setCity(e.target.value);
+                  }}
+                >
+                  <option>Select</option>
+                  {cities?.map((city, index) => (
+                    <option
+                      selected={projectDetails && projectDetails?.city === city}
+                      key={index}
+                      value={city}
+                    >
+                      {city}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>Location</p>
+                <select
+                  className={classes.input_field_dual}
+                  onChange={(e) => {
+                    setLocation(e.target.value);
+                  }}
+                >
+                  <option>Select</option>
+                  {locations?.map((location, index) => (
+                    <option
+                      selected={
+                        projectDetails && projectDetails?.location === location
+                      }
+                      key={index}
+                      value={location}
+                    >
+                      {location}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div
+              style={{ alignItems: "normal" }}
+              className={classes.single_row}
+            >
+              <p className={classes.label}>Address</p>
+              <textarea
+                placeholder={projectDetails ? projectDetails?.address : " "}
+                onChange={(e) => {
+                  setAddress(e.target.value);
+                }}
+                style={{ height: "150px", paddingTop: "10px" }}
+                className={classes.input_field_single}
+              />
+            </div>
+
+            <div className={classes.single_row}>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>Province</p>
+                <select
+                  placeholder="City Name"
+                  className={classes.input_field_dual}
+                  onChange={(e) => {
+                    setProvince(e.target.value);
+                  }}
+                >
+                  <option>Select</option>
+                  <option
+                    selected={
+                      projectDetails && projectDetails?.province === "Punjab"
+                    }
+                    value={"Punjab"}
+                  >
+                    Punjab
+                  </option>
+                  <option
+                    selected={
+                      projectDetails &&
+                      projectDetails?.province === "Baluchistan"
+                    }
+                    value={"Baluchistan"}
+                  >
+                    Baluchistan
+                  </option>
+                  <option
+                    selected={
+                      projectDetails && projectDetails?.province === "KPK"
+                    }
+                    value={"KPK"}
+                  >
+                    KPK
+                  </option>
+                  <option
+                    selected={
+                      projectDetails && projectDetails?.province === "Gilgit"
+                    }
+                    value={"Gilgit"}
+                  >
+                    Gilgit Baltistan
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div className={classes.single_row}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: width < 1011 ? "row-reverse" : "row",
+                  columnGap: width < 1011 && "15px",
+                  width: width < 1011 ? "100%" : "25%",
+                }}
+                className={classes.two_field_container}
+              >
+                <p
+                  style={{
+                    width: "95%",
+                    fontSize: "13px",
+                    color: "rgb(56, 56, 56)",
+                    fontWeight: "bolder",
+                  }}
+                >
+                  Government Approved
+                </p>
+                <input
+                  defaultChecked={projectDetails?.govtApproved}
+                  onChange={(e) => {
+                    setIsGovApproved(e.target.checked);
+                  }}
+                  style={{ width: "10%" }}
+                  type="checkbox"
+                  className={classes.checkbox}
                 />
               </div>
               <div
-                style={{ width: "48%" }}
-                className={classes.input_field_with_label_top_container}
+                style={{
+                  width: width < 1011 ? "100%" : "60%",
+                }}
+                className={classes.two_field_container}
               >
-                <p className={classes.top_label}>To</p>
-                <input
-                  onChange={(e) => {
-                    setPriceUpperBound(e.target.value);
+                <p
+                  style={{
+                    width: "30%",
+                    fontSize: "13px",
+                    color: "rgb(56, 56, 56)",
+                    fontWeight: "bolder",
                   }}
-                  className={classes.input_field_single}
+                >
+                  Approval Body
+                </p>
+                <input
+                  placeholder={
+                    projectDetails ? projectDetails?.approvalBodyName : " "
+                  }
+                  onChange={(e) => {
+                    setApprovalBody(e.target.value);
+                  }}
+                  className={classes.input_field_dual}
                 />
               </div>
             </div>
           </div>
-        </div>
 
-        <div style={{ alignItems: "normal" }} className={classes.single_row}>
-          <p className={classes.label}>Project Description</p>
-          <textarea
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-            style={{ height: "150px", paddingTop: "10px" }}
-            className={classes.input_field_single}
-          />
-        </div>
-
-        {/* <div className={classes.single_row}>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Since</p>
-            <input
-              placeholder="Type Year"
-              className={classes.input_field_dual}
-            />
-          </div>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Projects Developed</p>
-            <input className={classes.input_field_dual} />
-          </div>
-        </div> */}
-
-        <div className={classes.single_row}>
-          <div
-            style={{ width: "100%", alignItems: "normal" }}
-            className={classes.two_field_container}
-          >
-            <p style={{ marginTop: "17px" }} className={classes.label}>
-              Features
-            </p>
-            <div className={classes.infinite_input_fields_container}>
-              {featureArr?.map((feature, index) => (
-                <div
-                  key={index}
-                  style={{ width: "100%" }}
-                  className={classes.looped_input_field_container}
-                >
+          <div className={classes.section}>
+            <h1 className={classes.heading}>Data Upload</h1>
+            <div className={classes.single_row}>
+              <div className={classes.data_tabs_container}>
+                <div className={classes.data_input_container}>
+                  <p>Images</p>
                   <input
-                    style={{ width: "100%", marginBottom: "20px" }}
-                    disabled={featureArr?.length === index + 1 ? true : false}
                     onChange={(e) => {
-                      handleFeaturesInputChange(e.target.value, index);
+                      handleImages(e.target.files);
                     }}
-                    on
-                    placeholder={
-                      featureArr?.length === index + 1
-                        ? "Add more"
-                        : "Feature " + parseInt(index + 1)
-                    }
+                    style={{ width: "100%", marginBottom: "20px" }}
+                    placeholder="Images"
+                    type={"file"}
+                    multiple
                     className={classes.input_field_dual}
                   />
-                  {featureArr?.length === index + 1 && (
-                    <div className={classes.add_btn_border_working}>
-                      <h3
-                        onClick={() => {
-                          handleAddField();
-                        }}
-                        className={classes.add_field_working}
-                      >
-                        +
-                      </h3>
+                  <div className={classes.add_btn_border}>
+                    <h3 className={classes.add_field}>+</h3>
+                  </div>
+                </div>
+
+                <div className={classes.data_input_container}>
+                  <p>Brochure</p>
+
+                  <input
+                    onChange={(e) => {
+                      handleBrochureImages(e.target.files);
+                    }}
+                    multiple
+                    type={"file"}
+                    style={{ width: "100%", marginBottom: "20px" }}
+                    placeholder="Brochure"
+                    className={classes.input_field_dual}
+                  />
+                  <div className={classes.add_btn_border}>
+                    <h3 className={classes.add_field}>+</h3>
+                  </div>
+                </div>
+
+                <div className={classes.data_input_container}>
+                  <p>Price Plan</p>
+
+                  <input
+                    onChange={(e) => {
+                      handlePricePlanImages(e.target.files);
+                    }}
+                    multiple
+                    type={"file"}
+                    style={{ width: "100%", marginBottom: "20px" }}
+                    placeholder="Price Plan"
+                    className={classes.input_field_dual}
+                  />
+                  <div className={classes.add_btn_border}>
+                    <h3 className={classes.add_field}>+</h3>
+                  </div>
+                </div>
+
+                <div className={classes.data_input_container}>
+                  <p>Floor Plan</p>
+
+                  <input
+                    onChange={(e) => {
+                      handleFloorPlanImages(e.target.files);
+                    }}
+                    multiple
+                    type={"file"}
+                    style={{ width: "100%", marginBottom: "20px" }}
+                    placeholder="Floor Plan"
+                    className={classes.input_field_dual}
+                  />
+                  <div className={classes.add_btn_border}>
+                    <h3 className={classes.add_field}>+</h3>
+                  </div>
+                </div>
+
+                <div className={classes.data_input_container}>
+                  <p>Shop Availability</p>
+
+                  <input
+                    onChange={(e) => {
+                      handleShopAvailabilityImages(e.target.files);
+                    }}
+                    multiple
+                    type={"file"}
+                    style={{ width: "100%", marginBottom: "20px" }}
+                    placeholder="Shop Availability"
+                    className={classes.input_field_dual}
+                  />
+                  <div className={classes.add_btn_border}>
+                    <h3 className={classes.add_field}>+</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className={classes.section}>
+            <h1 className={classes.heading}>Project Timelines</h1>
+            <div className={classes.single_row}>
+              <div
+                style={{ width: width < 1011 ? "100%" : "65%" }}
+                className={classes.two_field_container}
+              >
+                <p className={classes.label}>Start Date</p>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    width: width < 1011 ? "100%" : "80%",
+                  }}
+                >
+                  <div
+                    style={{ marginBottom: "0px", width: "48%" }}
+                    className={classes.data_input_container}
+                  >
+                    <p>Image</p>
+                    <input placeholder="Image" type="file" />
+                    <div className={classes.add_btn_border}>
+                      <h3 className={classes.add_field}>+</h3>
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className={classes.single_row}>
-          <div
-            style={{ width: "100%", alignItems: "normal" }}
-            className={classes.single_row}
-          >
-            <p style={{ marginTop: "17px" }} className={classes.label}>
-              Amenities
-            </p>
-
-            <Select
-              className={classes.input_field_single}
-              components={{ Option }}
-              hideSelectedOptions={false}
-              options={amenitiesArr}
-              closeMenuOnSelect={false}
-              placeholder=" "
-              isMulti
-              isClearable
-              onChange={(e) => {
-                // addArtist(e);
-                addAmenities(e);
-              }}
-            />
-          </div>
-        </div>
-
-        <div className={classes.single_row}>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>City</p>
-            <select
-              className={classes.input_field_dual}
-              onChange={(e) => {
-                setCity(e.target.value);
-              }}
-            >
-              <option>Select</option>
-              {cities?.map((city, index) => (
-                <option key={index} value={city}>
-                  {city}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Location</p>
-            <select
-              className={classes.input_field_dual}
-              onChange={(e) => {
-                setLocation(e.target.value);
-              }}
-            >
-              <option>Select</option>
-              {locations?.map((location, index) => (
-                <option key={index} value={location}>
-                  {location}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div style={{ alignItems: "normal" }} className={classes.single_row}>
-          <p className={classes.label}>Address</p>
-          <textarea
-            onChange={(e) => {
-              setAddress(e.target.value);
-            }}
-            style={{ height: "150px", paddingTop: "10px" }}
-            className={classes.input_field_single}
-          />
-        </div>
-
-        <div className={classes.single_row}>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Province</p>
-            <select
-              placeholder="City Name"
-              className={classes.input_field_dual}
-              onChange={(e) => {
-                setProvince(e.target.value);
-              }}
-            >
-              <option>Select</option>
-              <option value={"Punjab"}>Punjab</option>
-              <option value={"Baluchistan"}>Baluchistan</option>
-              <option value={"KPK"}>KPK</option>
-              <option value={"Gilgit"}>Gilgit Baltistan</option>
-            </select>
-          </div>
-        </div>
-
-        <div className={classes.single_row}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: width < 1011 ? "row-reverse" : "row",
-              columnGap: width < 1011 && "15px",
-              width: width < 1011 ? "100%" : "25%",
-            }}
-            className={classes.two_field_container}
-          >
-            <p
-              style={{
-                width: "95%",
-                fontSize: "13px",
-                color: "rgb(56, 56, 56)",
-                fontWeight: "bolder",
-              }}
-            >
-              Government Approved
-            </p>
-            <input
-              onChange={(e) => {
-                setIsGovApproved(e.target.checked);
-              }}
-              style={{ width: "10%" }}
-              type="checkbox"
-              className={classes.checkbox}
-            />
-          </div>
-          <div
-            style={{
-              width: width < 1011 ? "100%" : "60%",
-            }}
-            className={classes.two_field_container}
-          >
-            <p
-              style={{
-                width: "30%",
-                fontSize: "13px",
-                color: "rgb(56, 56, 56)",
-                fontWeight: "bolder",
-              }}
-            >
-              Approval Body
-            </p>
-            <input
-              onChange={(e) => {
-                setApprovalBody(e.target.value);
-              }}
-              className={classes.input_field_dual}
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className={classes.section}>
-        <h1 className={classes.heading}>Data Upload</h1>
-        <div className={classes.single_row}>
-          <div className={classes.data_tabs_container}>
-            <div className={classes.data_input_container}>
-              <p>Images</p>
-              <input
-                onChange={(e) => {
-                  handleImages(e.target.files);
-                }}
-                style={{ width: "100%", marginBottom: "20px" }}
-                placeholder="Images"
-                type={"file"}
-                multiple
-                className={classes.input_field_dual}
-              />
-              <div className={classes.add_btn_border}>
-                <h3 className={classes.add_field}>+</h3>
-              </div>
-            </div>
-
-            <div className={classes.data_input_container}>
-              <p>Brochure</p>
-
-              <input
-                onChange={(e) => {
-                  handleBrochureImages(e.target.files);
-                }}
-                multiple
-                type={"file"}
-                style={{ width: "100%", marginBottom: "20px" }}
-                placeholder="Brochure"
-                className={classes.input_field_dual}
-              />
-              <div className={classes.add_btn_border}>
-                <h3 className={classes.add_field}>+</h3>
-              </div>
-            </div>
-
-            <div className={classes.data_input_container}>
-              <p>Price Plan</p>
-
-              <input
-                onChange={(e) => {
-                  handlePricePlanImages(e.target.files);
-                }}
-                multiple
-                type={"file"}
-                style={{ width: "100%", marginBottom: "20px" }}
-                placeholder="Price Plan"
-                className={classes.input_field_dual}
-              />
-              <div className={classes.add_btn_border}>
-                <h3 className={classes.add_field}>+</h3>
-              </div>
-            </div>
-
-            <div className={classes.data_input_container}>
-              <p>Floor Plan</p>
-
-              <input
-                onChange={(e) => {
-                  handleFloorPlanImages(e.target.files);
-                }}
-                multiple
-                type={"file"}
-                style={{ width: "100%", marginBottom: "20px" }}
-                placeholder="Floor Plan"
-                className={classes.input_field_dual}
-              />
-              <div className={classes.add_btn_border}>
-                <h3 className={classes.add_field}>+</h3>
-              </div>
-            </div>
-
-            <div className={classes.data_input_container}>
-              <p>Shop Availability</p>
-
-              <input
-                onChange={(e) => {
-                  handleShopAvailabilityImages(e.target.files);
-                }}
-                multiple
-                type={"file"}
-                style={{ width: "100%", marginBottom: "20px" }}
-                placeholder="Shop Availability"
-                className={classes.input_field_dual}
-              />
-              <div className={classes.add_btn_border}>
-                <h3 className={classes.add_field}>+</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className={classes.section}>
-        <h1 className={classes.heading}>Project Timelines</h1>
-        <div className={classes.single_row}>
-          <div
-            style={{ width: width < 1011 ? "100%" : "65%" }}
-            className={classes.two_field_container}
-          >
-            <p className={classes.label}>Start Date</p>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: width < 1011 ? "100%" : "80%",
-              }}
-            >
-              <div
-                style={{ marginBottom: "0px", width: "48%" }}
-                className={classes.data_input_container}
-              >
-                <p>Image</p>
-                <input placeholder="Image" type="file" />
-                <div className={classes.add_btn_border}>
-                  <h3 className={classes.add_field}>+</h3>
+                  </div>
+                  <input
+                    onChange={(e) => {
+                      setStartDate(e.target.value);
+                    }}
+                    style={{ width: "48%", paddingRight: "20px" }}
+                    type="date"
+                    className={classes.input_field_dual}
+                  />
                 </div>
               </div>
-              <input
-                onChange={(e) => {
-                  setStartDate(e.target.value);
-                }}
-                style={{ width: "48%", paddingRight: "20px" }}
-                type="date"
-                className={classes.input_field_dual}
-              />
             </div>
-          </div>
-        </div>
 
-        <div className={classes.single_row}>
-          <div
-            style={{ width: width < 1011 ? "100%" : "65%" }}
-            className={classes.two_field_container}
-          >
-            <p className={classes.label}>End Date</p>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: width < 1011 ? "100%" : "80%",
-              }}
-            >
+            <div className={classes.single_row}>
               <div
-                style={{ marginBottom: "0px", width: "48%" }}
-                className={classes.data_input_container}
+                style={{ width: width < 1011 ? "100%" : "65%" }}
+                className={classes.two_field_container}
               >
-                <p>Image</p>
-
-                <input
-                  style={{ width: "100%" }}
-                  type="file"
-                  placeholder="Image"
-                />
-                <div className={classes.add_btn_border}>
-                  <h3 className={classes.add_field}>+</h3>
-                </div>
-              </div>
-              <input
-                onChange={(e) => {
-                  setEndDate(e.target.value);
-                }}
-                style={{ width: "48%", paddingRight: "20px" }}
-                type="date"
-                className={classes.input_field_dual}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className={classes.single_row}>
-          <div
-            style={{ width: width < 1011 ? "100%" : "65%" }}
-            className={classes.two_field_container}
-          >
-            <p className={classes.label}>
-              1st <br /> Milestone
-            </p>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: width < 1011 ? "100%" : "80%",
-              }}
-            >
-              <div
-                style={{ marginBottom: "0px", width: "48%" }}
-                className={classes.data_input_container}
-              >
-                <p>Image</p>
-
-                <input
-                  style={{ width: "100%" }}
-                  type="file"
-                  placeholder="Image"
-                  onChange={(e) => {
-                    handleFirstMilestoneImage(e.target.files);
+                <p className={classes.label}>End Date</p>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    width: width < 1011 ? "100%" : "80%",
                   }}
-                />
-                <div className={classes.add_btn_border}>
-                  <h3 className={classes.add_field}>+</h3>
+                >
+                  <div
+                    style={{ marginBottom: "0px", width: "48%" }}
+                    className={classes.data_input_container}
+                  >
+                    <p>Image</p>
+
+                    <input
+                      style={{ width: "100%" }}
+                      type="file"
+                      placeholder="Image"
+                    />
+                    <div className={classes.add_btn_border}>
+                      <h3 className={classes.add_field}>+</h3>
+                    </div>
+                  </div>
+                  <input
+                    onChange={(e) => {
+                      setEndDate(e.target.value);
+                    }}
+                    style={{ width: "48%", paddingRight: "20px" }}
+                    type="date"
+                    className={classes.input_field_dual}
+                  />
                 </div>
               </div>
-              <input
-                onChange={(e) => {
-                  setFirstMilestone(e.target.value);
-                }}
-                style={{ width: "48%", paddingRight: "20px" }}
-                type="date"
-                className={classes.input_field_dual}
-              />
             </div>
-          </div>
-        </div>
 
-        <div className={classes.single_row}>
-          <div
-            style={{ width: width < 1011 ? "100%" : "65%" }}
-            className={classes.two_field_container}
-          >
-            <p className={classes.label}>
-              2nd <br /> Milestone
-            </p>
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: width < 1011 ? "100%" : "80%",
-              }}
-            >
+            <div className={classes.single_row}>
               <div
-                style={{ marginBottom: "0px", width: "48%" }}
-                className={classes.data_input_container}
+                style={{ width: width < 1011 ? "100%" : "65%" }}
+                className={classes.two_field_container}
               >
-                <p>Image</p>
-
-                <input
-                  style={{ width: "100%" }}
-                  placeholder="Image"
-                  type="file"
-                  onChange={(e) => {
-                    handleSecondMilestoneImage(e.target.files);
+                <p className={classes.label}>
+                  1st <br /> Milestone
+                </p>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    width: width < 1011 ? "100%" : "80%",
                   }}
-                />
-                <div className={classes.add_btn_border}>
-                  <h3 className={classes.add_field}>+</h3>
+                >
+                  <div
+                    style={{ marginBottom: "0px", width: "48%" }}
+                    className={classes.data_input_container}
+                  >
+                    <p>Image</p>
+
+                    <input
+                      style={{ width: "100%" }}
+                      type="file"
+                      placeholder="Image"
+                      onChange={(e) => {
+                        handleFirstMilestoneImage(e.target.files);
+                      }}
+                    />
+                    <div className={classes.add_btn_border}>
+                      <h3 className={classes.add_field}>+</h3>
+                    </div>
+                  </div>
+                  <input
+                    onChange={(e) => {
+                      setFirstMilestone(e.target.value);
+                    }}
+                    value={firstMilestone}
+                    style={{ width: "48%", paddingRight: "20px" }}
+                    type="date"
+                    className={classes.input_field_dual}
+                  />
                 </div>
               </div>
-              <input
-                onChange={(e) => {
-                  setSecondMilestone(e.target.value);
-                }}
-                style={{ width: "48%", paddingRight: "20px" }}
-                type="date"
-                className={classes.input_field_dual}
-              />
             </div>
-          </div>
-        </div>
 
-        <div className={classes.single_row}>
-          <div
-            style={{ width: width < 1011 ? "100%" : "65%" }}
-            className={classes.two_field_container}
-          >
-            <p className={classes.label}>
-              3rd <br /> Milestone
-            </p>
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: width < 1011 ? "100%" : "80%",
-              }}
-            >
+            <div className={classes.single_row}>
               <div
-                style={{ marginBottom: "0px", width: "48%" }}
-                className={classes.data_input_container}
+                style={{ width: width < 1011 ? "100%" : "65%" }}
+                className={classes.two_field_container}
               >
-                <p>Image</p>
-                <input
-                  style={{ width: "100%" }}
-                  placeholder="Image"
-                  type="file"
-                  onChange={(e) => {
-                    handleThirdMilestoneImage(e.target.files);
+                <p className={classes.label}>
+                  2nd <br /> Milestone
+                </p>
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    width: width < 1011 ? "100%" : "80%",
                   }}
-                />
-                <div className={classes.add_btn_border}>
-                  <h3 className={classes.add_field}>+</h3>
+                >
+                  <div
+                    style={{ marginBottom: "0px", width: "48%" }}
+                    className={classes.data_input_container}
+                  >
+                    <p>Image</p>
+
+                    <input
+                      style={{ width: "100%" }}
+                      placeholder="Image"
+                      type="file"
+                      onChange={(e) => {
+                        handleSecondMilestoneImage(e.target.files);
+                      }}
+                    />
+                    <div className={classes.add_btn_border}>
+                      <h3 className={classes.add_field}>+</h3>
+                    </div>
+                  </div>
+                  <input
+                    value={secondMilestone}
+                    onChange={(e) => {
+                      setSecondMilestone(e.target.value);
+                    }}
+                    style={{ width: "48%", paddingRight: "20px" }}
+                    type="date"
+                    className={classes.input_field_dual}
+                  />
                 </div>
               </div>
-              <input
-                onChange={(e) => {
-                  setThirdMilestone(e.target.value);
-                }}
-                style={{ width: "48%", paddingRight: "20px" }}
-                type="date"
-                className={classes.input_field_dual}
-              />
+            </div>
+
+            <div className={classes.single_row}>
+              <div
+                style={{ width: width < 1011 ? "100%" : "65%" }}
+                className={classes.two_field_container}
+              >
+                <p className={classes.label}>
+                  3rd <br /> Milestone
+                </p>
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    width: width < 1011 ? "100%" : "80%",
+                  }}
+                >
+                  <div
+                    style={{ marginBottom: "0px", width: "48%" }}
+                    className={classes.data_input_container}
+                  >
+                    <p>Image</p>
+                    <input
+                      style={{ width: "100%" }}
+                      placeholder="Image"
+                      type="file"
+                      onChange={(e) => {
+                        handleThirdMilestoneImage(e.target.files);
+                      }}
+                    />
+                    <div className={classes.add_btn_border}>
+                      <h3 className={classes.add_field}>+</h3>
+                    </div>
+                  </div>
+                  <input
+                    value={thirdMilestone}
+                    onChange={(e) => {
+                      setThirdMilestone(e.target.value);
+                    }}
+                    style={{ width: "48%", paddingRight: "20px" }}
+                    type="date"
+                    className={classes.input_field_dual}
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className={classes.btn} onClick={handleAddProject}>
-        <p>Add Project</p>
-        {loading && <ClipLoader size={"20px"} color="white" />}
-      </div>
+          <div className={classes.btn} onClick={handleEditProperty}>
+            <p>Edit Project</p>
+            {loading && <ClipLoader size={"20px"} color="white" />}
+          </div>
+        </>
+      )}
     </div>
   );
 }

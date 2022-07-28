@@ -42,9 +42,59 @@
 .tab {
   width: 47%;
   height: 120px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  /* justify-content: center; */
+  column-gap: 25px;
   background-color: white;
-  border-radius: 8px;
+  border-radius: 25px;
   box-shadow: 0 5px 30px 10px rgba(21, 81, 149, 0.146);
+}
+.inbound_outbound {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  row-gap: 10px;
+}
+.inbound_outbound p {
+  font-size: 14px;
+}
+.inbound_outbound > p:nth-child(3) {
+  color: rgb(171, 171, 171);
+  font-size: 11px;
+  cursor: pointer;
+}
+.inbound_outbound > p:nth-child(3):hover {
+  text-decoration: underline;
+}
+.inbound_outbound_text {
+  color: grey;
+}
+.tab_heading {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.tab_heading h1 {
+  font-size: 16px;
+  color: rgb(69, 69, 69);
+}
+.tab_heading p {
+  font-size: 32px;
+  font-weight: bolder;
+  color: #0068ed;
+}
+.row {
+  height: 100%;
+  width: 100%;
 }
 .overlay {
   position: absolute;

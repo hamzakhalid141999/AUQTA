@@ -54,6 +54,8 @@
 .accept_btn,
 .deny_btn {
   display: flex;
+  flex-direction: row;
+  column-gap: 10px;
   justify-content: center;
   align-items: center;
   width: 48%;
