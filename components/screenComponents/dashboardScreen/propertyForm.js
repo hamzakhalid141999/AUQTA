@@ -1396,10 +1396,6 @@ function PropertyForm() {
                     onChange={(e) => {
                       setAccessToNearbyPublicTransport(e.target.checked);
                     }}
-                    defaultChecked={
-                      salientFeatures?.otherFeatures
-                        ?.accessibilityForSpecialOrElderlyPersons
-                    }
                     className={classes.checkbox}
                     type="checkbox"
                   />
@@ -1775,10 +1771,6 @@ function PropertyForm() {
                         e.target.checked
                       );
                     }}
-                    defaultChecked={
-                      salientFeatures?.otherFeatures
-                        ?.accessibilityForSpecialOrElderlyPersons
-                    }
                     className={classes.checkbox}
                     type="checkbox"
                   />
