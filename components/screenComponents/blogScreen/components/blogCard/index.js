@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import classes from "./blogCard.module.css";
 import blog_pic from "../../../../../public/assets/blog_picture.png";
