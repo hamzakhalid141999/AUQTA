@@ -14,33 +14,34 @@ function SignUp() {
   const [userType, setUserType] = useState();
 
   const handleSignup = async () => {
-
     const info = {
-      "username": username,
-      "email": email,
-      "password": password,
-      "firstName": firstName,
-      "lastName": lastName,
-      "country": country,
-      "CNIC": CNIC,
-      "phone": phone,
-      "userType": userType,
+      username: username,
+      email: email,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+      country: country,
+      CNIC: CNIC,
+      phone: phone,
+      userType: userType,
     };
 
     // const json = JSON.stringify(info);
 
-    try{
-      const data = await axios.post("http://localhost:8080/api/auth/signup", info , {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    }
-    catch(err){
+    try {
+      const data = await axios.post(
+        "http://localhost:8080/api/auth/signup",
+        info,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (err) {
       console.log(err);
     }
-    
-  }
+  };
 
   //   const URL = "http://localhost:8080/api/auth/signup";
   //   axios(URL, {
@@ -90,6 +91,7 @@ function SignUp() {
           placeholder="Enter password"
         />
         <input
+          maxLength="13"
           onChange={(e) => {
             setCNIC(e.target.value);
           }}

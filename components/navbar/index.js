@@ -98,7 +98,8 @@ function Navbar() {
         currentPage === "contact" ||
         currentPage === "rent" ||
         currentPage === "confirmUser" ||
-        currentPage === "dashboard"
+        currentPage === "dashboard" ||
+        currentPage === "blogs"
       ) {
         setIsNavbarVisibleFromTop(true);
       } else if (
@@ -107,7 +108,8 @@ function Navbar() {
         currentPage !== "contact" ||
         currentPage !== "rent" ||
         currentPage !== "confirmUser" ||
-        currentPage !== "dashboard"
+        currentPage !== "dashboard" ||
+        currentPage !== "blogs"
       ) {
         setIsNavbarVisibleFromTop(false);
       }
@@ -168,7 +170,10 @@ function Navbar() {
             ? classes.filter_panel
             : classes.filter_panel_hidden
         }
-        style={{ display: currentPage === "dashboard" && "none" }}
+        style={{
+          display:
+            (currentPage === "dashboard" || currentPage === "blogs") && "none",
+        }}
       >
         <div className={classes.filter_panel_content}>
           <div className={classes.btns_container}>
@@ -340,6 +345,17 @@ function Navbar() {
         </Link>
       </div>
       <div className={classes.right_panel}>
+        <Link href={"/blogs"}>
+          <p
+            className={
+              page.includes("faq")
+                ? classes.selected
+                : classes.hover_underline_animation
+            }
+          >
+            BLOGS
+          </p>
+        </Link>
         <Link href={"/FAQ"}>
           <p
             className={

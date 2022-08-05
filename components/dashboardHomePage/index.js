@@ -12,6 +12,7 @@ import PropertyCard from "../../pages/map/components/propertyCard";
 import ProjectCard from "../screenComponents/homeScreen/trendingProperties/components/propertyCard";
 import phone from "../../public/assets/phone_call.png";
 import email from "../../public/assets/email_icon.png";
+import Link from "next/link";
 
 function DashboardHomePage() {
   const { width } = useWindowSize();
@@ -33,7 +34,7 @@ function DashboardHomePage() {
 
   useEffect(() => {
     const fetchProjectsByUserId = async () => {
-      if (user?.id) {
+      if (user?.id && user?.userType === "developer") {
         const data = await getProjectsByUserId(user?.id);
         setProjects(data);
       }
@@ -92,68 +93,78 @@ function DashboardHomePage() {
             <p>VIEW ALL</p>
           </div>
         </div>
-        <div className={classes.tab}>
-          <img src={email.src} style={{ height: "80%" }} />
-          <div className={classes.tab_heading}>
-            <h1>COMPLETED CALLS</h1>
-            <p>23</p>
+        <Link href="/dashboard/inbox">
+          <div className={classes.tab}>
+            <img src={email.src} style={{ height: "80%" }} />
+            <div className={classes.tab_heading}>
+              <h1>COMPLETED MESSAGES</h1>
+              <p>23</p>
+            </div>
+            <div className={classes.inbound_outbound}>
+              <p className={classes.inbound_outbound_text}>
+                <span style={{ color: "#0068ed", fontWeight: "bolder" }}>
+                  13
+                </span>{" "}
+                INBOUND
+              </p>
+              <p className={classes.inbound_outbound_text}>
+                <span style={{ color: "#0068ed", fontWeight: "bolder" }}>
+                  13
+                </span>{" "}
+                OUTBOUND
+              </p>
+              <p>VIEW ALL</p>
+            </div>
           </div>
-          <div className={classes.inbound_outbound}>
-            <p className={classes.inbound_outbound_text}>
-              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>13</span>{" "}
-              INBOUND
-            </p>
-            <p className={classes.inbound_outbound_text}>
-              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>13</span>{" "}
-              OUTBOUND
-            </p>
-            <p>VIEW ALL</p>
-          </div>
-        </div>
+        </Link>
       </div>
 
-      <div className={classes.property_section}>
-        <p className={classes.section_heading}>Properties</p>
-        <div className={classes.property_container}>
-          <div className={classes.overlay} />
-          <Slider slidesToShow={slidesToShow} {...settings}>
-            {properties?.map((property, index) => (
-              <PropertyCard
-                openEdit={true}
-                key={index}
-                propertyId={property?.propertyListing?._id}
-                title={property?.propertyListing?.title}
-                price={property?.propertyListing?.price}
-                location={property?.propertyListing?.location}
-                city={property?.propertyListing?.city}
-                picture={property?.propertyListing?.images[0]}
-              />
-            ))}
-          </Slider>
+      {(user?.userType === "agent" || user?.userType === "developer") && (
+        <div className={classes.property_section}>
+          <p className={classes.section_heading}>Properties</p>
+          <div className={classes.property_container}>
+            <div className={classes.overlay} />
+            <Slider slidesToShow={slidesToShow} {...settings}>
+              {properties?.map((property, index) => (
+                <PropertyCard
+                  openEdit={true}
+                  key={index}
+                  propertyId={property?.propertyListing?._id}
+                  title={property?.propertyListing?.title}
+                  price={property?.propertyListing?.price}
+                  location={property?.propertyListing?.location}
+                  city={property?.propertyListing?.city}
+                  picture={property?.propertyListing?.images[0]}
+                />
+              ))}
+            </Slider>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className={classes.property_section}>
-        <p className={classes.section_heading}>Projects</p>
-        <div className={classes.property_container}>
-          <div className={classes.overlay} />
-          <Slider slidesToShow={slidesToShow} {...settings}>
-            {projects?.map((project, index) => (
-              <ProjectCard
-                openEdit={true}
-                title={project.projectName}
-                description={project.projectDescription}
-                price={project.priceRangeFrom}
-                location={project.location}
-                city={project.city}
-                picture={project.images[0]}
-                key={index}
-                id={project?._id}
-              />
-            ))}
-          </Slider>
+      {user?.userType === "developer" && (
+        <div className={classes.property_section}>
+          <p className={classes.section_heading}>Projects</p>
+          <div className={classes.property_container}>
+            <div className={classes.overlay} />
+            <Slider slidesToShow={slidesToShow} {...settings}>
+              {projects?.map((project, index) => (
+                <ProjectCard
+                  openEdit={true}
+                  title={project.projectName}
+                  description={project.projectDescription}
+                  price={project.priceRangeFrom}
+                  location={project.location}
+                  city={project.city}
+                  picture={project.images[0]}
+                  key={index}
+                  id={project?._id}
+                />
+              ))}
+            </Slider>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

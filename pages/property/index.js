@@ -133,6 +133,7 @@ function Property() {
             propertyDetails={property?.propertyListing}
             propertyListingDetails={property}
             ownerDetails={propertyOwnerDetails}
+            propertyId={propertyId}
           />
           <PictureSection images={property?.propertyListing?.images} />
           <Description property={property} />

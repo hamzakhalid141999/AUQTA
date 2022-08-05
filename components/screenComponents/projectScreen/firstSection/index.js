@@ -6,7 +6,6 @@ import location_pointer from "../../../../public/assets/pin-locator-white.png";
 import Link from "next/link";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-
 import project_brochure from "../../../../public/assets/project_brochure.png";
 import project_floorplan from "../../../../public/assets/project_floorplan.png";
 import project_price from "../../../../public/assets/project_price.png";

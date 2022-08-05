@@ -10,14 +10,38 @@ import bathroom from "../../../../public/assets/bathroom.png";
 import bedroom from "../../../../public/assets/bedroom.png";
 import size from "../../../../public/assets/size.png";
 import ProjectImagesModal from "../../../modals/projectImagesModal.js";
+import InquiryForm from "../../../modals/inquiryForm/index";
 
 function FirstSection({
   images,
   propertyDetails,
   ownerDetails,
   propertyListingDetails,
+  propertyId,
 }) {
+  console.log(ownerDetails?.user?._id);
   const [formattedPrice, setFormattedPrice] = useState();
+  const [open, setOpen] = useState();
+  const [ownerId, setOwnerId] = useState();
+  const [_propertyId, setPropertyId] = useState();
+
+  console.log(propertyDetails);
+
+  const onCloseModal = () => {
+    setOpen(false);
+  };
+
+  const onOpenModal = () => {
+    setOpen(true);
+  };
+
+  useEffect(() => {
+    if (propertyId && ownerDetails) {
+      setPropertyId(propertyId);
+      setOwnerId(ownerDetails?.user?._id);
+    }
+  }, [ownerDetails, propertyId]);
+
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
   const slideImages = [
@@ -55,6 +79,13 @@ function FirstSection({
 
   return (
     <div className={classes.first_section_body}>
+      <InquiryForm
+        propertyName={propertyDetails?.title}
+        ownerId={ownerId}
+        realEstateId={_propertyId}
+        open={open}
+        onCloseModal={onCloseModal}
+      />
       <div className={classes.banner_img_container}>
         <div className={classes.overlay} />
         <Fade arrows={false} style={{ height: "100%" }} easing="ease">
@@ -110,9 +141,13 @@ function FirstSection({
                 </div>
               </Link>
             </div>
-            {/* <div style={{ width: "80%" }} className={classes.banner_btn}>
-              <p>{projectDetails?.approvalBodyName}</p>
-            </div> */}
+            <div
+              style={{ width: "87%" }}
+              onClick={onOpenModal}
+              className={classes.banner_btn}
+            >
+              <p>Inquiry Form</p>
+            </div>
           </div>
         </div>
         <div className={classes.banner_btns_wrapper}>

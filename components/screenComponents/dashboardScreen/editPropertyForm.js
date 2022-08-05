@@ -2790,6 +2790,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
               <div className={classes.two_field_container}>
                 <p className={classes.label_dual}>CNIC#</p>
                 <input
+                  maxLength="13"
                   onChange={(e) => {
                     setContactCnic(e.target.value);
                   }}

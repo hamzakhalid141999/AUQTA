@@ -6,8 +6,8 @@ import { baseURL } from "../../../constants";
 import axios from "axios";
 import { useAuth } from "../../../contextAPI";
 import ClipLoader from "react-spinners/ClipLoader";
-import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function LoginSignupModal({ setOpen, open, onCloseModal }) {

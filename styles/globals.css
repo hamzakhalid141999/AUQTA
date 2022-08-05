@@ -18,7 +18,7 @@ a {
 }
 .slick-list {
   padding-top: 30px !important;
-  height: 420px !important;
+  height: 500px !important;
 }
 .slick-initialized .slick-slide {
   display: flex !important;
@@ -116,6 +116,32 @@ input[type="file"]::file-selector-button {
   .styles_row-title-text__1MuhU {
   font-weight: 600 !important;
   font-size: 22px !important;
+}
+/* Fancy blur effect */
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px rgb(185, 255, 237), 0 0 5px rgb(179, 255, 245);
+  opacity: 1;
+
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
+}
+#nprogress {
+  pointer-events: none;
+}
+#nprogress .bar {
+  background: #0068ed !important;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
 }
 @media screen and (max-width: 910px) {
   .firstSection_input_field__qia1P {

@@ -2188,6 +2188,7 @@ function PropertyForm() {
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>CNIC#</p>
             <input
+              maxLength="13"
               placeholder="XXXXX XXX XXXX X"
               className={classes.input_field_dual}
             />
