@@ -18,6 +18,9 @@ function DashboardSideMenu() {
 
   const bucketBaseUrl = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
+  //users/developer/6299050a03ba683caaea666d/profile/profileImage-8-8-2022-1659963644310.jpeg
+  //users/developer/6299050a03ba683caaea666d/profile/profileImage-8-8-2022-1659963644310.jpeg
+
   const handleImg = async (event) => {
     if (event) {
       setImg(event);
@@ -38,7 +41,6 @@ function DashboardSideMenu() {
       if (user?.id) {
         const data = await fetchUserDetailsById(user?.id);
         setProfilePicture(data?.user?.profilePicture);
-        console.log(data);
       }
     };
 
@@ -74,7 +76,7 @@ function DashboardSideMenu() {
                 body: myBlob,
               });
               const s3Url = response?.url?.split("?")[0];
-              console.log(s3Url);
+              console.log("S3 stored link: ", s3Url);
               success("Profile picture updated!");
             }
           };
@@ -84,7 +86,6 @@ function DashboardSideMenu() {
   }, [imgKey]);
 
   const handleEditUserInformation = async () => {
-    console.log("asdasd");
     try {
       // setLoading(true);
       const data = await axios.post(
@@ -98,7 +99,10 @@ function DashboardSideMenu() {
           },
         }
       );
-      console.log(data?.data?.user?.user?.profilePicture);
+      console.log(
+        "Key stored in table: ",
+        data?.data?.user?.user?.profilePicture
+      );
       // await success();
       setImgKey(data?.data?.user?.user?.profilePicture);
       // setLogoKey(data?.data?.user?.developerLogo);
@@ -154,6 +158,7 @@ function DashboardSideMenu() {
                     type="file"
                   />
                   <img
+                    style={{ pointerEvents: "none" }}
                     className={classes.img}
                     src={bucketBaseUrl + profilePicture}
                   />
