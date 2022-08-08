@@ -8,11 +8,12 @@ import icon3 from "../../../../public/assets/our_mission_3.png";
 import icon4 from "../../../../public/assets/our_mission_4.png";
 import { Typewriter, useTypewriter, Cursor } from "react-simple-typewriter";
 import AOS from "aos";
+import { useWindowSize } from "../../../../utils";
 import "aos/dist/aos.css";
 
 function OurMission() {
   const [isVideo, setIsVideo] = useState(true);
-
+  const { width } = useWindowSize();
   const toggleVideo = () => {
     setIsVideo(!isVideo);
   };
@@ -74,16 +75,42 @@ function OurMission() {
           investment architecture from anywhere around the world.{" "}
         </p>
         <div className={classes.content_container}>
-          <div onClick={toggleVideo} className={classes.image_container}>
+          <div
+            onClick={toggleVideo}
+            className={
+              isVideo
+                ? classes.image_container
+                : classes.image_container_no_hover
+            }
+          >
+            <div className={classes.overlay}>
+              <p>Click to launch Virtual Tour</p>
+            </div>
             {isVideo ? (
-              <video
-                playsInline
-                className={classes.video_card}
-                loop
-                muted
-                autoPlay
-                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/card_video_2.mp4"
-              />
+              width < 786 ? (
+                <a
+                  target={"_blank"}
+                  href="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/vr/Business_District_Bahria_Town_VR.html"
+                >
+                  <video
+                    playsInline
+                    className={classes.video_card}
+                    loop
+                    muted
+                    autoPlay
+                    src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/card_video_2.mp4"
+                  />
+                </a>
+              ) : (
+                <video
+                  playsInline
+                  className={classes.video_card}
+                  loop
+                  muted
+                  autoPlay
+                  src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/media/card_video_2.mp4"
+                />
+              )
             ) : (
               <iframe
                 className={classes.video_card}

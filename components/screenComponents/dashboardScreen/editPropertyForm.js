@@ -1753,7 +1753,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                         className={classes.checkbox}
                         type="checkbox"
                         defaultChecked={
-                          salientFeatures?.utilities?.satelliteOrCableAccess
+                          salientFeatures?.communication
+                            ?.satelliteOrTvCableAccess
                         }
                       />
                       <p className={classes.checkbox_label}>
@@ -1767,7 +1768,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                         }}
                         className={classes.checkbox}
                         type="checkbox"
-                        defaultChecked={salientFeatures?.utilities?.intercom}
+                        defaultChecked={
+                          salientFeatures?.communication?.intercom
+                        }
                       />
                       <p className={classes.checkbox_label}>Intercom</p>
                     </div>
@@ -2212,7 +2215,14 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                       <p className={classes.checkbox_label}>Broadband Access</p>
                     </div>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        defaultChecked={
+                          salientFeatures?.communication
+                            ?.satelliteOrTvCableAccess
+                        }
+                        className={classes.checkbox}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>
                         Sattelite or TV Cable Access
                       </p>

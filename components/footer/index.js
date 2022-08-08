@@ -15,7 +15,7 @@ import { Link } from "react-scroll";
 import { useWindowSize } from "../../utils";
 
 function Footer() {
-  const {width} = useWindowSize();
+  const { width } = useWindowSize();
   return (
     <div className={classes.footer_body}>
       <div className={classes.search_bar_container}>
@@ -25,12 +25,14 @@ function Footer() {
             className={classes.search_bar}
           />
           <div className={classes.search_btn}>
-            {
-              width < 1000 ? 
-              <img src={msg_icon.src} style={{height: '20px', width: '20px'}}/>
-              :
+            {width < 1000 ? (
+              <img
+                src={msg_icon.src}
+                style={{ height: "20px", width: "20px" }}
+              />
+            ) : (
               <p>SUBSCRIBE</p>
-            }
+            )}
           </div>
         </div>
       </div>
@@ -127,18 +129,20 @@ function Footer() {
         <p>CONTACT US</p>
         <div className={classes.contact_us_mobile_section}>
           <div className={classes.contact_tab}>
-            <img src={email.src} style={{width: '23px'}}/>
+            <img src={email.src} style={{ width: "23px" }} />
             <p>info@auqta.com</p>
           </div>
           <div className={classes.contact_tab}>
-            <img src={call.src} style={{width: '23px'}}/>
+            <img src={call.src} style={{ width: "23px" }} />
             <p>+92 331 5008852</p>
           </div>
         </div>
         <div className={classes.socials_container_mobile}>
-        <img src={facebook.src} className={classes.social_media_icon} />
+          <img src={facebook.src} className={classes.social_media_icon} />
           <img src={instagram.src} className={classes.social_media_icon} />
           <img src={twitter.src} className={classes.social_media_icon} />
+          <img src={youtube.src} className={classes.social_media_icon} />
+          <img src={linkedin.src} className={classes.social_media_icon} />
         </div>
       </div>
       <div className={classes.divider} />

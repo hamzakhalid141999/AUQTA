@@ -76,7 +76,7 @@ function DashboardHomePage() {
 
       <div className={classes.calls_msgs_tab_container}>
         <div className={classes.tab}>
-          <img src={phone.src} style={{ height: "80%" }} />
+          <img src={phone.src} className={classes.logo} />
           <div className={classes.tab_heading}>
             <h1>COMPLETED CALLS</h1>
             <p>23</p>
@@ -95,7 +95,7 @@ function DashboardHomePage() {
         </div>
         <Link href="/dashboard/inbox">
           <div className={classes.tab}>
-            <img src={email.src} style={{ height: "80%" }} />
+            <img src={email.src} className={classes.logo} />
             <div className={classes.tab_heading}>
               <h1>COMPLETED MESSAGES</h1>
               <p>23</p>

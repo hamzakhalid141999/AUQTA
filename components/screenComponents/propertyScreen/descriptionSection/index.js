@@ -37,28 +37,6 @@ function Description({ property }) {
           </div>
         </div>
       </div>
-      <div className={classes.services_container}>
-        <div className={classes.image_container}>
-          <Image src={img} className={classes.img} />
-        </div>
-        <div className={classes.description}>
-          <h1>OVERVIEW OF THE LOCATION</h1>
-          <div className={classes.service_description_container}>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut
-              justo et eros suscipit ultricies. Nulla egestas at elit
-              condimentum ultricies. Class aptent taciti sociosqu ad litora
-              torquent per conubia nostra, per inceptos himenaeos. Pellentesque
-              habitant morbi tristique senectus et netus et malesuada fames ac
-              turpis egestas. Nam a fringilla leo. Nulla vestibulum, lorem sed
-              efficitur pharetra, nulla est pharetra purus, sit amet ultricies
-              nunc velit et odio. Aenean ultricies ultrices arcu nec egestas.
-              Etiam nec ligula vel eros hendrerit luctus. Duis vehicula libero
-              ut pretium ultricies.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

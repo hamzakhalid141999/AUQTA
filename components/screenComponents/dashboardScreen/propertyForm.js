@@ -340,7 +340,6 @@ function PropertyForm() {
                 });
                 const s3Url = response?.url?.split("?")[0];
                 imagesUrlTempArr.push(s3Url);
-                console.log("response ", s3Url);
                 if (i === imagesKeysArr?.length - 1) {
                   setIsImageUploadCompleted(true);
                 }
@@ -351,8 +350,6 @@ function PropertyForm() {
       }
     }
   }, [imagesKeysArr]);
-
-  console.log(imagesUrl);
 
   useEffect(() => {
     if (isImageUploadCompleted) {
@@ -570,6 +567,30 @@ function PropertyForm() {
     landMarkArr?.map((landmark) => temp.push(landmark?.value));
     setLandmarksFinalArray(temp);
   };
+
+  const [formattedPrice, setFormattedPrice] = useState();
+
+  useEffect(() => {
+    if (price >= 100000) {
+      const formattedPrice = numDifferentiation(price);
+      setFormattedPrice(formattedPrice);
+    } else {
+      setFormattedPrice();
+    }
+
+    function numDifferentiation(value) {
+      var val = Math.abs(value);
+      if (val >= 10000000) {
+        val = (val / 10000000).toFixed(2) + " Crores";
+      } else if (val >= 100000) {
+        val = (val / 100000).toFixed(2) + " Lac";
+      }
+      return val;
+    }
+  }, [price]);
+
+  console.log(price);
+
   return (
     <div className={classes.form_body}>
       <ToastContainer
@@ -808,16 +829,32 @@ function PropertyForm() {
         </div>
 
         <div className={classes.single_row}>
-          <div className={classes.three_field_container}>
+          <div
+            style={{ marginBottom: width < 786 ? "30px" : "0px" }}
+            className={classes.three_field_container}
+          >
             <p className={classes.label_dual}>Price</p>
-            <input
-              type={"number"}
-              onChange={(e) => {
-                setPrice(e.target.value);
-              }}
-              placeholder="Price (PKR)  "
-              className={classes.input_field_three}
-            />
+            <div style={{ position: "relative", width: "100%" }}>
+              <input
+                type={"number"}
+                onChange={(e) => {
+                  setPrice(e.target.value);
+                }}
+                placeholder="Price (PKR)  "
+                className={classes.input_field_three}
+              />
+              <p
+                style={{
+                  position: "absolute",
+                  left: "0px",
+                  top: "58px",
+                  color: "grey",
+                  fontSize: "12px",
+                }}
+              >
+                {formattedPrice}
+              </p>
+            </div>
           </div>
           <div className={classes.three_field_container}>
             <p className={classes.label_dual}>Size</p>
@@ -2007,6 +2044,10 @@ function PropertyForm() {
                   />
                 ) : (
                   <>
+                    <p style={{ marginBottom: "10px", color: "grey" }}>
+                      COVER IMAGE
+                    </p>
+
                     <div className={classes.add_btn_label}>
                       <h1>+</h1>
                     </div>

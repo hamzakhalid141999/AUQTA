@@ -24,9 +24,11 @@ import { activateProject } from "../../../components/utils/activateProject";
 import { deactivateProject } from "../../../components/utils/deactivateProject";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useWindowSize } from "../../../utils";
 import Inbox from "../../../components/screenComponents/dashboardScreen/inbox";
 
 function Dashboard() {
+  const { width } = useWindowSize();
   const [dashboardType, setDashboardType] = useState();
   const router = useRouter();
   const { id } = router.query;
@@ -125,7 +127,7 @@ function Dashboard() {
           isProperty={dashboardType === "edit_property" ? true : false}
         />
 
-        <DashboardSideMenu />
+        {width > 1060 && <DashboardSideMenu />}
         <div className={classes.dashboard_screen}>
           <DashboardNavbar />
           <div className={classes.dashboard_content_container}>

@@ -45,7 +45,7 @@ function FirstSection({
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
   const slideImages = [
-    "/assets/hotel_1.png",
+    "/assets/first_section_banner_bg.jpg",
     "/assets/hotel_2.png",
     "/assets/hotel_3.png",
     "/assets/hotel_4.png",
@@ -89,15 +89,9 @@ function FirstSection({
       <div className={classes.banner_img_container}>
         <div className={classes.overlay} />
         <Fade arrows={false} style={{ height: "100%" }} easing="ease">
-          {images?.length > 0 ? (
-            images?.map((image, index) => (
-              <div key={index} className={classes.each_slide}>
-                <div style={{ backgroundImage: `url(${image})` }}></div>
-              </div>
-            ))
-          ) : (
-            <></>
-          )}
+          <div className={classes.each_slide}>
+            <div style={{ backgroundImage: `url(${slideImages[0]})` }}></div>
+          </div>
         </Fade>
       </div>
       <div className={classes.first_section_content_section}>

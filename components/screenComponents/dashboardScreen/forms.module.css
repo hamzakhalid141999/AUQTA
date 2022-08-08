@@ -1,6 +1,7 @@
 .form_body {
   width: 100%;
   height: fit-content;
+  max-width: 1030px !important;
 }
 .inbox_container {
   display: flex;

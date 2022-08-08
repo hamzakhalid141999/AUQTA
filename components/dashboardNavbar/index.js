@@ -6,8 +6,10 @@ import Image from "next/image";
 import logout from "../../public/assets/icons/logout.png";
 import settings from "../../public/assets/icons/setting.png";
 import user from "../../public/assets/icons/user.png";
+import { useWindowSize } from "../../utils";
 
 function DashboardNavbar() {
+  const { width } = useWindowSize();
   return (
     <div className={classes.navbar_body}>
       <div className={classes.left_panel}>

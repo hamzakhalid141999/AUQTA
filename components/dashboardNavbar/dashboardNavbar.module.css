@@ -34,3 +34,16 @@
   max-width: 25%;
   cursor: pointer;
 }
+@media screen and (max-width: 1060px) {
+  .navbar_body {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .right_panel {
+    justify-content: flex-end;
+  }
+  .icon {
+    margin-left: 30px;
+    cursor: pointer;
+  }
+}

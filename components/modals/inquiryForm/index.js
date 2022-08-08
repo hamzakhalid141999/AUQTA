@@ -23,7 +23,7 @@ function InquiryForm({
   const [userType, setUserType] = useState();
   const [message, setMessage] = useState();
 
-  console.log(realEstateId, ownerId);
+  console.log(realEstateId, ownerId, propertyName);
 
   useEffect(() => {
     if (open === true) {

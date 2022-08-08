@@ -11,6 +11,7 @@ import project_floorplan from "../../../../public/assets/project_floorplan.png";
 import project_price from "../../../../public/assets/project_price.png";
 import project_image from "../../../../public/assets/projct-imagewhite.png";
 import ProjectImagesModal from "../../../modals/projectImagesModal.js";
+import InquiryForm from "../../../modals/inquiryForm";
 
 function FirstSection({
   projectDetails,
@@ -26,7 +27,7 @@ function FirstSection({
   console.log(projectDetails);
 
   const slideImages = [
-    "/assets/hotel_1.png",
+    "/assets/first_section_banner_bg.jpg",
     "/assets/hotel_2.png",
     "/assets/hotel_3.png",
     "/assets/hotel_4.png",
@@ -40,8 +41,13 @@ function FirstSection({
   const handleModal = () => {
     setOpen(true);
   };
-
   const onCloseModal = () => setOpen(false);
+
+  const [openInquiryForm, setOpenInquiryForm] = useState();
+  const onOpenInquiryForm = () => {
+    setOpenInquiryForm(true);
+  };
+  const onCloseInquiryForm = () => setOpenInquiryForm(false);
 
   function numDifferentiation(value) {
     var val = Math.abs(value);
@@ -84,6 +90,13 @@ function FirstSection({
 
   return (
     <div className={classes.first_section_body}>
+      <InquiryForm
+        propertyName={projectDetails?.projectName}
+        realEstateId={projectDetails?._id}
+        ownerId={projectDetails?.userId?._id}
+        open={openInquiryForm}
+        onCloseModal={onCloseInquiryForm}
+      />
       <ProjectImagesModal
         setOpen={setOpen}
         open={open}
@@ -95,21 +108,6 @@ function FirstSection({
         <Fade arrows={false} style={{ height: "100%" }} easing="ease">
           <div className={classes.each_slide}>
             <div style={{ backgroundImage: `url(${slideImages[0]})` }}></div>
-          </div>
-          <div className={classes.each_slide}>
-            <div style={{ backgroundImage: `url(${slideImages[1]})` }}></div>
-          </div>
-          <div className={classes.each_slide}>
-            <div style={{ backgroundImage: `url(${slideImages[2]})` }}></div>
-          </div>
-          <div className={classes.each_slide}>
-            <div style={{ backgroundImage: `url(${slideImages[3]})` }}></div>
-          </div>
-          <div className={classes.each_slide}>
-            <div style={{ backgroundImage: `url(${slideImages[4]})` }}></div>
-          </div>
-          <div className={classes.each_slide}>
-            <div style={{ backgroundImage: `url(${slideImages[5]})` }}></div>
           </div>
         </Fade>
       </div>
@@ -152,7 +150,7 @@ function FirstSection({
                   },
                 }}
               >
-                <div className={classes.banner_btn}>
+                <div style={{ width: "80%" }} className={classes.banner_btn}>
                   <p>
                     {ownerDetails?.user?.username}
                     <span>{">"}</span>
@@ -160,8 +158,15 @@ function FirstSection({
                 </div>
               </Link>
             </div>
-            <div style={{ width: "80%" }} className={classes.banner_btn}>
+            <div style={{ width: "100%" }} className={classes.banner_btn}>
               <p>{projectDetails?.approvalBodyName}</p>
+            </div>
+            <div
+              onClick={onOpenInquiryForm}
+              style={{ width: "100%" }}
+              className={classes.banner_btn}
+            >
+              <p>Inquiry Form</p>
             </div>
           </div>
         </div>
