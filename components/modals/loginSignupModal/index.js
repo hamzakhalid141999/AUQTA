@@ -281,7 +281,13 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
             )}
 
             {currentState === 1 ? (
-              <>
+              <div
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    signIn();
+                  }
+                }}
+              >
                 <div className={classes.inputField}>
                   <label>Email</label>
                   <input
@@ -325,7 +331,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                 <div className={classes.google_btn}>
                   <p>Continue with Google</p>
                 </div>
-              </>
+              </div>
             ) : currentState === 2 ? (
               <>
                 <div className={classes.inputField}>
