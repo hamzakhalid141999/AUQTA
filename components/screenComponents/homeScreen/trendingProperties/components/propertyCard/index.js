@@ -31,8 +31,6 @@ function PropertyCard({
 
   const [formattedPrice, setFormattedPrice] = useState();
 
-  console.log("OPEN EDIT: ", openEdit);
-
   useEffect(() => {
     if (price) {
       let number = price;

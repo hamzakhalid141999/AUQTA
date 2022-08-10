@@ -99,7 +99,8 @@ function Navbar() {
         currentPage === "rent" ||
         currentPage === "confirmUser" ||
         currentPage === "dashboard" ||
-        currentPage === "blogs"
+        currentPage === "blogs" ||
+        currentPage === "forgotPassword"
       ) {
         setIsNavbarVisibleFromTop(true);
       } else if (
@@ -109,7 +110,8 @@ function Navbar() {
         currentPage !== "rent" ||
         currentPage !== "confirmUser" ||
         currentPage !== "dashboard" ||
-        currentPage !== "blogs"
+        currentPage !== "blogs" ||
+        currentPage !== "forgotPassword"
       ) {
         setIsNavbarVisibleFromTop(false);
       }
@@ -172,7 +174,10 @@ function Navbar() {
         }
         style={{
           display:
-            (currentPage === "dashboard" || currentPage === "blogs") && "none",
+            (currentPage === "dashboard" ||
+              currentPage === "blogs" ||
+              currentPage === "forgotPassword") &&
+            "none",
         }}
       >
         <div className={classes.filter_panel_content}>

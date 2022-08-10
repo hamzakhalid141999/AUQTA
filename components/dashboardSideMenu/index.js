@@ -18,11 +18,14 @@ function DashboardSideMenu() {
 
   const bucketBaseUrl = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
+  console.log("PROFILE PICTURE BEING LOADED: ", bucketBaseUrl + profilePicture);
+
   //users/developer/6299050a03ba683caaea666d/profile/profileImage-8-8-2022-1659964467685.jpeg
   //users/developer/6299050a03ba683caaea666d/profile/profileImage-8-8-2022-1659963644310.jpeg
 
   const handleImg = async (event) => {
     if (event) {
+      console.log(event);
       setImg(event);
       setImagesBlobArr(event);
       setImgArr(event?.name);
@@ -49,6 +52,7 @@ function DashboardSideMenu() {
 
   useEffect(() => {
     if (imgKey) {
+      console.log("Key before upload: ", imgKey);
       const data = {
         fileKey: imgKey,
       };
@@ -78,6 +82,8 @@ function DashboardSideMenu() {
               const s3Url = response?.url?.split("?")[0];
               console.log("S3 stored link: ", s3Url);
               success("Profile picture updated!");
+              setImgArr();
+              setImgKey();
             }
           };
           xhr.send();
@@ -105,6 +111,7 @@ function DashboardSideMenu() {
       );
       // await success();
       setImgKey(data?.data?.user?.user?.profilePicture);
+      console.log("KEY FROM TABLE: ", data?.data?.user?.user?.profilePicture);
       // setLogoKey(data?.data?.user?.developerLogo);
       // setLoading(false);
       // await delay(2000);
@@ -144,10 +151,19 @@ function DashboardSideMenu() {
           <div className={classes.image_container_inner}>
             <div className={classes.image_container}>
               {img ? (
-                <img
-                  className={classes.img}
-                  src={img && URL.createObjectURL(img)}
-                />
+                <>
+                  <input
+                    onChange={(e) => {
+                      handleImg(e.target.files[0], "files");
+                    }}
+                    className={classes.pic_input}
+                    type="file"
+                  />
+                  <img
+                    className={classes.img}
+                    src={img && URL.createObjectURL(img)}
+                  />
+                </>
               ) : profilePicture ? (
                 <>
                   <input
@@ -189,16 +205,24 @@ function DashboardSideMenu() {
           >
             <h1>DASHBOARD</h1>
           </Link>
-          <p>Projects</p>
-          <p>Properties</p>
+          <Link href={"/dashboard/projects"}>
+            <p>Projects</p>
+          </Link>
+          <Link href={"/dashboard/properties"}>
+            <p>Properties</p>
+          </Link>
           <Link href={"/dashboard/add_project"}>
             <p>Add Project</p>
           </Link>
           <Link href={"/dashboard/add_property"}>
             <p>Add Property</p>
           </Link>
-          <p>Developers</p>
-          <p>Agents</p>
+          <Link href={"/dashboard/developers"}>
+            <p>Developers</p>
+          </Link>
+          <Link href={"/dashboard/agents"}>
+            <p>Agents</p>
+          </Link>
           <p>Developers</p>
           <p>Users</p>
           <p>Inquiry Form</p>

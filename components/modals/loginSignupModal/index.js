@@ -7,11 +7,14 @@ import axios from "axios";
 import { useAuth } from "../../../contextAPI";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useRouter } from "next/router";
+import { sendResetPasswordEmail } from "../../utils/sendResetPasswordEmail";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function LoginSignupModal({ setOpen, open, onCloseModal }) {
   const router = useRouter();
+  const [forgotPasswordEmailLoading, setForgotPasswordEmailLoading] =
+    useState(false);
   const [activeTab, setActiveTab] = useState("signin");
   const [loggedInUser, setLoggedInUser] = useState();
   const [signupPassword, setSignupPassword] = useState();
@@ -33,6 +36,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
   const [loading, setLoading] = useState(false);
   const [userType, setUserType] = useState("agent");
   const [termsServiceAgreed, setTermsServiceAgreed] = useState();
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState();
   const [currentState, setCurrentState] = useState(1); //1=Login, 2=Signup, 3=Forget Password
   const toggleAuthScreen = (value) => {
     setActiveTab(value);
@@ -40,6 +44,16 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
 
   const success = () =>
     toast.success("Signed in successfully!", {
+      position: "bottom-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+    });
+
+  const successResetPassEmailSent = () =>
+    toast.success("Email sent!", {
       position: "bottom-center",
       autoClose: 1000,
       hideProgressBar: true,
@@ -111,6 +125,14 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
       console.log(err);
       setLoading(false);
     }
+  };
+
+  const handleForgotPasswordEmail = async () => {
+    const data = await sendResetPasswordEmail(
+      forgotPasswordEmail,
+      setForgotPasswordEmailLoading,
+      successResetPassEmailSent
+    );
   };
 
   useEffect(() => {
@@ -507,16 +529,25 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                   </p>
                   <div className={classes.inputField}>
                     <label>Email</label>
-                    <input type="email" placeholder="Enter email" />
+                    <input
+                      onChange={(e) => {
+                        setForgotPasswordEmail(e.target.value);
+                      }}
+                      type="email"
+                      placeholder="Enter email"
+                    />
                   </div>
 
                   <div
                     onClick={() => {
-                      handleStateChange(1);
+                      handleForgotPasswordEmail();
                     }}
                     className={classes.btn}
                   >
                     <p>Reset</p>
+                    {forgotPasswordEmailLoading && (
+                      <ClipLoader size={"20px"} color="white" />
+                    )}
                   </div>
                 </>
               )

@@ -24,10 +24,16 @@ import { activateProject } from "../../../components/utils/activateProject";
 import { deactivateProject } from "../../../components/utils/deactivateProject";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "../../../contextAPI";
 import { useWindowSize } from "../../../utils";
 import Inbox from "../../../components/screenComponents/dashboardScreen/inbox";
+import AllProperties from "../../../components/screenComponents/dashboardScreen/allProperties";
+import AllProjects from "../../../components/screenComponents/dashboardScreen/allProjects";
+import AllAgents from "../../../components/screenComponents/dashboardScreen/allAgents";
+import AllDevelopers from "../../../components/screenComponents/dashboardScreen/allDevelopers";
 
 function Dashboard() {
+  const { user } = useAuth();
   const { width } = useWindowSize();
   const [dashboardType, setDashboardType] = useState();
   const router = useRouter();
@@ -151,7 +157,9 @@ function Dashboard() {
                       Edit Property details
                     </h1>
                     <p className={classes.subheading}>
-                      Auqta Developer Control System
+                      {user?.userType === "developer"
+                        ? "Auqta Developer Control System"
+                        : "Auqta Agent Control System"}
                     </p>
                   </div>
                   <div className={classes.buttons_container}>
@@ -294,27 +302,65 @@ function Dashboard() {
                   />
                 </div>
               </>
+            ) : dashboardType === "inbox" ? (
+              <>
+                <div className={classes.top_content}>
+                  <div className={classes.heading_contaienr}>
+                    <h1 className={classes.page_section}>All Messages</h1>
+                    <p className={classes.subheading}>Auqta Developer Inbox</p>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    paddingTop: "25px",
+                    paddingBottom: "25px",
+                    paddingLeft: "25px",
+                  }}
+                  className={classes.dashboard_container}
+                >
+                  <Inbox />
+                </div>
+              </>
+            ) : dashboardType === "properties" ? (
+              <>
+                <div className={classes.top_content}>
+                  <div className={classes.heading_contaienr}>
+                    <h1 className={classes.page_section}>All Properties</h1>
+                  </div>
+                </div>
+
+                <AllProperties dashboardType={dashboardType} />
+              </>
+            ) : dashboardType === "projects" ? (
+              <>
+                <div className={classes.top_content}>
+                  <div className={classes.heading_contaienr}>
+                    <h1 className={classes.page_section}>All Projects</h1>
+                  </div>
+                </div>
+
+                <AllProjects dashboardType={dashboardType} />
+              </>
+            ) : dashboardType === "agents" ? (
+              <>
+                <div className={classes.top_content}>
+                  <div className={classes.heading_contaienr}>
+                    <h1 className={classes.page_section}>All Agents</h1>
+                  </div>
+                </div>
+
+                <AllAgents dashboardType={dashboardType} />
+              </>
             ) : (
-              dashboardType === "inbox" && (
+              dashboardType === "developers" && (
                 <>
                   <div className={classes.top_content}>
                     <div className={classes.heading_contaienr}>
-                      <h1 className={classes.page_section}>All Messages</h1>
-                      <p className={classes.subheading}>
-                        Auqta Developer Inbox
-                      </p>
+                      <h1 className={classes.page_section}>All Developers</h1>
                     </div>
                   </div>
-                  <div
-                    style={{
-                      paddingTop: "25px",
-                      paddingBottom: "25px",
-                      paddingLeft: "25px",
-                    }}
-                    className={classes.dashboard_container}
-                  >
-                    <Inbox />
-                  </div>
+
+                  <AllDevelopers dashboardType={dashboardType} />
                 </>
               )
             )}
