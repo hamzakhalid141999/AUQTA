@@ -11,7 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import placeholder from "../../public/assets/placeholder_user.png";
 
-function AgentCard({ picture, name, city, location, description }) {
+function AgentCard({ picture, name, city, location, description, logo }) {
   const [source, setSource] = useState();
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
@@ -30,7 +30,9 @@ function AgentCard({ picture, name, city, location, description }) {
     // >
     <div className={classes.card_body}>
       <div className={classes.logo_container}>
-        <div className={classes.logo_image_container}>{}</div>
+        <div className={classes.logo_image_container}>
+          {logo && <img src={baseS3Url + logo} style={{ height: "90%" }} />}
+        </div>
       </div>
       <div className={classes.image_container}>
         <Image

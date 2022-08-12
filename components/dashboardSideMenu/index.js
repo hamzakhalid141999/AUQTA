@@ -223,9 +223,7 @@ function DashboardSideMenu() {
           <Link href={"/dashboard/agents"}>
             <p>Agents</p>
           </Link>
-          <p>Developers</p>
           <p>Users</p>
-          <p>Inquiry Form</p>
         </div>
       </div>
     </div>

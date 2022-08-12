@@ -12,6 +12,10 @@ import { getAllAgents } from "../../utils/getAllAgents";
 import AgentCard from "../../userCard";
 
 function AllAgents({ dashboardType }) {
+  const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
+  const [loading, setLoading] = useState(true);
+  const [longLatArr, setLongLatArr] = useState([]);
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
   });
@@ -19,6 +23,34 @@ function AllAgents({ dashboardType }) {
   const [agents, setAgents] = useState();
 
   console.log(agents);
+
+  useEffect(() => {
+    const fetchFilteredProperties = async () => {
+      if (agents?.length > 0) {
+        var longlatTempArr = [];
+        for (var i = 0; i < agents?.length; i++) {
+          let url;
+          url =
+            "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+            agents[i]?.companyAddress +
+            agents[i]?.user?.location +
+            agents[i]?.user?.city +
+            "&key=" +
+            GEOCODING_API;
+
+          const data = await axios.get(url);
+          if (data?.data?.results.length > 0) {
+            longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
+          } else {
+            setLoading(false);
+          }
+        }
+        setLoading(false);
+        setLongLatArr(longlatTempArr);
+      }
+    };
+    fetchFilteredProperties();
+  }, [agents]);
 
   useEffect(() => {
     const fetchAgents = async () => {
@@ -36,10 +68,10 @@ function AllAgents({ dashboardType }) {
     return (
       <GoogleMap
         // className={classes.iframe}
-        zoom={10}
+        zoom={7}
         center={{
-          lat: 44,
-          lng: -80,
+          lat: longLatArr[0]?.lat ? longLatArr[0]?.lat : 44,
+          lng: longLatArr[0]?.lng ? longLatArr[0]?.lng : -80,
         }}
         style={{
           height: "700px",
@@ -49,12 +81,15 @@ function AllAgents({ dashboardType }) {
         }}
         mapContainerClassName={classes.map_container}
       >
-        <Marker
-          icon={
-            "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/assets/pin-without-shadow.png"
-          }
-          position={{ lat: 44, lng: -80 }}
-        />
+        {longLatArr?.map((location, index) => (
+          <Marker
+            key={index}
+            icon={
+              "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/assets/pin-without-shadow.png"
+            }
+            position={{ lat: location?.lat, lng: location?.lng }}
+          />
+        ))}
       </GoogleMap>
     );
   }
@@ -81,6 +116,7 @@ function AllAgents({ dashboardType }) {
             location={user?.user?.location}
             picture={user?.user?.profilePicture}
             description={user?.user?.aboutInformation}
+            logo={user?.companyLogo}
           />
         ))}
       </div>
