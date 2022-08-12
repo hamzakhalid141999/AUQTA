@@ -5,7 +5,7 @@ import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function forgotPassword() {
+function ForgotPassword() {
   const [loading, setLoading] = useState();
   const [stage, setStage] = useState(1);
   const [code, setCode] = useState();
@@ -70,4 +70,4 @@ function forgotPassword() {
   );
 }
 
-export default forgotPassword;
+export default ForgotPassword;
