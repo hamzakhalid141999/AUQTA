@@ -79,6 +79,12 @@ input[type="file"]::file-selector-button {
   font-size: 16px !important;
   color: #0068ed !important;
   font-weight: bolder !important;
+  max-width: calc(95%) !important;
+  /* max-width: 230px; */
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
 }
 .navbar_input_field___g1A7 {
   font-size: 14px !important;

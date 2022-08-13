@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import classes from "./forms.module.css";
 import axios from "axios";
 import { baseURL } from "../../../constants";
@@ -9,9 +9,22 @@ import { useAuth } from "../../../contextAPI";
 import { getAllCities } from "../../utils";
 import { useWindowSize } from "../../../utils";
 import { ToastContainer, toast } from "react-toastify";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  StandaloneSearchBox,
+  LoadScript,
+} from "@react-google-maps/api";
 import "react-toastify/dist/ReactToastify.css";
 
 function ProjectForm() {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
+  });
+
+  const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
+
   const { width } = useWindowSize();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
@@ -86,6 +99,11 @@ function ProjectForm() {
   const [isFloorPlanImageUplaoded, setIsFloorPlanImageUploaded] =
     useState(false);
   const [isShopImageUploaded, setIsShopImageUploaded] = useState(false);
+
+  const [lat, setLat] = useState();
+  const [lng, setLng] = useState();
+  const [initialLat, setInitialLat] = useState();
+  const [initialLng, setInitialLng] = useState();
 
   useEffect(async () => {
     const data = await getAllCities();
@@ -322,6 +340,8 @@ function ProjectForm() {
           secondMilestoneImage: secondMilestoneImage,
           thirdMilestoneImage: thirdMilestoneImage,
           userId: user?.id,
+          lat: lat,
+          lng: lng,
         },
         {
           headers: {
@@ -706,6 +726,62 @@ function ProjectForm() {
       draggable: true,
     });
 
+  useEffect(() => {
+    const fetchFilteredProperties = async () => {
+      if (city && location) {
+        let url =
+          "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+          city +
+          location +
+          "&key=" +
+          GEOCODING_API;
+
+        const data = await axios.get(url);
+        console.log(data);
+        if (data?.data?.results.length > 0) {
+          setInitialLat(data?.data?.results[0]?.geometry?.location?.lat);
+          setInitialLng(data?.data?.results[0]?.geometry?.location?.lng);
+          setLat(data?.data?.results[0]?.geometry?.location?.lat);
+          setLng(data?.data?.results[0]?.geometry?.location?.lng);
+        }
+      }
+    };
+    fetchFilteredProperties();
+  }, [city, location]);
+
+  const map = useMemo(() => {
+    return (
+      <>
+        <p style={{ color: "grey", marginBottom: "20px", marginTop: "50px" }}>
+          Move the pin to mark to your desired location
+        </p>
+        <GoogleMap
+          zoom={14}
+          center={{
+            lat: initialLat,
+            lng: initialLng,
+          }}
+          style={{
+            height: "700px",
+            borderBottomLeftRadius: "180px",
+            borderBottomRightRadius: "180px",
+            width: "100%",
+          }}
+          mapContainerClassName={classes.map_container}
+        >
+          <Marker
+            onDragEnd={(e) => {
+              setLat(e.latLng.lat());
+              setLng(e.latLng.lng());
+            }}
+            draggable
+            position={{ lat: initialLat, lng: initialLng }}
+          />
+        </GoogleMap>
+      </>
+    );
+  }, [initialLat, initialLng]);
+
   return (
     <div className={classes.form_body}>
       <ToastContainer
@@ -902,34 +978,33 @@ function ProjectForm() {
           </div>
         </div>
 
-        <div style={{ alignItems: "normal" }} className={classes.single_row}>
+        {city && location ? map : <></>}
+
+        <div className={classes.single_row}>
           <p className={classes.label}>Address</p>
-          <textarea
+          <input
             onChange={(e) => {
               setAddress(e.target.value);
             }}
-            style={{ height: "150px", paddingTop: "10px" }}
             className={classes.input_field_single}
           />
         </div>
 
         <div className={classes.single_row}>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Province</p>
-            <select
-              placeholder="City Name"
-              className={classes.input_field_dual}
-              onChange={(e) => {
-                setProvince(e.target.value);
-              }}
-            >
-              <option>Select</option>
-              <option value={"Punjab"}>Punjab</option>
-              <option value={"Baluchistan"}>Baluchistan</option>
-              <option value={"KPK"}>KPK</option>
-              <option value={"Gilgit"}>Gilgit Baltistan</option>
-            </select>
-          </div>
+          <p className={classes.label_dual}>Province</p>
+          <select
+            placeholder="City Name"
+            className={classes.input_field_single}
+            onChange={(e) => {
+              setProvince(e.target.value);
+            }}
+          >
+            <option>Select</option>
+            <option value={"Punjab"}>Punjab</option>
+            <option value={"Baluchistan"}>Baluchistan</option>
+            <option value={"KPK"}>KPK</option>
+            <option value={"Gilgit"}>Gilgit Baltistan</option>
+          </select>
         </div>
 
         <div className={classes.single_row}>

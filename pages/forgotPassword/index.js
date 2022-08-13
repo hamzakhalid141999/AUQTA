@@ -53,17 +53,23 @@ function ForgotPassword() {
         </p>
         <div className={classes.inputField}>
           <label>New Password</label>
-          <input type="email" placeholder="Enter new password" />
+          <input
+            onChange={(e) => {
+              setNewPassword(e.target.value);
+            }}
+            type="email"
+            placeholder="Enter new password"
+          />
         </div>
 
         <div
-          // onClick={() => {
-          //   handleStateChange(1);
-          // }}
+          onClick={() => {
+            handleResetPassword();
+          }}
           className={classes.btn}
         >
           <p>Reset My Password</p>
-          {/* <ClipLoader size={"20px"} color="white" /> */}
+          {loading && <ClipLoader size={"20px"} color="white" />}
         </div>
       </div>
     </div>

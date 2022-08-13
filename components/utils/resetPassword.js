@@ -3,6 +3,7 @@ import axios from "axios";
 import { baseURL } from "../../constants";
 
 async function resetPassword(code, newPassword, setLoading, success) {
+  console.log(newPassword);
   try {
     setLoading(true);
     const data = await axios.post(

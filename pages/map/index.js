@@ -16,7 +16,7 @@ import { baseURL } from "../../constants";
 
 function Map() {
   const router = useRouter();
-  const searchBox = useRef();
+  const marker = useRef();
   const [loading, setLoading] = useState(true);
   const [searchedParams, setSearchedParams] = useState();
   const [longLatArr, setLongLatArr] = useState([]);
@@ -34,6 +34,8 @@ function Map() {
       setSearchedParams(router.query);
     }
   }, [router]);
+
+  console.log(filteredProperties);
 
   useEffect(() => {
     const fetchFilteredProperties = async () => {
@@ -55,14 +57,33 @@ function Map() {
               GEOCODING_API;
           }
 
-          console.log(filteredProperties[i]);
           const data = await axios.get(url);
-          console.log(data);
-          if (data?.data?.results.length > 0) {
-            longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
+          let longLatObj;
+
+          if (searchedParams?.type) {
+            console.log(
+              "LLAAAAATTTTTT: ",
+              filteredProperties[i]?.propertyListing?.address
+            );
+            longLatArr = {
+              lat: parseFloat(filteredProperties[i]?.propertyListing?.lat),
+              lng: parseFloat(filteredProperties[i]?.propertyListing?.lng),
+            };
+            longlatTempArr.push(longLatArr);
           } else {
-            setLoading(false);
+            console.log("LLAAAAATTTTTT: ", filteredProperties[i]?.lat);
+            longLatArr = {
+              lat: parseFloat(filteredProperties[i]?.lat),
+              lng: parseFloat(filteredProperties[i]?.lng),
+            };
+            longlatTempArr.push(longLatArr);
           }
+          // if (data?.data?.results.length > 0) {
+
+          //   longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
+          // } else {
+          //   setLoading(false);
+          // }
         }
         setLoading(false);
         setLongLatArr(longlatTempArr);
@@ -71,7 +92,7 @@ function Map() {
     fetchFilteredProperties();
   }, [filteredProperties]);
 
-  console.log(filteredProperties);
+  console.log(longLatArr);
 
   useEffect(() => {
     const fetchSearchedProperties = async () => {
@@ -111,6 +132,25 @@ function Map() {
     fetchSearchedProperties();
   }, [searchedParams]);
 
+  useEffect(() => {}, []);
+
+  const [market, setMarker] = useState();
+
+  // const onPositionChanged = () => {
+  //   if (markerRef) {
+  //     // const position = markerRef.getPosition();
+  //     console.log(markerRef);
+  //   }
+  // };
+
+  // const markerRef = undefined;
+
+  // const onMarkerMounted = (ref) => {
+  //   // setMarker(ref);
+  //   console.log("MAARRRKKKEEERRRR REEFFFF: ", ref);
+  //   markerRef = ref;
+  // };
+
   function RenderMap() {
     return (
       <GoogleMap
@@ -137,6 +177,18 @@ function Map() {
             position={{ lat: location?.lat, lng: location?.lng }}
           />
         ))}
+        <Marker
+          // onPositionChanged={onPositionChanged}
+          onDragEnd={(e) => {
+            console.log(e.latLng.lat());
+          }}
+          // ref={onMarkerMounted}
+          draggable
+          position={{
+            lat: longLatArr[0]?.lat ? longLatArr[0]?.lat + 1 : 48,
+            lng: longLatArr[0]?.lng ? longLatArr[0]?.lng + 1 : -88,
+          }}
+        />
       </GoogleMap>
     );
   }

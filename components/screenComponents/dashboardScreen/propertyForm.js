@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import classes from "./forms.module.css";
 import {
   residential_subtypes,
@@ -18,8 +18,21 @@ import ReactTagInput from "@pathofdev/react-tag-input";
 import "@pathofdev/react-tag-input/build/index.css";
 import Select, { components } from "react-select";
 import { getAllCities } from "../../utils";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  StandaloneSearchBox,
+  LoadScript,
+} from "@react-google-maps/api";
 
 function PropertyForm() {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
+  });
+
+  const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
+
   const [loading, setLoading] = useState(false);
 
   const { user } = useAuth();
@@ -139,6 +152,16 @@ function PropertyForm() {
 
   const [cities, setCities] = useState([]);
   const [locations, setLocations] = useState([]);
+
+  const [lat, setLat] = useState();
+  const [lng, setLng] = useState();
+  const [initialLat, setInitialLat] = useState();
+  const [initialLng, setInitialLng] = useState();
+
+  const [contactPhoneWork, setContactPhoneWork] = useState();
+  const [contactPhoneHome, setContactPhoneHome] = useState();
+  const [contactEmail, setContactEmail] = useState();
+  const [contactCnic, setContactCnic] = useState();
 
   const nearbyLandmarksObject = (landmark, name) => ({
     label: landmark,
@@ -283,6 +306,12 @@ function PropertyForm() {
           userId: user?.id,
           hasBasement: "false",
           nearbyLandmarks: landmarksFinalArray,
+          lat: lat,
+          lng: lng,
+          contactCnic: contactCnic,
+          contactEmail: contactEmail,
+          contactPhoneWork: contactPhoneWork,
+          contactPhoneHome: contactPhoneHome,
           // images: [],
         },
         {
@@ -591,6 +620,66 @@ function PropertyForm() {
 
   console.log(price);
 
+  useEffect(() => {
+    const fetchFilteredProperties = async () => {
+      if (city && location) {
+        let url =
+          "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+          city +
+          location +
+          "&key=" +
+          GEOCODING_API;
+
+        const data = await axios.get(url);
+        console.log(data);
+        if (data?.data?.results.length > 0) {
+          setInitialLat(data?.data?.results[0]?.geometry?.location?.lat);
+          setInitialLng(data?.data?.results[0]?.geometry?.location?.lng);
+          setLat(data?.data?.results[0]?.geometry?.location?.lat);
+          setLng(data?.data?.results[0]?.geometry?.location?.lng);
+        }
+      }
+    };
+    fetchFilteredProperties();
+  }, [city, location]);
+
+  console.log("initial values: ", lat, lng);
+
+  const map = useMemo(() => {
+    return (
+      <>
+        <p style={{ color: "grey", marginBottom: "20px", marginTop: "50px" }}>
+          Move the pin to mark to your desired location
+        </p>
+        <GoogleMap
+          zoom={14}
+          center={{
+            lat: initialLat,
+            lng: initialLng,
+          }}
+          style={{
+            height: "700px",
+            borderBottomLeftRadius: "180px",
+            borderBottomRightRadius: "180px",
+            width: "100%",
+          }}
+          mapContainerClassName={classes.map_container}
+        >
+          <Marker
+            onDragEnd={(e) => {
+              setLat(e.latLng.lat());
+              setLng(e.latLng.lng());
+            }}
+            draggable
+            position={{ lat: initialLat, lng: initialLng }}
+          />
+        </GoogleMap>
+      </>
+    );
+  }, [initialLat, initialLng]);
+
+  console.log(lat, ",", lng);
+
   return (
     <div className={classes.form_body}>
       <ToastContainer
@@ -802,6 +891,8 @@ function PropertyForm() {
             </select>
           </div>
         </div>
+
+        {city && location ? map : <></>}
 
         <div className={classes.single_row}>
           <p className={classes.label}>Address</p>
@@ -2205,6 +2296,9 @@ function PropertyForm() {
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>Phone</p>
             <input
+              onChange={(e) => {
+                setContactPhoneWork(e.target.value);
+              }}
               placeholder="Phone (Work)"
               className={classes.input_field_dual}
             />
@@ -2212,6 +2306,9 @@ function PropertyForm() {
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>Phone</p>
             <input
+              onChange={(e) => {
+                setContactPhoneHome(e.target.value);
+              }}
               placeholder="Phone (Home)"
               className={classes.input_field_dual}
             />
@@ -2222,6 +2319,9 @@ function PropertyForm() {
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>Email</p>
             <input
+              onChange={(e) => {
+                setContactEmail(e.target.value);
+              }}
               placeholder="Enter Email"
               className={classes.input_field_dual}
             />
@@ -2229,6 +2329,9 @@ function PropertyForm() {
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>CNIC#</p>
             <input
+              onChange={(e) => {
+                setContactCnic(e.target.value);
+              }}
               maxLength="13"
               placeholder="XXXXX XXX XXXX X"
               className={classes.input_field_dual}

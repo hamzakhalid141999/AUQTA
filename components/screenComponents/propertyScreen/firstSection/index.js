@@ -119,6 +119,7 @@ function FirstSection({
           <div className={classes.btns_container}>
             <div className={classes.upper_btns}>
               <img
+                style={{ width: "20%" }}
                 src={
                   ownerDetails?.user?.userType === "developer"
                     ? baseS3Url + ownerDetails?.developerLogo
@@ -127,20 +128,13 @@ function FirstSection({
                 className={classes.developer_logo}
               />
               <Link href={"/developer"}>
-                <div className={classes.banner_btn}>
+                <div style={{ width: "80%" }} className={classes.banner_btn}>
                   <p>
                     {ownerDetails?.user?.username}
                     <span>{">"}</span>
                   </p>
                 </div>
               </Link>
-            </div>
-            <div
-              style={{ width: "87%" }}
-              onClick={onOpenModal}
-              className={classes.banner_btn}
-            >
-              <p>Inquiry Form</p>
             </div>
           </div>
         </div>
@@ -158,6 +152,18 @@ function FirstSection({
               <img src={bedroom.src} className={classes.img_icon} />
               {propertyListingDetails?.noOfBedrooms}
             </div>
+          </div>
+          <div
+            style={{
+              height: "60px",
+              marginRight: "65px",
+              width: "260px",
+              maxWidth: "260px",
+            }}
+            onClick={onOpenModal}
+            className={classes.banner_btn}
+          >
+            <p>Inquiry Form</p>
           </div>
         </div>
       </div>
