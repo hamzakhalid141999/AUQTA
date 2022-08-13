@@ -161,13 +161,13 @@ function FirstSection({
             <div style={{ width: "100%" }} className={classes.banner_btn}>
               <p>{projectDetails?.approvalBodyName}</p>
             </div>
-            <div
+            {/* <div
               onClick={onOpenInquiryForm}
               style={{ width: "100%" }}
               className={classes.banner_btn}
             >
               <p>Inquiry Form</p>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className={classes.banner_btns_wrapper}>
@@ -194,6 +194,9 @@ function FirstSection({
               <img src={project_image.src} className={classes.img_icon} />
               <a href="#">IMAGES</a>
             </div>
+          </div>
+          <div className={classes.inquiry_btn} onClick={onOpenInquiryForm}>
+            <p>Inquiry Form</p>
           </div>
         </div>
       </div>

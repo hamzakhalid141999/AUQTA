@@ -137,7 +137,10 @@ function Property() {
           />
           <PictureSection images={property?.propertyListing?.images} />
           <Description property={property} />
-          <MainFeaturesSection features={salientFeatures} />
+          <MainFeaturesSection
+            property={property?.propertyListing}
+            features={salientFeatures}
+          />
           <SimilarProperties properties={similarProperties} />
         </>
       )}

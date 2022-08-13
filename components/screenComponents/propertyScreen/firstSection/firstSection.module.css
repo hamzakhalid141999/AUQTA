@@ -240,6 +240,25 @@
 .location_icon {
   height: 30px;
 }
+.inquiry_btn {
+  width: fit-content;
+  background-color: rgba(255, 255, 255, 0.075);
+  backdrop-filter: blur(5px);
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: ease-in-out 200ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent !important;
+  height: 60px;
+  margin-right: 65px;
+  width: 260px;
+  max-width: 260px;
+}
+.inquiry_btn p {
+  color: white;
+}
 @media screen and (max-width: 1316px) {
   .info_and_btns {
     flex-direction: column;
@@ -355,6 +374,9 @@
   .pkr {
     font-size: 11px;
   }
+  .inquiry_btn p {
+    font-size: 12px;
+  }
   .property_location {
     font-size: 11px;
   }
@@ -375,5 +397,8 @@
     align-items: center;
     width: 100%;
     padding-left: 0px;
+  }
+  .inquiry_btn {
+    margin-right: 0px;
   }
 }

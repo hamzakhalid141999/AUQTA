@@ -7,6 +7,8 @@ import { useWindowSize } from "../../../../utils";
 function Description({ property }) {
   const { width } = useWindowSize();
 
+  console.log("PROPERTY: ", property);
+
   return (
     <div className={classes.description_section}>
       <div
@@ -24,15 +26,44 @@ function Description({ property }) {
               <div className={classes.input_field_container_dual}>
                 <label>TYPE</label>
                 <div className={classes.input_field}>
-                  <p>{property?.propertyListing?.type}</p>
+                  <p className={classes.input_value}>
+                    {property?.propertyListing?.type}
+                  </p>
                 </div>
               </div>
               <div className={classes.input_field_container_dual}>
                 <label>SUBTYPE</label>
                 <div className={classes.input_field}>
-                  <p>{property?.subtype}</p>
+                  <p className={classes.input_value}>{property?.subtype}</p>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className={classes.service_description_container}>
+            <div className={classes.input_field_container_dual}>
+              <label>Owner Email</label>
+              {/* <div className={classes.input_field}> */}
+              <p className={classes.info_val}>
+                {property?.propertyListing?.contactEmail}
+              </p>
+              {/* </div> */}
+            </div>
+
+            <div className={classes.input_field_container_dual}>
+              <label>Owner Phone (Home)</label>
+              {/* <div className={classes.input_field}> */}
+              <p className={classes.info_val}>
+                {property?.propertyListing?.contactPhoneHome}
+              </p>
+              {/* </div> */}
+            </div>
+            <div className={classes.input_field_container_dual}>
+              <label>Owner Phone (Work)</label>
+              {/* <div className={classes.input_field}> */}
+              <p className={classes.info_val}>
+                {property?.propertyListing?.contactPhoneWork}
+              </p>
+              {/* </div> */}
             </div>
           </div>
         </div>

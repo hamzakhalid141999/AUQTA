@@ -75,6 +75,25 @@
   align-items: center;
   border: 1px solid transparent !important;
 }
+.inquiry_btn {
+  width: fit-content;
+  background-color: rgba(255, 255, 255, 0.075);
+  backdrop-filter: blur(5px);
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: ease-in-out 200ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent !important;
+  height: 60px;
+  margin-right: 89px;
+  width: 260px;
+  max-width: 260px;
+}
+.inquiry_btn p {
+  color: white;
+}
 .developer_logo {
   width: 20%;
 }
@@ -152,6 +171,9 @@
 .banner_btns_wrapper {
   height: 150px;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   padding-left: 0px;
 }
@@ -300,6 +322,9 @@
   .banner_btn p {
     font-size: 12px;
   }
+  .inquiry_btn p {
+    font-size: 12px;
+  }
   .img_icon {
     width: initial;
     height: 30%;
@@ -357,5 +382,17 @@
   }
   .info_and_btns {
     column-gap: 5px !important;
+  }
+  .banner_btns_wrapper {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-left: 0px;
+  }
+  .inquiry_btn {
+    margin-right: 0px;
   }
 }

@@ -11,6 +11,7 @@ import bedroom from "../../../../public/assets/bedroom.png";
 import size from "../../../../public/assets/size.png";
 import ProjectImagesModal from "../../../modals/projectImagesModal.js";
 import InquiryForm from "../../../modals/inquiryForm/index";
+import project_image from "../../../../public/assets/projct-imagewhite.png";
 
 function FirstSection({
   images,
@@ -24,6 +25,12 @@ function FirstSection({
   const [open, setOpen] = useState();
   const [ownerId, setOwnerId] = useState();
   const [_propertyId, setPropertyId] = useState();
+
+  const [openPicModal, setOpenPicModal] = useState();
+  const handlePicModal = () => {
+    setOpenPicModal(true);
+  };
+  const onClosePicModal = () => setOpenPicModal(false);
 
   console.log(propertyDetails);
 
@@ -85,6 +92,12 @@ function FirstSection({
         realEstateId={_propertyId}
         open={open}
         onCloseModal={onCloseModal}
+      />
+      <ProjectImagesModal
+        setOpen={setOpenPicModal}
+        open={openPicModal}
+        onCloseModal={onClosePicModal}
+        pictures={propertyDetails?.images}
       />
       <div className={classes.banner_img_container}>
         <div className={classes.overlay} />
@@ -152,17 +165,12 @@ function FirstSection({
               <img src={bedroom.src} className={classes.img_icon} />
               {propertyListingDetails?.noOfBedrooms}
             </div>
+            <div onClick={handlePicModal} className={classes.btn_body}>
+              <img src={project_image.src} className={classes.img_icon} />
+              <a href="#">IMAGES</a>
+            </div>
           </div>
-          <div
-            style={{
-              height: "60px",
-              marginRight: "65px",
-              width: "260px",
-              maxWidth: "260px",
-            }}
-            onClick={onOpenModal}
-            className={classes.banner_btn}
-          >
+          <div onClick={onOpenModal} className={classes.inquiry_btn}>
             <p>Inquiry Form</p>
           </div>
         </div>
