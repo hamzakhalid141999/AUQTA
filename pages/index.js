@@ -7,9 +7,32 @@ import FindSection from "../components/screenComponents/homeScreen/findSection";
 import OurMission from "../components/screenComponents/homeScreen/ourMission";
 import TrendingProperties from "../components/screenComponents/homeScreen/trendingProperties";
 import { getHomePageProjects } from "../components/utils/fetchProjectsByProvince";
+import ComingSoonModal from "../components/modals/comingSoonProjectModal";
 
 export default function Home() {
   const [projects, setProjects] = useState([]);
+
+  const [open, setOpen] = useState();
+
+  useEffect(() => {
+    const handleOpen = () => {
+      if (typeof window !== undefined) {
+        if (
+          window.localStorage.getItem("comingSoon") === undefined ||
+          window.localStorage.getItem("comingSoon") !== "false"
+        ) {
+          setOpen(true);
+        }
+      }
+    };
+
+    handleOpen();
+  }, []);
+
+  const onCloseHandle = () => {
+    setOpen(false);
+    window.localStorage.setItem("comingSoon", false);
+  };
 
   useEffect(() => {
     const getProjects = async () => {
@@ -25,6 +48,11 @@ export default function Home() {
     <div className={classes.main_body}>
       <div className={classes.main_bg}>
         <Image alt="bg" className={classes.bg} layout="fill" src={bg} />
+        <ComingSoonModal
+          setOpen={setOpen}
+          open={open}
+          onCloseModal={onCloseHandle}
+        />
         <HomeFirstSection />
         <OurMission />
         <FindSection />
