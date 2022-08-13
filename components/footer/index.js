@@ -138,23 +138,36 @@ function Footer() {
           </div>
         </div>
         <div className={classes.socials_container_mobile}>
-          <a href={"https://www.facebook.com/auqta.platforms/"} target="_blank">
+          <a
+            href={"https://www.facebook.com/auqta.platforms/"}
+            rel="noreferrer"
+            target="_blank"
+          >
             {" "}
             <img src={facebook.src} className={classes.social_media_icon} />
           </a>
           <a
             href={"https://www.instagram.com/auqta.platforms/"}
             target="_blank"
+            rel="noreferrer"
           >
             <img src={instagram.src} className={classes.social_media_icon} />
           </a>
-          <a href={"https://twitter.com/auqta_platforms"} target="_blank">
+          <a
+            href={"https://twitter.com/auqta_platforms"}
+            target="_blank"
+            rel="noreferrer"
+          >
             <img src={twitter.src} className={classes.social_media_icon} />
           </a>
-          <a href={""} target="_blank">
+          <a href={""} target="_blank" rel="noreferrer">
             <img src={youtube.src} className={classes.social_media_icon} />
           </a>
-          <a href={"https://www.linkedin.com/company/auqta/"} target="_blank">
+          <a
+            href={"https://www.linkedin.com/company/auqta/"}
+            target="_blank"
+            rel="noreferrer"
+          >
             <img src={linkedin.src} className={classes.social_media_icon} />
           </a>
         </div>
@@ -183,23 +196,36 @@ function Footer() {
         </div>
         <div className={classes.social_media_icons}>
           Follow us
-          <a href={"https://www.facebook.com/auqta.platforms/"} target="_blank">
+          <a
+            href={"https://www.facebook.com/auqta.platforms/"}
+            target="_blank"
+            rel="noreferrer"
+          >
             {" "}
             <img src={facebook.src} className={classes.social_media_icon} />
           </a>
           <a
             href={"https://www.instagram.com/auqta.platforms/"}
             target="_blank"
+            rel="noreferrer"
           >
             <img src={instagram.src} className={classes.social_media_icon} />
           </a>
-          <a href={"https://twitter.com/auqta_platforms"} target="_blank">
+          <a
+            href={"https://twitter.com/auqta_platforms"}
+            target="_blank"
+            rel="noreferrer"
+          >
             <img src={twitter.src} className={classes.social_media_icon} />
           </a>
-          <a href={""} target="_blank">
+          <a href={""} target="_blank" rel="noreferrer">
             <img src={youtube.src} className={classes.social_media_icon} />
           </a>
-          <a href={"https://www.linkedin.com/company/auqta/"} target="_blank">
+          <a
+            href={"https://www.linkedin.com/company/auqta/"}
+            target="_blank"
+            rel="noreferrer"
+          >
             <img src={linkedin.src} className={classes.social_media_icon} />
           </a>
         </div>
