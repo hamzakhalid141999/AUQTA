@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import classes from "./contentSection.module.css";
 import bullet from "../../../../public/assets/bullet.png";
