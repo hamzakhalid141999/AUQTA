@@ -28,7 +28,7 @@ export default function Home() {
         <HomeFirstSection />
         <OurMission />
         <FindSection />
-        <TrendingProperties investmentProjects={projects} />
+        <TrendingProperties fromHome={true} investmentProjects={projects} />
         {/* <NewsSection/> */}
       </div>
     </div>

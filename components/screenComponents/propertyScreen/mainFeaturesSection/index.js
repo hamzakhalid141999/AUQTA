@@ -7,6 +7,7 @@ import {
   StandaloneSearchBox,
   LoadScript,
 } from "@react-google-maps/api";
+import bullet from "../../../../public/assets/bullet.png";
 
 function MainFeaturesSection({ property, features }) {
   const { isLoaded } = useLoadScript({
@@ -160,7 +161,8 @@ function MainFeaturesSection({ property, features }) {
               {features?.mainFeatures?.nearbyLandmarks?.map(
                 (landmark, index) => (
                   <div key={index} className={classes.bullets_container}>
-                    <div className={classes.bullet} />
+                    <img src={bullet.src} style={{ height: "10px" }} />
+
                     <p>{landmark}</p>
                   </div>
                 )
@@ -179,7 +181,7 @@ function MainFeaturesSection({ property, features }) {
                   ?.filter((feature, idx) => feature?.value === true)
                   ?.map((feature, index) => (
                     <div key={index} className={classes.bullets_container}>
-                      <div className={classes.bullet} />
+                      <img src={bullet.src} style={{ height: "10px" }} />
                       <p>{feature?.label}</p>
                     </div>
                   ))}
@@ -199,7 +201,7 @@ function MainFeaturesSection({ property, features }) {
                   ?.filter((feature, idx) => feature?.value === true)
                   ?.map((feature, index) => (
                     <div key={index} className={classes.bullets_container}>
-                      <div className={classes.bullet} />
+                      <img src={bullet.src} style={{ height: "10px" }} />
                       <p>{feature?.label}</p>
                     </div>
                   ))}
@@ -218,7 +220,7 @@ function MainFeaturesSection({ property, features }) {
                   ?.filter((feature, idx) => feature?.value === true)
                   ?.map((feature, index) => (
                     <div key={index} className={classes.bullets_container}>
-                      <div className={classes.bullet} />
+                      <img src={bullet.src} style={{ height: "10px" }} />
                       <p>{feature?.label}</p>
                     </div>
                   ))}
@@ -238,7 +240,7 @@ function MainFeaturesSection({ property, features }) {
                   ?.filter((feature, idx) => feature?.value === true)
                   ?.map((feature, index) => (
                     <div key={index} className={classes.bullets_container}>
-                      <div className={classes.bullet} />
+                      <img src={bullet.src} style={{ height: "10px" }} />
                       <p>{feature?.label}</p>
                     </div>
                   ))}
@@ -257,7 +259,7 @@ function MainFeaturesSection({ property, features }) {
                   ?.filter((feature, idx) => feature?.value === true)
                   ?.map((feature, index) => (
                     <div key={index} className={classes.bullets_container}>
-                      <div className={classes.bullet} />
+                      <img src={bullet.src} style={{ height: "10px" }} />
                       <p>{feature?.label}</p>
                     </div>
                   ))}
@@ -277,7 +279,7 @@ function MainFeaturesSection({ property, features }) {
                   ?.filter((feature, idx) => feature?.value === true)
                   ?.map((feature, index) => (
                     <div key={index} className={classes.bullets_container}>
-                      <div className={classes.bullet} />
+                      <img src={bullet.src} style={{ height: "10px" }} />
                       <p>{feature?.label}</p>
                     </div>
                   ))}

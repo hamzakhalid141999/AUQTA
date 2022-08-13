@@ -11,8 +11,8 @@ import call from "../../public/assets/call.png";
 import email from "../../public/assets/email.png";
 import msg_icon from "../../public/assets/message_icon.png";
 import pin_white from "../../public/assets/pin-locator-white.png";
-import { Link } from "react-scroll";
 import { useWindowSize } from "../../utils";
+import Link from "next/link";
 
 function Footer() {
   const { width } = useWindowSize();
@@ -138,30 +138,70 @@ function Footer() {
           </div>
         </div>
         <div className={classes.socials_container_mobile}>
-          <img src={facebook.src} className={classes.social_media_icon} />
-          <img src={instagram.src} className={classes.social_media_icon} />
-          <img src={twitter.src} className={classes.social_media_icon} />
-          <img src={youtube.src} className={classes.social_media_icon} />
-          <img src={linkedin.src} className={classes.social_media_icon} />
+          <a href={"https://www.facebook.com/auqta.platforms/"} target="_blank">
+            {" "}
+            <img src={facebook.src} className={classes.social_media_icon} />
+          </a>
+          <a
+            href={"https://www.instagram.com/auqta.platforms/"}
+            target="_blank"
+          >
+            <img src={instagram.src} className={classes.social_media_icon} />
+          </a>
+          <a href={"https://twitter.com/auqta_platforms"} target="_blank">
+            <img src={twitter.src} className={classes.social_media_icon} />
+          </a>
+          <a href={""} target="_blank">
+            <img src={youtube.src} className={classes.social_media_icon} />
+          </a>
+          <a href={"https://www.linkedin.com/company/auqta/"} target="_blank">
+            <img src={linkedin.src} className={classes.social_media_icon} />
+          </a>
         </div>
       </div>
+      <Link href={"terms_and_conditions"}>
+        <p className={classes.mobile_terms_conditions}>
+          TERMS - PRIVACY - COOKIE POLICY
+        </p>
+      </Link>
+
       <div className={classes.divider} />
       <div className={classes.lower_content_container}>
         <div className={classes.lower_content}>
           <div className={classes.left_content}>
             <p>AUQTA. 2022 ALL RIGHTS RESERVED</p>
-            <p>TERMS</p>
-            <p>PRIVACY</p>
-            <p>COOKIE POLICY</p>
+            <Link href="/terms_and_conditions">
+              <p>TERMS</p>
+            </Link>
+            <Link href="/terms_and_conditions">
+              <p>PRIVACY</p>
+            </Link>
+            <Link href="/terms_and_conditions">
+              <p>COOKIE POLICY</p>
+            </Link>
           </div>
         </div>
         <div className={classes.social_media_icons}>
           Follow us
-          <img src={facebook.src} className={classes.social_media_icon} />
-          <img src={instagram.src} className={classes.social_media_icon} />
-          <img src={twitter.src} className={classes.social_media_icon} />
-          <img src={youtube.src} className={classes.social_media_icon} />
-          <img src={linkedin.src} className={classes.social_media_icon} />
+          <a href={"https://www.facebook.com/auqta.platforms/"} target="_blank">
+            {" "}
+            <img src={facebook.src} className={classes.social_media_icon} />
+          </a>
+          <a
+            href={"https://www.instagram.com/auqta.platforms/"}
+            target="_blank"
+          >
+            <img src={instagram.src} className={classes.social_media_icon} />
+          </a>
+          <a href={"https://twitter.com/auqta_platforms"} target="_blank">
+            <img src={twitter.src} className={classes.social_media_icon} />
+          </a>
+          <a href={""} target="_blank">
+            <img src={youtube.src} className={classes.social_media_icon} />
+          </a>
+          <a href={"https://www.linkedin.com/company/auqta/"} target="_blank">
+            <img src={linkedin.src} className={classes.social_media_icon} />
+          </a>
         </div>
       </div>
     </div>

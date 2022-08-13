@@ -75,20 +75,17 @@ function OurMission() {
           investment architecture from anywhere around the world.{" "}
         </p>
         <div className={classes.content_container}>
-          <div
-            onClick={toggleVideo}
-            className={
-              isVideo
-                ? classes.image_container
-                : classes.image_container_no_hover
-            }
-          >
-            <div className={classes.overlay}>
-              <p>Click to launch Virtual Tour</p>
-            </div>
+          <div onClick={toggleVideo} className={classes.image_container}>
+            <p
+              style={{ display: isVideo ? "flex" : "none", color: "grey" }}
+              className={classes.virtual_tour_text}
+            >
+              Click above to launch Virtual Tour
+            </p>
             {isVideo ? (
               width < 786 ? (
                 <a
+                  className={classes.tour_link}
                   rel="noreferrer"
                   target={"_blank"}
                   href="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/vr/Business_District_Bahria_Town_VR.html"

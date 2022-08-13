@@ -3,8 +3,47 @@ import classes from "./firstSection.module.css";
 import Image from "next/image";
 import banner_img from "../../../../public/assets/contact_us_banner_img.png";
 import Contact_Form from "./form";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  StandaloneSearchBox,
+  LoadScript,
+} from "@react-google-maps/api";
 
 function FirstSection() {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
+  });
+
+  const RenderMap = () => {
+    return (
+      <>
+        <GoogleMap
+          zoom={14}
+          center={{
+            lat: 33.52591987135425,
+            lng: 73.11186914233437,
+          }}
+          style={{
+            height: "700px",
+            borderBottomLeftRadius: "180px",
+            borderBottomRightRadius: "180px",
+            width: "100%",
+          }}
+          mapContainerClassName={classes.map_container}
+        >
+          <Marker
+            // icon={
+            //   "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/assets/pin-without-shadow.png"
+            // }
+            position={{ lat: 33.52591987135425, lng: 73.11186914233437 }}
+          />
+        </GoogleMap>
+      </>
+    );
+  };
+
   return (
     <div className={classes.main_container}>
       <div
@@ -14,18 +53,7 @@ function FirstSection() {
           borderBottomLeftRadius: "30px",
         }}
       >
-        <iframe
-          className={classes.iframe_container}
-          allowFullScreen
-          width="100%"
-          frameBorder="0"
-          scrolling="no"
-          marginHeight="0"
-          marginWidth="0"
-          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-        >
-          <a href="https://www.gps.ie/marine-gps/">marine gps</a>
-        </iframe>
+        {isLoaded ? <RenderMap /> : <></>}
       </div>
 
       <div className={classes.dashboard_container}>

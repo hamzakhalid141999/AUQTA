@@ -20,6 +20,7 @@ function PropertyCard({
   isProject,
   city,
   id,
+  hardCodedProperty,
   openEdit,
 }) {
   const [source, setSource] = useState();
@@ -43,54 +44,117 @@ function PropertyCard({
   }, [price]);
 
   return (
-    <Link
-      href={{
-        pathname: openEdit === true ? "/dashboard/edit_project" : "/project",
-        query: {
-          projectId: id,
-        },
-      }}
-    >
-      <div className={classes.card_body}>
-        <div className={classes.image_container}>
-          <Image
-            layout="fill"
-            className={classes.property_picture}
-            src={picture ? source : placeholder}
-            onError={() => {
-              setSource(placeholder);
-            }}
-            alt="picture"
-          />
-        </div>
-        <div className={classes.description_container}>
-          <div className={classes.title_and_price_container}>
-            <p className={classes.title}>{title}</p>
-          </div>
-          <div className={classes.location_container}>
-            <FontAwesomeIcon
-              className={classes.location_icon}
-              icon={faMapMarker}
-              size={"1x"}
-            />
-            <p className={classes.location}>
-              {location}, {city}
-            </p>
-          </div>
-          <div className={classes.property_description_container}>
-            <p>{description}</p>
-          </div>
-          <div className={classes.bottom_description_container}>
-            <p className={classes.price}>{formattedPrice}</p>
-            <FontAwesomeIcon
-              className={classes.heart_icon}
-              icon={faHeart}
-              size={"1x"}
+    <>
+      {hardCodedProperty ? (
+        <div className={classes.card_body}>
+          <div className={classes.image_container}>
+            <Image
+              layout="fill"
+              className={classes.property_picture}
+              src={
+                picture ? (hardCodedProperty ? picture : source) : placeholder
+              }
+              onError={() => {
+                setSource(placeholder);
+              }}
+              alt="picture"
             />
           </div>
+          <div className={classes.description_container}>
+            <div className={classes.title_and_price_container}>
+              <p className={classes.title}>{title}</p>
+            </div>
+            {!hardCodedProperty && (
+              <>
+                <div className={classes.location_container}>
+                  <FontAwesomeIcon
+                    className={classes.location_icon}
+                    icon={faMapMarker}
+                    size={"1x"}
+                  />
+                  <p className={classes.location}>
+                    {location}, {city}
+                  </p>
+                </div>
+              </>
+            )}
+
+            <div className={classes.property_description_container}>
+              <p>{description}</p>
+            </div>
+            {!hardCodedProperty && (
+              <div className={classes.bottom_description_container}>
+                <p className={classes.price}>{formattedPrice}</p>
+                <FontAwesomeIcon
+                  className={classes.heart_icon}
+                  icon={faHeart}
+                  size={"1x"}
+                />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </Link>
+      ) : (
+        <Link
+          href={{
+            pathname:
+              openEdit === true ? "/dashboard/edit_project" : "/project",
+            query: {
+              projectId: id,
+            },
+          }}
+        >
+          <div className={classes.card_body}>
+            <div className={classes.image_container}>
+              <Image
+                layout="fill"
+                className={classes.property_picture}
+                src={
+                  picture ? (hardCodedProperty ? picture : source) : placeholder
+                }
+                onError={() => {
+                  setSource(placeholder);
+                }}
+                alt="picture"
+              />
+            </div>
+            <div className={classes.description_container}>
+              <div className={classes.title_and_price_container}>
+                <p className={classes.title}>{title}</p>
+              </div>
+              {!hardCodedProperty && (
+                <>
+                  <div className={classes.location_container}>
+                    <FontAwesomeIcon
+                      className={classes.location_icon}
+                      icon={faMapMarker}
+                      size={"1x"}
+                    />
+                    <p className={classes.location}>
+                      {location}, {city}
+                    </p>
+                  </div>
+                </>
+              )}
+
+              <div className={classes.property_description_container}>
+                <p>{description}</p>
+              </div>
+              {!hardCodedProperty && (
+                <div className={classes.bottom_description_container}>
+                  <p className={classes.price}>{formattedPrice}</p>
+                  <FontAwesomeIcon
+                    className={classes.heart_icon}
+                    icon={faHeart}
+                    size={"1x"}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </Link>
+      )}
+    </>
   );
 }
 

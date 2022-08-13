@@ -5,12 +5,15 @@ import cardInfo from "./components/propertyCard/cardInfo";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useWindowSize } from "../../../../utils";
+import kmk from "../../../../public/assets/comingSoonProjects/kmk_towers.jpg";
+import gulberg from "../../../../public/assets/comingSoonProjects/gulberg_mall.jpg";
 
 function TrendingProperties({
   isProject,
   heading,
   noButtons,
   investmentProjects,
+  fromHome,
 }) {
   const { width } = useWindowSize();
   const [citySelected, setCitySelected] = useState("ISLAMABAD");
@@ -116,8 +119,25 @@ function TrendingProperties({
           // data-aos="fade-up"
           className={classes.property_cards_container}
         >
+          {fromHome && (
+            <>
+              <PropertyCard
+                hardCodedProperty={true}
+                title={"KMK Towers"}
+                description={"Coming Soon"}
+                picture={kmk}
+              />
+              <PropertyCard
+                hardCodedProperty={true}
+                isProject={isProject}
+                title={"Gulberg Mall"}
+                description={"Coming Soon"}
+                picture={gulberg}
+              />
+            </>
+          )}
           {investmentProjects
-            ?.filter((project, index) => (width < 1177 ? index < 3 : index < 4))
+            ?.filter((project, index) => (width < 1177 ? index < 1 : index < 2))
             .map((project, index) => (
               <PropertyCard
                 isProject={isProject}
