@@ -80,7 +80,18 @@ function PropertyCard({
             )}
 
             <div className={classes.property_description_container}>
-              <p>{description}</p>
+              <p
+                style={{
+                  color: "#0068ed",
+                  fontWeight: "bolder",
+                  fontSize: "20px",
+                  width: "100%",
+                  textAlign: "center",
+                  marginTop: "35px",
+                }}
+              >
+                {description}
+              </p>
             </div>
             {!hardCodedProperty && (
               <div className={classes.bottom_description_container}>
