@@ -361,7 +361,7 @@ function Navbar() {
         <Link href={"/blogs"}>
           <p
             className={
-              page.includes("faq")
+              page.includes("blogs")
                 ? classes.selected
                 : classes.hover_underline_animation
             }
@@ -372,7 +372,7 @@ function Navbar() {
         <Link href={"/FAQ"}>
           <p
             className={
-              page.includes("faq")
+              page.includes("FAQ")
                 ? classes.selected
                 : classes.hover_underline_animation
             }
@@ -404,7 +404,15 @@ function Navbar() {
         </Link>
 
         <Link href={"/contact"}>
-          <p className={classes.hover_underline_animation}>CONTACT US</p>
+          <p
+            className={
+              page.includes("contact")
+                ? classes.selected
+                : classes.hover_underline_animation
+            }
+          >
+            CONTACT US
+          </p>
         </Link>
 
         <Link href={"#"}>
@@ -428,18 +436,6 @@ function Navbar() {
                 </div>
               )}
             </div>
-
-            {user && (
-              <div
-                className={
-                  backgroundColor === "opaque"
-                    ? classes.add_btn_black
-                    : classes.add_btn
-                }
-              >
-                <p>+</p>
-              </div>
-            )}
           </div>
         </Link>
 
