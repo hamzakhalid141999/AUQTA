@@ -2,7 +2,7 @@
 
 import React from "react";
 import classes from "./contentSection.module.css";
-import bullet from "../../../../public/assets/bullet.png";
+import bullet_auqta from "../../../../public/assets/bullet_auqta.png";
 
 function ContentSection() {
   return (
@@ -34,7 +34,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -48,7 +48,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -60,7 +60,7 @@ function ContentSection() {
           <p className={classes.med_heading}>General Disclaimer:</p>
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -74,7 +74,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -89,7 +89,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -103,7 +103,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -116,7 +116,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -130,7 +130,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -144,7 +144,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -157,7 +157,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -175,7 +175,7 @@ function ContentSection() {
           </p>
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -190,7 +190,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -204,7 +204,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -218,7 +218,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -232,7 +232,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -246,7 +246,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -264,7 +264,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -288,7 +288,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -306,7 +306,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -322,7 +322,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -340,7 +340,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -354,7 +354,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -374,7 +374,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -396,7 +396,7 @@ function ContentSection() {
           </p>
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -412,7 +412,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -427,7 +427,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
@@ -441,7 +441,7 @@ function ContentSection() {
 
           <div className={classes.single_row}>
             <img
-              src={bullet.src}
+              src={bullet_auqta.src}
               style={{ height: "15px", maxHeight: "15px" }}
             />
 
