@@ -21,6 +21,28 @@
   height: fit-content;
   position: relative;
 }
+.properties_container {
+  display: flex;
+  flex-direction: row;
+  column-gap: 15px;
+  height: fit-content;
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  overflow-x: scroll;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-left: 40px;
+  scrollbar-width: none !important;
+  /* Firefox - for hiding scrollbar */
+  -ms-overflow-style: none !important;
+}
+
+.properties_container::-webkit-scrollbar {
+  /* WebKit for hiding scrollbar */
+  width: 0 !important;
+  height: 0 !important;
+}
 .property_section {
   display: flex;
   flex-direction: column;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import classes from "./forgotPassword.module.css";
-import { resetPassword } from "../../components/utils/resetPassword";
+import { ResetPassword } from "../../components/utils/resetPassword";
 import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,7 +20,7 @@ function ForgotPassword() {
   }, []);
 
   const handleResetPassword = async () => {
-    const data = await resetPassword(code, newPassword, setLoading, success);
+    const data = await ResetPassword(code, newPassword, setLoading, success);
   };
 
   const success = (successMessage) =>

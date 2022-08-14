@@ -5,7 +5,7 @@ import logo_black from "../../public/assets/logo_black.png";
 import Image from "next/image";
 import logout from "../../public/assets/icons/logout.png";
 import settings from "../../public/assets/icons/setting.png";
-import user from "../../public/assets/icons/user.png";
+import user_logo from "../../public/assets/icons/user.png";
 import { useWindowSize } from "../../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,9 +14,19 @@ import {
   faAngleDown,
   faAngleUp,
 } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "../../contextAPI";
+import { useRouter } from "next/router";
 
-function DashboardNavbar() {
+function DashboardNavbar({ handleOpenSideBar }) {
   const { width } = useWindowSize();
+  const { user, removeUser } = useAuth();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    removeUser();
+    router.push("/");
+  };
+
   return (
     <div className={classes.navbar_body}>
       {width < 1060 ? (
@@ -25,6 +35,9 @@ function DashboardNavbar() {
             className={classes.menu_icon}
             icon={faBars}
             size={"2x"}
+            onClick={() => {
+              handleOpenSideBar();
+            }}
           />
         </div>
       ) : (
@@ -37,15 +50,21 @@ function DashboardNavbar() {
           </div>
         </Link>
       </div>
-      <div className={classes.right_panel}>
-        <div className={classes.icon}>
-          <Image src={user} alt="logo" />
-        </div>
-        <div className={classes.icon}>
-          <Image src={settings} alt="logo" />
-        </div>
 
-        <div className={classes.icon}>
+      <div className={classes.right_panel}>
+        <Link
+          href={
+            user?.userType === "agent"
+              ? "/dashboard/agent_details"
+              : "/dashboard/developer_details"
+          }
+        >
+          <div className={classes.icon}>
+            <Image src={user_logo} alt="logo" />
+          </div>
+        </Link>
+
+        <div onClick={handleLogout} className={classes.icon}>
           <Image src={logout} alt="logo" />
         </div>
       </div>

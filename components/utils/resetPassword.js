@@ -2,16 +2,13 @@ import React from "react";
 import axios from "axios";
 import { baseURL } from "../../constants";
 
-async function resetPassword(code, newPassword, setLoading, success) {
-  console.log(newPassword);
+async function ResetPassword(code, newPassword, setLoading, success) {
   try {
     setLoading(true);
     const data = await axios.post(
       baseURL + "/api/user/resetPassword/" + code,
       {
-        params: {
-          newPassword: newPassword,
-        },
+        newPassword: newPassword,
       },
       {
         headers: {
@@ -21,7 +18,7 @@ async function resetPassword(code, newPassword, setLoading, success) {
     );
     setLoading(false);
     success("Password has been reset");
-    window.location.href("/");
+    window.location.replace("/");
     return data?.data;
   } catch (err) {
     setLoading(false);
@@ -29,4 +26,4 @@ async function resetPassword(code, newPassword, setLoading, success) {
   }
 }
 
-export { resetPassword };
+export { ResetPassword };

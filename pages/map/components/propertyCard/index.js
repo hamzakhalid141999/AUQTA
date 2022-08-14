@@ -20,6 +20,7 @@ function PropertyCard({
   city,
   propertyId,
   openEdit,
+  noResize,
 }) {
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
@@ -63,7 +64,9 @@ function PropertyCard({
         },
       }}
     >
-      <div className={classes.card_body}>
+      <div
+        className={noResize ? classes.card_body_no_resize : classes.card_body}
+      >
         <FontAwesomeIcon className={classes.like} icon={faHeart} size={"1x"} />
         <div className={classes.image_container}>
           <Image

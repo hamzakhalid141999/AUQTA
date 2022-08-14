@@ -62,6 +62,13 @@ function PropertyForm() {
   const [img4, setImg4] = useState();
   const [img5, setImg5] = useState();
   const [img6, setImg6] = useState();
+
+  const [img7, setImg7] = useState();
+  const [img8, setImg8] = useState();
+  const [img9, setImg9] = useState();
+  const [img10, setImg10] = useState();
+  const [img11, setImg11] = useState();
+  const [img12, setImg12] = useState();
   const [imgArr, setImgArr] = useState([]);
 
   // Salient Features
@@ -556,6 +563,54 @@ function PropertyForm() {
   const handleImg6 = async (event) => {
     if (event) {
       setImg6(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
+    }
+  };
+
+  const handleImg7 = async (event) => {
+    if (event) {
+      setImg7(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
+    }
+  };
+
+  const handleImg8 = async (event) => {
+    if (event) {
+      setImg8(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
+    }
+  };
+
+  const handleImg9 = async (event) => {
+    if (event) {
+      setImg9(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
+    }
+  };
+
+  const handleImg10 = async (event) => {
+    if (event) {
+      setImg10(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
+    }
+  };
+
+  const handleImg11 = async (event) => {
+    if (event) {
+      setImg11(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
+    }
+  };
+
+  const handleImg12 = async (event) => {
+    if (event) {
+      setImg12(event);
       imagesBlobArr.push(event);
       imgArr.push(event?.name);
     }
@@ -2272,6 +2327,161 @@ function PropertyForm() {
                       style={{ display: "flex", flexDirection: "column" }}
                       onChange={(e) => {
                         handleImg6(e.target.files[0], "files");
+                      }}
+                      id="image_input"
+                      type="file"
+                      name="fileToUpload"
+                      accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                    />
+                  </>
+                )}
+              </div>
+            </div>
+            <div
+              style={{ marginTop: "30px" }}
+              className={classes.image_holder_container}
+            >
+              <div className={classes.image_holder}>
+                {img7 ? (
+                  <img
+                    className={classes.img}
+                    src={img7 && URL.createObjectURL(img7)}
+                  />
+                ) : (
+                  <>
+                    <div className={classes.add_btn_label}>
+                      <h1>+</h1>
+                    </div>
+                    <input
+                      className={classes.img_input_field}
+                      style={{ display: "flex", flexDirection: "column" }}
+                      onChange={(e) => {
+                        handleImg7(e.target.files[0], "files");
+                      }}
+                      id="image_input"
+                      type="file"
+                      name="fileToUpload"
+                      accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                    />
+                  </>
+                )}
+              </div>
+              <div className={classes.image_holder}>
+                {img8 ? (
+                  <img
+                    className={classes.img}
+                    src={img8 && URL.createObjectURL(img8)}
+                  />
+                ) : (
+                  <>
+                    <div className={classes.add_btn_label}>
+                      <h1>+</h1>
+                    </div>
+                    <input
+                      className={classes.img_input_field}
+                      style={{ display: "flex", flexDirection: "column" }}
+                      onChange={(e) => {
+                        handleImg8(e.target.files[0], "files");
+                      }}
+                      id="image_input"
+                      type="file"
+                      name="fileToUpload"
+                      accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                    />
+                  </>
+                )}
+              </div>
+              <div className={classes.image_holder}>
+                {img9 ? (
+                  <img
+                    className={classes.img}
+                    src={img9 && URL.createObjectURL(img9)}
+                  />
+                ) : (
+                  <>
+                    <div className={classes.add_btn_label}>
+                      <h1>+</h1>
+                    </div>
+                    <input
+                      className={classes.img_input_field}
+                      style={{ display: "flex", flexDirection: "column" }}
+                      onChange={(e) => {
+                        handleImg9(e.target.files[0], "files");
+                      }}
+                      id="image_input"
+                      type="file"
+                      name="fileToUpload"
+                      accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                    />
+                  </>
+                )}
+              </div>
+              <div className={classes.image_holder}>
+                {img10 ? (
+                  <img
+                    className={classes.img}
+                    src={img10 && URL.createObjectURL(img10)}
+                  />
+                ) : (
+                  <>
+                    <div className={classes.add_btn_label}>
+                      <h1>+</h1>
+                    </div>
+                    <input
+                      className={classes.img_input_field}
+                      style={{ display: "flex", flexDirection: "column" }}
+                      onChange={(e) => {
+                        handleImg10(e.target.files[0], "files");
+                      }}
+                      id="image_input"
+                      type="file"
+                      name="fileToUpload"
+                      accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                    />
+                  </>
+                )}
+              </div>
+              <div className={classes.image_holder}>
+                {img11 ? (
+                  <img
+                    className={classes.img}
+                    src={img11 && URL.createObjectURL(img11)}
+                  />
+                ) : (
+                  <>
+                    <div className={classes.add_btn_label}>
+                      <h1>+</h1>
+                    </div>
+                    <input
+                      className={classes.img_input_field}
+                      style={{ display: "flex", flexDirection: "column" }}
+                      onChange={(e) => {
+                        handleImg11(e.target.files[0], "files");
+                      }}
+                      id="image_input"
+                      type="file"
+                      name="fileToUpload"
+                      accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                    />
+                  </>
+                )}
+              </div>
+              <div className={classes.image_holder}>
+                {img12 ? (
+                  <img
+                    className={classes.img}
+                    src={img12 && URL.createObjectURL(img12)}
+                  />
+                ) : (
+                  <>
+                    <div className={classes.add_btn_label}>
+                      <h1>+</h1>
+                    </div>
+                    <input
+                      className={classes.img_input_field}
+                      style={{ display: "flex", flexDirection: "column" }}
+                      onChange={(e) => {
+                        handleImg12(e.target.files[0], "files");
                       }}
                       id="image_input"
                       type="file"

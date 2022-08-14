@@ -15,6 +15,24 @@
 .card_body:hover .like {
   opacity: 1;
 }
+
+.card_body_no_resize {
+  height: 340px;
+  width: 270px;
+  min-width: 260px;
+  border-radius: 30px;
+  flex-direction: column;
+  position: relative;
+  transition: ease-in-out 200ms;
+  position: relative;
+}
+.card_body_no_resize:hover {
+  transform: translate3d(0px, -3px, 0px);
+  box-shadow: 0 5px 30px 10px rgba(8, 72, 146, 0.24);
+}
+.card_body_no_resize:hover .like {
+  opacity: 1;
+}
 .like {
   transition: ease-in-out 200ms;
   position: absolute;

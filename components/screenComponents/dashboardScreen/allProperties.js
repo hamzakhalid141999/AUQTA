@@ -33,6 +33,7 @@ function AllProperties({ dashboardType }) {
           {properties?.map((property, index) => (
             <PropertyCard
               key={index}
+              noResize={true}
               propertyId={property?.propertyListing?._id}
               title={property?.propertyListing?.title}
               price={property?.propertyListing?.price}

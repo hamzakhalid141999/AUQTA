@@ -19,6 +19,7 @@
   align-items: center;
   height: 100%;
   width: 50%;
+  max-width: 150px !important;
 }
 .right_panel {
   width: 50%;

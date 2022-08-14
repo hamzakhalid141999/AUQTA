@@ -316,37 +316,6 @@ function AgentForm() {
         </div>
       </div>
 
-      <div className={classes.section}>
-        <h1 className={classes.heading}>Add Project</h1>
-        <div style={{ alignItems: "normal" }} className={classes.single_row}>
-          <p className={classes.label}></p>
-          <div
-            style={{ columnGap: "15px" }}
-            className={classes.image_holder_container}
-          >
-            <div className={classes.project_holder}>
-              <p>Add Project</p>
-              <div className={classes.add_btn_border_without_absolute}>
-                <h3 className={classes.add_field}>+</h3>
-              </div>
-            </div>
-
-            <div className={classes.project_holder}>
-              <p>Add Project</p>
-              <div className={classes.add_btn_border_without_absolute}>
-                <h3 className={classes.add_field}>+</h3>
-              </div>
-            </div>
-
-            <div className={classes.project_holder}>
-              <p>Add Project</p>
-              <div className={classes.add_btn_border_without_absolute}>
-                <h3 className={classes.add_field}>+</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div onClick={handleEditUserInformation} className={classes.btn}>
         <p>Add details</p>
         {loading && <ClipLoader size={"20px"} color="white" />}

@@ -116,3 +116,40 @@
     padding: 20px;
   }
 }
+@media screen and (max-width: 720px) {
+  .top_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .buttons_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  .icon_text_container p {
+    display: none;
+  }
+  .tab {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .heading_contaienr {
+    width: 100%;
+    text-align: center;
+  }
+  .page_section {
+    width: 100%;
+    text-align: center;
+  }
+  .subheading {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+}

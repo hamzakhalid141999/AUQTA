@@ -55,19 +55,29 @@ function Invest() {
       if (filteredProperties?.length > 0) {
         var longlatTempArr = [];
         for (var i = 0; i < filteredProperties?.length; i++) {
-          if (filteredProperties[i]?.address) {
-            const url =
-              "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-              filteredProperties[i]?.address +
-              "&key=" +
-              GEOCODING_API;
+          if (filteredProperties[i]?.lat || filteredProperties[i]?.lng) {
+            let longLatArr;
 
-            const data = await axios.get(url);
+            longLatArr = {
+              lat: parseFloat(filteredProperties[i]?.lat),
+              lng: parseFloat(filteredProperties[i]?.lng),
+            };
+            longlatTempArr.push(longLatArr);
+          } else {
+            if (filteredProperties[i]?.address) {
+              const url =
+                "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+                filteredProperties[i]?.address +
+                "&key=" +
+                GEOCODING_API;
 
-            if (data?.data?.results.length > 0) {
-              longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
-            } else {
-              setLoading(false);
+              const data = await axios.get(url);
+
+              if (data?.data?.results.length > 0) {
+                longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
+              } else {
+                setLoading(false);
+              }
             }
           }
         }

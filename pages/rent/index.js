@@ -41,26 +41,54 @@ function Map() {
         var longlatTempArr = [];
         for (var i = 0; i < filteredProperties?.length; i++) {
           let url;
-          if (searchedParams?.type) {
-            url =
-              "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-              filteredProperties[i]?.propertyListing?.address +
-              "&key=" +
-              GEOCODING_API;
-          } else {
-            url =
-              "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-              filteredProperties[i]?.address +
-              "&key=" +
-              GEOCODING_API;
-          }
+          let longLatArr;
 
-          const data = await axios.get(url);
-
-          if (data?.data?.results.length > 0) {
-            longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
+          if (
+            filteredProperties[i]?.propertyListing?.lat ||
+            filteredProperties[i]?.propertyListing?.lng ||
+            filteredProperties[i]?.lat ||
+            filteredProperties[i]?.lng
+          ) {
+            if (searchedParams?.type) {
+              console.log(
+                "LLAAAAATTTTTT: ",
+                filteredProperties[i]?.propertyListing?.address
+              );
+              longLatArr = {
+                lat: parseFloat(filteredProperties[i]?.propertyListing?.lat),
+                lng: parseFloat(filteredProperties[i]?.propertyListing?.lng),
+              };
+              longlatTempArr.push(longLatArr);
+            } else {
+              console.log("LLAAAAATTTTTT: ", filteredProperties[i]?.lat);
+              longLatArr = {
+                lat: parseFloat(filteredProperties[i]?.lat),
+                lng: parseFloat(filteredProperties[i]?.lng),
+              };
+              longlatTempArr.push(longLatArr);
+            }
           } else {
-            setLoading(false);
+            if (searchedParams?.type) {
+              url =
+                "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+                filteredProperties[i]?.propertyListing?.address +
+                "&key=" +
+                GEOCODING_API;
+            } else {
+              url =
+                "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+                filteredProperties[i]?.address +
+                "&key=" +
+                GEOCODING_API;
+            }
+
+            const data = await axios.get(url);
+
+            if (data?.data?.results.length > 0) {
+              longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
+            } else {
+              setLoading(false);
+            }
           }
         }
         setLoading(false);

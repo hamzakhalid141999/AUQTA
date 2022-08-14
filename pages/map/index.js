@@ -43,47 +43,55 @@ function Map() {
         var longlatTempArr = [];
         for (var i = 0; i < filteredProperties?.length; i++) {
           let url;
-          if (searchedParams?.type) {
-            url =
-              "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-              filteredProperties[i]?.propertyListing?.address +
-              "&key=" +
-              GEOCODING_API;
+          let longLatArr;
+
+          if (
+            filteredProperties[i]?.propertyListing?.lat ||
+            filteredProperties[i]?.propertyListing?.lng ||
+            filteredProperties[i]?.lat ||
+            filteredProperties[i]?.lng
+          ) {
+            if (searchedParams?.type) {
+              console.log(
+                "LLAAAAATTTTTT: ",
+                filteredProperties[i]?.propertyListing?.address
+              );
+              longLatArr = {
+                lat: parseFloat(filteredProperties[i]?.propertyListing?.lat),
+                lng: parseFloat(filteredProperties[i]?.propertyListing?.lng),
+              };
+              longlatTempArr.push(longLatArr);
+            } else {
+              console.log("LLAAAAATTTTTT: ", filteredProperties[i]?.lat);
+              longLatArr = {
+                lat: parseFloat(filteredProperties[i]?.lat),
+                lng: parseFloat(filteredProperties[i]?.lng),
+              };
+              longlatTempArr.push(longLatArr);
+            }
           } else {
-            url =
-              "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-              filteredProperties[i]?.address +
-              "&key=" +
-              GEOCODING_API;
+            if (searchedParams?.type) {
+              url =
+                "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+                filteredProperties[i]?.propertyListing?.address +
+                "&key=" +
+                GEOCODING_API;
+            } else {
+              url =
+                "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+                filteredProperties[i]?.address +
+                "&key=" +
+                GEOCODING_API;
+            }
+
+            const data = await axios.get(url);
+
+            if (data?.data?.results.length > 0) {
+              longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
+            } else {
+              setLoading(false);
+            }
           }
-
-          const data = await axios.get(url);
-          let longLatObj;
-
-          if (searchedParams?.type) {
-            console.log(
-              "LLAAAAATTTTTT: ",
-              filteredProperties[i]?.propertyListing?.address
-            );
-            longLatArr = {
-              lat: parseFloat(filteredProperties[i]?.propertyListing?.lat),
-              lng: parseFloat(filteredProperties[i]?.propertyListing?.lng),
-            };
-            longlatTempArr.push(longLatArr);
-          } else {
-            console.log("LLAAAAATTTTTT: ", filteredProperties[i]?.lat);
-            longLatArr = {
-              lat: parseFloat(filteredProperties[i]?.lat),
-              lng: parseFloat(filteredProperties[i]?.lng),
-            };
-            longlatTempArr.push(longLatArr);
-          }
-          // if (data?.data?.results.length > 0) {
-
-          //   longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
-          // } else {
-          //   setLoading(false);
-          // }
         }
         setLoading(false);
         setLongLatArr(longlatTempArr);
@@ -132,25 +140,6 @@ function Map() {
     fetchSearchedProperties();
   }, [searchedParams]);
 
-  useEffect(() => {}, []);
-
-  const [market, setMarker] = useState();
-
-  // const onPositionChanged = () => {
-  //   if (markerRef) {
-  //     // const position = markerRef.getPosition();
-  //     console.log(markerRef);
-  //   }
-  // };
-
-  // const markerRef = undefined;
-
-  // const onMarkerMounted = (ref) => {
-  //   // setMarker(ref);
-  //   console.log("MAARRRKKKEEERRRR REEFFFF: ", ref);
-  //   markerRef = ref;
-  // };
-
   function RenderMap() {
     return (
       <GoogleMap
@@ -177,18 +166,6 @@ function Map() {
             position={{ lat: location?.lat, lng: location?.lng }}
           />
         ))}
-        <Marker
-          // onPositionChanged={onPositionChanged}
-          onDragEnd={(e) => {
-            console.log(e.latLng.lat());
-          }}
-          // ref={onMarkerMounted}
-          draggable
-          position={{
-            lat: longLatArr[0]?.lat ? longLatArr[0]?.lat + 1 : 48,
-            lng: longLatArr[0]?.lng ? longLatArr[0]?.lng + 1 : -88,
-          }}
-        />
       </GoogleMap>
     );
   }

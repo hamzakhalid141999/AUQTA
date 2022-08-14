@@ -69,30 +69,14 @@ function DashboardHomePage() {
     autoplaySpeed: 2000,
   };
 
+  console.log(properties?.length);
+
   return (
     <div className={classes.content_section}>
       <h1 className={classes.page_section}>Hello, {user?.username}</h1>
       <p className={classes.subheading}>Auqta Developer Control System</p>
 
       <div className={classes.calls_msgs_tab_container}>
-        <div className={classes.tab}>
-          <img src={phone.src} className={classes.logo} />
-          <div className={classes.tab_heading}>
-            <h1>COMPLETED CALLS</h1>
-            <p>23</p>
-          </div>
-          <div className={classes.inbound_outbound}>
-            <p className={classes.inbound_outbound_text}>
-              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>13</span>{" "}
-              INBOUND
-            </p>
-            <p className={classes.inbound_outbound_text}>
-              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>13</span>{" "}
-              OUTBOUND
-            </p>
-            <p>VIEW ALL</p>
-          </div>
-        </div>
         <Link href="/dashboard/inbox">
           <div className={classes.tab}>
             <img src={email.src} className={classes.logo} />
@@ -117,16 +101,35 @@ function DashboardHomePage() {
             </div>
           </div>
         </Link>
+        <div className={classes.tab}>
+          <img src={phone.src} className={classes.logo} />
+          <div className={classes.tab_heading}>
+            <h1>COMPLETED CALLS</h1>
+            <p>23</p>
+          </div>
+          <div className={classes.inbound_outbound}>
+            <p className={classes.inbound_outbound_text}>
+              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>13</span>{" "}
+              INBOUND
+            </p>
+            <p className={classes.inbound_outbound_text}>
+              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>13</span>{" "}
+              OUTBOUND
+            </p>
+            <p>VIEW ALL</p>
+          </div>
+        </div>
       </div>
 
-      {(user?.userType === "agent" || user?.userType === "developer") && (
-        <div className={classes.property_section}>
-          <p className={classes.section_heading}>Properties</p>
-          <div className={classes.property_container}>
-            <div className={classes.overlay} />
-            <Slider slidesToShow={slidesToShow} {...settings}>
+      {(user?.userType === "agent" || user?.userType === "developer") &&
+        (properties?.length < 3 ? (
+          <div className={classes.property_section}>
+            <p className={classes.section_heading}>Properties</p>
+
+            <div className={classes.properties_container}>
               {properties?.map((property, index) => (
                 <PropertyCard
+                  noResize={true}
                   openEdit={true}
                   key={index}
                   propertyId={property?.propertyListing?._id}
@@ -137,17 +140,37 @@ function DashboardHomePage() {
                   picture={property?.propertyListing?.images[0]}
                 />
               ))}
-            </Slider>
+            </div>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className={classes.property_section}>
+            <p className={classes.section_heading}>Properties</p>
+            <div className={classes.property_container}>
+              <div className={classes.overlay} />
+              <Slider slidesToShow={slidesToShow} {...settings}>
+                {properties?.map((property, index) => (
+                  <PropertyCard
+                    openEdit={true}
+                    key={index}
+                    propertyId={property?.propertyListing?._id}
+                    title={property?.propertyListing?.title}
+                    price={property?.propertyListing?.price}
+                    location={property?.propertyListing?.location}
+                    city={property?.propertyListing?.city}
+                    picture={property?.propertyListing?.images[0]}
+                  />
+                ))}
+              </Slider>
+            </div>
+          </div>
+        ))}
 
-      {user?.userType === "developer" && (
-        <div className={classes.property_section}>
-          <p className={classes.section_heading}>Projects</p>
-          <div className={classes.property_container}>
-            <div className={classes.overlay} />
-            <Slider slidesToShow={slidesToShow} {...settings}>
+      {user?.userType === "developer" &&
+        (projects?.length < 3 ? (
+          <div className={classes.property_section}>
+            <p className={classes.section_heading}>Projects</p>
+
+            <div className={classes.properties_container}>
               {projects?.map((project, index) => (
                 <ProjectCard
                   openEdit={true}
@@ -161,10 +184,31 @@ function DashboardHomePage() {
                   id={project?._id}
                 />
               ))}
-            </Slider>
+            </div>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className={classes.property_section}>
+            <p className={classes.section_heading}>Projects</p>
+            <div className={classes.property_container}>
+              <div className={classes.overlay} />
+              <Slider slidesToShow={slidesToShow} {...settings}>
+                {projects?.map((project, index) => (
+                  <ProjectCard
+                    openEdit={true}
+                    title={project.projectName}
+                    description={project.projectDescription}
+                    price={project.priceRangeFrom}
+                    location={project.location}
+                    city={project.city}
+                    picture={project.images[0]}
+                    key={index}
+                    id={project?._id}
+                  />
+                ))}
+              </Slider>
+            </div>
+          </div>
+        ))}
     </div>
   );
 }

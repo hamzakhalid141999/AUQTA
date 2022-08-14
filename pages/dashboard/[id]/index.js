@@ -50,6 +50,18 @@ function Dashboard() {
     setOpenDeleteModal(false);
   };
 
+  const [openSideBar, setOpenSideBar] = useState(false);
+
+  const handleOpenSideBar = () => {
+    setOpenSideBar(!openSideBar);
+  };
+
+  const handleCloseSideBar = () => {
+    setOpenSideBar(false);
+  };
+
+  console.log(openSideBar);
+
   const onOpenDeleteModal = () => {
     setOpenDeleteModal(true);
   };
@@ -91,6 +103,8 @@ function Dashboard() {
     }
   }, [id]);
 
+  console.log(dashboardType);
+
   useEffect(() => {
     if (router?.query) {
       console.log(router.query?.propertyId);
@@ -123,6 +137,12 @@ function Dashboard() {
         pauseOnHover
       />
       <div className={classes.main_container}>
+        {width < 1060 && (
+          <DashboardSideMenu
+            handleCloseSideBar={handleCloseSideBar}
+            openSideBar={openSideBar}
+          />
+        )}
         <ConfirmDelete
           open={openDeleteModal}
           setOpen={onOpenDeleteModal}
@@ -135,7 +155,7 @@ function Dashboard() {
 
         {width > 1060 && <DashboardSideMenu />}
         <div className={classes.dashboard_screen}>
-          <DashboardNavbar />
+          <DashboardNavbar handleOpenSideBar={handleOpenSideBar} />
           <div className={classes.dashboard_content_container}>
             {dashboardType === "developer" || dashboardType === "agent" ? (
               <DashboardHomePage />
@@ -351,16 +371,56 @@ function Dashboard() {
 
                 <AllAgents dashboardType={dashboardType} />
               </>
+            ) : dashboardType === "developers" ? (
+              <>
+                <div className={classes.top_content}>
+                  <div className={classes.heading_contaienr}>
+                    <h1 className={classes.page_section}>All Developers</h1>
+                  </div>
+                </div>
+
+                <AllDevelopers dashboardType={dashboardType} />
+              </>
+            ) : dashboardType === "developer_details" ? (
+              <>
+                <div className={classes.top_content}>
+                  <div className={classes.heading_contaienr}>
+                    <h1 className={classes.page_section}>Developer Details</h1>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    paddingTop: "25px",
+                    paddingBottom: "25px",
+                    paddingLeft: "25px",
+                    marginTop: "50px",
+                  }}
+                  className={classes.dashboard_container}
+                >
+                  <DeveloperForm />
+                </div>
+              </>
             ) : (
-              dashboardType === "developers" && (
+              dashboardType === "agent_details" && (
                 <>
                   <div className={classes.top_content}>
                     <div className={classes.heading_contaienr}>
-                      <h1 className={classes.page_section}>All Developers</h1>
+                      <h1 className={classes.page_section}>Agent Details</h1>
                     </div>
                   </div>
 
-                  <AllDevelopers dashboardType={dashboardType} />
+                  <div
+                    style={{
+                      paddingTop: "50px",
+                      paddingBottom: "50px",
+                      paddingLeft: "25px",
+                      marginTop: "50px",
+                    }}
+                    className={classes.dashboard_container}
+                  >
+                    <AgentForm />
+                  </div>
                 </>
               )
             )}

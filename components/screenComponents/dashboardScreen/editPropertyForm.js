@@ -30,6 +30,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
   const [propertyDetails, setPropertyDetails] = useState();
   const [salientFeatures, setSalientFeatures] = useState();
 
+  const [startingImgIndex, setStartingImgIndex] = useState();
+
   const bucketBaseUrl = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
   const [uploadedImg1, setUploadedImg1] = useState(undefined);
@@ -40,8 +42,18 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
   const [uploadedImg5, setUploadedImg5] = useState(undefined);
   const [uploadedImg6, setUploadedImg6] = useState(undefined);
 
+  const [uploadedImg7, setUploadedImg7] = useState(undefined);
+  const [uploadedImg8, setUploadedImg8] = useState(undefined);
+  const [uploadedImg9, setUploadedImg9] = useState(undefined);
+
+  const [uploadedImg10, setUploadedImg10] = useState(undefined);
+  const [uploadedImg11, setUploadedImg11] = useState(undefined);
+  const [uploadedImg12, setUploadedImg12] = useState(undefined);
+
   useEffect(() => {
     if (propertyDetails) {
+      setImgArr(propertyDetails?.propertyListing?.images);
+
       setIsPropertyActive(propertyDetails?.propertyListing?.isActive);
       if (propertyDetails?.resSalientFeatures) {
         setSalientFeatures(propertyDetails?.resSalientFeatures);
@@ -81,6 +93,42 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
           ? bucketBaseUrl + propertyDetails?.propertyListing?.images[5]
           : undefined
       );
+
+      setUploadedImg7(
+        propertyDetails?.propertyListing?.images[6] !== undefined
+          ? bucketBaseUrl + propertyDetails?.propertyListing?.images[6]
+          : undefined
+      );
+
+      setUploadedImg8(
+        propertyDetails?.propertyListing?.images[7] !== undefined
+          ? bucketBaseUrl + propertyDetails?.propertyListing?.images[7]
+          : undefined
+      );
+
+      setUploadedImg9(
+        propertyDetails?.propertyListing?.images[8] !== undefined
+          ? bucketBaseUrl + propertyDetails?.propertyListing?.images[8]
+          : undefined
+      );
+
+      setUploadedImg10(
+        propertyDetails?.propertyListing?.images[9] !== undefined
+          ? bucketBaseUrl + propertyDetails?.propertyListing?.images[9]
+          : undefined
+      );
+
+      setUploadedImg11(
+        propertyDetails?.propertyListing?.images[10] !== undefined
+          ? bucketBaseUrl + propertyDetails?.propertyListing?.images[10]
+          : undefined
+      );
+
+      setUploadedImg12(
+        propertyDetails?.propertyListing?.images[11] !== undefined
+          ? bucketBaseUrl + propertyDetails?.propertyListing?.images[11]
+          : undefined
+      );
     }
   }, [propertyDetails]);
 
@@ -115,9 +163,14 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
   const [img4, setImg4] = useState();
   const [img5, setImg5] = useState();
   const [img6, setImg6] = useState();
-  const [imgArr, setImgArr] = useState([]);
 
-  console.log(propertyDetails);
+  const [img7, setImg7] = useState();
+  const [img8, setImg8] = useState();
+  const [img9, setImg9] = useState();
+  const [img10, setImg10] = useState();
+  const [img11, setImg11] = useState();
+  const [img12, setImg12] = useState();
+  const [imgArr, setImgArr] = useState([]);
 
   // Salient Features
 
@@ -246,6 +299,13 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
       setAccessibilityForSpecialOrElderlyPerson(
         salientFeatures?.otherFeatures?.accessibilityForSpecialOrElderlyPersons
       );
+
+      setOtherMainFeature(salientFeatures?.mainFeatures?.otherMainFeatures);
+      setOtherRoomFeature(salientFeatures?.rooms?.otherFeatures);
+      setOtherCommunicationFeature(
+        salientFeatures?.communication?.otherFeatures
+      );
+      setFacilitiesOtherFeatures(salientFeatures?.otherFeatures?.otherFeatures);
     }
   }, [salientFeatures]);
 
@@ -434,9 +494,6 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
           },
         }
       );
-      setLoading(false);
-      success();
-      window.location.reload();
     } catch (err) {
       setLoading(false);
       error();
@@ -495,6 +552,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
     if (contactPhoneHome) {
       userData = { ...userData, contactPhoneHome: contactPhoneHome };
     }
+    userData = { ...userData, images: imgArr };
     return userData;
   };
 
@@ -514,8 +572,12 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
           },
         }
       );
-      // setImagesKeysArr(data?.data?.proplisting?.images);
-      // setPropertyId(data?.data?.proplisting?._id);
+      setImagesKeysArr(data?.data?.proplisting?.propertyListing?.images);
+      if (imagesBlobArr?.length === 0) {
+        setLoading(false);
+        success();
+        window.location.reload();
+      }
       handleEditPropertySalientFeatures();
     } catch (err) {
       setLoading(false);
@@ -523,6 +585,55 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    if (imagesKeysArr.length > 0) {
+      var imagesUrlTempArr = [];
+      var blobCounter = 0;
+      for (
+        var i = startingImgIndex, j = 0;
+        i < imagesKeysArr?.length;
+        i++, j++
+      ) {
+        const data = {
+          fileKey: imagesKeysArr[i],
+        };
+        axios
+          .post(baseURL + "/api/s3/getUrlWithKey", data, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((url) => {
+            const blobUrl = URL.createObjectURL(imagesBlobArr[j], {
+              type: "image/png",
+            });
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", blobUrl, true);
+            xhr.responseType = "blob";
+            xhr.onload = async function (e) {
+              if (this.status === 200) {
+                var myBlob = this.response;
+                const myHeaders = new Headers({ "Content-Type": "image/*" });
+                const response = await fetch(url.data.body.presigned_url, {
+                  method: "PUT",
+                  headers: myHeaders,
+                  body: myBlob,
+                });
+                const s3Url = response?.url?.split("?")[0];
+                imagesUrlTempArr.push(s3Url);
+                if (i === imagesKeysArr?.length - 1) {
+                  setIsImageUploadCompleted(true);
+                }
+              }
+            };
+            xhr.send();
+          });
+        blobCounter = blobCounter + 1;
+      }
+    }
+  }, [imagesKeysArr]);
 
   useEffect(async () => {
     const data = await getAllCities();
@@ -624,49 +735,6 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
   }, [salientFeatures]);
 
   useEffect(() => {
-    if (imagesKeysArr.length > 0) {
-      var imagesUrlTempArr = [];
-      for (var i = 0; i < imagesKeysArr?.length; i++) {
-        const data = {
-          fileKey: imagesKeysArr[i],
-        };
-        axios
-          .post(baseURL + "/api/s3/getUrlWithKey", data, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-          .then((url) => {
-            const blobUrl = URL.createObjectURL(imagesBlobArr[i], {
-              type: "image/png",
-            });
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", blobUrl, true);
-            xhr.responseType = "blob";
-            xhr.onload = async function (e) {
-              if (this.status === 200) {
-                var myBlob = this.response;
-                const myHeaders = new Headers({ "Content-Type": "image/*" });
-                const response = await fetch(url.data.body.presigned_url, {
-                  method: "PUT",
-                  headers: myHeaders,
-                  body: myBlob,
-                });
-                const s3Url = response?.url?.split("?")[0];
-                imagesUrlTempArr.push(s3Url);
-                if (i === imagesKeysArr?.length - 1) {
-                  setIsImageUploadCompleted(true);
-                }
-              }
-            };
-            xhr.send();
-          });
-      }
-    }
-  }, [imagesKeysArr]);
-
-  useEffect(() => {
     if (isImageUploadCompleted) {
       setLoading(false);
       success();
@@ -698,6 +766,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg1 = async (event) => {
     if (event) {
+      setStartingImgIndex(0);
       setImg1(event);
       imagesBlobArr.push(event);
       imgArr.push(event?.name);
@@ -706,6 +775,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg2 = async (event) => {
     if (event) {
+      setStartingImgIndex(1);
       setImg2(event);
       imagesBlobArr.push(event);
       imgArr.push(event?.name);
@@ -714,6 +784,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg3 = async (event) => {
     if (event) {
+      setStartingImgIndex(2);
+
       setImg3(event);
       imagesBlobArr.push(event);
       imgArr.push(event?.name);
@@ -722,6 +794,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg4 = async (event) => {
     if (event) {
+      setStartingImgIndex(3);
+
       setImg4(event);
       imagesBlobArr.push(event);
       imgArr.push(event?.name);
@@ -730,6 +804,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg5 = async (event) => {
     if (event) {
+      setStartingImgIndex(4);
+
       setImg5(event);
       imagesBlobArr.push(event);
       imgArr.push(event?.name);
@@ -738,7 +814,69 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg6 = async (event) => {
     if (event) {
+      setStartingImgIndex(5);
+
       setImg6(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
+    }
+  };
+
+  const handleImg7 = async (event) => {
+    if (event) {
+      setStartingImgIndex(6);
+
+      setImg7(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
+    }
+  };
+
+  const handleImg8 = async (event) => {
+    if (event) {
+      setStartingImgIndex(7);
+
+      setImg8(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
+    }
+  };
+
+  const handleImg9 = async (event) => {
+    if (event) {
+      setStartingImgIndex(8);
+
+      setImg9(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
+    }
+  };
+
+  const handleImg10 = async (event) => {
+    if (event) {
+      setStartingImgIndex(9);
+
+      setImg10(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
+    }
+  };
+
+  const handleImg11 = async (event) => {
+    if (event) {
+      setStartingImgIndex(10);
+
+      setImg11(event);
+      imagesBlobArr.push(event);
+      imgArr.push(event?.name);
+    }
+  };
+
+  const handleImg12 = async (event) => {
+    if (event) {
+      setStartingImgIndex(11);
+
+      setImg12(event);
       imagesBlobArr.push(event);
       imgArr.push(event?.name);
     }
@@ -2731,6 +2869,186 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                           style={{ display: "flex", flexDirection: "column" }}
                           onChange={(e) => {
                             handleImg6(e.target.files[0], "files");
+                          }}
+                          id="image_input"
+                          type="file"
+                          name="fileToUpload"
+                          accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                        />
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                <div
+                  style={{ marginTop: "30px" }}
+                  className={classes.image_holder_container}
+                >
+                  <div className={classes.image_holder}>
+                    {img7 || uploadedImg7 ? (
+                      <img
+                        className={classes.img}
+                        src={
+                          uploadedImg7
+                            ? uploadedImg7
+                            : img7 && URL.createObjectURL(img7)
+                        }
+                      />
+                    ) : (
+                      <>
+                        <div className={classes.add_btn_label}>
+                          <h1>+</h1>
+                        </div>
+                        <input
+                          className={classes.img_input_field}
+                          style={{ display: "flex", flexDirection: "column" }}
+                          onChange={(e) => {
+                            handleImg7(e.target.files[0], "files");
+                          }}
+                          id="image_input"
+                          type="file"
+                          name="fileToUpload"
+                          accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                        />
+                      </>
+                    )}
+                  </div>
+                  <div className={classes.image_holder}>
+                    {img8 || uploadedImg8 ? (
+                      <img
+                        className={classes.img}
+                        src={
+                          uploadedImg8
+                            ? uploadedImg8
+                            : img8 && URL.createObjectURL(img8)
+                        }
+                      />
+                    ) : (
+                      <>
+                        <div className={classes.add_btn_label}>
+                          <h1>+</h1>
+                        </div>
+                        <input
+                          className={classes.img_input_field}
+                          style={{ display: "flex", flexDirection: "column" }}
+                          onChange={(e) => {
+                            handleImg8(e.target.files[0], "files");
+                          }}
+                          id="image_input"
+                          type="file"
+                          name="fileToUpload"
+                          accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                        />
+                      </>
+                    )}
+                  </div>
+                  <div className={classes.image_holder}>
+                    {img9 || uploadedImg9 ? (
+                      <img
+                        className={classes.img}
+                        src={
+                          uploadedImg9
+                            ? uploadedImg9
+                            : img9 && URL.createObjectURL(img9)
+                        }
+                      />
+                    ) : (
+                      <>
+                        <div className={classes.add_btn_label}>
+                          <h1>+</h1>
+                        </div>
+                        <input
+                          className={classes.img_input_field}
+                          style={{ display: "flex", flexDirection: "column" }}
+                          onChange={(e) => {
+                            handleImg9(e.target.files[0], "files");
+                          }}
+                          id="image_input"
+                          type="file"
+                          name="fileToUpload"
+                          accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                        />
+                      </>
+                    )}
+                  </div>
+                  <div className={classes.image_holder}>
+                    {img10 || uploadedImg10 ? (
+                      <img
+                        className={classes.img}
+                        src={
+                          uploadedImg10
+                            ? uploadedImg10
+                            : img10 && URL.createObjectURL(img10)
+                        }
+                      />
+                    ) : (
+                      <>
+                        <div className={classes.add_btn_label}>
+                          <h1>+</h1>
+                        </div>
+                        <input
+                          className={classes.img_input_field}
+                          style={{ display: "flex", flexDirection: "column" }}
+                          onChange={(e) => {
+                            handleImg10(e.target.files[0], "files");
+                          }}
+                          id="image_input"
+                          type="file"
+                          name="fileToUpload"
+                          accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                        />
+                      </>
+                    )}
+                  </div>
+                  <div className={classes.image_holder}>
+                    {img11 || uploadedImg11 ? (
+                      <img
+                        className={classes.img}
+                        src={
+                          uploadedImg11
+                            ? uploadedImg11
+                            : img11 && URL.createObjectURL(img11)
+                        }
+                      />
+                    ) : (
+                      <>
+                        <div className={classes.add_btn_label}>
+                          <h1>+</h1>
+                        </div>
+                        <input
+                          className={classes.img_input_field}
+                          style={{ display: "flex", flexDirection: "column" }}
+                          onChange={(e) => {
+                            handleImg11(e.target.files[0], "files");
+                          }}
+                          id="image_input"
+                          type="file"
+                          name="fileToUpload"
+                          accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                        />
+                      </>
+                    )}
+                  </div>
+                  <div className={classes.image_holder}>
+                    {img12 || uploadedImg12 ? (
+                      <img
+                        className={classes.img}
+                        src={
+                          uploadedImg12
+                            ? uploadedImg12
+                            : img12 && URL.createObjectURL(img12)
+                        }
+                      />
+                    ) : (
+                      <>
+                        <div className={classes.add_btn_label}>
+                          <h1>+</h1>
+                        </div>
+                        <input
+                          className={classes.img_input_field}
+                          style={{ display: "flex", flexDirection: "column" }}
+                          onChange={(e) => {
+                            handleImg12(e.target.files[0], "files");
                           }}
                           id="image_input"
                           type="file"
