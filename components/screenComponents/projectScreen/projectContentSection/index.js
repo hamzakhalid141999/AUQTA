@@ -8,7 +8,6 @@ import icon1 from "../../../../public/assets/project_card_construction_site_icon
 import icon2 from "../../../../public/assets/project_card_interactive_broucher_icon.png";
 import icon3 from "../../../../public/assets/project_card_3d_plan_icon.png";
 import { useWindowSize } from "../../../../utils";
-import bullet_auqta from "../../../../public/assets/bullet_auqta.png";
 
 function ProjectConentSection({
   features,
@@ -42,8 +41,7 @@ function ProjectConentSection({
                 <p className={classes.bullet_text}>Main Features</p>
                 {features?.map((feature, index) => (
                   <div key={index} className={classes.bullets_container}>
-                    <img src={bullet_auqta.src} style={{ height: "10px" }} />
-                    <p>{feature}</p>
+                    <div className={classes.bullet} /> <p>{feature}</p>
                   </div>
                 ))}
 
@@ -60,8 +58,7 @@ function ProjectConentSection({
                 <div className={classes.bullet_points_grid}>
                   {amenities?.map((amenity, index) => (
                     <div key={index} className={classes.bullets_container}>
-                      <img src={bullet_auqta.src} style={{ height: "10px" }} />
-                      <p>{amenity}</p>
+                      <div className={classes.bullet} /> <p>{amenity}</p>
                     </div>
                   ))}
                 </div>
@@ -94,7 +91,7 @@ function ProjectConentSection({
 
               <div className={classes.bullet_point}>
                 <div className={classes.bullets_container}>
-                  <img src={bullet_auqta.src} style={{ height: "10px" }} />
+                  <div className={classes.bullet} />{" "}
                   <p className={classes.bullet_text}>INTERACTIVE FLOOR PLAN</p>
                 </div>
                 <p>
@@ -103,7 +100,7 @@ function ProjectConentSection({
               </div>
               <div className={classes.bullet_point}>
                 <div className={classes.bullets_container}>
-                  <img src={bullet_auqta.src} style={{ height: "10px" }} />
+                  <div className={classes.bullet} />{" "}
                   <p className={classes.bullet_text}>3D ON CONSTRUCTION SITE</p>
                 </div>
                 <p>
@@ -112,7 +109,7 @@ function ProjectConentSection({
               </div>
               <div className={classes.bullet_point}>
                 <div className={classes.bullets_container}>
-                  <img src={bullet_auqta.src} style={{ height: "10px" }} />
+                  <div className={classes.bullet} />{" "}
                   <p className={classes.bullet_text}>INTERACTIVE BROUCHERS</p>
                 </div>
                 <p>
@@ -124,8 +121,7 @@ function ProjectConentSection({
               <div className={classes.bullet_points_container}>
                 <p className={classes.bullet_text}>Address</p>
                 <div className={classes.bullets_container}>
-                  <img src={bullet_auqta.src} style={{ height: "10px" }} />
-                  <p>{address}</p>
+                  <div className={classes.bullet} /> <p>{address}</p>
                 </div>
               </div>
             </div>

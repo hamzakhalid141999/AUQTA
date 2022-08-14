@@ -2,7 +2,6 @@
 
 import React from "react";
 import classes from "./contentSection.module.css";
-import bullet_auqta from "../../../../public/assets/bullet_auqta.png";
 
 function ContentSection() {
   return (
@@ -33,10 +32,9 @@ function ContentSection() {
           </p>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
+
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -47,10 +45,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p> The “Company” here is referred to as Auqta or Auqta.com.</p>
           </div>
@@ -59,10 +54,7 @@ function ContentSection() {
           </p>
           <p className={classes.med_heading}>General Disclaimer:</p>
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -73,10 +65,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -88,10 +77,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -102,10 +88,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -115,10 +98,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -129,10 +109,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -143,10 +120,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -156,10 +130,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -174,10 +145,7 @@ function ContentSection() {
             General Terms and Conditions:
           </p>
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -189,10 +157,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -203,10 +168,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -217,10 +179,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -231,10 +190,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -245,10 +201,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -263,10 +216,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -287,10 +237,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -305,11 +252,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
-
+            <div className={classes.bullet} />
             <p>
               {" "}
               Any reproduction, modification, creation of derivative works from
@@ -321,10 +264,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -339,10 +279,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -353,10 +290,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -373,10 +307,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -395,10 +326,7 @@ function ContentSection() {
             Service Terms and Conditions:
           </p>
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -411,11 +339,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
-
+            <div className={classes.bullet} />
             <p>
               {" "}
               Auqta.com does not guarantee the authenticity of the displayed
@@ -426,10 +350,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
@@ -440,10 +361,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <img
-              src={bullet_auqta.src}
-              style={{ height: "15px", maxHeight: "15px" }}
-            />
+            <div className={classes.bullet} />
 
             <p>
               {" "}
