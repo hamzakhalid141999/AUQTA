@@ -50,45 +50,36 @@ function Footer() {
         </div>
         <div className={classes.col_2}>
           <h1>About</h1>
-          <div className={classes.row}>
-            <div className={classes.bullet} />
-            <p>Our Story</p>
-          </div>
-          <div className={classes.row}>
-            <div className={classes.bullet} />
-            <p>Our Vision</p>
-          </div>
-          <div className={classes.row}>
-            <div className={classes.bullet} />
-            <p>Mission Statement</p>
-          </div>
-          <div className={classes.row}>
-            <div className={classes.bullet} />
-            <p>Our Values</p>
-          </div>
-          <div className={classes.row}>
-            <div className={classes.bullet} />
-            <p>What makes AUQTA unique</p>
-          </div>
+
+          <Link href={"/all_developers"}>
+            <div className={classes.row}>
+              <div className={classes.bullet} />
+              <p>Our Developers</p>
+            </div>
+          </Link>
+
+          <Link href={"/all_agents"}>
+            <div className={classes.row}>
+              <div className={classes.bullet} />
+              <p>Our Agents</p>
+            </div>
+          </Link>
         </div>
         <div className={classes.col_2}>
           <h1>Services</h1>
-          <div className={classes.row}>
-            <div className={classes.bullet} />
-            <p>Architectural Visualisation</p>
-          </div>
-          <div className={classes.row}>
-            <div className={classes.bullet} />
-            <p>Augmented Structures</p>
-          </div>
-          <div className={classes.row}>
-            <div className={classes.bullet} />
-            <p>Virtual Reality</p>
-          </div>
-          <div className={classes.row}>
-            <div className={classes.bullet} />
-            <p>Additional Services</p>
-          </div>
+          <Link href={"/contact"}>
+            <div className={classes.row}>
+              <div className={classes.bullet} />
+              <p>Contact Us</p>
+            </div>
+          </Link>
+
+          <Link href={"/FAQ"}>
+            <div className={classes.row}>
+              <div className={classes.bullet} />
+              <p>FAQ</p>
+            </div>
+          </Link>
         </div>
         <div className={classes.col_2}>
           <h1>Contact</h1>

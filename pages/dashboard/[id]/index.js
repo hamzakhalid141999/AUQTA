@@ -157,7 +157,9 @@ function Dashboard() {
         <div className={classes.dashboard_screen}>
           <DashboardNavbar handleOpenSideBar={handleOpenSideBar} />
           <div className={classes.dashboard_content_container}>
-            {dashboardType === "developer" || dashboardType === "agent" ? (
+            {dashboardType === "developer" ||
+            dashboardType === "agent" ||
+            dashboardType === "user" ? (
               <DashboardHomePage />
             ) : dashboardType === "add_property" ? (
               <>
@@ -179,6 +181,8 @@ function Dashboard() {
                     <p className={classes.subheading}>
                       {user?.userType === "developer"
                         ? "Auqta Developer Control System"
+                        : user?.userType === "enduser"
+                        ? "Auqta User Control System"
                         : "Auqta Agent Control System"}
                     </p>
                   </div>
@@ -255,7 +259,11 @@ function Dashboard() {
                       Edit Project details
                     </h1>
                     <p className={classes.subheading}>
-                      Auqta Developer Control System
+                      {user?.userType === "developer"
+                        ? "Auqta Developer Control System"
+                        : user?.userType === "enduser"
+                        ? "Auqta User Control System"
+                        : "Auqta Agent Control System"}
                     </p>
                   </div>
                   <div className={classes.buttons_container}>
@@ -361,26 +369,6 @@ function Dashboard() {
 
                 <AllProjects dashboardType={dashboardType} />
               </>
-            ) : dashboardType === "agents" ? (
-              <>
-                <div className={classes.top_content}>
-                  <div className={classes.heading_contaienr}>
-                    <h1 className={classes.page_section}>All Agents</h1>
-                  </div>
-                </div>
-
-                <AllAgents dashboardType={dashboardType} />
-              </>
-            ) : dashboardType === "developers" ? (
-              <>
-                <div className={classes.top_content}>
-                  <div className={classes.heading_contaienr}>
-                    <h1 className={classes.page_section}>All Developers</h1>
-                  </div>
-                </div>
-
-                <AllDevelopers dashboardType={dashboardType} />
-              </>
             ) : dashboardType === "developer_details" ? (
               <>
                 <div className={classes.top_content}>
@@ -402,11 +390,14 @@ function Dashboard() {
                 </div>
               </>
             ) : (
-              dashboardType === "agent_details" && (
+              dashboardType === "agent_details" ||
+              (dashboardType === "user_details" && (
                 <>
                   <div className={classes.top_content}>
                     <div className={classes.heading_contaienr}>
-                      <h1 className={classes.page_section}>Agent Details</h1>
+                      <h1 className={classes.page_section}>
+                        {user?.userType === "agent" ? "Agent" : "User"} Details
+                      </h1>
                     </div>
                   </div>
 
@@ -422,7 +413,7 @@ function Dashboard() {
                     <AgentForm />
                   </div>
                 </>
-              )
+              ))
             )}
           </div>
         </div>

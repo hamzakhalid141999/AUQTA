@@ -14,20 +14,20 @@ export default function Home() {
 
   const [open, setOpen] = useState();
 
-  useEffect(() => {
-    const handleOpen = () => {
-      if (typeof window !== undefined) {
-        if (
-          window.localStorage.getItem("comingSoon") === undefined ||
-          window.localStorage.getItem("comingSoon") !== "false"
-        ) {
-          setOpen(true);
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const handleOpen = () => {
+  //     if (typeof window !== undefined) {
+  //       if (
+  //         window.localStorage.getItem("comingSoon") === undefined ||
+  //         window.localStorage.getItem("comingSoon") !== "false"
+  //       ) {
+  //         setOpen(true);
+  //       }
+  //     }
+  //   };
 
-    handleOpen();
-  }, []);
+  //   handleOpen();
+  // }, []);
 
   const onCloseHandle = () => {
     setOpen(false);

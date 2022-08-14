@@ -51,8 +51,10 @@ function NavbarModal({ displayModal = false, setDisplayModal = () => {} }) {
           <div onClick={closeNavModal}>
             <Link
               href={
-                user?.userType === "agent"
+                user?.usertype === "agent"
                   ? "/dashboard/agent"
+                  : user?.userType === "enduser"
+                  ? "/dashboard/user"
                   : "/dashboard/developer"
               }
             >
@@ -61,7 +63,9 @@ function NavbarModal({ displayModal = false, setDisplayModal = () => {} }) {
           </div>
         )}
 
-        {(user?.userType === "agent" || user?.userType === "developer") && (
+        {(user?.userType === "agent" ||
+          user?.userType === "developer" ||
+          user?.userType === "enduser") && (
           <div onClick={closeNavModal}>
             <Link href="/dashboard/property">
               <p>ADD PROPERTY</p>

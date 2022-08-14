@@ -222,12 +222,20 @@ function DashboardSideMenu({ openSideBar, handleCloseSideBar }) {
           </div>
         </div>
         <h1>{user?.username}</h1>
-        <p>{user?.userType}</p>
+        <p>
+          {user?.userType === "developer"
+            ? "Developer"
+            : user?.userType === "agent"
+            ? "Agent"
+            : "User"}
+        </p>
         <div className={classes.side_menu_btns_container}>
           <Link
             href={
               user?.usertype === "agent"
                 ? "/dashboard/agent"
+                : user?.userType === "enduser"
+                ? "/dashboard/user"
                 : "/dashboard/developer"
             }
           >
@@ -250,13 +258,6 @@ function DashboardSideMenu({ openSideBar, handleCloseSideBar }) {
           <Link href={"/dashboard/add_property"}>
             <p>Add Property</p>
           </Link>
-          <Link href={"/dashboard/developers"}>
-            <p>Developers</p>
-          </Link>
-          <Link href={"/dashboard/agents"}>
-            <p>Agents</p>
-          </Link>
-          <p>Users</p>
         </div>
       </div>
     </div>

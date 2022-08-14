@@ -100,7 +100,9 @@ function Navbar() {
         currentPage === "confirmUser" ||
         currentPage === "dashboard" ||
         currentPage === "blogs" ||
-        currentPage === "forgotPassword"
+        currentPage === "forgotPassword" ||
+        currentPage === "all_agents" ||
+        currentPage === "all_developers"
       ) {
         setIsNavbarVisibleFromTop(true);
       } else if (
@@ -111,7 +113,9 @@ function Navbar() {
         currentPage !== "confirmUser" ||
         currentPage !== "dashboard" ||
         currentPage !== "blogs" ||
-        currentPage !== "forgotPassword"
+        currentPage !== "forgotPassword" ||
+        currentPage !== "all_agents" ||
+        currentPage !== "all_developers"
       ) {
         setIsNavbarVisibleFromTop(false);
       }
@@ -145,6 +149,8 @@ function Navbar() {
     };
   }, [backgroundColor]);
 
+  console.log("USERRRRRR: ", user);
+
   return (
     <div
       className={
@@ -176,7 +182,9 @@ function Navbar() {
           display:
             (currentPage === "dashboard" ||
               currentPage === "blogs" ||
-              currentPage === "forgotPassword") &&
+              currentPage === "forgotPassword" ||
+              currentPage === "all_agents" ||
+              currentPage === "all_developers") &&
             "none",
         }}
       >
@@ -402,14 +410,15 @@ function Navbar() {
         <Link href={"#"}>
           <div className={classes.dropdown_container}>
             <div className={classes.dropdown}>
-              {(user?.userType?.includes("agent") ||
-                user?.userType?.includes("developer")) && (
-                <div className={classes.option}>
-                  <Link href={"/dashboard/property"}>
-                    <p>Property</p>
-                  </Link>
-                </div>
-              )}
+              {user?.userType?.includes("agent") ||
+                user?.userType?.includes("developer") ||
+                (user?.userType?.includes("enduser") && (
+                  <div className={classes.option}>
+                    <Link href={"/dashboard/property"}>
+                      <p>Property</p>
+                    </Link>
+                  </div>
+                ))}
 
               {user?.userType?.includes("developer") && (
                 <div className={classes.option}>
@@ -460,6 +469,8 @@ function Navbar() {
                     href={
                       user?.usertype === "agent"
                         ? "/dashboard/agent"
+                        : user?.userType === "enduser"
+                        ? "/dashboard/user"
                         : "/dashboard/developer"
                     }
                   >

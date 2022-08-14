@@ -74,8 +74,13 @@ function DashboardHomePage() {
   return (
     <div className={classes.content_section}>
       <h1 className={classes.page_section}>Hello, {user?.username}</h1>
-      <p className={classes.subheading}>Auqta Developer Control System</p>
-
+      <p className={classes.subheading}>
+        {user?.userType === "developer"
+          ? "Auqta Developer Control System"
+          : user?.userType === "enduser"
+          ? "Auqta User Control System"
+          : "Auqta Agent Control System"}
+      </p>
       <div className={classes.calls_msgs_tab_container}>
         <Link href="/dashboard/inbox">
           <div className={classes.tab}>
@@ -121,25 +126,33 @@ function DashboardHomePage() {
         </div>
       </div>
 
-      {(user?.userType === "agent" || user?.userType === "developer") &&
+      {(user?.userType === "agent" ||
+        user?.userType === "developer" ||
+        user?.userType === "enduser") &&
         (properties?.length < 3 ? (
           <div className={classes.property_section}>
             <p className={classes.section_heading}>Properties</p>
 
             <div className={classes.properties_container}>
-              {properties?.map((property, index) => (
-                <PropertyCard
-                  noResize={true}
-                  openEdit={true}
-                  key={index}
-                  propertyId={property?.propertyListing?._id}
-                  title={property?.propertyListing?.title}
-                  price={property?.propertyListing?.price}
-                  location={property?.propertyListing?.location}
-                  city={property?.propertyListing?.city}
-                  picture={property?.propertyListing?.images[0]}
-                />
-              ))}
+              {properties?.length === 0 ? (
+                <p style={{ width: "100%", textAlign: "center" }}>
+                  No Properties
+                </p>
+              ) : (
+                properties?.map((property, index) => (
+                  <PropertyCard
+                    noResize={true}
+                    openEdit={true}
+                    key={index}
+                    propertyId={property?.propertyListing?._id}
+                    title={property?.propertyListing?.title}
+                    price={property?.propertyListing?.price}
+                    location={property?.propertyListing?.location}
+                    city={property?.propertyListing?.city}
+                    picture={property?.propertyListing?.images[0]}
+                  />
+                ))
+              )}
             </div>
           </div>
         ) : (
@@ -171,19 +184,25 @@ function DashboardHomePage() {
             <p className={classes.section_heading}>Projects</p>
 
             <div className={classes.properties_container}>
-              {projects?.map((project, index) => (
-                <ProjectCard
-                  openEdit={true}
-                  title={project.projectName}
-                  description={project.projectDescription}
-                  price={project.priceRangeFrom}
-                  location={project.location}
-                  city={project.city}
-                  picture={project.images[0]}
-                  key={index}
-                  id={project?._id}
-                />
-              ))}
+              {projects?.length === 0 ? (
+                <p style={{ width: "100%", textAlign: "center" }}>
+                  No Projects
+                </p>
+              ) : (
+                projects?.map((project, index) => (
+                  <ProjectCard
+                    openEdit={true}
+                    title={project.projectName}
+                    description={project.projectDescription}
+                    price={project.priceRangeFrom}
+                    location={project.location}
+                    city={project.city}
+                    picture={project.images[0]}
+                    key={index}
+                    id={project?._id}
+                  />
+                ))
+              )}
             </div>
           </div>
         ) : (

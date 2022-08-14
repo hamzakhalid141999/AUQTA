@@ -54,8 +54,10 @@ function DashboardNavbar({ handleOpenSideBar }) {
       <div className={classes.right_panel}>
         <Link
           href={
-            user?.userType === "agent"
+            user?.usertype === "agent"
               ? "/dashboard/agent_details"
+              : user?.userType === "enduser"
+              ? "/dashboard/user_details"
               : "/dashboard/developer_details"
           }
         >

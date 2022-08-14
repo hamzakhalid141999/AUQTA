@@ -11,7 +11,7 @@ import axios from "axios";
 import { getAllAgents } from "../../utils/getAllAgents";
 import AgentCard from "../../userCard";
 
-function AllAgents({ dashboardType }) {
+function AllAgents() {
   const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
   const [loading, setLoading] = useState(true);
   const [longLatArr, setLongLatArr] = useState([]);
@@ -54,15 +54,13 @@ function AllAgents({ dashboardType }) {
 
   useEffect(() => {
     const fetchAgents = async () => {
-      if (dashboardType === "agents") {
-        const data = await getAllAgents();
-        setAgents(data);
-        console.log(data);
-      }
+      const data = await getAllAgents();
+      setAgents(data);
+      console.log(data);
     };
 
     fetchAgents();
-  }, [dashboardType]);
+  }, []);
 
   function RenderMap() {
     return (
@@ -106,6 +104,7 @@ function AllAgents({ dashboardType }) {
       >
         {!isLoaded ? <p>Loading</p> : <RenderMap />}
       </div>
+      <h1 className={classes.heading}>Our Agents</h1>
 
       <div className={classes.content_container}>
         {agents?.map((user, index) => (

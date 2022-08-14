@@ -34,7 +34,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
   const { user, signUp } = useAuth();
   const [confirmPassword, setConfirmPassword] = useState();
   const [loading, setLoading] = useState(false);
-  const [userType, setUserType] = useState("agent");
+  const [userType, setUserType] = useState();
   const [termsServiceAgreed, setTermsServiceAgreed] = useState();
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState();
   const [currentState, setCurrentState] = useState(1); //1=Login, 2=Signup, 3=Forget Password
@@ -107,6 +107,8 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
         router.push("/dashboard/developer");
       } else if (data?.data?.userType === "agent") {
         router.push("/dashboard/agent");
+      } else {
+        router.push("/dashboard/user");
       }
     } catch (err) {
       if (err.response) {
@@ -176,7 +178,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
           password: signupPassword,
           firstName: firstName,
           lastName: lastName,
-          userType: userType,
+          userType: userType ? userType : "enduser",
           username: signupUsername,
           city: city,
           phoneNo: phone,

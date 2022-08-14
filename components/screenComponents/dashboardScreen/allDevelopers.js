@@ -11,7 +11,7 @@ import axios from "axios";
 import { getAllDevelopers } from "../../utils/getAllDevelopers";
 import DeveloperCard from "../../userCard";
 
-function AllDevelopers({ dashboardType }) {
+function AllDevelopers() {
   const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
   const [loading, setLoading] = useState(true);
   const [longLatArr, setLongLatArr] = useState([]);
@@ -24,14 +24,12 @@ function AllDevelopers({ dashboardType }) {
 
   useEffect(() => {
     const fetchAgents = async () => {
-      if (dashboardType === "developers") {
-        const data = await getAllDevelopers();
-        setDevelopers(data);
-      }
+      const data = await getAllDevelopers();
+      setDevelopers(data);
     };
 
     fetchAgents();
-  }, [dashboardType]);
+  }, []);
 
   useEffect(() => {
     const fetchFilteredProperties = async () => {
@@ -91,8 +89,6 @@ function AllDevelopers({ dashboardType }) {
     );
   }
 
-  console.log(developers);
-
   return (
     <div className={classes.container}>
       <div
@@ -106,6 +102,7 @@ function AllDevelopers({ dashboardType }) {
         {!isLoaded ? <p>Loading</p> : <RenderMap />}
       </div>
 
+      <h1 className={classes.heading}>Our Developers</h1>
       <div className={classes.content_container}>
         {developers?.map((user, index) => (
           <DeveloperCard

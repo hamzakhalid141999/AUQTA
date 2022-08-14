@@ -36,10 +36,13 @@ function AgentForm() {
         }
       );
       setAgent(data?.data);
+      console.log(data);
     } catch (err) {
       console.log(err);
     }
   };
+
+  console.log("AGENTT: ", agent);
 
   const success = () =>
     toast.success("Profile Updated", {
@@ -72,6 +75,8 @@ function AgentForm() {
       setImgName(event?.name);
     }
   };
+
+  console.log(corporateAddress);
 
   const getUpdatedData = () => {
     let userData = {};
@@ -181,28 +186,46 @@ function AgentForm() {
         pauseOnHover
       />
       <div className={classes.section}>
-        <h1 className={classes.heading}>Agent Information</h1>
+        <h1 className={classes.heading}>
+          {user?.userType === "agent" ? "Agent" : "User"} Information
+        </h1>
         <div className={classes.single_row}>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Name</p>
-            <input
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-              placeholder={agent?.user?.username ? agent?.user?.username : ""}
-              className={classes.input_field_dual}
-            />
-          </div>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Since</p>
-            <input
-              onChange={(e) => {
-                setSinceYear(e.target.value);
-              }}
-              placeholder={agent?.since ? agent?.since : "Type Year"}
-              className={classes.input_field_dual}
-            />
-          </div>
+          {user?.userType === "agent" ? (
+            <div className={classes.two_field_container}>
+              <p className={classes.label_dual}>Name</p>
+              <input
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                placeholder={agent?.username ? agent?.username : ""}
+                className={classes.input_field_dual}
+              />
+            </div>
+          ) : (
+            <>
+              <p className={classes.label_dual}>Name</p>
+              <input
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                placeholder={agent?.username ? agent?.username : ""}
+                className={classes.input_field_single}
+              />
+            </>
+          )}
+
+          {user?.userType === "agent" && (
+            <div className={classes.two_field_container}>
+              <p className={classes.label_dual}>Since</p>
+              <input
+                onChange={(e) => {
+                  setSinceYear(e.target.value);
+                }}
+                placeholder={agent?.since ? agent?.since : "Type Year"}
+                className={classes.input_field_dual}
+              />
+            </div>
+          )}
         </div>
 
         <div style={{ alignItems: "normal" }} className={classes.single_row}>
@@ -212,9 +235,7 @@ function AgentForm() {
               setAbout(e.target.value);
             }}
             style={{ height: "150px", paddingTop: "10px" }}
-            placeholder={
-              agent?.user?.aboutInformation ? agent?.user?.aboutInformation : ""
-            }
+            placeholder={agent?.aboutInformation ? agent?.aboutInformation : ""}
             className={classes.input_field_single}
           />
         </div>
@@ -229,7 +250,7 @@ function AgentForm() {
               onChange={(e) => {
                 setCity(e.target.value);
               }}
-              placeholder={agent?.user?.city ? agent?.user?.city : "City Name"}
+              placeholder={agent?.city ? agent?.city : "City Name"}
               className={classes.input_field_dual}
             />
           </div>
@@ -239,16 +260,16 @@ function AgentForm() {
               onChange={(e) => {
                 setLocation(e.target.value);
               }}
-              placeholder={
-                agent?.user?.location ? agent?.user?.location : "Location Area"
-              }
+              placeholder={agent?.location ? agent?.location : "Location Area"}
               className={classes.input_field_dual}
             />
           </div>
         </div>
 
         <div style={{ alignItems: "normal" }} className={classes.single_row}>
-          <p className={classes.label}>Corporate Address</p>
+          <p className={classes.label}>
+            {user?.userType === "agent" ? "Corporate Address" : "Address"}
+          </p>
           <textarea
             onChange={(e) => {
               setCorporateAddress(e.target.value);
@@ -265,9 +286,7 @@ function AgentForm() {
               onChange={(e) => {
                 setWebsiteUrl(e.target.value);
               }}
-              placeholder={
-                agent?.user?.websiteURL ? agent?.user?.websiteURL : ""
-              }
+              placeholder={agent?.websiteURL ? agent?.websiteURL : ""}
               className={classes.input_field_dual}
             />
           </div>
@@ -283,37 +302,40 @@ function AgentForm() {
             </select>
           </div>
         </div>
-        <div className={classes.single_row}>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Logo Attachment</p>
-            {
-              // developer?.developerLogo ? (
-              //   <img
-              //     className={classes.img}
-              //     src={baseS3Url + developer?.developerLogo}
-              //   />
-              // ) :
-              logoImg ? (
-                <div className={classes.image_holder}>
-                  <img
-                    className={classes.img}
-                    src={logoImg && URL.createObjectURL(logoImg)}
+
+        {user?.userType === "agent" && (
+          <div className={classes.single_row}>
+            <div className={classes.two_field_container}>
+              <p className={classes.label_dual}>Logo Attachment</p>
+              {
+                // developer?.developerLogo ? (
+                //   <img
+                //     className={classes.img}
+                //     src={baseS3Url + developer?.developerLogo}
+                //   />
+                // ) :
+                logoImg ? (
+                  <div className={classes.image_holder}>
+                    <img
+                      className={classes.img}
+                      src={logoImg && URL.createObjectURL(logoImg)}
+                    />
+                  </div>
+                ) : (
+                  <input
+                    onChange={(e) => {
+                      handleLogoFile(e.target.files[0], "files");
+                    }}
+                    type={"file"}
+                    placeholder="City Name"
+                    className={classes.input_field_dual}
+                    accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
                   />
-                </div>
-              ) : (
-                <input
-                  onChange={(e) => {
-                    handleLogoFile(e.target.files[0], "files");
-                  }}
-                  type={"file"}
-                  placeholder="City Name"
-                  className={classes.input_field_dual}
-                  accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
-                />
-              )
-            }
+                )
+              }
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div onClick={handleEditUserInformation} className={classes.btn}>
