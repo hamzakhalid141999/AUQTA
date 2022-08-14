@@ -99,6 +99,8 @@
 .virtual_tour_text {
   position: absolute;
   bottom: 0px;
+  color: #0068ed !important;
+  font-weight: bolder;
 }
 
 .tour_message {
