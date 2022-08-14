@@ -400,9 +400,7 @@ function ContentSection() {
             other users to contact the specific User for property inquiries and
             to get thoroughly informed regarding the uploaded property.
           </p>
-        </div>
 
-        <div className={classes.single_section}>
           <p className={classes.small_heading}>Why Do We Collect Data</p>
 
           <p>

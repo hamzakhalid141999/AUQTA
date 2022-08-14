@@ -63,23 +63,18 @@ function NavbarModal({ displayModal = false, setDisplayModal = () => {} }) {
           </div>
         )}
 
-        {(user?.userType === "agent" ||
-          user?.userType === "developer" ||
-          user?.userType === "enduser") && (
-          <div onClick={closeNavModal}>
-            <Link href="/dashboard/property">
-              <p>ADD PROPERTY</p>
-            </Link>
-          </div>
-        )}
+        <div onClick={closeNavModal}>
+          <Link href={"/blogs"}>
+            <p>BLOGS</p>
+          </Link>
+        </div>
 
-        {user?.userType === "developer" && (
-          <div onClick={closeNavModal}>
-            <Link href="/dashboard/project">
-              <p>ADD PROJECT</p>
-            </Link>
-          </div>
-        )}
+        <div onClick={closeNavModal}>
+          <Link href={"/FAQ"}>
+            <p>FAQ</p>
+          </Link>
+        </div>
+
         {/* <div onClick={closeNavModal}>
           <Link href="/map">
             <p>BUY</p>

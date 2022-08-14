@@ -88,7 +88,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
       const data = await axios.post(
         baseURL + "/api/auth/signinbyemail",
         {
-          email: signInEmail,
+          email: signInEmail.trim(),
           password: signInPassword,
         },
         {
@@ -144,6 +144,10 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
   }, [loggedInUser]);
 
   const onPressSignUp = async () => {
+    if (signupUsername.length < 5) {
+      error("Username is less than 5 characters");
+      return;
+    }
     if (!firstName) {
       error("Enter First Name");
       return;
@@ -174,7 +178,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
       const data = await axios.post(
         baseURL + "/api/auth/signup",
         {
-          email: signupEmail,
+          email: signupEmail.trim(),
           password: signupPassword,
           firstName: firstName,
           lastName: lastName,
