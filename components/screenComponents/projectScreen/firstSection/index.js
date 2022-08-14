@@ -146,7 +146,7 @@ function FirstSection({
                 href={{
                   pathname: "/developer",
                   query: {
-                    developerId: projectDetails?.userId,
+                    developerId: projectDetails?.userId?._id,
                   },
                 }}
               >

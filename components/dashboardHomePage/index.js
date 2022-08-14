@@ -164,6 +164,7 @@ function DashboardHomePage() {
                 {properties?.map((property, index) => (
                   <PropertyCard
                     openEdit={true}
+                    noResize={true}
                     key={index}
                     propertyId={property?.propertyListing?._id}
                     title={property?.propertyListing?.title}

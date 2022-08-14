@@ -52,33 +52,24 @@ function Footer() {
           <h1>About</h1>
 
           <Link href={"/all_developers"}>
-            <div className={classes.row}>
-              <div className={classes.bullet} />
-              <p>Our Developers</p>
-            </div>
+            {/* <div className={classes.row}>
+              <div className={classes.bullet} /> */}
+            <h1>Our Developers</h1>
+            {/* </div> */}
           </Link>
 
           <Link href={"/all_agents"}>
-            <div className={classes.row}>
-              <div className={classes.bullet} />
-              <p>Our Agents</p>
-            </div>
+            <h1>Our Agents</h1>
           </Link>
         </div>
         <div className={classes.col_2}>
           <h1>Services</h1>
-          <Link href={"/contact"}>
-            <div className={classes.row}>
-              <div className={classes.bullet} />
-              <p>Contact Us</p>
-            </div>
+          <Link href={"/blogs"}>
+            <h1>Blogs</h1>
           </Link>
 
           <Link href={"/FAQ"}>
-            <div className={classes.row}>
-              <div className={classes.bullet} />
-              <p>FAQ</p>
-            </div>
+            <h1>FAQ</h1>
           </Link>
         </div>
         <div className={classes.col_2}>

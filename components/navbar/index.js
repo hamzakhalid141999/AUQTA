@@ -358,28 +358,6 @@ function Navbar() {
         </Link>
       </div>
       <div className={classes.right_panel}>
-        <Link href={"/blogs"}>
-          <p
-            className={
-              page.includes("blogs")
-                ? classes.selected
-                : classes.hover_underline_animation
-            }
-          >
-            BLOGS
-          </p>
-        </Link>
-        <Link href={"/FAQ"}>
-          <p
-            className={
-              page.includes("FAQ")
-                ? classes.selected
-                : classes.hover_underline_animation
-            }
-          >
-            FAQ
-          </p>
-        </Link>
         <Link href={"/about"}>
           <p
             className={
@@ -400,6 +378,18 @@ function Navbar() {
             }
           >
             SERVICES
+          </p>
+        </Link>
+
+        <Link href={"/blogs"}>
+          <p
+            className={
+              page.includes("blogs")
+                ? classes.selected
+                : classes.hover_underline_animation
+            }
+          >
+            BLOGS
           </p>
         </Link>
 

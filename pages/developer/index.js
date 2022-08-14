@@ -43,7 +43,7 @@ function Developer() {
 
   return (
     <div className={classes.developer_section}>
-      <FirstSection />
+      <FirstSection developerDetails={developerDetails} />
       <ContentSection developerDetails={developerDetails} />
       <UpcomingProjects />
     </div>

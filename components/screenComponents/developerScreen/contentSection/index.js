@@ -3,27 +3,12 @@ import Image from "next/image";
 import classes from "./contentSection.module.css";
 import img from "../../../../public/assets/developer_section_img.png";
 import { useWindowSize } from "../../../../utils";
+import { SocialIcon } from "react-social-icons";
 
 function ContentSection({ developerDetails }) {
   console.log(developerDetails);
   const [showMore, setShowMore] = useState(false);
   const { width } = useWindowSize();
-  const description = `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-    officia deserunt mollit anim id es eopksio laborum. Sed ut
-    perspiciatis unde omnis istpoe natus error sit voluptatem
-    accusantium doloremque eopsloi laudantium, totam rem aperiam,
-    eaque ipsa quae ab illo inventore veritatis et quasi architecto
-    beatae vitae dicta sunot explicabo. Nemo ernim ipsam voluptatem
-    quia voluptas sit aspernatur aut odit aut fugit, sedopk quia
-    consequuntur magni dolores eos qui rationesopl voluptatem sequi
-    nesciunt. Neque porro quisquameo est, qui dolorem ipsum quia dolor
-    sit amet, eopsmiep consectetur, adipisci velit, seisud quia non
-    numquam eius modi tempora I cidunt ut labore et dolore wopeir
-    magnam aliquam quaerat voluptatem eoplmuriquisquGExcepteur sint
-    occaecat cupidatat non proident, sunt in culpa qui officia
-    deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis
-    unde omnis istpoe natus error sit voluptatem accusantium
-    doloremque eopsloi laudantium, totam rem aperiam, eaque ips`;
 
   return (
     <div className={classes.container}>
@@ -36,11 +21,17 @@ function ContentSection({ developerDetails }) {
             <h1>ABOUT THE DEVELOPER</h1>
 
             <p>
-              {showMore ? description : description.substr(0, width - 1200)}
-              {!showMore && description.length > width - 1200 && (
-                <span>{showMore ? ` ` : `...`}</span>
-              )}
-              {description.length > width - 1200 && (
+              {showMore
+                ? developerDetails?.user?.aboutInformation
+                : developerDetails?.user?.aboutInformation.substr(
+                    0,
+                    width - 1200
+                  )}
+              {!showMore &&
+                developerDetails?.user?.aboutInformation.length >
+                  width - 1200 && <span>{showMore ? ` ` : `...`}</span>}
+              {developerDetails?.user?.aboutInformation.length >
+                width - 1200 && (
                 <span
                   style={{ color: "black", cursor: "pointer", fontWeight: 700 }}
                   onClick={() => {
@@ -66,7 +57,7 @@ function ContentSection({ developerDetails }) {
                 >
                   <p>Since</p>
                   <div className={classes.values_container}>
-                    <p>{developerDetails?.since}</p>
+                    <p className={classes.values}>{developerDetails?.since}</p>
                   </div>
                 </div>
                 <div
@@ -81,14 +72,16 @@ function ContentSection({ developerDetails }) {
                 >
                   <p>Projects Developed</p>
                   <div className={classes.values_container}>
-                    <p>{developerDetails?.projectsDeveloped}</p>
+                    <p className={classes.values}>
+                      {developerDetails?.projectsDeveloped}
+                    </p>
                   </div>
                 </div>
               </div>
               <div style={{ width: "98%" }} className={classes.single_row}>
                 <div
                   style={{
-                    width: "48%",
+                    width: "100%",
                     display: "flex",
                     flexDirection: "row",
                     columnGap: "15px",
@@ -98,12 +91,16 @@ function ContentSection({ developerDetails }) {
                 >
                   <p>City</p>
                   <div className={classes.values_container}>
-                    <p>{developerDetails?.user?.city}</p>
+                    <p className={classes.values}>
+                      {developerDetails?.user?.city}
+                    </p>
                   </div>
                 </div>
+              </div>
+              <div style={{ width: "98%" }} className={classes.single_row}>
                 <div
                   style={{
-                    width: "48%",
+                    width: "100%",
                     display: "flex",
                     flexDirection: "row",
                     columnGap: "15px",
@@ -112,8 +109,30 @@ function ContentSection({ developerDetails }) {
                   }}
                 >
                   <p>Social Media</p>
-                  <div className={classes.values_container}>
-                    <p>2012</p>
+                  <div className={classes.social_values_container}>
+                    {developerDetails?.user?.socialMedia?.map((link) => (
+                      <SocialIcon
+                        style={{
+                          height: 35,
+                          width: 35,
+                          marginLeft: "15px",
+                          marginRight: "15px",
+                          marginBottom: "10px",
+                        }}
+                        bgColor="#0169ec"
+                        fgColor="#fff"
+                        url={
+                          link === "Instagram"
+                            ? "https://instagram.com/isekai_verse"
+                            : link === "Facebook"
+                            ? "www.facebook.com"
+                            : link === "Twitter"
+                            ? "https://twitter.com/Isekai_Verse"
+                            : link === "Youtube" &&
+                              "https://www.youtube.com/channel/UCFr9GIiQwxDzvhuwzJOII5w/featured"
+                        }
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
@@ -130,7 +149,9 @@ function ContentSection({ developerDetails }) {
                 >
                   <p>Website URL</p>
                   <div className={classes.values_container}>
-                    <p>{developerDetails?.user?.websiteURL}</p>
+                    <p className={classes.values}>
+                      {developerDetails?.user?.websiteURL}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -148,7 +169,9 @@ function ContentSection({ developerDetails }) {
                 >
                   <p>Corporate Address</p>
                   <div className={classes.values_container}>
-                    <p>{developerDetails?.corporateAddress}</p>
+                    <p className={classes.values}>
+                      {developerDetails?.corporateAddress}
+                    </p>
                   </div>
                 </div>
               </div>

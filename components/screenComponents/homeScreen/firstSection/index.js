@@ -49,11 +49,11 @@ function FirstSection() {
     fetchAllCities();
   }, []);
 
-  useEffect(() => {
-    if (cities?.length > 0) {
-      setCity(cities[0]);
-    }
-  }, [cities]);
+  // useEffect(() => {
+  //   if (cities?.length > 0) {
+  //     setCity(cities[0]);
+  //   }
+  // }, [cities]);
 
   useEffect(() => {
     if (city) {
@@ -160,6 +160,7 @@ function FirstSection() {
                   }}
                   className={classes.input_field}
                 >
+                  <option>Select City</option>
                   {cities?.map((city, index) => (
                     <option key={index} value={city}>
                       {city}
@@ -262,6 +263,8 @@ function FirstSection() {
                         }}
                         className={classes.input_field}
                       >
+                        <option>Select City</option>
+
                         {cities?.map((city, index) => (
                           <option key={index} value={city}>
                             {city}
