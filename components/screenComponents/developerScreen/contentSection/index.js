@@ -110,8 +110,9 @@ function ContentSection({ developerDetails }) {
                 >
                   <p>Social Media</p>
                   <div className={classes.social_values_container}>
-                    {developerDetails?.user?.socialMedia?.map((link) => (
+                    {developerDetails?.user?.socialMedia?.map((link, index) => (
                       <SocialIcon
+                        key={index}
                         style={{
                           height: 35,
                           width: 35,
@@ -123,13 +124,13 @@ function ContentSection({ developerDetails }) {
                         fgColor="#fff"
                         url={
                           link === "Instagram"
-                            ? "https://instagram.com/isekai_verse"
+                            ? "https://instagram.com/a"
                             : link === "Facebook"
                             ? "www.facebook.com"
                             : link === "Twitter"
-                            ? "https://twitter.com/Isekai_Verse"
+                            ? "https://twitter.com/a"
                             : link === "Youtube" &&
-                              "https://www.youtube.com/channel/UCFr9GIiQwxDzvhuwzJOII5w/featured"
+                              "https://www.youtube.com/channel/a"
                         }
                       />
                     ))}
