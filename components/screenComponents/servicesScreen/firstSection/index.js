@@ -11,7 +11,7 @@ import "react-slideshow-image/dist/styles.css";
 
 function FirstSection() {
   const slideImages = [
-    "/assets/services_1.png",
+    "/assets/services_banner.png",
     "/assets/services_2.png",
     "/assets/services_3.png",
     "/assets/services_4.png",
@@ -24,15 +24,6 @@ function FirstSection() {
         <Fade arrows={false} style={{ height: "100%" }} easing="ease">
           <div className={classes.each_slide}>
             <div style={{ backgroundImage: `url(${slideImages[0]})` }}></div>
-          </div>
-          <div className={classes.each_slide}>
-            <div style={{ backgroundImage: `url(${slideImages[1]})` }}></div>
-          </div>
-          <div className={classes.each_slide}>
-            <div style={{ backgroundImage: `url(${slideImages[2]})` }}></div>
-          </div>
-          <div className={classes.each_slide}>
-            <div style={{ backgroundImage: `url(${slideImages[3]})` }}></div>
           </div>
         </Fade>
       </div>

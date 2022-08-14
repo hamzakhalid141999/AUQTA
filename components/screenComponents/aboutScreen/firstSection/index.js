@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import classes from "./firstSection.module.css";
 import Image from "next/image";
-import banner_img from "../../../../public/assets/about_page_banner_bg.png";
+import banner_img from "../../../../public/assets/about_banner.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 

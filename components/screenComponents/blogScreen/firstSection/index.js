@@ -6,7 +6,7 @@ import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 
 function FirstSection() {
-  const slideImages = ["/assets/faq_banner.jpeg"];
+  const slideImages = ["/assets/blog_banner.png"];
 
   return (
     <div className={classes.first_section_body}>

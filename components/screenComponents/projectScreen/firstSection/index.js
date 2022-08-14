@@ -27,7 +27,7 @@ function FirstSection({
   console.log(projectDetails);
 
   const slideImages = [
-    "/assets/first_section_banner_bg.jpg",
+    "/assets/project_banner.png",
     "/assets/hotel_2.png",
     "/assets/hotel_3.png",
     "/assets/hotel_4.png",
