@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import { getAllDevelopers } from "../../utils/getAllDevelopers";
 import DeveloperCard from "../../userCard";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function AllDevelopers() {
   const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
@@ -26,6 +27,7 @@ function AllDevelopers() {
     const fetchAgents = async () => {
       const data = await getAllDevelopers();
       setDevelopers(data);
+      setLoading(false);
     };
 
     fetchAgents();
@@ -65,8 +67,8 @@ function AllDevelopers() {
         // className={classes.iframe}
         zoom={7}
         center={{
-          lat: longLatArr[0]?.lat ? longLatArr[0]?.lat : 44,
-          lng: longLatArr[0]?.lng ? longLatArr[0]?.lng : -80,
+          lat: longLatArr[0]?.lat ? longLatArr[0]?.lat : 33.6844,
+          lng: longLatArr[0]?.lng ? longLatArr[0]?.lng : 73.0479,
         }}
         style={{
           height: "700px",
@@ -103,19 +105,29 @@ function AllDevelopers() {
       </div>
 
       <h1 className={classes.heading}>Our Developers</h1>
-      <div className={classes.content_container}>
-        {developers?.map((user, index) => (
-          <DeveloperCard
-            key={index}
-            name={user?.user?.username}
-            city={user?.user?.city}
-            location={user?.user?.location}
-            picture={user?.user?.profilePicture}
-            description={user?.user?.aboutInformation}
-            logo={user?.developerLogo}
-          />
-        ))}
-      </div>
+      {loading ? (
+        <div className={classes.loading_container}>
+          <ClipLoader size={"15px"} color="black" />
+        </div>
+      ) : developers?.length === 0 ? (
+        <div className={classes.loading_container}>
+          <p> No Developers</p>
+        </div>
+      ) : (
+        <div className={classes.content_container}>
+          {developers?.map((user, index) => (
+            <DeveloperCard
+              key={index}
+              name={user?.user?.username}
+              city={user?.user?.city}
+              location={user?.user?.location}
+              picture={user?.user?.profilePicture}
+              description={user?.user?.aboutInformation}
+              logo={user?.developerLogo}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

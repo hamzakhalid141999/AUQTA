@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import { getAllAgents } from "../../utils/getAllAgents";
 import AgentCard from "../../userCard";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function AllAgents() {
   const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
@@ -56,7 +57,7 @@ function AllAgents() {
     const fetchAgents = async () => {
       const data = await getAllAgents();
       setAgents(data);
-      console.log(data);
+      setLoading(false);
     };
 
     fetchAgents();
@@ -68,8 +69,8 @@ function AllAgents() {
         // className={classes.iframe}
         zoom={7}
         center={{
-          lat: longLatArr[0]?.lat ? longLatArr[0]?.lat : 44,
-          lng: longLatArr[0]?.lng ? longLatArr[0]?.lng : -80,
+          lat: longLatArr[0]?.lat ? longLatArr[0]?.lat : 33.6844,
+          lng: longLatArr[0]?.lng ? longLatArr[0]?.lng : 73.0479,
         }}
         style={{
           height: "700px",
@@ -106,19 +107,29 @@ function AllAgents() {
       </div>
       <h1 className={classes.heading}>Our Agents</h1>
 
-      <div className={classes.content_container}>
-        {agents?.map((user, index) => (
-          <AgentCard
-            key={index}
-            name={user?.user?.username}
-            city={user?.user?.city}
-            location={user?.user?.location}
-            picture={user?.user?.profilePicture}
-            description={user?.user?.aboutInformation}
-            logo={user?.companyLogo}
-          />
-        ))}
-      </div>
+      {loading ? (
+        <div className={classes.loading_container}>
+          <ClipLoader size={"15px"} color="black" />
+        </div>
+      ) : agents?.length === 0 ? (
+        <div className={classes.loading_container}>
+          <p> No Agents</p>
+        </div>
+      ) : (
+        <div className={classes.content_container}>
+          {agents?.map((user, index) => (
+            <AgentCard
+              key={index}
+              name={user?.user?.username}
+              city={user?.user?.city}
+              location={user?.user?.location}
+              picture={user?.user?.profilePicture}
+              description={user?.user?.aboutInformation}
+              logo={user?.companyLogo}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
