@@ -42,24 +42,6 @@ function FirstSection() {
                   style={{ backgroundImage: `url(${slideImages[0]})` }}
                 ></div>
               </div>
-
-              <div className={classes.each_slide}>
-                <div
-                  style={{ backgroundImage: `url(${slideImages[1]})` }}
-                ></div>
-              </div>
-
-              <div className={classes.each_slide}>
-                <div
-                  style={{ backgroundImage: `url(${slideImages[2]})` }}
-                ></div>
-              </div>
-
-              <div className={classes.each_slide}>
-                <div
-                  style={{ backgroundImage: `url(${slideImages[3]})` }}
-                ></div>
-              </div>
             </>
           )}
         </Fade>
