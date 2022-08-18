@@ -243,7 +243,7 @@ function Navbar() {
           </div>
           <div className={classes.search_bar}>
             <div
-              style={{ paddingLeft: "0px" }}
+              // style={{ paddingLeft: "0px" }}
               className={classes.search_category}
             >
               <p>CITY</p>

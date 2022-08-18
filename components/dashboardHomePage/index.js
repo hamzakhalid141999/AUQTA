@@ -106,7 +106,7 @@ function DashboardHomePage() {
             </div>
           </div>
         </Link>
-        <div className={classes.tab}>
+        {/* <div className={classes.tab}>
           <img src={phone.src} className={classes.logo} />
           <div className={classes.tab_heading}>
             <h1>COMPLETED CALLS</h1>
@@ -123,7 +123,7 @@ function DashboardHomePage() {
             </p>
             <p>VIEW ALL</p>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {(user?.userType === "agent" ||

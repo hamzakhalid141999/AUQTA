@@ -350,9 +350,12 @@
   color: white;
   border-radius: 100px;
   font-size: 12px;
+  transition: ease-in-out 200ms;
   box-shadow: 0 10px 20px 5px rgba(60, 78, 98, 0.329);
 }
-
+.send_message_btn:hover {
+  background-color: #3389f2;
+}
 @media screen and (max-width: 1000px) {
   .bg_pic {
     display: none;

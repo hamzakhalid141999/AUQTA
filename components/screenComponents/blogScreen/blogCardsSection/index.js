@@ -40,13 +40,14 @@ function BlogCardsSection({ isTitle }) {
     <div className={classes.blogs_section_container}>
       {isTitle && <h1>YOU MAY ALSO LIKE</h1>}
       <div className={classes.blogs_section}>
-        <Slider slidesToShow={slidesToShow} {...settings}>
+        <h1>Coming Soon</h1>
+        {/* <Slider slidesToShow={slidesToShow} {...settings}>
           <BlogCard />
           <BlogCard />
           <BlogCard />
           <BlogCard />
           <BlogCard />
-        </Slider>
+        </Slider> */}
       </div>
     </div>
   );

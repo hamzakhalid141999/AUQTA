@@ -42,18 +42,28 @@ function FirstSection() {
     const fetchAllCities = async () => {
       const data = await getAllCities();
       setCitiesAndLocations(data);
-      data?.map((cityObject) =>
-        setCities((city) => [...city, cityObject?.cityName])
-      );
+      data?.map((cityObject) => {
+        if (
+          cityObject?.cityName !== "Islamabad" &&
+          cityObject?.cityName !== "Lahore" &&
+          cityObject?.cityName !== "Rawalpindi" &&
+          cityObject?.cityName !== "Faisalabad" &&
+          cityObject?.cityName !== "Karachi"
+        ) {
+          setCities((city) => [...city, cityObject?.cityName]);
+        }
+      });
     };
     fetchAllCities();
   }, []);
 
-  // useEffect(() => {
-  //   if (cities?.length > 0) {
-  //     setCity(cities[0]);
-  //   }
-  // }, [cities]);
+  const [isCitiesListSorted, setIsCitiesListSorted] = useState(false);
+
+  useEffect(() => {
+    if (cities?.length > 0) {
+      setCities(cities?.sort());
+    }
+  }, [cities]);
 
   useEffect(() => {
     if (city) {
@@ -155,12 +165,19 @@ function FirstSection() {
               <div className={classes.search_category}>
                 <p>CITY</p>
                 <select
+                  style={{ paddingRight: "0px" }}
                   onChange={(e) => {
                     setCity(e.target.value);
                   }}
                   className={classes.input_field}
                 >
                   <option>Select City</option>
+                  <option>Islamabad</option>
+                  <option>Lahore</option>
+                  <option>Karachi</option>
+                  <option>Faisalabad</option>
+                  <option>Rawalpindi</option>
+
                   {cities?.map((city, index) => (
                     <option key={index} value={city}>
                       {city}

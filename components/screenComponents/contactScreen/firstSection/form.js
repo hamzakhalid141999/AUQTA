@@ -85,7 +85,7 @@ function Contact_Form() {
           our representatives will get back to you shortly
         </p>
         <div className={classes.vertical_field_container}>
-          <label className={classes.label}>Your name</label>
+          <label className={classes.label}>Name</label>
           <input
             onChange={(e) => {
               setName(e.target.value);
@@ -95,7 +95,7 @@ function Contact_Form() {
           />
         </div>
         <div className={classes.vertical_field_container}>
-          <label className={classes.label}>Your email</label>
+          <label className={classes.label}>Email</label>
           <input
             onChange={(e) => {
               setEmail(e.target.value);

@@ -4,7 +4,9 @@ import { baseURL } from "../../constants";
 async function getPropertiesByUserId(userId) {
   try {
     const data = await axios.get(
-      baseURL + "/api/property/allpropertylistings/id/" + userId,
+      baseURL +
+        "/api/property/allpropertylistings/activeandinactive/id/" +
+        userId,
       {
         params: {
           pageNumber: 1,

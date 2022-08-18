@@ -1,8 +1,8 @@
 .card_bg {
   height: 380px;
   min-height: 380px;
-  max-width: 250px;
-  min-width: 250px;
+  max-width: 260px;
+  min-width: 260px;
   border-radius: 25px;
   display: flex;
   justify-content: center;
@@ -40,14 +40,14 @@
 .card_body h1 {
   text-align: center;
   margin-top: 25px;
-  font-size: 20px;
+  font-size: 17px;
   margin-bottom: 20px;
   color: #0169ec !important;
 }
 .description {
   width: 100% !important;
   text-align: center;
-  font-size: 13px !important;
+  font-size: 12px !important;
   line-height: 20px;
 }
 .icon {

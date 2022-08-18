@@ -350,8 +350,8 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                 >
                   Forgot your password?
                 </p>
-                <div className={classes.divider} />
-                <p className={classes.connect_with}>Or connect with:</p>
+                {/* <div className={classes.divider} />
+                <p className={classes.connect_with}>:</p>
                 <div className={classes.apple_btn}>
                   <p>Continue with Apple</p>
                 </div>
@@ -360,7 +360,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                 </div>
                 <div className={classes.google_btn}>
                   <p>Continue with Google</p>
-                </div>
+                </div> */}
               </div>
             ) : currentState === 2 ? (
               <>
@@ -517,7 +517,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                   </p>
                 </div>
 
-                <div className={classes.divider} />
+                {/* <div className={classes.divider} />
                 <p className={classes.connect_with}>Or connect with:</p>
                 <div className={classes.apple_btn}>
                   <p>Continue with Apple</p>
@@ -527,7 +527,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                 </div>
                 <div className={classes.google_btn}>
                   <p>Continue with Google</p>
-                </div>
+                </div> */}
               </>
             ) : (
               currentState === 3 && (
