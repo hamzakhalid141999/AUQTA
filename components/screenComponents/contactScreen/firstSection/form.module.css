@@ -335,18 +335,22 @@
 }
 
 .send_message_btn {
+  cursor: pointer;
   height: 40px;
-  width: fit-content;
+  width: 260px;
+  max-width: 260px;
   padding-left: 25px;
   padding-right: 25px;
   display: flex;
   align-items: center;
+  flex-direction: row;
+  column-gap: 10px;
   justify-content: center;
   background-color: #0169ec;
   color: white;
   border-radius: 100px;
   font-size: 12px;
-  box-shadow: 0 10px 20px 5px rgba(8, 72, 146, 0.329);
+  box-shadow: 0 10px 20px 5px rgba(60, 78, 98, 0.329);
 }
 
 @media screen and (max-width: 1000px) {

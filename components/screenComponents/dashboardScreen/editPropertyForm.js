@@ -1310,7 +1310,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
               </div>
             </div>
 
-            {type !== "plot" && (
+            {type !== "plot" && type !== "commercial" ? (
               <div className={classes.single_row}>
                 <div className={classes.two_field_container}>
                   <p className={classes.label_dual}>Bedrooms</p>
@@ -1339,6 +1339,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                   />
                 </div>
               </div>
+            ) : (
+              <></>
             )}
 
             <div

@@ -1030,28 +1030,32 @@ function PropertyForm() {
           </div>
         </div>
 
-        <div className={classes.single_row}>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Bedrooms</p>
-            <input
-              onChange={(e) => {
-                setBedroom(e.target.value);
-              }}
-              type="number"
-              className={classes.input_field_dual}
-            />
+        {type !== "plot" && type !== "commercial" ? (
+          <div className={classes.single_row}>
+            <div className={classes.two_field_container}>
+              <p className={classes.label_dual}>Bedrooms</p>
+              <input
+                onChange={(e) => {
+                  setBedroom(e.target.value);
+                }}
+                type="number"
+                className={classes.input_field_dual}
+              />
+            </div>
+            <div className={classes.two_field_container}>
+              <p className={classes.label_dual}>Bathrooms</p>
+              <input
+                type="number"
+                onChange={(e) => {
+                  setBathroom(e.target.value);
+                }}
+                className={classes.input_field_dual}
+              />
+            </div>
           </div>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Bathrooms</p>
-            <input
-              type="number"
-              onChange={(e) => {
-                setBathroom(e.target.value);
-              }}
-              className={classes.input_field_dual}
-            />
-          </div>
-        </div>
+        ) : (
+          <></>
+        )}
         <div style={{ alignItems: "normal" }} className={classes.single_row}>
           <p className={classes.label}>Description</p>
           <textarea

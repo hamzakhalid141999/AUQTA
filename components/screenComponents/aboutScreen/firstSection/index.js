@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import classes from "./firstSection.module.css";
 import Image from "next/image";
 import banner_img from "../../../../public/assets/about_banner.png";
+import banner_img_desktop from "../../../../public/assets/about_page_banner_bg.png";
+import { useWindowSize } from "../../../../utils";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -13,12 +15,14 @@ function FirstSection() {
     AOS.refresh();
   }, []);
 
+  const { width } = useWindowSize();
+
   return (
     <div id="home" className={classes.first_section_body}>
       <div className={classes.banner_img_container}>
         <div className={classes.overlay} />
         <Image
-          src={banner_img}
+          src={width < 786 ? banner_img : banner_img_desktop}
           className={classes.banner_img}
           alt="hero_banner_img"
           layout="fill"

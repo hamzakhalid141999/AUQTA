@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import classes from "./forms.module.css";
 import axios from "axios";
 import { useAuth } from "../../../contextAPI";
@@ -7,7 +7,14 @@ import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Select, { components } from "react-select";
-import placeholder from "../../../public/assets/placeholder_user.png";
+import { getAllCities } from "../../../components/utils";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  StandaloneSearchBox,
+  LoadScript,
+} from "@react-google-maps/api";
 
 function AgentForm() {
   const { user } = useAuth();
@@ -26,6 +33,9 @@ function AgentForm() {
   const [logoKey, setLogoKey] = useState(logoKey);
   const [socialMediaArr, setSocialMediaArr] = useState([]);
   const [socialsArr, setSocialsArr] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [citiesAndLocations, setCitiesAndLocations] = useState();
 
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -40,7 +50,44 @@ function AgentForm() {
   const [imgArr, setImgArr] = useState();
   const [imgKey, setImgKey] = useState();
 
+  const [lat, setLat] = useState();
+  const [lng, setLng] = useState();
+  const [initialLat, setInitialLat] = useState();
+  const [initialLng, setInitialLng] = useState();
+
   const [profilePicture, setProfilePicture] = useState();
+
+  const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
+  });
+
+  useEffect(async () => {
+    const data = await getAllCities();
+    setCitiesAndLocations(data);
+    data?.map((cityObject) =>
+      setCities((city) => [...city, cityObject?.cityName])
+    );
+  }, []);
+
+  useEffect(() => {
+    if (cities?.length > 0) {
+      setCity(cities[0]);
+    }
+  }, [cities]);
+
+  console.log(citiesAndLocations);
+
+  useEffect(() => {
+    if (city) {
+      for (var i = 0; i < citiesAndLocations?.length; i++) {
+        if (citiesAndLocations[i]?.cityName === city) {
+          setLocations(citiesAndLocations[i]?.areas);
+        }
+      }
+    }
+  }, [city]);
 
   const handleImg = async (event) => {
     if (event) {
@@ -97,13 +144,14 @@ function AgentForm() {
         }
       );
       setAgent(data?.data);
-      console.log(data);
+      console.log(data?.data);
+      setInitialLat(parseInt(data?.data?.lat));
+      setInitialLng(parseInt(data?.data?.lng));
+      setCity(data?.data?.user?.city);
     } catch (err) {
       console.log(err);
     }
   };
-
-  console.log("AGENTT: ", agent);
 
   const success = () =>
     toast.success("Profile Updated", {
@@ -166,6 +214,63 @@ function AgentForm() {
     );
   };
 
+  useEffect(() => {
+    const fetchFilteredProperties = async () => {
+      if (city && location) {
+        let url =
+          "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+          city +
+          location +
+          "&key=" +
+          GEOCODING_API;
+
+        const data = await axios.get(url);
+        console.log(data);
+        if (data?.data?.results.length > 0) {
+          setInitialLat(data?.data?.results[0]?.geometry?.location?.lat);
+          setInitialLng(data?.data?.results[0]?.geometry?.location?.lng);
+          setLat(data?.data?.results[0]?.geometry?.location?.lat);
+          setLng(data?.data?.results[0]?.geometry?.location?.lng);
+        }
+      }
+    };
+    fetchFilteredProperties();
+  }, [city, location]);
+
+  const map = useMemo(() => {
+    return (
+      <>
+        <p style={{ color: "grey", marginBottom: "20px", marginTop: "50px" }}>
+          Move the pin to mark to your desired location
+        </p>
+
+        <GoogleMap
+          zoom={14}
+          center={{
+            lat: initialLat,
+            lng: initialLng,
+          }}
+          style={{
+            height: "700px",
+            borderBottomLeftRadius: "180px",
+            borderBottomRightRadius: "180px",
+            width: "100%",
+          }}
+          mapContainerClassName={classes.map_container}
+        >
+          <Marker
+            onDragEnd={(e) => {
+              setLat(e.latLng.lat());
+              setLng(e.latLng.lng());
+            }}
+            draggable
+            position={{ lat: initialLat, lng: initialLng }}
+          />
+        </GoogleMap>
+      </>
+    );
+  }, [initialLat, initialLng]);
+
   const getUpdatedData = () => {
     let userData = {};
     if (name) {
@@ -213,6 +318,12 @@ function AgentForm() {
     if (cnic) {
       userData = { ...userData, cnic: cnic };
     }
+    if (lng) {
+      userData = { ...userData, lng: lng };
+    }
+    if (lat) {
+      userData = { ...userData, lat: lat };
+    }
 
     return userData;
   };
@@ -234,10 +345,11 @@ function AgentForm() {
         }
       );
       console.log(data);
-      success();
       setLogoKey(data?.data?.user?.companyLogo);
-      setLoading(false);
-      window.location.reload();
+      if (!logoImg) {
+        setLoading(false);
+        window.location.reload();
+      }
     } catch (err) {
       error();
       console.log(err);
@@ -275,6 +387,9 @@ function AgentForm() {
               });
               const s3Url = response?.url?.split("?")[0];
               console.log(s3Url);
+              setLoading(false);
+              success();
+              window.location.reload();
             }
           };
           xhr.send();
@@ -310,7 +425,9 @@ function AgentForm() {
                     onChange={(e) => {
                       setName(e.target.value);
                     }}
-                    placeholder={agent?.username ? agent?.username : ""}
+                    placeholder={
+                      agent?.user?.username ? agent?.user?.username : ""
+                    }
                     className={classes.input_field_dual}
                   />
                 </div>
@@ -321,7 +438,9 @@ function AgentForm() {
                     onChange={(e) => {
                       setName(e.target.value);
                     }}
-                    placeholder={agent?.username ? agent?.username : ""}
+                    placeholder={
+                      agent?.user?.username ? agent?.user?.username : ""
+                    }
                     className={classes.input_field_single}
                   />
                 </>
@@ -334,7 +453,9 @@ function AgentForm() {
                     onChange={(e) => {
                       setSinceYear(e.target.value);
                     }}
-                    placeholder={agent?.since ? agent?.since : "Type Year"}
+                    placeholder={
+                      agent?.user?.since ? agent?.user?.since : "Type Year"
+                    }
                     className={classes.input_field_dual}
                   />
                 </div>
@@ -352,7 +473,9 @@ function AgentForm() {
                 }}
                 style={{ height: "150px", paddingTop: "10px" }}
                 placeholder={
-                  agent?.aboutInformation ? agent?.aboutInformation : ""
+                  agent?.user?.aboutInformation
+                    ? agent?.user?.aboutInformation
+                    : ""
                 }
                 className={classes.input_field_single}
               />
@@ -364,27 +487,47 @@ function AgentForm() {
             <div className={classes.single_row}>
               <div className={classes.two_field_container}>
                 <p className={classes.label_dual}>City</p>
-                <input
+                <select
+                  className={classes.input_field_dual}
                   onChange={(e) => {
                     setCity(e.target.value);
                   }}
-                  placeholder={agent?.city ? agent?.city : "City Name"}
-                  className={classes.input_field_dual}
-                />
+                >
+                  <option>Select City</option>
+                  {cities?.map((city, index) => (
+                    <option
+                      selected={agent && agent?.user?.city === city}
+                      key={index}
+                      value={city}
+                    >
+                      {city}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className={classes.two_field_container}>
                 <p className={classes.label_dual}>Location</p>
-                <input
+                <select
+                  className={classes.input_field_dual}
                   onChange={(e) => {
                     setLocation(e.target.value);
                   }}
-                  placeholder={
-                    agent?.location ? agent?.location : "Location Area"
-                  }
-                  className={classes.input_field_dual}
-                />
+                >
+                  <option>Select Location</option>
+                  {locations?.map((location, index) => (
+                    <option
+                      selected={agent && agent?.user?.location === location}
+                      key={index}
+                      value={location}
+                    >
+                      {location}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
+
+            {isLoaded ? map : <></>}
 
             <div
               style={{ alignItems: "normal" }}
@@ -409,7 +552,9 @@ function AgentForm() {
                   onChange={(e) => {
                     setWebsiteUrl(e.target.value);
                   }}
-                  placeholder={agent?.websiteURL ? agent?.websiteURL : ""}
+                  placeholder={
+                    agent?.user?.websiteURL ? agent?.user?.websiteURL : ""
+                  }
                   className={classes.input_field_dual}
                 />
               </div>
@@ -435,10 +580,12 @@ function AgentForm() {
               <div className={classes.two_field_container}>
                 <p className={classes.label_dual}>Logo Attachment</p>
                 {agent?.companyLogo ? (
-                  <img
-                    className={classes.img}
-                    src={baseS3Url + agent?.companyLogo}
-                  />
+                  <>
+                    <img
+                      className={classes.img}
+                      src={baseS3Url + agent?.companyLogo}
+                    />
+                  </>
                 ) : logoImg ? (
                   <div className={classes.image_holder}>
                     <img

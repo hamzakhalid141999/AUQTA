@@ -34,13 +34,15 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
   const { user, signUp } = useAuth();
   const [confirmPassword, setConfirmPassword] = useState();
   const [loading, setLoading] = useState(false);
-  const [userType, setUserType] = useState();
+  const [userType, setUserType] = useState("enduser");
   const [termsServiceAgreed, setTermsServiceAgreed] = useState();
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState();
   const [currentState, setCurrentState] = useState(1); //1=Login, 2=Signup, 3=Forget Password
   const toggleAuthScreen = (value) => {
     setActiveTab(value);
   };
+
+  console.log(userType);
 
   const success = () =>
     toast.success("Signed in successfully!", {
@@ -182,7 +184,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
           password: signupPassword,
           firstName: firstName,
           lastName: lastName,
-          userType: userType ? userType : "enduser",
+          userType: userType,
           username: signupUsername,
           city: city,
           phoneNo: phone,
@@ -438,6 +440,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                         setUserType(e.target.value);
                       }}
                     >
+                      <option>Select User Type</option>
                       <option value={"agent"}>Real Estate Agent</option>
                       <option value={"developer"}>Developer</option>
                     </select>

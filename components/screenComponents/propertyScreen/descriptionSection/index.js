@@ -41,7 +41,7 @@ function Description({ property }) {
           </div>
           <div className={classes.service_description_container}>
             <div className={classes.input_field_container_dual}>
-              <label>Owner Email</label>
+              <label>Email</label>
               {/* <div className={classes.input_field}> */}
               <p className={classes.info_val}>
                 {property?.propertyListing?.contactEmail}
@@ -50,7 +50,7 @@ function Description({ property }) {
             </div>
 
             <div className={classes.input_field_container_dual}>
-              <label>Owner Phone (Home)</label>
+              <label>Phone (Home)</label>
               {/* <div className={classes.input_field}> */}
               <p className={classes.info_val}>
                 {property?.propertyListing?.contactPhoneHome}
@@ -58,7 +58,7 @@ function Description({ property }) {
               {/* </div> */}
             </div>
             <div className={classes.input_field_container_dual}>
-              <label>Owner Phone (Work)</label>
+              <label>Phone (Work)</label>
               {/* <div className={classes.input_field}> */}
               <p className={classes.info_val}>
                 {property?.propertyListing?.contactPhoneWork}

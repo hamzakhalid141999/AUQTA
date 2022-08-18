@@ -79,7 +79,7 @@ input[type="file"]::file-selector-button {
   font-size: 16px !important;
   color: #0068ed !important;
   font-weight: bolder !important;
-  max-width: calc(95%) !important;
+  max-width: calc(100%) !important;
   /* max-width: 230px; */
   text-overflow: ellipsis !important;
   overflow: hidden !important;

@@ -435,7 +435,9 @@
 }
 .img {
   height: 100%;
-  max-width: 100%;
+  background-color: red;
+  max-width: 150px;
+  border-radius: 0px !important;
   object-fit: contain;
 }
 .btn {

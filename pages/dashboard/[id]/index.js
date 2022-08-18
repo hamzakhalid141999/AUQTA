@@ -31,6 +31,7 @@ import AllProperties from "../../../components/screenComponents/dashboardScreen/
 import AllProjects from "../../../components/screenComponents/dashboardScreen/allProjects";
 import AllAgents from "../../../components/screenComponents/dashboardScreen/allAgents";
 import AllDevelopers from "../../../components/screenComponents/dashboardScreen/allDevelopers";
+import { getAllCities } from "../../../components/utils";
 
 function Dashboard() {
   const { user } = useAuth();
@@ -44,7 +45,7 @@ function Dashboard() {
   const [propertyId, _setPropertyId] = useState();
   const [projectId, _setProjectId] = useState();
 
-  console.log("Property Id: ", propertyId);
+  console.log("DASHBOARD TYPE: ", dashboardType);
 
   const onCloseDeleteModal = () => {
     setOpenDeleteModal(false);
@@ -390,8 +391,8 @@ function Dashboard() {
                 </div>
               </>
             ) : (
-              dashboardType === "agent_details" ||
-              (dashboardType === "user_details" && (
+              (dashboardType === "agent_details" ||
+                dashboardType === "user_details") && (
                 <>
                   <div className={classes.top_content}>
                     <div className={classes.heading_contaienr}>
@@ -413,7 +414,7 @@ function Dashboard() {
                     <AgentForm />
                   </div>
                 </>
-              ))
+              )
             )}
           </div>
         </div>

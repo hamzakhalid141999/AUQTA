@@ -1,8 +1,8 @@
 .card_bg {
   height: 380px;
   min-height: 380px;
-  max-width: 220px;
-  min-width: 210px;
+  max-width: 250px;
+  min-width: 250px;
   border-radius: 25px;
   display: flex;
   justify-content: center;

@@ -203,6 +203,7 @@ function Map() {
               ?.map((property, index) => (
                 <PropertyCard
                   key={index}
+                  propertyId={property?._id}
                   title={
                     searchedParams?.type
                       ? property?.propertyListing?.title

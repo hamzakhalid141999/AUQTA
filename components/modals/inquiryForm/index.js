@@ -23,8 +23,6 @@ function InquiryForm({
   const [userType, setUserType] = useState();
   const [message, setMessage] = useState();
 
-  console.log(realEstateId, ownerId, propertyName);
-
   useEffect(() => {
     if (open === true) {
       setEmail();
@@ -116,7 +114,7 @@ function InquiryForm({
         />
         <div className={classes.main_container}>
           <div className={classes.content_container}>
-            <h1>Inquiry Form</h1>
+            <h1>Get in touch!</h1>
             <div className={classes.single_row}>
               <input
                 onChange={(e) => {

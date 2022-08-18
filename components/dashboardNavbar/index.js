@@ -27,6 +27,8 @@ function DashboardNavbar({ handleOpenSideBar }) {
     router.push("/");
   };
 
+  console.log(user);
+
   return (
     <div className={classes.navbar_body}>
       {width < 1060 ? (
@@ -54,7 +56,7 @@ function DashboardNavbar({ handleOpenSideBar }) {
       <div className={classes.right_panel}>
         <Link
           href={
-            user?.usertype === "agent"
+            user?.userType === "agent"
               ? "/dashboard/agent_details"
               : user?.userType === "enduser"
               ? "/dashboard/user_details"

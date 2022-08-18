@@ -52,7 +52,7 @@ function FirstSection({
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
   const slideImages = [
-    "/assets/first_section_banner_bg.jpg",
+    "/assets/project_banner_img.png",
     "/assets/hotel_2.png",
     "/assets/hotel_3.png",
     "/assets/hotel_4.png",
@@ -171,7 +171,7 @@ function FirstSection({
             </div>
           </div>
           <div onClick={onOpenModal} className={classes.inquiry_btn}>
-            <p>Inquiry Form</p>
+            <p>Inquire</p>
           </div>
         </div>
       </div>

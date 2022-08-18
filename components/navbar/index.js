@@ -242,7 +242,10 @@ function Navbar() {
             </div>
           </div>
           <div className={classes.search_bar}>
-            <div className={classes.search_category}>
+            <div
+              style={{ paddingLeft: "0px" }}
+              className={classes.search_category}
+            >
               <p>CITY</p>
               <select
                 onChange={(e) => {
