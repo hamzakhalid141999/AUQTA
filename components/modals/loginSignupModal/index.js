@@ -42,8 +42,6 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
     setActiveTab(value);
   };
 
-  console.log(userType);
-
   const success = () =>
     toast.success("Signed in successfully!", {
       position: "bottom-center",
@@ -104,7 +102,6 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
       success();
       setLoading(false);
       setOpen(false);
-      console.log(data?.data);
       if (data?.data?.userType === "developer") {
         router.push("/dashboard/developer");
       } else if (data?.data?.userType === "agent") {
@@ -114,7 +111,6 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
       }
     } catch (err) {
       if (err.response) {
-        console.log(err.response.data.message);
         if (err.response.data?.message === "Invalid Password!") {
           error("Invaid Password");
         } else if (err.response.data?.message === "User not found") {
@@ -200,7 +196,6 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
       setCurrentState(1);
     } catch (err) {
       if (err.response) {
-        console.log(err.response.data.message);
         if (err.response.data.message === "Email is already in use") {
           error("Email already registered");
         } else if (err.response.data.message === "Username is already taken") {

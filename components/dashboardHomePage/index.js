@@ -13,6 +13,7 @@ import ProjectCard from "../screenComponents/homeScreen/trendingProperties/compo
 import phone from "../../public/assets/phone_call.png";
 import email from "../../public/assets/email_icon.png";
 import Link from "next/link";
+import { getInboxByUserId } from "../utils/fetchInboxByUserId";
 
 function DashboardHomePage() {
   const { width } = useWindowSize();
@@ -20,6 +21,7 @@ function DashboardHomePage() {
   const { user } = useAuth();
   const [properties, setProperties] = useState([]);
   const [projects, setProjects] = useState([]);
+  const [inboundMessages, setInboundMessages] = useState();
 
   useEffect(() => {
     const fetchPropertiesByUserId = async () => {
@@ -60,6 +62,16 @@ function DashboardHomePage() {
     }
   }, [width]);
 
+  useEffect(() => {
+    const handleFetchUserInbox = async () => {
+      if (user?.id) {
+        const data = await getInboxByUserId(user?.id);
+        setInboundMessages(data?.messages?.length);
+      }
+    };
+    handleFetchUserInbox();
+  }, [user?.id]);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -68,8 +80,6 @@ function DashboardHomePage() {
     autoplay: true,
     autoplaySpeed: 2000,
   };
-
-  console.log(properties?.length);
 
   return (
     <div className={classes.content_section}>
@@ -82,30 +92,28 @@ function DashboardHomePage() {
           : "Auqta Agent Control System"}
       </p>
       <div className={classes.calls_msgs_tab_container}>
-        <Link href="/dashboard/inbox">
-          <div className={classes.tab}>
-            <img src={email.src} className={classes.logo} />
-            <div className={classes.tab_heading}>
-              <h1>COMPLETED MESSAGES</h1>
-              <p>23</p>
-            </div>
-            <div className={classes.inbound_outbound}>
-              <p className={classes.inbound_outbound_text}>
-                <span style={{ color: "#0068ed", fontWeight: "bolder" }}>
-                  13
-                </span>{" "}
-                INBOUND
-              </p>
-              <p className={classes.inbound_outbound_text}>
-                <span style={{ color: "#0068ed", fontWeight: "bolder" }}>
-                  13
-                </span>{" "}
-                OUTBOUND
-              </p>
-              <p>VIEW ALL</p>
-            </div>
+        <div className={classes.tab}>
+          <img src={email.src} className={classes.logo} />
+          <div className={classes.tab_heading}>
+            <h1>COMPLETED MESSAGES</h1>
+            <p>23</p>
           </div>
-        </Link>
+          <div className={classes.inbound_outbound}>
+            <p className={classes.inbound_outbound_text}>
+              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>
+                {inboundMessages}
+              </span>{" "}
+              INBOUND
+            </p>
+            <p className={classes.inbound_outbound_text}>
+              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>13</span>{" "}
+              OUTBOUND
+            </p>
+            <Link href="/dashboard/inbox">
+              <p>VIEW ALL</p>
+            </Link>
+          </div>
+        </div>
         {/* <div className={classes.tab}>
           <img src={phone.src} className={classes.logo} />
           <div className={classes.tab_heading}>

@@ -27,8 +27,6 @@ function DashboardNavbar({ handleOpenSideBar }) {
     router.push("/");
   };
 
-  console.log(user);
-
   return (
     <div className={classes.navbar_body}>
       {width < 1060 ? (

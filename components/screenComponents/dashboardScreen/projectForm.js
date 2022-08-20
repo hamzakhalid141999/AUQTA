@@ -31,6 +31,9 @@ function ProjectForm() {
   const [categorySelected, setCategorySelected] = useState("buy");
   const [featureArr, setFeatureArr] = useState([1, 2, 3, 4]);
   const [amenityArr, setAmenityArr] = useState([1, 2, 3, 4, 5, 6, 7]);
+
+  const [locationFeatureArr, setLocationFeatureArr] = useState([1, 2, 3, 4]);
+
   const [name, setName] = useState();
   const [priceLowerBound, setPriceLowerBound] = useState();
   const [priceUpperBound, setPriceUpperBound] = useState();
@@ -69,6 +72,9 @@ function ProjectForm() {
   const [shopImgKeysArr, setShopImgKeysArr] = useState([]);
 
   const [featuresArr, setFeaturesArr] = useState(featureArr);
+  const [locationFeaturesArr, setLocationFeaturesArr] =
+    useState(locationFeatureArr);
+
   const [amenitiesArr, setAmenitiesArr] = useState([]);
   const [amenitiesArrFinal, setAmenitiesArrFinal] = useState();
   const [cities, setCities] = useState([]);
@@ -104,6 +110,8 @@ function ProjectForm() {
   const [lng, setLng] = useState();
   const [initialLat, setInitialLat] = useState();
   const [initialLng, setInitialLng] = useState();
+
+  const [locationOverview, setLocationOverview] = useState();
 
   useEffect(async () => {
     const data = await getAllCities();
@@ -189,6 +197,10 @@ function ProjectForm() {
 
   const handleAddField = () => {
     setFeatureArr((array) => [...array, featureArr.length + 1]);
+  };
+
+  const handleAddLocationField = () => {
+    setLocationFeatureArr((array) => [...array, locationFeatureArr.length + 1]);
   };
 
   const handleAddAmenity = () => {
@@ -317,6 +329,8 @@ function ProjectForm() {
           city: city,
           location: location,
           features: featuresArr,
+          locationOverview: locationOverview,
+          locationFeatures: locationFeaturesArr,
           amenities: amenitiesArrFinal,
           govtApproved: isGovApproved,
           approvalBodyName: approvalBody,
@@ -327,6 +341,7 @@ function ProjectForm() {
           images: imgArr,
           address: address,
           province: province,
+          isActive: false,
           dateAdded: Math.floor(Date.now() / 1000),
           currentScenario: "ongoing",
           projectStartDate: startDate,
@@ -395,7 +410,6 @@ function ProjectForm() {
                 body: myBlob,
               });
               const s3Url = response?.url?.split("?")[0];
-              console.log("response ", s3Url);
               setIsFirstMilestoneImageUploaded(true);
             }
           };
@@ -433,7 +447,6 @@ function ProjectForm() {
                 body: myBlob,
               });
               const s3Url = response?.url?.split("?")[0];
-              console.log("response ", s3Url);
               setIsSecondMilestoneImageUploaded(true);
             }
           };
@@ -471,7 +484,6 @@ function ProjectForm() {
                 body: myBlob,
               });
               const s3Url = response?.url?.split("?")[0];
-              console.log("response ", s3Url);
               setIsThirdMilestoneImageUploaded(true);
             }
           };
@@ -510,7 +522,6 @@ function ProjectForm() {
                   body: myBlob,
                 });
                 const s3Url = response?.url?.split("?")[0];
-                console.log("response ", s3Url);
                 if (i === imgsKeysArr?.length - 1) {
                   setIsImagesUploaded(true);
                 }
@@ -552,7 +563,6 @@ function ProjectForm() {
                   body: myBlob,
                 });
                 const s3Url = response?.url?.split("?")[0];
-                console.log("response ", s3Url);
                 setIsFloorPlanImageUploaded(true);
               }
             };
@@ -592,7 +602,6 @@ function ProjectForm() {
                   body: myBlob,
                 });
                 const s3Url = response?.url?.split("?")[0];
-                console.log("response ", s3Url);
                 setIsPriceplanImageUplaoded(true);
               }
             };
@@ -632,7 +641,6 @@ function ProjectForm() {
                   body: myBlob,
                 });
                 const s3Url = response?.url?.split("?")[0];
-                console.log("response ", s3Url);
                 setIsBrochureImageUploaded(true);
               }
             };
@@ -672,7 +680,6 @@ function ProjectForm() {
                   body: myBlob,
                 });
                 const s3Url = response?.url?.split("?")[0];
-                console.log("response ", s3Url);
                 setIsShopImageUploaded(true);
               }
             };
@@ -712,6 +719,10 @@ function ProjectForm() {
     featuresArr[id] = value;
   };
 
+  const handleLocationFeatureInputChange = (value, id) => {
+    locationFeaturesArr[id] = value;
+  };
+
   const handleAmenitiesInputChange = (value, id) => {
     amenitiesArr[id] = value;
   };
@@ -737,7 +748,6 @@ function ProjectForm() {
           GEOCODING_API;
 
         const data = await axios.get(url);
-        console.log(data);
         if (data?.data?.results.length > 0) {
           setInitialLat(data?.data?.results[0]?.geometry?.location?.lat);
           setInitialLng(data?.data?.results[0]?.geometry?.location?.lng);
@@ -856,19 +866,65 @@ function ProjectForm() {
           />
         </div>
 
-        {/* <div className={classes.single_row}>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Since</p>
-            <input
-              placeholder="Type Year"
-              className={classes.input_field_dual}
-            />
+        <div style={{ alignItems: "normal" }} className={classes.single_row}>
+          <p className={classes.label}>Overview of the Location</p>
+          <textarea
+            onChange={(e) => {
+              setLocationOverview(e.target.value);
+            }}
+            style={{ height: "150px", paddingTop: "10px" }}
+            className={classes.input_field_single}
+          />
+        </div>
+
+        <div className={classes.single_row}>
+          <div
+            style={{ width: "100%", alignItems: "normal" }}
+            className={classes.two_field_container}
+          >
+            <p style={{ marginTop: "17px" }} className={classes.label}>
+              Location Features
+            </p>
+            <div className={classes.infinite_input_fields_container}>
+              {locationFeatureArr?.map((feature, index) => (
+                <div
+                  key={index}
+                  style={{ width: "100%" }}
+                  className={classes.looped_input_field_container}
+                >
+                  <input
+                    style={{ width: "100%", marginBottom: "20px" }}
+                    disabled={
+                      locationFeatureArr?.length === index + 1 ? true : false
+                    }
+                    onChange={(e) => {
+                      handleLocationFeatureInputChange(e.target.value, index);
+                    }}
+                    on
+                    placeholder={
+                      locationFeatureArr?.length === index + 1
+                        ? "Add more"
+                        : "Feature " + parseInt(index + 1)
+                    }
+                    className={classes.input_field_dual}
+                  />
+                  {locationFeatureArr?.length === index + 1 && (
+                    <div className={classes.add_btn_border_working}>
+                      <h3
+                        onClick={() => {
+                          handleAddLocationField();
+                        }}
+                        className={classes.add_field_working}
+                      >
+                        +
+                      </h3>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Projects Developed</p>
-            <input className={classes.input_field_dual} />
-          </div>
-        </div> */}
+        </div>
 
         <div className={classes.single_row}>
           <div

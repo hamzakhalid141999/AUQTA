@@ -33,8 +33,6 @@ function Map() {
     }
   }, [router]);
 
-  console.log(searchedParams);
-
   useEffect(() => {
     const fetchFilteredProperties = async () => {
       if (filteredProperties?.length > 0) {
@@ -60,7 +58,6 @@ function Map() {
               };
               longlatTempArr.push(longLatArr);
             } else {
-              console.log("LLAAAAATTTTTT: ", filteredProperties[i]?.lat);
               longLatArr = {
                 lat: parseFloat(filteredProperties[i]?.lat),
                 lng: parseFloat(filteredProperties[i]?.lng),
@@ -124,7 +121,6 @@ function Map() {
               },
             }
           );
-          console.log(data?.data);
           setFilteredProperties(data?.data);
           if (data?.data?.length === 0) {
             setLoading(false);

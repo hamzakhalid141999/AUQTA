@@ -12,6 +12,7 @@ import size from "../../../../public/assets/size.png";
 import ProjectImagesModal from "../../../modals/projectImagesModal.js";
 import InquiryForm from "../../../modals/inquiryForm/index";
 import project_image from "../../../../public/assets/projct-imagewhite.png";
+import ContactDetail from "../../../modals/contactDetailsModal/index";
 
 function FirstSection({
   images,
@@ -20,9 +21,10 @@ function FirstSection({
   propertyListingDetails,
   propertyId,
 }) {
-  console.log(ownerDetails?.user?._id);
   const [formattedPrice, setFormattedPrice] = useState();
   const [open, setOpen] = useState();
+  const [openContactModal, setOpenContactModal] = useState();
+
   const [ownerId, setOwnerId] = useState();
   const [_propertyId, setPropertyId] = useState();
 
@@ -32,14 +34,20 @@ function FirstSection({
   };
   const onClosePicModal = () => setOpenPicModal(false);
 
-  console.log(propertyDetails);
-
   const onCloseModal = () => {
     setOpen(false);
   };
 
+  const onCloseContactModal = () => {
+    setOpenContactModal(false);
+  };
+
   const onOpenModal = () => {
     setOpen(true);
+  };
+
+  const onOpenContactModal = () => {
+    setOpenContactModal(true);
   };
 
   useEffect(() => {
@@ -93,6 +101,13 @@ function FirstSection({
         open={open}
         onCloseModal={onCloseModal}
       />
+
+      <ContactDetail
+        open={openContactModal}
+        onCloseModal={onCloseContactModal}
+        propertyDetails={propertyDetails}
+      />
+
       <ProjectImagesModal
         setOpen={setOpenPicModal}
         open={openPicModal}
@@ -129,27 +144,29 @@ function FirstSection({
             </div>
           </div>
           {/* <p data-aos="fade-right">Lorem ipsum is just a dummy text which is used to fill in spaces when you have nothing else to write over there</p> */}
-          <div className={classes.btns_container}>
-            <div className={classes.upper_btns}>
-              <img
-                style={{ width: "20%" }}
-                src={
-                  ownerDetails?.user?.userType === "developer"
-                    ? baseS3Url + ownerDetails?.developerLogo
-                    : baseS3Url + ownerDetails?.companyLogo
-                }
-                className={classes.developer_logo}
-              />
-              <Link href={"/developer"}>
-                <div style={{ width: "80%" }} className={classes.banner_btn}>
-                  <p>
-                    {ownerDetails?.user?.username}
-                    <span>{">"}</span>
-                  </p>
-                </div>
-              </Link>
+          {ownerDetails?.userType !== "enduser" && (
+            <div className={classes.btns_container}>
+              <div className={classes.upper_btns}>
+                <img
+                  style={{ width: "20%" }}
+                  src={
+                    ownerDetails?.user?.userType === "developer"
+                      ? baseS3Url + ownerDetails?.developerLogo
+                      : baseS3Url + ownerDetails?.companyLogo
+                  }
+                  className={classes.developer_logo}
+                />
+                <Link href={"/developer"}>
+                  <div style={{ width: "80%" }} className={classes.banner_btn}>
+                    <p>
+                      {ownerDetails?.user?.username}
+                      <span>{">"}</span>
+                    </p>
+                  </div>
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div className={classes.banner_btns_wrapper}>
           <div className={classes.banner_btns_container}>
@@ -170,8 +187,27 @@ function FirstSection({
               <a href="#">IMAGES</a>
             </div>
           </div>
-          <div onClick={onOpenModal} className={classes.inquiry_btn}>
-            <p>Inquire</p>
+          <div className={classes.inquire_contact_btns}>
+            <div
+              style={{
+                borderTopRightRadius: "0px",
+                borderBottomRightRadius: "0px",
+              }}
+              onClick={onOpenModal}
+              className={classes.login_btn}
+            >
+              <p>Inquire</p>
+            </div>
+            <div
+              style={{
+                borderTopLeftRadius: "0px",
+                borderBottomLeftRadius: "0px",
+              }}
+              onClick={onOpenContactModal}
+              className={classes.login_btn}
+            >
+              <p>Contact</p>
+            </div>
           </div>
         </div>
       </div>

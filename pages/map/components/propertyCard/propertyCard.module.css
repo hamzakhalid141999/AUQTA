@@ -33,6 +33,9 @@
 .card_body_no_resize:hover .like {
   opacity: 1;
 }
+.card_body_no_resize:hover .edit {
+  opacity: 1;
+}
 .like {
   transition: ease-in-out 200ms;
   position: absolute;
@@ -41,6 +44,26 @@
   color: #0068ed;
   z-index: 50;
   opacity: 0;
+  cursor: pointer;
+  transition: ease-in-out 200ms;
+}
+.like:hover {
+  color: #1f7df9;
+}
+.edit {
+  transition: ease-in-out 200ms;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #0068ed;
+  z-index: 50;
+  opacity: 0;
+  cursor: pointer;
+  transition: ease-in-out 200ms;
+}
+.edit:hover {
+  transform: rotate(80deg);
+  color: #1f7df9;
 }
 
 .image_container {

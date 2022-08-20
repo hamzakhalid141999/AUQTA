@@ -18,8 +18,6 @@ function ProjectConentSection({
   const [showMore, setShowMore] = useState(false);
   const { width } = useWindowSize();
 
-  console.log(projectDetails);
-
   const showContent = () => {
     setShowMore(!showMore);
   };
@@ -76,48 +74,17 @@ function ProjectConentSection({
           >
             <h1>VIRTUAL VIEW OF THE LOCATION</h1>
             <div className={classes.service_description_container}>
-              <p>
-                Augmented reality superimposes a digital layer upon physical
-                content which allows user to interact with a structure in a
-                physical environment. This is an innovative marketing solution
-                for realtors who can showcase their future projects with the tip
-                of their smartphones/tablets.
-              </p>
-              <p>
-                So, Contact Us! and elevate your immersive experience with your
-                future property.
-              </p>
-              <p>Our augmented reality services include:</p>
+              <p>{projectDetails?.locationOverview}</p>
 
-              <div className={classes.bullet_point}>
-                <div className={classes.bullets_container}>
-                  <div className={classes.bullet} />{" "}
-                  <p className={classes.bullet_text}>INTERACTIVE FLOOR PLAN</p>
+              {projectDetails?.locationFeatures?.map((feature) => (
+                <div className={classes.bullet_point}>
+                  <div className={classes.bullets_container}>
+                    <div className={classes.bullet} />{" "}
+                    <p className={classes.bullet_text}>{feature}</p>
+                  </div>
                 </div>
-                <p>
-                  Project your architectural structure through your floor plan
-                </p>
-              </div>
-              <div className={classes.bullet_point}>
-                <div className={classes.bullets_container}>
-                  <div className={classes.bullet} />{" "}
-                  <p className={classes.bullet_text}>3D ON CONSTRUCTION SITE</p>
-                </div>
-                <p>
-                  Visualise your future project on the actual construction site
-                </p>
-              </div>
-              <div className={classes.bullet_point}>
-                <div className={classes.bullets_container}>
-                  <div className={classes.bullet} />{" "}
-                  <p className={classes.bullet_text}>INTERACTIVE BROUCHERS</p>
-                </div>
-                <p>
-                  Elevate your client{"'"}s experience through our immersive
-                  brouchers which contain interact floor plans of your structure
-                  and creative content
-                </p>
-              </div>
+              ))}
+
               <div className={classes.bullet_points_container}>
                 <p className={classes.bullet_text}>Address</p>
                 <div className={classes.bullets_container}>

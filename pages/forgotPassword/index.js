@@ -11,8 +11,6 @@ function ForgotPassword() {
   const [code, setCode] = useState();
   const [newPassword, setNewPassword] = useState();
 
-  console.log(code);
-
   useEffect(() => {
     const url = window.location.href.split("?");
     const codeSplitted = url[1].split("=")[1];

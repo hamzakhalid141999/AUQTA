@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import classes from "./allPropertiesProjects.module.css";
-import { getAllActiveProjects } from "../../utils/fetchAllActiveProjects";
+import { getProjectsByUserId } from "../../utils/fetchProjectsByUserId";
 import ProjectCard from "../homeScreen/trendingProperties/components/propertyCard";
 import { ClipLoader } from "react-spinners";
+import { useAuth } from "../../../contextAPI";
 
 function AllProjects({ dashboardType }) {
   const [projects, setProjects] = useState();
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchProjects = async () => {
-      if (dashboardType === "projects") {
-        const data = await getAllActiveProjects();
+      if (dashboardType === "projects" && user?.id) {
+        const data = await getProjectsByUserId(user?.id);
         setProjects(data);
         setLoading(false);
       }
     };
 
     fetchProjects();
-  }, [dashboardType]);
-
-  console.log(projects);
+  }, [dashboardType, user]);
 
   return (
     <>

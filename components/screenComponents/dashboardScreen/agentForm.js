@@ -66,37 +66,34 @@ function AgentForm() {
   useEffect(async () => {
     const data = await getAllCities();
     setCitiesAndLocations(data);
-    data?.map((cityObject) =>
-      setCities((city) => [...city, cityObject?.cityName])
-    );
+    data?.map((cityObject) => {
+      if (
+        cityObject?.cityName !== "Islamabad" &&
+        cityObject?.cityName !== "Lahore" &&
+        cityObject?.cityName !== "Rawalpindi" &&
+        cityObject?.cityName !== "Faisalabad" &&
+        cityObject?.cityName !== "Karachi"
+      ) {
+        setCities((city) => [...city, cityObject?.cityName]);
+      }
+    });
   }, []);
 
   useEffect(() => {
     if (cities?.length > 0) {
-      setCity(cities[0]);
+      setCities(cities?.sort());
     }
   }, [cities]);
 
-  console.log(citiesAndLocations);
-
   useEffect(() => {
-    if (city) {
+    if (city && citiesAndLocations) {
       for (var i = 0; i < citiesAndLocations?.length; i++) {
         if (citiesAndLocations[i]?.cityName === city) {
           setLocations(citiesAndLocations[i]?.areas);
         }
       }
     }
-  }, [city]);
-
-  const handleImg = async (event) => {
-    if (event) {
-      console.log(event);
-      setImg(event);
-      setImagesBlobArr(event);
-      setImgArr(event?.name);
-    }
-  };
+  }, [city, citiesAndLocations]);
 
   const socials = [
     {
@@ -144,10 +141,10 @@ function AgentForm() {
         }
       );
       setAgent(data?.data);
-      console.log(data?.data);
-      setInitialLat(parseInt(data?.data?.lat));
-      setInitialLng(parseInt(data?.data?.lng));
-      setCity(data?.data?.user?.city);
+      setInitialLat(parseFloat(data?.data?.lat));
+      setInitialLng(parseFloat(data?.data?.lng));
+      // setCity(data?.data?.user?.city);
+      // setLocation(data?.data?.user?.location);
     } catch (err) {
       console.log(err);
     }
@@ -184,8 +181,6 @@ function AgentForm() {
       setImgName(event?.name);
     }
   };
-
-  console.log(corporateAddress);
 
   const Option = (props) => {
     return (
@@ -225,7 +220,6 @@ function AgentForm() {
           GEOCODING_API;
 
         const data = await axios.get(url);
-        console.log(data);
         if (data?.data?.results.length > 0) {
           setInitialLat(data?.data?.results[0]?.geometry?.location?.lat);
           setInitialLng(data?.data?.results[0]?.geometry?.location?.lng);
@@ -344,7 +338,6 @@ function AgentForm() {
           },
         }
       );
-      console.log(data);
       setLogoKey(data?.data?.user?.companyLogo);
       if (!logoImg) {
         setLoading(false);
@@ -386,7 +379,6 @@ function AgentForm() {
                 body: myBlob,
               });
               const s3Url = response?.url?.split("?")[0];
-              console.log(s3Url);
               setLoading(false);
               success();
               window.location.reload();
@@ -494,6 +486,37 @@ function AgentForm() {
                   }}
                 >
                   <option>Select City</option>
+                  <option
+                    selected={agent && agent?.user?.city === "Islamabad"}
+                    value="Islamabad"
+                  >
+                    Islamabad
+                  </option>
+                  <option
+                    selected={agent && agent?.user?.city === "Lahore"}
+                    value="Lahore"
+                  >
+                    Lahore
+                  </option>
+                  <option
+                    selected={agent && agent?.user?.city === "Karachi"}
+                    value="Karachi"
+                  >
+                    Karachi
+                  </option>
+                  <option
+                    selected={agent && agent?.user?.city === "Faisalabad"}
+                    value="Faisalabad"
+                  >
+                    Faisalabad
+                  </option>
+                  <option
+                    selected={agent && agent?.user?.city === "Rawalpindi"}
+                    value="Rawalpindi"
+                  >
+                    Rawalpindi
+                  </option>
+
                   {cities?.map((city, index) => (
                     <option
                       selected={agent && agent?.user?.city === city}
@@ -514,6 +537,11 @@ function AgentForm() {
                   }}
                 >
                   <option>Select Location</option>
+                  {agent?.user?.location && (
+                    <option selected value={agent?.user?.location}>
+                      {agent?.user?.location}
+                    </option>
+                  )}
                   {locations?.map((location, index) => (
                     <option
                       selected={agent && agent?.user?.location === location}
@@ -577,19 +605,39 @@ function AgentForm() {
             </div>
 
             <div className={classes.single_row}>
-              <div className={classes.two_field_container}>
+              <div
+                style={{ justifyContent: "initial", columnGap: "20px" }}
+                className={classes.two_field_container}
+              >
                 <p className={classes.label_dual}>Logo Attachment</p>
                 {agent?.companyLogo ? (
-                  <>
+                  <div style={{ position: "relative" }}>
                     <img
                       className={classes.img}
+                      style={{
+                        maxWidth: "100px",
+                        maxHeight: "100px",
+                        minHeight: "100px",
+                      }}
                       src={baseS3Url + agent?.companyLogo}
                     />
-                  </>
+                    <div className={classes.input_on_top_image}>
+                      <input
+                        onChange={(e) => {
+                          handleLogoFile(e.target.files[0], "files");
+                        }}
+                        type={"file"}
+                        placeholder="City Name"
+                        className={classes.input_field_dual}
+                        accept={".png,.jpeg,.jpg,.mp4, .MOV, .gif"}
+                      />
+                    </div>
+                  </div>
                 ) : logoImg ? (
                   <div className={classes.image_holder}>
                     <img
                       className={classes.img}
+                      style={{ zIndex: "500" }}
                       src={logoImg && URL.createObjectURL(logoImg)}
                     />
                   </div>

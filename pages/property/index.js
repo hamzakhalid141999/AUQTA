@@ -33,7 +33,6 @@ function Property() {
 
   useEffect(() => {
     if (router?.query?.propertyId) {
-      console.log(router?.query?.propertyId);
       setPropertyId(router?.query?.propertyId);
     }
   }, [router]);
@@ -41,7 +40,6 @@ function Property() {
   useEffect(() => {
     const fetchPropertiesByLocation = async () => {
       if (property) {
-        console.log(property);
         const data = await getPropertiesByProvince(
           property?.propertyListing?.province
         );
@@ -51,8 +49,6 @@ function Property() {
 
     fetchPropertiesByLocation();
   }, [property]);
-
-  console.log(property);
 
   const bucketBaseUrl = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
@@ -67,7 +63,6 @@ function Property() {
           },
         }
       );
-      console.log(property?.data);
       const data = property?.data;
       setLoading(false);
       for (var i = 0; i < data?.propertyListing?.images?.length; i++) {
@@ -83,7 +78,6 @@ function Property() {
 
   useEffect(() => {
     const fetchDeveloperDetails = async () => {
-      console.log(property?.propertyListing);
       try {
         const data = await axios.get(
           baseURL +

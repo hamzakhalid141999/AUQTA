@@ -24,10 +24,8 @@ function FirstSection({
 }) {
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
-  console.log(projectDetails);
-
   const slideImages = [
-    "/assets/project_banner.png",
+    "/assets/project_banner_img.png",
     "/assets/hotel_2.png",
     "/assets/hotel_3.png",
     "/assets/hotel_4.png",
@@ -195,8 +193,10 @@ function FirstSection({
               <a href="#">IMAGES</a>
             </div>
           </div>
-          <div className={classes.inquiry_btn} onClick={onOpenInquiryForm}>
-            <p>Inquiry Form</p>
+          <div className={classes.inquire_contact_btns}>
+            <div onClick={onOpenInquiryForm} className={classes.login_btn}>
+              <p>Inquire</p>
+            </div>
           </div>
         </div>
       </div>

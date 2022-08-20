@@ -35,8 +35,6 @@ function Map() {
     }
   }, [router]);
 
-  console.log(filteredProperties);
-
   useEffect(() => {
     const fetchFilteredProperties = async () => {
       if (filteredProperties?.length > 0) {
@@ -52,17 +50,12 @@ function Map() {
             filteredProperties[i]?.lng
           ) {
             if (searchedParams?.type) {
-              console.log(
-                "LLAAAAATTTTTT: ",
-                filteredProperties[i]?.propertyListing?.address
-              );
               longLatArr = {
                 lat: parseFloat(filteredProperties[i]?.propertyListing?.lat),
                 lng: parseFloat(filteredProperties[i]?.propertyListing?.lng),
               };
               longlatTempArr.push(longLatArr);
             } else {
-              console.log("LLAAAAATTTTTT: ", filteredProperties[i]?.lat);
               longLatArr = {
                 lat: parseFloat(filteredProperties[i]?.lat),
                 lng: parseFloat(filteredProperties[i]?.lng),
@@ -100,12 +93,9 @@ function Map() {
     fetchFilteredProperties();
   }, [filteredProperties]);
 
-  console.log(longLatArr);
-
   useEffect(() => {
     const fetchSearchedProperties = async () => {
       if (searchedParams?.city) {
-        console.log("IN FILTER PROPS", searchedParams);
         try {
           const data = await axios.get(
             baseURL + "/api/property/filter",
@@ -125,7 +115,6 @@ function Map() {
               },
             }
           );
-          console.log(data);
           setFilteredProperties(data?.data);
           if (data?.data?.length === 0) {
             setLoading(false);
@@ -169,8 +158,6 @@ function Map() {
       </GoogleMap>
     );
   }
-
-  console.log(filteredProperties);
 
   return (
     <div>

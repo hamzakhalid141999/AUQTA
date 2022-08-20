@@ -26,8 +26,6 @@ function Project() {
     }
   }, [router]);
 
-  console.log(projectId);
-
   useEffect(() => {
     if (projectId) {
       fetchProjectDetails();

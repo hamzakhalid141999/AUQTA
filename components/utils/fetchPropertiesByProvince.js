@@ -19,7 +19,6 @@ async function getPropertiesByProvince(province) {
         },
       }
     );
-    console.log(data);
     return data?.data;
   } catch (err) {
     console.log(err);

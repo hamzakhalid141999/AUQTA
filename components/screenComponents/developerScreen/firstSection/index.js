@@ -7,7 +7,6 @@ import Link from "next/link";
 function FirstSection({ developerDetails }) {
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
-  console.log(developerDetails);
   return (
     <div className={classes.first_section_body}>
       <div className={classes.banner_img_container}>

@@ -378,6 +378,7 @@
   font-weight: bolder;
   font-size: 15px;
   width: 20%;
+  margin-right: 20px;
   max-width: 100px;
   min-width: 100px;
   color: rgb(56, 56, 56);
@@ -388,6 +389,7 @@
   width: 20%;
   min-width: 100px;
   max-width: 100px;
+  margin-right: 20px;
   color: rgb(56, 56, 56);
 }
 .data_tabs_container {
@@ -463,6 +465,21 @@
   background-color: #3788ea;
 }
 .image_holder input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer !important;
+  height: 100% !important;
+}
+.input_on_top_image {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+}
+.input_on_top_image input[type="file"] {
   position: absolute;
   left: 0;
   top: 0;

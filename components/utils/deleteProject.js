@@ -8,7 +8,6 @@ async function deleteProject(id) {
         "Content-Type": "application/json",
       },
     });
-    console.log(data?.data);
   } catch (err) {
     console.log(err);
   }

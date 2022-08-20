@@ -62,6 +62,22 @@ function MainFeaturesSection({ property, features }) {
           mockVal(finalResult, features?.mainFeatures[i]),
         ]);
       }
+      for (
+        var i = 0;
+        i < features?.mainFeatures?.otherMainFeatures?.length;
+        i++
+      ) {
+        var result = features?.mainFeatures?.otherMainFeatures[i].replace(
+          /([A-Z])/g,
+          " $1"
+        );
+        var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+
+        setMainFeatures((featureArr) => [
+          ...featureArr,
+          mockVal(finalResult, true),
+        ]);
+      }
     }
   }, [features]);
 
@@ -76,6 +92,19 @@ function MainFeaturesSection({ property, features }) {
           mockVal(finalResult, features?.communication[i]),
         ]);
       }
+
+      for (var i = 0; i < features?.communication?.otherFeatures?.length; i++) {
+        var result = features?.communication?.otherFeatures[i].replace(
+          /([A-Z])/g,
+          " $1"
+        );
+        var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+
+        setCommunicationFeatures((featureArr) => [
+          ...featureArr,
+          mockVal(finalResult, true),
+        ]);
+      }
     }
   }, [features]);
 
@@ -88,6 +117,19 @@ function MainFeaturesSection({ property, features }) {
         setOtherFeatures((featureArr) => [
           ...featureArr,
           mockVal(finalResult, features?.otherFeatures[i]),
+        ]);
+      }
+
+      for (var i = 0; i < features?.utilities?.otherFeatures?.length; i++) {
+        var result = features?.utilities?.otherFeatures[i].replace(
+          /([A-Z])/g,
+          " $1"
+        );
+        var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+
+        setOtherFeatures((featureArr) => [
+          ...featureArr,
+          mockVal(finalResult, true),
         ]);
       }
     }
@@ -118,6 +160,19 @@ function MainFeaturesSection({ property, features }) {
           mockVal(finalResult, features?.rooms[i]),
         ]);
       }
+
+      for (var i = 0; i < features?.rooms?.otherFeatures?.length; i++) {
+        var result = features?.rooms?.otherFeatures[i].replace(
+          /([A-Z])/g,
+          " $1"
+        );
+        var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+
+        setRoomFeatures((featureArr) => [
+          ...featureArr,
+          mockVal(finalResult, true),
+        ]);
+      }
     }
   }, [features]);
 
@@ -130,6 +185,19 @@ function MainFeaturesSection({ property, features }) {
         setUtilitiesFeatures((featureArr) => [
           ...featureArr,
           mockVal(finalResult, features?.utilities[i]),
+        ]);
+      }
+
+      for (var i = 0; i < features?.utilities?.otherFeatures?.length; i++) {
+        var result = features?.utilities?.otherFeatures[i].replace(
+          /([A-Z])/g,
+          " $1"
+        );
+        var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+
+        setUtilitiesFeatures((featureArr) => [
+          ...featureArr,
+          mockVal(finalResult, true),
         ]);
       }
     }

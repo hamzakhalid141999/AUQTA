@@ -13,7 +13,6 @@ async function sendInquiry(
   propertyOrProject,
   realEstateName
 ) {
-  console.log(propertyOrProject, realEstateName);
   try {
     const data = await axios.post(
       baseURL + "/api/inbox/addmessage",
@@ -39,8 +38,6 @@ async function sendInquiry(
         },
       }
     );
-
-    console.log(data?.data);
   } catch (err) {
     console.log(err);
   }

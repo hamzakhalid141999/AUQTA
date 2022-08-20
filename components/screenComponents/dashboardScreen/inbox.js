@@ -16,12 +16,9 @@ function Inbox() {
 
   useEffect(() => {
     if (user) {
-      console.log(user);
       setUser(user?.id);
     }
   }, [user]);
-
-  console.log(messages);
 
   useEffect(() => {
     const handleFetchUserInbox = async () => {
@@ -47,8 +44,6 @@ function Inbox() {
     setActiveMessageId(id);
     setActiveMessageIndex(index);
   };
-
-  console.log(messages);
 
   return (
     <div className={classes.form_body}>

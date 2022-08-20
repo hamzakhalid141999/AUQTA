@@ -22,7 +22,6 @@ export default function Home() {
   useEffect(() => {
     const getProjects = async () => {
       const data = await getHomePageProjects();
-      console.log(data);
       setProjects(data);
     };
 

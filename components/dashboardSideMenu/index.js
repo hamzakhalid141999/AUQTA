@@ -22,14 +22,11 @@ function DashboardSideMenu({ openSideBar, handleCloseSideBar }) {
 
   const bucketBaseUrl = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
-  console.log("PROFILE PICTURE BEING LOADED: ", bucketBaseUrl + profilePicture);
-
   //users/developer/6299050a03ba683caaea666d/profile/profileImage-8-8-2022-1659964467685.jpeg
   //users/developer/6299050a03ba683caaea666d/profile/profileImage-8-8-2022-1659963644310.jpeg
 
   const handleImg = async (event) => {
     if (event) {
-      console.log(event);
       setImg(event);
       setImagesBlobArr(event);
       setImgArr(event?.name);
@@ -56,7 +53,6 @@ function DashboardSideMenu({ openSideBar, handleCloseSideBar }) {
 
   useEffect(() => {
     if (imgKey) {
-      console.log("Key before upload: ", imgKey);
       const data = {
         fileKey: imgKey,
       };
@@ -84,7 +80,6 @@ function DashboardSideMenu({ openSideBar, handleCloseSideBar }) {
                 body: myBlob,
               });
               const s3Url = response?.url?.split("?")[0];
-              console.log("S3 stored link: ", s3Url);
               success("Profile picture updated!");
               setImgArr();
               setImgKey();
@@ -109,13 +104,9 @@ function DashboardSideMenu({ openSideBar, handleCloseSideBar }) {
           },
         }
       );
-      console.log(
-        "Key stored in table: ",
-        data?.data?.user?.user?.profilePicture
-      );
+
       // await success();
       setImgKey(data?.data?.user?.user?.profilePicture);
-      console.log("KEY FROM TABLE: ", data?.data?.user?.user?.profilePicture);
       // setLogoKey(data?.data?.user?.developerLogo);
       // setLoading(false);
       // await delay(2000);

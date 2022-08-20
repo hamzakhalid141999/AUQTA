@@ -4,7 +4,7 @@ import { baseURL } from "../../constants";
 async function getProjectsByUserId(userId) {
   try {
     const data = await axios.get(
-      baseURL + "/api/newproject/allnewprojects/id/" + userId,
+      baseURL + "/api/newproject/allnewprojects/activeandinactive/id/" + userId,
       {
         params: {
           pageNumber: 1,

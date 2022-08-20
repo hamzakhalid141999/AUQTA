@@ -5,10 +5,13 @@ import {
   faBed,
   faMapMarker,
   faHeart,
+  faExternalLink,
+  faCog,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import placeholder from "../../../../public/assets/placeholder-company.png";
 
 function PropertyCard({
@@ -56,19 +59,30 @@ function PropertyCard({
   }, [price]);
 
   return (
-    <Link
-      href={{
-        pathname: openEdit === true ? "/dashboard/edit_property" : "/property",
-        query: {
-          propertyId: propertyId,
-        },
-      }}
-    >
-      <div
-        className={noResize ? classes.card_body_no_resize : classes.card_body}
+    <div className={noResize ? classes.card_body_no_resize : classes.card_body}>
+      <Link
+        href={{
+          pathname: openEdit ? "/dashboard/edit_property" : "/property",
+          query: {
+            propertyId: propertyId,
+          },
+        }}
       >
-        <FontAwesomeIcon className={classes.like} icon={faHeart} size={"1x"} />
-        <div className={classes.image_container}>
+        <FontAwesomeIcon
+          className={openEdit ? classes.edit : classes.like}
+          icon={openEdit ? faCog : faExternalLink}
+          size={"2x"}
+        />
+      </Link>
+      <div className={classes.image_container}>
+        <Link
+          href={{
+            pathname: "/property",
+            query: {
+              propertyId: propertyId,
+            },
+          }}
+        >
           <Image
             layout="fill"
             className={classes.property_picture}
@@ -78,27 +92,27 @@ function PropertyCard({
             }}
             alt="picture"
           />
+        </Link>
+      </div>
+      <div className={classes.description_container}>
+        <div className={classes.title_and_price_container}>
+          <p className={classes.title}>{title}</p>
         </div>
-        <div className={classes.description_container}>
-          <div className={classes.title_and_price_container}>
-            <p className={classes.title}>{title}</p>
-          </div>
-          <div className={classes.location_container}>
-            <FontAwesomeIcon
-              className={classes.location_icon}
-              icon={faMapMarker}
-              size={"1x"}
-            />
-            <p className={classes.location}>
-              {location}, {city}
-            </p>
-          </div>
-          <div className={classes.property_description_container}>
-            <p className={classes.price}>{formattedPrice}</p>
-          </div>
+        <div className={classes.location_container}>
+          <FontAwesomeIcon
+            className={classes.location_icon}
+            icon={faMapMarker}
+            size={"1x"}
+          />
+          <p className={classes.location}>
+            {location}, {city}
+          </p>
+        </div>
+        <div className={classes.property_description_container}>
+          <p className={classes.price}>{formattedPrice}</p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 

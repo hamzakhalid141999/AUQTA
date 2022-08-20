@@ -56,12 +56,26 @@ function Navbar() {
     const fetchAllCities = async () => {
       const data = await getAllCities();
       setCitiesAndLocations(data);
-      data?.map((cityObject) =>
-        setCities((city) => [...city, cityObject?.cityName])
-      );
+      data?.map((cityObject) => {
+        if (
+          cityObject?.cityName !== "Islamabad" &&
+          cityObject?.cityName !== "Lahore" &&
+          cityObject?.cityName !== "Rawalpindi" &&
+          cityObject?.cityName !== "Faisalabad" &&
+          cityObject?.cityName !== "Karachi"
+        ) {
+          setCities((city) => [...city, cityObject?.cityName]);
+        }
+      });
     };
     fetchAllCities();
   }, []);
+
+  useEffect(() => {
+    if (cities?.length > 0) {
+      setCities(cities?.sort());
+    }
+  }, [cities]);
 
   useEffect(() => {
     if (city && citiesAndLocations) {
@@ -91,7 +105,6 @@ function Navbar() {
 
   useEffect(() => {
     if (currentPage) {
-      console.log(currentPage);
       if (
         currentPage === "map" ||
         currentPage === "invest" ||
@@ -148,8 +161,6 @@ function Navbar() {
       document.removeEventListener("scroll", listener);
     };
   }, [backgroundColor]);
-
-  console.log("USERRRRRR: ", user);
 
   return (
     <div
@@ -254,6 +265,11 @@ function Navbar() {
                 className={classes.input_field}
               >
                 <option>Select City</option>
+                <option value="Islamabad">Islamabad</option>
+                <option value="Lahore">Lahore</option>
+                <option value="Karachi">Karachi</option>
+                <option value="Faisalabad">Faisalabad</option>
+                <option value="Rawalpindi">Rawalpindi</option>
 
                 {cities?.map((city, index) => (
                   <option key={index} value={city}>

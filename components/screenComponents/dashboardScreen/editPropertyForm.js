@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import classes from "./forms.module.css";
 import {
   residential_subtypes,
@@ -21,9 +21,22 @@ import "@pathofdev/react-tag-input/build/index.css";
 import Select, { components } from "react-select";
 import { getAllCities } from "../../utils";
 import { useRouter } from "next/router";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  StandaloneSearchBox,
+  LoadScript,
+} from "@react-google-maps/api";
 import { getPropertyDetailsById } from "../../utils/fetchPropertyById";
 
 function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
+  });
+
+  const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
+
   const router = useRouter();
   const [loadingInfo, setLoadingInfo] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -171,6 +184,11 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
   const [img11, setImg11] = useState();
   const [img12, setImg12] = useState();
   const [imgArr, setImgArr] = useState([]);
+
+  const [lat, setLat] = useState();
+  const [lng, setLng] = useState();
+  const [initialLat, setInitialLat] = useState();
+  const [initialLng, setInitialLng] = useState();
 
   // Salient Features
 
@@ -494,6 +512,11 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
           },
         }
       );
+      if (imagesBlobArr?.length === 0) {
+        setLoading(false);
+        success();
+        window.location.reload();
+      }
     } catch (err) {
       setLoading(false);
       error();
@@ -552,6 +575,13 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
     if (contactPhoneHome) {
       userData = { ...userData, contactPhoneHome: contactPhoneHome };
     }
+    if (lat) {
+      userData = { ...userData, lat: lat };
+    }
+    if (lng) {
+      userData = { ...userData, lng: lng };
+    }
+
     userData = { ...userData, images: imgArr };
     return userData;
   };
@@ -573,11 +603,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
         }
       );
       setImagesKeysArr(data?.data?.proplisting?.propertyListing?.images);
-      if (imagesBlobArr?.length === 0) {
-        setLoading(false);
-        success();
-        window.location.reload();
-      }
+
       handleEditPropertySalientFeatures();
     } catch (err) {
       setLoading(false);
@@ -638,14 +664,22 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
   useEffect(async () => {
     const data = await getAllCities();
     setCitiesAndLocations(data);
-    data?.map((cityObject) =>
-      setCities((city) => [...city, cityObject?.cityName])
-    );
+    data?.map((cityObject) => {
+      if (
+        cityObject?.cityName !== "Islamabad" &&
+        cityObject?.cityName !== "Lahore" &&
+        cityObject?.cityName !== "Rawalpindi" &&
+        cityObject?.cityName !== "Faisalabad" &&
+        cityObject?.cityName !== "Karachi"
+      ) {
+        setCities((city) => [...city, cityObject?.cityName]);
+      }
+    });
   }, []);
 
   useEffect(() => {
     if (cities?.length > 0) {
-      setCity(cities[0]);
+      setCities(cities?.sort());
     }
   }, [cities]);
 
@@ -669,11 +703,35 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
   }, [propertyId]);
 
   useEffect(() => {
+    const fetchFilteredProperties = async () => {
+      if (city && location) {
+        let url =
+          "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+          city +
+          location +
+          "&key=" +
+          GEOCODING_API;
+
+        const data = await axios.get(url);
+        if (data?.data?.results.length > 0) {
+          setInitialLat(data?.data?.results[0]?.geometry?.location?.lat);
+          setInitialLng(data?.data?.results[0]?.geometry?.location?.lng);
+          setLat(data?.data?.results[0]?.geometry?.location?.lat);
+          setLng(data?.data?.results[0]?.geometry?.location?.lng);
+        }
+      }
+    };
+    fetchFilteredProperties();
+  }, [city, location]);
+
+  useEffect(() => {
     if (propertyDetails) {
       setPurposeSelected(propertyDetails?.propertyListing?.purpose);
       setType(propertyDetails?.propertyListing?.type);
       setSubtype(propertyDetails?.subtype);
       setImgArr(propertyDetails?.propertyListing?.images);
+      setInitialLat(parseFloat(propertyDetails?.propertyListing?.lat));
+      setInitialLng(parseFloat(propertyDetails?.propertyListing?.lng));
     }
   }, [propertyDetails]);
 
@@ -713,6 +771,40 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
       </div>
     );
   };
+
+  const map = useMemo(() => {
+    return (
+      <>
+        <p style={{ color: "grey", marginBottom: "20px", marginTop: "50px" }}>
+          Move the pin to mark to your desired location
+        </p>
+
+        <GoogleMap
+          zoom={14}
+          center={{
+            lat: initialLat,
+            lng: initialLng,
+          }}
+          style={{
+            height: "700px",
+            borderBottomLeftRadius: "180px",
+            borderBottomRightRadius: "180px",
+            width: "100%",
+          }}
+          mapContainerClassName={classes.map_container}
+        >
+          <Marker
+            onDragEnd={(e) => {
+              setLat(e.latLng.lat());
+              setLng(e.latLng.lng());
+            }}
+            draggable
+            position={{ lat: initialLat, lng: initialLng }}
+          />
+        </GoogleMap>
+      </>
+    );
+  }, [initialLat, initialLng]);
 
   useEffect(() => {
     landmarks?.map((landmark) =>
@@ -775,7 +867,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg2 = async (event) => {
     if (event) {
-      setStartingImgIndex(1);
+      if (startingImgIndex > 1 || !startingImgIndex) {
+        setStartingImgIndex(1);
+      }
       setImg2(event);
       imagesBlobArr.push(event);
       imgArr.push(event?.name);
@@ -784,7 +878,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg3 = async (event) => {
     if (event) {
-      setStartingImgIndex(2);
+      if (startingImgIndex > 2 || !startingImgIndex) {
+        setStartingImgIndex(2);
+      }
 
       setImg3(event);
       imagesBlobArr.push(event);
@@ -794,7 +890,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg4 = async (event) => {
     if (event) {
-      setStartingImgIndex(3);
+      if (startingImgIndex > 3 || !startingImgIndex) {
+        setStartingImgIndex(3);
+      }
 
       setImg4(event);
       imagesBlobArr.push(event);
@@ -804,7 +902,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg5 = async (event) => {
     if (event) {
-      setStartingImgIndex(4);
+      if (startingImgIndex > 4 || !startingImgIndex) {
+        setStartingImgIndex(4);
+      }
 
       setImg5(event);
       imagesBlobArr.push(event);
@@ -814,7 +914,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg6 = async (event) => {
     if (event) {
-      setStartingImgIndex(5);
+      if (startingImgIndex > 5 || !startingImgIndex) {
+        setStartingImgIndex(5);
+      }
 
       setImg6(event);
       imagesBlobArr.push(event);
@@ -824,7 +926,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg7 = async (event) => {
     if (event) {
-      setStartingImgIndex(6);
+      if (startingImgIndex > 6 || !startingImgIndex) {
+        setStartingImgIndex(6);
+      }
 
       setImg7(event);
       imagesBlobArr.push(event);
@@ -834,7 +938,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg8 = async (event) => {
     if (event) {
-      setStartingImgIndex(7);
+      if (startingImgIndex > 7 || !startingImgIndex) {
+        setStartingImgIndex(7);
+      }
 
       setImg8(event);
       imagesBlobArr.push(event);
@@ -844,7 +950,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg9 = async (event) => {
     if (event) {
-      setStartingImgIndex(8);
+      if (startingImgIndex > 8 || !startingImgIndex) {
+        setStartingImgIndex(8);
+      }
 
       setImg9(event);
       imagesBlobArr.push(event);
@@ -854,7 +962,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg10 = async (event) => {
     if (event) {
-      setStartingImgIndex(9);
+      if (startingImgIndex > 9 || !startingImgIndex) {
+        setStartingImgIndex(9);
+      }
 
       setImg10(event);
       imagesBlobArr.push(event);
@@ -864,7 +974,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg11 = async (event) => {
     if (event) {
-      setStartingImgIndex(10);
+      if (startingImgIndex > 10 || !startingImgIndex) {
+        setStartingImgIndex(10);
+      }
 
       setImg11(event);
       imagesBlobArr.push(event);
@@ -874,7 +986,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const handleImg12 = async (event) => {
     if (event) {
-      setStartingImgIndex(11);
+      if (startingImgIndex > 11 || !startingImgIndex) {
+        setStartingImgIndex(11);
+      }
 
       setImg12(event);
       imagesBlobArr.push(event);
@@ -1117,6 +1231,51 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                   }}
                 >
                   <option>Select City</option>
+                  <option
+                    selected={
+                      propertyDetails &&
+                      propertyDetails?.propertyListing?.city === "Islamabad"
+                    }
+                    value="Islamabad"
+                  >
+                    Islamabad
+                  </option>
+                  <option
+                    selected={
+                      propertyDetails &&
+                      propertyDetails?.propertyListing?.city === "Lahore"
+                    }
+                    value="Lahore"
+                  >
+                    Lahore
+                  </option>
+                  <option
+                    selected={
+                      propertyDetails &&
+                      propertyDetails?.propertyListing?.city === "Karachi"
+                    }
+                    value="Karachi"
+                  >
+                    Karachi
+                  </option>
+                  <option
+                    selected={
+                      propertyDetails &&
+                      propertyDetails?.propertyListing?.city === "Faisalabad"
+                    }
+                    value="Faisalabad"
+                  >
+                    Faisalabad
+                  </option>
+                  <option
+                    selected={
+                      propertyDetails &&
+                      propertyDetails?.propertyListing?.city === "Rawalpindi"
+                    }
+                    value="Rawalpindi"
+                  >
+                    Rawalpindi
+                  </option>
                   {cities?.map((city, index) => (
                     <option
                       selected={
@@ -1144,6 +1303,14 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                   }}
                 >
                   <option>Select Location</option>
+                  {propertyDetails?.propertyListing?.location && (
+                    <option
+                      selected
+                      value={propertyDetails?.propertyListing?.location}
+                    >
+                      {propertyDetails?.propertyListing?.location}
+                    </option>
+                  )}
                   {locations?.map((location, index) => (
                     <option
                       selected={
@@ -1220,6 +1387,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                 </select>
               </div>
             </div>
+
+            {isLoaded ? map : <></>}
 
             <div className={classes.single_row}>
               <p className={classes.label}>Address</p>
@@ -2718,9 +2887,13 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                       />
                     ) : (
                       <>
+                        <p style={{ marginBottom: "10px", color: "grey" }}>
+                          COVER IMAGE
+                        </p>
                         <div className={classes.add_btn_label}>
                           <h1>+</h1>
                         </div>
+
                         <input
                           className={classes.img_input_field}
                           style={{ display: "flex", flexDirection: "column" }}

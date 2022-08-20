@@ -45,8 +45,6 @@ function Dashboard() {
   const [propertyId, _setPropertyId] = useState();
   const [projectId, _setProjectId] = useState();
 
-  console.log("DASHBOARD TYPE: ", dashboardType);
-
   const onCloseDeleteModal = () => {
     setOpenDeleteModal(false);
   };
@@ -61,8 +59,6 @@ function Dashboard() {
     setOpenSideBar(false);
   };
 
-  console.log(openSideBar);
-
   const onOpenDeleteModal = () => {
     setOpenDeleteModal(true);
   };
@@ -73,7 +69,7 @@ function Dashboard() {
     }
     if (isProjectActive === true) {
       const data = await deactivateProject(projectId);
-      success("Project deactivated!");
+      error("Project deactivated!");
     }
     if (isProjectActive === false) {
       const data = await activateProject(projectId);
@@ -89,7 +85,7 @@ function Dashboard() {
     }
     if (isPropertyActive === true) {
       const data = await deactivateProperty(propertyId);
-      success("Property deactivated!");
+      error("Property deactivated!");
     }
     if (isPropertyActive === false) {
       const data = await activateProperty(propertyId);
@@ -104,14 +100,6 @@ function Dashboard() {
     }
   }, [id]);
 
-  console.log(dashboardType);
-
-  useEffect(() => {
-    if (router?.query) {
-      console.log(router.query?.propertyId);
-    }
-  }, [router.query]);
-
   const success = (successMessage) =>
     toast.success(successMessage, {
       position: "bottom-center",
@@ -122,7 +110,15 @@ function Dashboard() {
       draggable: true,
     });
 
-  console.log(id);
+  const error = (successMessage) =>
+    toast.error(successMessage, {
+      position: "bottom-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+    });
 
   return (
     <>
@@ -223,7 +219,7 @@ function Dashboard() {
                                   classes.inactive_btn
                             }
                           >
-                            ON
+                            OFF
                           </p>
                           <Switch
                             onChange={handlePropertyActiveState}
@@ -238,7 +234,7 @@ function Dashboard() {
                                   classes.active_btn
                             }
                           >
-                            OFF
+                            ON
                           </p>
                         </div>
                       </div>
@@ -303,7 +299,7 @@ function Dashboard() {
                                   classes.inactive_btn
                             }
                           >
-                            ON
+                            OFF
                           </p>
                           <Switch
                             onChange={handleProjectActiveState}
@@ -317,7 +313,7 @@ function Dashboard() {
                                   classes.active_btn
                             }
                           >
-                            OFF
+                            ON
                           </p>
                         </div>
                       </div>

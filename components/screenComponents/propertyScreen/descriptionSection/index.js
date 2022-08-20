@@ -7,8 +7,6 @@ import { useWindowSize } from "../../../../utils";
 function Description({ property }) {
   const { width } = useWindowSize();
 
-  console.log("PROPERTY: ", property);
-
   return (
     <div className={classes.description_section}>
       <div
@@ -41,15 +39,6 @@ function Description({ property }) {
           </div>
           <div className={classes.service_description_container}>
             <div className={classes.input_field_container_dual}>
-              <label>Email</label>
-              {/* <div className={classes.input_field}> */}
-              <p className={classes.info_val}>
-                {property?.propertyListing?.contactEmail}
-              </p>
-              {/* </div> */}
-            </div>
-
-            <div className={classes.input_field_container_dual}>
               <label>Phone (Home)</label>
               {/* <div className={classes.input_field}> */}
               <p className={classes.info_val}>
@@ -62,6 +51,15 @@ function Description({ property }) {
               {/* <div className={classes.input_field}> */}
               <p className={classes.info_val}>
                 {property?.propertyListing?.contactPhoneWork}
+              </p>
+              {/* </div> */}
+            </div>
+
+            <div className={classes.input_field_container_dual}>
+              <label>Address</label>
+              {/* <div className={classes.input_field}> */}
+              <p className={classes.info_val}>
+                {property?.propertyListing?.address}
               </p>
               {/* </div> */}
             </div>

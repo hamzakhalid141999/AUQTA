@@ -673,8 +673,6 @@ function PropertyForm() {
     }
   }, [price]);
 
-  console.log(price);
-
   useEffect(() => {
     const fetchFilteredProperties = async () => {
       if (city && location) {
@@ -686,7 +684,6 @@ function PropertyForm() {
           GEOCODING_API;
 
         const data = await axios.get(url);
-        console.log(data);
         if (data?.data?.results.length > 0) {
           setInitialLat(data?.data?.results[0]?.geometry?.location?.lat);
           setInitialLng(data?.data?.results[0]?.geometry?.location?.lng);
@@ -697,8 +694,6 @@ function PropertyForm() {
     };
     fetchFilteredProperties();
   }, [city, location]);
-
-  console.log("initial values: ", lat, lng);
 
   const map = useMemo(() => {
     return (
@@ -732,8 +727,6 @@ function PropertyForm() {
       </>
     );
   }, [initialLat, initialLng]);
-
-  console.log(lat, ",", lng);
 
   return (
     <div className={classes.form_body}>

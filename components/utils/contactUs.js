@@ -27,7 +27,6 @@ async function contactUs(
     );
     setLoading(false);
     success("Message sent!");
-    console.log(data?.data);
   } catch (err) {
     console.log(err);
   }

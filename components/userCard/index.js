@@ -16,8 +16,8 @@ function AgentCard({ picture, name, city, location, description, logo }) {
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
   useState(() => {
-    setSource(baseS3Url + picture);
-  }, [picture]);
+    setSource(baseS3Url + logo);
+  }, [logo]);
 
   return (
     // <Link
@@ -30,15 +30,15 @@ function AgentCard({ picture, name, city, location, description, logo }) {
     // >
     <div className={classes.card_body}>
       <div className={classes.logo_container}>
-        <div className={classes.logo_image_container}>
+        {/* <div className={classes.logo_image_container}>
           {logo && <img src={baseS3Url + logo} style={{ height: "90%" }} />}
-        </div>
+        </div> */}
       </div>
       <div className={classes.image_container}>
         <Image
           layout="fill"
           className={classes.property_picture}
-          src={picture ? source : placeholder}
+          src={logo ? source : placeholder}
           onError={() => {
             setSource(placeholder);
           }}

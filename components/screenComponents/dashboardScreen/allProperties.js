@@ -3,24 +3,27 @@ import classes from "./allPropertiesProjects.module.css";
 import { getAllProperties } from "../../utils/fetchAllActiveProperties";
 import PropertyCard from "../../../pages/map/components/propertyCard";
 import { ClipLoader } from "react-spinners";
+import { useAuth } from "../../../contextAPI";
+import { getPropertiesByUserId } from "../../utils/fetchPropertiesByUserId";
 
 function AllProperties({ dashboardType }) {
   const [properties, setProperties] = useState();
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
+
+  console.log(properties);
 
   useEffect(() => {
-    const fetchProperties = async () => {
-      if (dashboardType === "properties") {
-        const data = await getAllProperties();
+    const fetchPropertiesByUserId = async () => {
+      if (user?.id && dashboardType === "properties") {
+        const data = await getPropertiesByUserId(user?.id);
         setProperties(data);
         setLoading(false);
       }
     };
 
-    fetchProperties();
-  }, [dashboardType]);
-
-  console.log(properties);
+    fetchPropertiesByUserId();
+  }, [user?.id, dashboardType]);
 
   return (
     <>

@@ -28,7 +28,6 @@ function Developer() {
           },
         }
       );
-      console.log(data);
       setDeveloperDetails(data?.data);
     } catch (err) {
       console.log(err);

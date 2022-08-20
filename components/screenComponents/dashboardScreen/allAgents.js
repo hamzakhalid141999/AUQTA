@@ -23,27 +23,35 @@ function AllAgents() {
 
   const [agents, setAgents] = useState();
 
-  console.log(agents);
-
   useEffect(() => {
     const fetchFilteredProperties = async () => {
       if (agents?.length > 0) {
         var longlatTempArr = [];
-        for (var i = 0; i < agents?.length; i++) {
-          let url;
-          url =
-            "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-            agents[i]?.companyAddress +
-            agents[i]?.user?.location +
-            agents[i]?.user?.city +
-            "&key=" +
-            GEOCODING_API;
+        let longLatArr;
+        let url;
 
-          const data = await axios.get(url);
-          if (data?.data?.results.length > 0) {
-            longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
+        for (var i = 0; i < agents?.length; i++) {
+          if (agents[i]?.lat || agents[i]?.lng) {
+            longLatArr = {
+              lat: parseFloat(agents[i]?.lat),
+              lng: parseFloat(agents[i]?.lng),
+            };
+            longlatTempArr.push(longLatArr);
           } else {
-            setLoading(false);
+            url =
+              "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+              agents[i]?.companyAddress +
+              agents[i]?.user?.location +
+              agents[i]?.user?.city +
+              "&key=" +
+              GEOCODING_API;
+
+            const data = await axios.get(url);
+            if (data?.data?.results.length > 0) {
+              longlatTempArr.push(data?.data?.results[0]?.geometry?.location);
+            } else {
+              setLoading(false);
+            }
           }
         }
         setLoading(false);

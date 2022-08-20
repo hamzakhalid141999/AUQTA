@@ -172,11 +172,11 @@ function FirstSection() {
                   className={classes.input_field}
                 >
                   <option>Select City</option>
-                  <option>Islamabad</option>
-                  <option>Lahore</option>
-                  <option>Karachi</option>
-                  <option>Faisalabad</option>
-                  <option>Rawalpindi</option>
+                  <option value="Islamabad">Islamabad</option>
+                  <option value="Lahore">Lahore</option>
+                  <option value="Karachi">Karachi</option>
+                  <option value="Faisalabad">Faisalabad</option>
+                  <option value="Rawalpindi">Rawalpindi</option>
 
                   {cities?.map((city, index) => (
                     <option key={index} value={city}>

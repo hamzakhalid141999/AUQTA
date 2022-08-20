@@ -5,6 +5,8 @@ import {
   faBed,
   faMapMarker,
   faHeart,
+  faExternalLink,
+  faCog,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
@@ -116,18 +118,45 @@ function PropertyCard({
           }}
         >
           <div className={classes.card_body}>
-            <div className={classes.image_container}>
-              <Image
-                layout="fill"
-                className={classes.property_picture}
-                src={
-                  picture ? (hardCodedProperty ? picture : source) : placeholder
-                }
-                onError={() => {
-                  setSource(placeholder);
-                }}
-                alt="picture"
+            <Link
+              href={{
+                pathname: openEdit ? "/dashboard/edit_project" : "/project",
+                query: {
+                  projectId: id,
+                },
+              }}
+            >
+              <FontAwesomeIcon
+                className={openEdit ? classes.edit : classes.like}
+                icon={openEdit ? faCog : faExternalLink}
+                size={"2x"}
               />
+            </Link>
+            <div className={classes.image_container}>
+              <Link
+                href={{
+                  pathname: "/project",
+                  query: {
+                    projectId: id,
+                  },
+                }}
+              >
+                <Image
+                  layout="fill"
+                  className={classes.property_picture}
+                  src={
+                    picture
+                      ? hardCodedProperty
+                        ? picture
+                        : source
+                      : placeholder
+                  }
+                  onError={() => {
+                    setSource(placeholder);
+                  }}
+                  alt="picture"
+                />
+              </Link>
             </div>
             <div className={classes.description_container}>
               <div className={classes.title_and_price_container}>

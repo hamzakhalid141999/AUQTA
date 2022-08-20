@@ -152,7 +152,7 @@ function InquiryForm({
                 className={classes.input_field}
                 placeholder="User Type"
               >
-                <option disabled>Select User Type</option>
+                <option>Select User Type</option>
                 <option value="developer">Developer</option>
                 <option value="agent">Agent</option>
               </select>

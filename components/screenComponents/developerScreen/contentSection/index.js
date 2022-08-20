@@ -6,7 +6,6 @@ import { useWindowSize } from "../../../../utils";
 import { SocialIcon } from "react-social-icons";
 
 function ContentSection({ developerDetails }) {
-  console.log(developerDetails);
   const [showMore, setShowMore] = useState(false);
   const { width } = useWindowSize();
 
