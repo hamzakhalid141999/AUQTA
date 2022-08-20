@@ -76,8 +76,8 @@ function ProjectConentSection({
             <div className={classes.service_description_container}>
               <p>{projectDetails?.locationOverview}</p>
 
-              {projectDetails?.locationFeatures?.map((feature) => (
-                <div className={classes.bullet_point}>
+              {projectDetails?.locationFeatures?.map((feature, index) => (
+                <div key={index} className={classes.bullet_point}>
                   <div className={classes.bullets_container}>
                     <div className={classes.bullet} />{" "}
                     <p className={classes.bullet_text}>{feature}</p>
