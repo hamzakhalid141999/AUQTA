@@ -37,11 +37,13 @@ function ProjectConentSection({
               <p>{projectDetails?.projectDescription}</p>
               <div className={classes.bullet_points_container}>
                 <p className={classes.bullet_text}>Main Features</p>
-                {features?.map((feature, index) => (
-                  <div key={index} className={classes.bullets_container}>
-                    <div className={classes.bullet} /> <p>{feature}</p>
-                  </div>
-                ))}
+                {features
+                  ?.filter((feature, index) => index < features?.length - 1)
+                  ?.map((feature, index) => (
+                    <div key={index} className={classes.bullets_container}>
+                      <div className={classes.bullet} /> <p>{feature}</p>
+                    </div>
+                  ))}
 
                 <p className={classes.see_more_btn} onClick={showContent}>
                   {showMore ? "See less" : "See more"}
@@ -76,14 +78,19 @@ function ProjectConentSection({
             <div className={classes.service_description_container}>
               <p>{projectDetails?.locationOverview}</p>
 
-              {projectDetails?.locationFeatures?.map((feature, index) => (
-                <div key={index} className={classes.bullet_point}>
-                  <div className={classes.bullets_container}>
-                    <div className={classes.bullet} />{" "}
-                    <p className={classes.bullet_text}>{feature}</p>
+              {projectDetails?.locationFeatures
+                ?.filter(
+                  (feature, index) =>
+                    index < projectDetails?.locationFeatures?.length - 1
+                )
+                ?.map((feature, index) => (
+                  <div key={index} className={classes.bullet_point}>
+                    <div className={classes.bullets_container}>
+                      <div className={classes.bullet} />{" "}
+                      <p className={classes.bullet_text}>{feature}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
 
               <div className={classes.bullet_points_container}>
                 <p className={classes.bullet_text}>Address</p>

@@ -124,6 +124,11 @@
 }
 .property_description_container p {
   font-size: 12px;
+  max-width: calc(95%) !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
 }
 .bottom_description_container {
   position: absolute;

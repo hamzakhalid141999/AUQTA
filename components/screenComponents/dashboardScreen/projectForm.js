@@ -355,6 +355,15 @@ function ProjectForm() {
       if (!thirdMilestoneImage) {
         setIsThirdMilestoneImageUploaded(true);
       }
+      if (!brochureImgArr) {
+        setIsBrochureImageUploaded(true);
+      }
+      if (!shopImgArr) {
+        setIsShopImageUploaded(true);
+      }
+      if (!floorplanImgArr) {
+        setIsFloorPlanImageUploaded(true);
+      }
       setImgsKeysArr(data?.data?.newproject?.images);
       setPriceImgKeysArr(data?.data?.newproject?.pricePlan);
       setBrochureImgKeysArr(data?.data?.newproject?.projectBrochure);
