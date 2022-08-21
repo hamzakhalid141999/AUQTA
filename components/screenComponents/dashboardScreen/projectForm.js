@@ -297,24 +297,6 @@ function ProjectForm() {
     } else if (!endDate) {
       missingCredError("end date");
       return;
-    } else if (!firstMilestone) {
-      missingCredError("first milestone date");
-      return;
-    } else if (!secondMilestone) {
-      missingCredError("second milestone date");
-      return;
-    } else if (!thirdMilestone) {
-      missingCredError("third milestone date");
-      return;
-    } else if (!firstMilestoneImage) {
-      missingCredError("first milestone image");
-      return;
-    } else if (!secondMilestoneImage) {
-      missingCredError("second milestone second");
-      return;
-    } else if (!thirdMilestoneImage) {
-      missingCredError("third milestone third");
-      return;
     }
 
     setLoading(true);
@@ -364,6 +346,15 @@ function ProjectForm() {
           },
         }
       );
+      if (!firstMilestoneImage) {
+        setIsFirstMilestoneImageUploaded(true);
+      }
+      if (!secondMilestoneImage) {
+        setIsSecondMilestoneImageUploaded(true);
+      }
+      if (!thirdMilestoneImage) {
+        setIsThirdMilestoneImageUploaded(true);
+      }
       setImgsKeysArr(data?.data?.newproject?.images);
       setPriceImgKeysArr(data?.data?.newproject?.pricePlan);
       setBrochureImgKeysArr(data?.data?.newproject?.projectBrochure);
@@ -382,7 +373,7 @@ function ProjectForm() {
   };
 
   useEffect(() => {
-    if (firstMilestoneImageKey) {
+    if (firstMilestoneImageKey && firstMilestoneImage) {
       const data = {
         fileKey: firstMilestoneImageKey,
       };

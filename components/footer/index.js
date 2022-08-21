@@ -49,7 +49,9 @@ function Footer() {
           </p>
         </div>
         <div className={classes.col_2}>
-          <h1>About</h1>
+          <Link href={"/about"}>
+            <h1>About</h1>
+          </Link>
 
           <Link href={"/all_developers"}>
             {/* <div className={classes.row}>
@@ -63,7 +65,9 @@ function Footer() {
           </Link>
         </div>
         <div className={classes.col_2}>
-          <h1>Services</h1>
+          <Link href={"/services"}>
+            <h1>Services</h1>
+          </Link>
           <Link href={"/blogs"}>
             <h1>Blogs</h1>
           </Link>
@@ -73,7 +77,9 @@ function Footer() {
           </Link>
         </div>
         <div className={classes.col_2}>
-          <h1>Contact</h1>
+          <Link href={"/contact"}>
+            <h1>Contact</h1>
+          </Link>
           <div className={classes.row}>
             <img
               style={{ height: "15px" }}

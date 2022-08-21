@@ -80,7 +80,7 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
   const [firstMilestoneImageKey, setFirstMilestoneImageKey] = useState();
   const [secondMilestoneImageKey, setSecondMilestoneImageKey] = useState();
   const [thirdMilestoneImageKey, setThirdMilestoneImageKey] = useState();
-
+  const [locationFeaturesArr, setLocationFeaturesArr] = useState([]);
   const [isImagesUploaded, setIsImagesUploaded] = useState(false);
   const [isFirstMilestoneImageUploaded, setIsFirstMilestoneImageUploaded] =
     useState(false);
@@ -94,6 +94,7 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
   const [isFloorPlanImageUplaoded, setIsFloorPlanImageUploaded] =
     useState(false);
   const [isShopImageUploaded, setIsShopImageUploaded] = useState(false);
+  const [locationOverview, setLocationOverview] = useState();
 
   useEffect(async () => {
     const data = await getAllCities();
@@ -162,10 +163,17 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
     if (thirdMilestoneImage) {
       userData = { ...userData, contactPhoneHome: thirdMilestoneImage };
     }
+    if (locationOverview) {
+      userData = { ...userData, locationOverview: locationOverview };
+    }
     userData = { ...userData, govtApproved: isGovApproved };
     userData = { ...userData, features: featuresArr };
+    userData = { ...userData, locationFeatures: locationFeaturesArr };
+
     return userData;
   };
+
+  console.log(locationFeaturesArr);
 
   const success = () =>
     toast.success("Property updated", {
@@ -218,6 +226,7 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
     if (projectDetails) {
       setIsProjectActive(projectDetails?.isActive);
       setFeaturesArr(projectDetails?.features);
+      setLocationFeaturesArr(projectDetails?.locationFeatures);
       setFirstMilestone(projectDetails?.firstMilestone?.date);
       setSecondMilestone(projectDetails?.secondMilestone?.date);
       setThirdMilestone(projectDetails?.thirdMilestone?.date);
@@ -300,6 +309,13 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
 
   const handleCategorySelected = (value) => {
     setCategorySelected(value);
+  };
+
+  const handleAddLocationFeatureField = () => {
+    setLocationFeaturesArr((array) => [
+      ...array,
+      locationFeaturesArr.length + 1,
+    ]);
   };
 
   const handleAddField = () => {
@@ -698,6 +714,10 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
     featuresArr[id] = value;
   };
 
+  const handleLocationFeatureInputChange = (value, id) => {
+    locationFeaturesArr[id] = value;
+  };
+
   const handleAmenitiesInputChange = (value, id) => {
     amenitiesArr[id] = value;
   };
@@ -805,19 +825,76 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
               />
             </div>
 
-            {/* <div className={classes.single_row}>
-        <div className={classes.two_field_container}>
-          <p className={classes.label_dual}>Since</p>
-          <input
-            placeholder="Type Year"
-            className={classes.input_field_dual}
-          />
-        </div>
-        <div className={classes.two_field_container}>
-          <p className={classes.label_dual}>Projects Developed</p>
-          <input className={classes.input_field_dual} />
-        </div>
-      </div> */}
+            <div
+              style={{ alignItems: "normal" }}
+              className={classes.single_row}
+            >
+              <p className={classes.label}>Overview of the Location</p>
+              <textarea
+                placeholder={
+                  projectDetails ? projectDetails?.locationOverview : " "
+                }
+                onChange={(e) => {
+                  setLocationOverview(e.target.value);
+                }}
+                style={{ height: "150px", paddingTop: "10px" }}
+                className={classes.input_field_single}
+              />
+            </div>
+
+            <div className={classes.single_row}>
+              <div
+                style={{ width: "100%", alignItems: "normal" }}
+                className={classes.two_field_container}
+              >
+                <p style={{ marginTop: "17px" }} className={classes.label}>
+                  Location Features
+                </p>
+                <div className={classes.infinite_input_fields_container}>
+                  {locationFeaturesArr?.map((feature, index) => (
+                    <div
+                      key={index}
+                      style={{ width: "100%" }}
+                      className={classes.looped_input_field_container}
+                    >
+                      <input
+                        style={{ width: "100%", marginBottom: "20px" }}
+                        disabled={
+                          locationFeaturesArr?.length === index + 1
+                            ? true
+                            : false
+                        }
+                        onChange={(e) => {
+                          handleLocationFeatureInputChange(
+                            e.target.value,
+                            index
+                          );
+                        }}
+                        on
+                        placeholder={
+                          locationFeaturesArr?.length === index + 1
+                            ? "Add more"
+                            : feature
+                        }
+                        className={classes.input_field_dual}
+                      />
+                      {locationFeaturesArr?.length === index + 1 && (
+                        <div className={classes.add_btn_border_working}>
+                          <h3
+                            onClick={() => {
+                              handleAddLocationFeatureField();
+                            }}
+                            className={classes.add_field_working}
+                          >
+                            +
+                          </h3>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
 
             <div className={classes.single_row}>
               <div

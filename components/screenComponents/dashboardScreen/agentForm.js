@@ -241,8 +241,8 @@ function AgentForm() {
         <GoogleMap
           zoom={14}
           center={{
-            lat: initialLat,
-            lng: initialLng,
+            lat: initialLat ? initialLat : 30.3753,
+            lng: initialLng ? initialLng : 69.3451,
           }}
           style={{
             height: "700px",
@@ -258,7 +258,10 @@ function AgentForm() {
               setLng(e.latLng.lng());
             }}
             draggable
-            position={{ lat: initialLat, lng: initialLng }}
+            position={{
+              lat: initialLat ? initialLat : 30.3753,
+              lng: initialLng ? initialLng : 69.3451,
+            }}
           />
         </GoogleMap>
       </>

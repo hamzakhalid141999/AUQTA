@@ -99,12 +99,17 @@
   bottom: 10px;
 }
 .property_description_container {
-  margin-top: 20px;
+  margin-top: 10px;
   width: 90%;
   word-wrap: break-word;
 }
 .property_description_container p {
   font-size: 12px;
+  max-width: calc(95%) !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
 }
 .bottom_description_container {
   position: absolute;

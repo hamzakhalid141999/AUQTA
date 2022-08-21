@@ -286,6 +286,12 @@ function DeveloperForm() {
     if (socialsArr?.length > 0) {
       userData = { ...userData, socialMedia: socialsArr };
     }
+    if (lat) {
+      userData = { ...userData, lat: lat };
+    }
+    if (lng) {
+      userData = { ...userData, lng: lng };
+    }
     return userData;
   };
 
