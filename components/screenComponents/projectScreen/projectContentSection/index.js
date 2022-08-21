@@ -17,10 +17,35 @@ function ProjectConentSection({
 }) {
   const [showMore, setShowMore] = useState(false);
   const { width } = useWindowSize();
+  const [isVideo, setIsVideo] = useState(true);
+  const [isVideoLocation, setIsVideoLocation] = useState(true);
+  // https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/6301e2257cd62ffd3a83a286-PT/6301e2257cd62ffd3a83a286-PT.html
+  const toursBaseUrl = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
+
+  console.log(
+    toursBaseUrl +
+      projectDetails?._id +
+      "-LT/" +
+      projectDetails?._id +
+      "-LT.html"
+  );
 
   const showContent = () => {
     setShowMore(!showMore);
   };
+
+  const handleVideoToggle = () => {
+    if (projectDetails?._id === "6301e2257cd62ffd3a83a286") {
+      setIsVideo(!isVideo);
+    }
+  };
+
+  const handleVideoLocationToggle = () => {
+    if (projectDetails?._id === "6301e2257cd62ffd3a83a286") {
+      setIsVideoLocation(!isVideoLocation);
+    }
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.content_container}>
@@ -29,7 +54,27 @@ function ProjectConentSection({
           className={classes.services_container}
         >
           <div className={classes.image_container}>
-            <Image src={img1} className={classes.img} />
+            {projectDetails?._id === "6301e2257cd62ffd3a83a286" && !isVideo ? (
+              <iframe
+                onClick={handleVideoToggle}
+                allowFullScreen
+                src={
+                  "/vr/6301e2257cd62ffd3a83a286-PT/6301e2257cd62ffd3a83a286-PT.html"
+                }
+                height="100%"
+                width="100%"
+                style={{ borderRadius: "40px", objectFit: "initial" }}
+                className={classes.img}
+              />
+            ) : (
+              isVideo && (
+                <Image
+                  onClick={handleVideoToggle}
+                  src={img1}
+                  className={classes.img}
+                />
+              )
+            )}
           </div>
           <div className={classes.description}>
             <h1>OVERVIEW OF THE PROJECT</h1>
@@ -68,7 +113,28 @@ function ProjectConentSection({
         </div>
         <div className={classes.services_container}>
           <div className={classes.image_container}>
-            <Image src={img2} className={classes.img} />
+            {projectDetails?._id === "6301e2257cd62ffd3a83a286" &&
+            !isVideoLocation ? (
+              <iframe
+                onClick={handleVideoLocationToggle}
+                style={{ borderRadius: "40px", objectFit: "initial" }}
+                allowFullScreen
+                src={
+                  "/vr/6301e2257cd62ffd3a83a286-LT/6301e2257cd62ffd3a83a286-LT.html"
+                }
+                height="100%"
+                width="100%"
+                className={classes.img}
+              />
+            ) : (
+              isVideoLocation && (
+                <Image
+                  onClick={handleVideoLocationToggle}
+                  src={img2}
+                  className={classes.img}
+                />
+              )
+            )}
           </div>
           <div
             style={{ maxHeight: "initial", overflowY: "initial" }}
