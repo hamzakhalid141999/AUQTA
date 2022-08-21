@@ -22,7 +22,7 @@ function ContentSection({ developerDetails }) {
             <p>
               {showMore
                 ? developerDetails?.user?.aboutInformation
-                : developerDetails?.user?.aboutInformation.substr(
+                : developerDetails?.user?.aboutInformation?.substr(
                     0,
                     width - 1200
                   )}

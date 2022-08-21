@@ -61,6 +61,8 @@ function AllDevelopers() {
     fetchFilteredProperties();
   }, [developers]);
 
+  console.log(developers);
+
   function RenderMap() {
     return (
       <GoogleMap
@@ -118,6 +120,7 @@ function AllDevelopers() {
           {developers?.map((user, index) => (
             <DeveloperCard
               key={index}
+              id={user?.user?._id}
               name={user?.user?.username}
               city={user?.user?.city}
               location={user?.user?.location}

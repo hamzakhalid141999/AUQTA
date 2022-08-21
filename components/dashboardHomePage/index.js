@@ -14,6 +14,10 @@ import phone from "../../public/assets/phone_call.png";
 import email from "../../public/assets/email_icon.png";
 import Link from "next/link";
 import { getInboxByUserId } from "../utils/fetchInboxByUserId";
+import { fetchActiveProjectsByUserId } from "../utils/getActiveProjectsByUserId";
+import { fetchInActiveProjectsByUserId } from "../utils/getInActiveProjectsByUserId";
+import { fetchActivePropertiesByUserId } from "../utils/getActivePropertiesByUserId";
+import { fetchInActivePropertiesByUserId } from "../utils/getInActivePropertiesByUserId";
 
 function DashboardHomePage() {
   const { width } = useWindowSize();
@@ -22,27 +26,46 @@ function DashboardHomePage() {
   const [properties, setProperties] = useState([]);
   const [projects, setProjects] = useState([]);
   const [inboundMessages, setInboundMessages] = useState();
+  const [inActiveProjects, setInActiveProjects] = useState();
+  const [inActiveProperties, setInActiveProperties] = useState();
 
   useEffect(() => {
-    const fetchPropertiesByUserId = async () => {
+    const fetchActiveProperties = async () => {
       if (user?.id) {
-        const data = await getPropertiesByUserId(user?.id);
+        const data = await fetchActivePropertiesByUserId(user?.id, true);
         setProperties(data);
       }
     };
 
-    fetchPropertiesByUserId();
-  }, [user?.id]);
-
-  useEffect(() => {
-    const fetchProjectsByUserId = async () => {
-      if (user?.id && user?.userType === "developer") {
-        const data = await getProjectsByUserId(user?.id);
-        setProjects(data);
+    const fetchInActiveProperties = async () => {
+      if (user?.id) {
+        const data = await fetchInActivePropertiesByUserId(user?.id, true);
+        setInActiveProperties(data);
       }
     };
 
-    fetchProjectsByUserId();
+    const fetchActiveProjects = async () => {
+      if (user?.id) {
+        const data = await fetchActiveProjectsByUserId(user?.id, true);
+        setProjects(data);
+        console.log("Active Projects: ", data);
+      }
+    };
+
+    const fetchInActiveProjects = async () => {
+      if (user?.id) {
+        const data = await fetchInActiveProjectsByUserId(user?.id, true);
+        console.log(data);
+        console.log("InActive Projects: ", data);
+        setInActiveProjects(data);
+        // setProperties(data);
+      }
+    };
+
+    fetchActiveProperties();
+    fetchInActiveProperties();
+    fetchActiveProjects();
+    fetchInActiveProjects();
   }, [user?.id]);
 
   useEffect(() => {
@@ -96,7 +119,7 @@ function DashboardHomePage() {
           <img src={email.src} className={classes.logo} />
           <div className={classes.tab_heading}>
             <h1>COMPLETED MESSAGES</h1>
-            <p>23</p>
+            <p>{inboundMessages}</p>
           </div>
           <div className={classes.inbound_outbound}>
             <p className={classes.inbound_outbound_text}>
@@ -106,7 +129,7 @@ function DashboardHomePage() {
               INBOUND
             </p>
             <p className={classes.inbound_outbound_text}>
-              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>13</span>{" "}
+              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>0</span>{" "}
               OUTBOUND
             </p>
             <Link href="/dashboard/inbox">
@@ -139,7 +162,7 @@ function DashboardHomePage() {
         user?.userType === "enduser") &&
         (properties?.length < 3 ? (
           <div className={classes.property_section}>
-            <p className={classes.section_heading}>Properties</p>
+            <p className={classes.section_heading}>Properties (Active)</p>
 
             <div className={classes.properties_container}>
               {properties?.length === 0 ? (
@@ -165,7 +188,7 @@ function DashboardHomePage() {
           </div>
         ) : (
           <div className={classes.property_section}>
-            <p className={classes.section_heading}>Properties</p>
+            <p className={classes.section_heading}>Properties (Active)</p>
             <div className={classes.property_container}>
               <div className={classes.overlay} />
               <Slider slidesToShow={slidesToShow} {...settings}>
@@ -190,7 +213,7 @@ function DashboardHomePage() {
       {user?.userType === "developer" &&
         (projects?.length < 3 ? (
           <div className={classes.property_section}>
-            <p className={classes.section_heading}>Projects</p>
+            <p className={classes.section_heading}>Projects (Active)</p>
 
             <div className={classes.properties_container}>
               {projects?.length === 0 ? (
@@ -216,11 +239,115 @@ function DashboardHomePage() {
           </div>
         ) : (
           <div className={classes.property_section}>
-            <p className={classes.section_heading}>Projects</p>
+            <p className={classes.section_heading}>Projects (Active)</p>
             <div className={classes.property_container}>
               <div className={classes.overlay} />
               <Slider slidesToShow={slidesToShow} {...settings}>
                 {projects?.map((project, index) => (
+                  <ProjectCard
+                    openEdit={true}
+                    title={project.projectName}
+                    description={project.projectDescription}
+                    price={project.priceRangeFrom}
+                    location={project.location}
+                    city={project.city}
+                    picture={project.images[0]}
+                    key={index}
+                    id={project?._id}
+                  />
+                ))}
+              </Slider>
+            </div>
+          </div>
+        ))}
+
+      {(user?.userType === "agent" ||
+        user?.userType === "developer" ||
+        user?.userType === "enduser") &&
+        (inActiveProperties?.length < 3 ? (
+          <div className={classes.property_section}>
+            <p className={classes.section_heading}>Properties (Inactive)</p>
+
+            <div className={classes.properties_container}>
+              {inActiveProperties?.length === 0 ? (
+                <p style={{ width: "100%", textAlign: "center" }}>
+                  No Properties
+                </p>
+              ) : (
+                inActiveProperties?.map((property, index) => (
+                  <PropertyCard
+                    noResize={true}
+                    openEdit={true}
+                    key={index}
+                    propertyId={property?.propertyListing?._id}
+                    title={property?.propertyListing?.title}
+                    price={property?.propertyListing?.price}
+                    location={property?.propertyListing?.location}
+                    city={property?.propertyListing?.city}
+                    picture={property?.propertyListing?.images[0]}
+                  />
+                ))
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className={classes.property_section}>
+            <p className={classes.section_heading}>Properties (Inactive)</p>
+            <div className={classes.property_container}>
+              <div className={classes.overlay} />
+              <Slider slidesToShow={slidesToShow} {...settings}>
+                {inActiveProperties?.map((property, index) => (
+                  <PropertyCard
+                    openEdit={true}
+                    noResize={true}
+                    key={index}
+                    propertyId={property?.propertyListing?._id}
+                    title={property?.propertyListing?.title}
+                    price={property?.propertyListing?.price}
+                    location={property?.propertyListing?.location}
+                    city={property?.propertyListing?.city}
+                    picture={property?.propertyListing?.images[0]}
+                  />
+                ))}
+              </Slider>
+            </div>
+          </div>
+        ))}
+
+      {user?.userType === "developer" &&
+        (inActiveProjects?.length < 3 ? (
+          <div className={classes.property_section}>
+            <p className={classes.section_heading}>Projects (Inactive)</p>
+
+            <div className={classes.properties_container}>
+              {inActiveProjects?.length === 0 ? (
+                <p style={{ width: "100%", textAlign: "center" }}>
+                  No In Active Projects
+                </p>
+              ) : (
+                inActiveProjects?.map((project, index) => (
+                  <ProjectCard
+                    openEdit={true}
+                    title={project.projectName}
+                    description={project.projectDescription}
+                    price={project.priceRangeFrom}
+                    location={project.location}
+                    city={project.city}
+                    picture={project.images[0]}
+                    key={index}
+                    id={project?._id}
+                  />
+                ))
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className={classes.property_section}>
+            <p className={classes.section_heading}>Projects (Inactive)</p>
+            <div className={classes.property_container}>
+              <div className={classes.overlay} />
+              <Slider slidesToShow={slidesToShow} {...settings}>
+                {inActiveProjects?.map((project, index) => (
                   <ProjectCard
                     openEdit={true}
                     title={project.projectName}

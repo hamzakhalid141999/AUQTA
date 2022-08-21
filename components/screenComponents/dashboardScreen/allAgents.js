@@ -128,6 +128,7 @@ function AllAgents() {
           {agents?.map((user, index) => (
             <AgentCard
               key={index}
+              id={user?.user?._id}
               name={user?.user?.username}
               city={user?.user?.city}
               location={user?.user?.location}
