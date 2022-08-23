@@ -27,9 +27,9 @@ function ContentSection({ developerDetails }) {
                     width - 1200
                   )}
               {!showMore &&
-                developerDetails?.user?.aboutInformation.length >
+                developerDetails?.user?.aboutInformation?.length >
                   width - 1200 && <span>{showMore ? ` ` : `...`}</span>}
-              {developerDetails?.user?.aboutInformation.length >
+              {developerDetails?.user?.aboutInformation?.length >
                 width - 1200 && (
                 <span
                   style={{ color: "black", cursor: "pointer", fontWeight: 700 }}

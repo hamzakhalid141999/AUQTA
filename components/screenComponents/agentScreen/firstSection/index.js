@@ -24,10 +24,13 @@ function FirstSection({ developerDetails }) {
         >
           {developerDetails?.user?.username}
         </h1>
-        <img
-          src={baseS3Url + developerDetails?.companyLogo}
-          style={{ width: "100px" }}
-        />
+        {developerDetails?.companyLogo && (
+          <img
+            src={baseS3Url + developerDetails?.companyLogo}
+            style={{ width: "100px" }}
+          />
+        )}
+
         {/* <p data-aos="fade-right">Lorem ipsum is just a dummy text which is used to fill in spaces when you have nothing else to write over there</p> */}
       </div>
     </div>
