@@ -64,6 +64,18 @@ function NavbarModal({ displayModal = false, setDisplayModal = () => {} }) {
         )}
 
         <div onClick={closeNavModal}>
+          <Link href={"/all_developers"}>
+            <p>DEVELOPERS</p>
+          </Link>
+        </div>
+
+        <div onClick={closeNavModal}>
+          <Link href={"/all_agents"}>
+            <p>AGENTS</p>
+          </Link>
+        </div>
+
+        <div onClick={closeNavModal}>
           <Link href={"/blogs"}>
             <p>BLOGS</p>
           </Link>

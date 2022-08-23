@@ -13,6 +13,7 @@ import ProjectImagesModal from "../../../modals/projectImagesModal.js";
 import InquiryForm from "../../../modals/inquiryForm/index";
 import project_image from "../../../../public/assets/projct-imagewhite.png";
 import ContactDetail from "../../../modals/contactDetailsModal/index";
+import { useAuth } from "../../../../contextAPI";
 
 function FirstSection({
   images,
@@ -21,6 +22,7 @@ function FirstSection({
   propertyListingDetails,
   propertyId,
 }) {
+  const { user } = useAuth();
   const [formattedPrice, setFormattedPrice] = useState();
   const [open, setOpen] = useState();
   const [openContactModal, setOpenContactModal] = useState();
@@ -156,7 +158,17 @@ function FirstSection({
                   }
                   className={classes.developer_logo}
                 />
-                <Link href={"/developer"}>
+                <Link
+                  href={{
+                    pathname:
+                      ownerDetails?.user?.userType === "developer"
+                        ? "/developer"
+                        : "/agent",
+                    query: {
+                      developerId: ownerDetails?.user?._id,
+                    },
+                  }}
+                >
                   <div style={{ width: "80%" }} className={classes.banner_btn}>
                     <p>
                       {ownerDetails?.user?.username}

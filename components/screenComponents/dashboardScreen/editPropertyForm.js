@@ -189,6 +189,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
   const [lng, setLng] = useState();
   const [initialLat, setInitialLat] = useState();
   const [initialLng, setInitialLng] = useState();
+  const [selectedLandmarksArr, setSelectedLandmarksArr] = useState([]);
 
   // Salient Features
 
@@ -444,7 +445,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
           doubleGlazedWindows: doubleGlazedWindows,
           electricityBackup: electricityBackup,
           wasteDisposal: wasteDisposal,
-          nearbyLandmarks: [],
+          nearbyLandmarks: selectedLandmarksArr,
           accessToNearbyPublicTransport: accessToNearbyPublicTransport,
           tvLounge: tvLongue,
           diningRoom: diningRoom,
@@ -560,8 +561,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
     if (subtype) {
       userData = { ...userData, province: province };
     }
-    if (landmarksFinalArray) {
-      userData = { ...userData, nearbyLandmarks: landmarksFinalArray };
+    if (selectedLandmarksArr) {
+      userData = { ...userData, nearbyLandmarks: selectedLandmarksArr };
     }
     if (contactCnic) {
       userData = { ...userData, contactCnic: contactCnic };
@@ -823,6 +824,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
           nearbyLandmarksObject(landmark, landmark),
         ])
       );
+
+      setSelectedLandmarksArr(salientFeatures?.mainFeatures?.nearbyLandmarks);
     }
   }, [salientFeatures]);
 
@@ -1029,7 +1032,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
   const addLandmarks = (landMarkArr) => {
     const temp = [];
     landMarkArr?.map((landmark) => temp.push(landmark?.value));
-    setLandmarksFinalArray(temp);
+    setSelectedLandmarksArr(temp);
   };
 
   return (
@@ -1624,9 +1627,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                       }}
                       className={classes.input_field_with_label_top_container}
                     >
-                      <p className={classes.top_label}>Nearby Landmarkss</p>
+                      <p className={classes.top_label}>Nearby Landmarks</p>
 
-                      {landmarksFinalArray && (
+                      {landmarksFinalArray?.length > 0 && (
                         <Select
                           defaultValue={
                             landmarksFinalArray?.length > 0 &&

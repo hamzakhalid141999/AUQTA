@@ -120,8 +120,8 @@ function MainFeaturesSection({ property, features }) {
         ]);
       }
 
-      for (var i = 0; i < features?.utilities?.otherFeatures?.length; i++) {
-        var result = features?.utilities?.otherFeatures[i].replace(
+      for (var i = 0; i < features?.otherFeatures?.otherFeatures?.length; i++) {
+        var result = features?.otherFeatures?.otherFeatures[i].replace(
           /([A-Z])/g,
           " $1"
         );
@@ -238,68 +238,12 @@ function MainFeaturesSection({ property, features }) {
 
           {mainFeatures?.filter((arr) => arr?.value === true)?.length > 0 && (
             <div className={classes.section}>
-              <label>Salient Features</label>
+              <label>Main Features</label>
               <div className={classes.grid}>
                 {/* {
             features?.mainFeatures
           } */}
                 {mainFeatures
-                  ?.filter((feature, idx) => feature?.value === true)
-                  ?.map((feature, index) => (
-                    <div key={index} className={classes.bullets_container}>
-                      <div className={classes.bullet} /> <p>{feature?.label}</p>
-                    </div>
-                  ))}
-              </div>
-            </div>
-          )}
-
-          {communicationFeatures?.filter((arr) => arr?.value === true)?.length >
-            0 && (
-            <div className={classes.section}>
-              <label>Communication Features</label>
-              <div className={classes.grid}>
-                {/* {
-              features?.mainFeatures
-            } */}
-                {communicationFeatures
-                  ?.filter((feature, idx) => feature?.value === true)
-                  ?.map((feature, index) => (
-                    <div key={index} className={classes.bullets_container}>
-                      <div className={classes.bullet} /> <p>{feature?.label}</p>
-                    </div>
-                  ))}
-              </div>
-            </div>
-          )}
-
-          {otherFeatures?.filter((arr) => arr?.value === true)?.length > 0 && (
-            <div className={classes.section}>
-              <label>Other Features</label>
-              <div className={classes.grid}>
-                {/* {
-            features?.mainFeatures
-          } */}
-                {otherFeatures
-                  ?.filter((feature, idx) => feature?.value === true)
-                  ?.map((feature, index) => (
-                    <div key={index} className={classes.bullets_container}>
-                      <div className={classes.bullet} /> <p>{feature?.label}</p>
-                    </div>
-                  ))}
-              </div>
-            </div>
-          )}
-
-          {recreationalFeatures?.filter((arr) => arr?.value === true)?.length >
-            0 && (
-            <div className={classes.section}>
-              <label>Recreational Features</label>
-              <div className={classes.grid}>
-                {/* {
-            features?.mainFeatures
-          } */}
-                {recreationalFeatures
                   ?.filter((feature, idx) => feature?.value === true)
                   ?.map((feature, index) => (
                     <div key={index} className={classes.bullets_container}>
@@ -337,6 +281,62 @@ function MainFeaturesSection({ property, features }) {
               features?.mainFeatures
             } */}
                 {utilitiesFeatures
+                  ?.filter((feature, idx) => feature?.value === true)
+                  ?.map((feature, index) => (
+                    <div key={index} className={classes.bullets_container}>
+                      <div className={classes.bullet} /> <p>{feature?.label}</p>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
+
+          {communicationFeatures?.filter((arr) => arr?.value === true)?.length >
+            0 && (
+            <div className={classes.section}>
+              <label>Communication Features</label>
+              <div className={classes.grid}>
+                {/* {
+              features?.mainFeatures
+            } */}
+                {communicationFeatures
+                  ?.filter((feature, idx) => feature?.value === true)
+                  ?.map((feature, index) => (
+                    <div key={index} className={classes.bullets_container}>
+                      <div className={classes.bullet} /> <p>{feature?.label}</p>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
+
+          {recreationalFeatures?.filter((arr) => arr?.value === true)?.length >
+            0 && (
+            <div className={classes.section}>
+              <label>Recreational Features</label>
+              <div className={classes.grid}>
+                {/* {
+            features?.mainFeatures
+          } */}
+                {recreationalFeatures
+                  ?.filter((feature, idx) => feature?.value === true)
+                  ?.map((feature, index) => (
+                    <div key={index} className={classes.bullets_container}>
+                      <div className={classes.bullet} /> <p>{feature?.label}</p>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
+
+          {otherFeatures?.filter((arr) => arr?.value === true)?.length > 0 && (
+            <div className={classes.section}>
+              <label>Other Features</label>
+              <div className={classes.grid}>
+                {/* {
+            features?.mainFeatures
+          } */}
+                {otherFeatures
                   ?.filter((feature, idx) => feature?.value === true)
                   ?.map((feature, index) => (
                     <div key={index} className={classes.bullets_container}>

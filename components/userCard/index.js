@@ -11,7 +11,16 @@ import Image from "next/image";
 import Link from "next/link";
 import placeholder from "../../public/assets/placeholder_user.png";
 
-function AgentCard({ picture, name, city, location, description, logo, id }) {
+function AgentCard({
+  picture,
+  name,
+  city,
+  location,
+  description,
+  logo,
+  id,
+  isAgent,
+}) {
   const [source, setSource] = useState();
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
@@ -30,7 +39,7 @@ function AgentCard({ picture, name, city, location, description, logo, id }) {
     // >
     <Link
       href={{
-        pathname: "/developer",
+        pathname: isAgent === true ? "/agent" : "/developer",
         query: {
           developerId: id,
         },

@@ -123,7 +123,7 @@ function ProjectForm() {
 
   useEffect(() => {
     if (cities?.length > 0) {
-      setCity(cities[0]);
+      setCities(cities?.sort());
     }
   }, [cities]);
 
@@ -1008,7 +1008,12 @@ function ProjectForm() {
                 setCity(e.target.value);
               }}
             >
-              <option>Select</option>
+              <option>Select City</option>
+              <option value="Islamabad">Islamabad</option>
+              <option value="Lahore">Lahore</option>
+              <option value="Karachi">Karachi</option>
+              <option value="Faisalabad">Faisalabad</option>
+              <option value="Rawalpindi">Rawalpindi</option>
               {cities?.map((city, index) => (
                 <option key={index} value={city}>
                   {city}
@@ -1024,7 +1029,7 @@ function ProjectForm() {
                 setLocation(e.target.value);
               }}
             >
-              <option>Select</option>
+              <option>Select Location</option>
               {locations?.map((location, index) => (
                 <option key={index} value={location}>
                   {location}

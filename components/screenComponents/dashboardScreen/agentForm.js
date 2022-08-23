@@ -55,6 +55,8 @@ function AgentForm() {
   const [initialLat, setInitialLat] = useState();
   const [initialLng, setInitialLng] = useState();
 
+  const [selectedSocialMedia, setSelectedSocialMedia] = useState([]);
+
   const [profilePicture, setProfilePicture] = useState();
 
   const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
@@ -125,7 +127,7 @@ function AgentForm() {
   const addSocials = (socialsArr) => {
     const temp = [];
     socialsArr?.map((socials) => temp.push(socials?.value));
-    setSocialsArr(temp);
+    setSelectedSocialMedia(temp);
   };
 
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
@@ -181,6 +183,26 @@ function AgentForm() {
       setImgName(event?.name);
     }
   };
+
+  const socialMediaObject = (socialMedia, name) => ({
+    label: socialMedia,
+    value: name,
+  });
+
+  useEffect(() => {
+    if (agent?.user?.socialMedia) {
+      agent?.user?.socialMedia?.map((socialMedia) =>
+        setSocialMediaArr((single) => [
+          ...single,
+          socialMediaObject(socialMedia, socialMedia),
+        ])
+      );
+
+      setSelectedSocialMedia(agent?.user?.socialMedia);
+    }
+  }, [agent]);
+
+  console.log(selectedSocialMedia);
 
   const Option = (props) => {
     return (
@@ -294,9 +316,7 @@ function AgentForm() {
     if (imgName) {
       userData = { ...userData, companyLogo: imgName };
     }
-    if (socialsArr?.length) {
-      userData = { ...userData, socialMedia: socialsArr };
-    }
+    userData = { ...userData, socialMedia: selectedSocialMedia };
 
     if (email) {
       userData = { ...userData, email: email };
@@ -591,19 +611,37 @@ function AgentForm() {
               </div>
               <div className={classes.two_field_container}>
                 <p className={classes.label_dual}>Social Media</p>
-                <Select
-                  className={classes.input_field_dual}
-                  components={{ Option }}
-                  hideSelectedOptions={false}
-                  options={socials}
-                  closeMenuOnSelect={false}
-                  placeholder=" "
-                  isMulti
-                  isClearable
-                  onChange={(e) => {
-                    addSocials(e);
-                  }}
-                />
+                {socialMediaArr?.length > 0 && (
+                  <Select
+                    className={classes.input_field_dual}
+                    components={{ Option }}
+                    defaultValue={socialMediaArr?.length > 0 && socialMediaArr}
+                    hideSelectedOptions={false}
+                    options={socials}
+                    closeMenuOnSelect={false}
+                    placeholder=" "
+                    isMulti
+                    isClearable
+                    onChange={(e) => {
+                      addSocials(e);
+                    }}
+                  />
+                )}
+                {socialMediaArr?.length === 0 && (
+                  <Select
+                    className={classes.input_field_dual}
+                    components={{ Option }}
+                    hideSelectedOptions={false}
+                    options={socials}
+                    closeMenuOnSelect={false}
+                    placeholder=" "
+                    isMulti
+                    isClearable
+                    onChange={(e) => {
+                      addSocials(e);
+                    }}
+                  />
+                )}
               </div>
             </div>
 

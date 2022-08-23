@@ -48,15 +48,13 @@ function DashboardHomePage() {
       if (user?.id) {
         const data = await fetchActiveProjectsByUserId(user?.id, true);
         setProjects(data);
-        console.log("Active Projects: ", data);
       }
     };
 
     const fetchInActiveProjects = async () => {
       if (user?.id) {
         const data = await fetchInActiveProjectsByUserId(user?.id, true);
-        console.log(data);
-        console.log("InActive Projects: ", data);
+
         setInActiveProjects(data);
         // setProperties(data);
       }

@@ -185,7 +185,7 @@ function PropertyForm() {
 
   useEffect(() => {
     if (cities?.length > 0) {
-      setCity(cities[0]);
+      setCities(cities?.sort());
     }
   }, [cities]);
 
@@ -893,6 +893,11 @@ function PropertyForm() {
               }}
             >
               <option>Select City</option>
+              <option value="Islamabad">Islamabad</option>
+              <option value="Lahore">Lahore</option>
+              <option value="Karachi">Karachi</option>
+              <option value="Faisalabad">Faisalabad</option>
+              <option value="Rawalpindi">Rawalpindi</option>
               {cities?.map((city, index) => (
                 <option key={index} value={city}>
                   {city}

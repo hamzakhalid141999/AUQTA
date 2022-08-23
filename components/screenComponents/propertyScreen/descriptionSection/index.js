@@ -39,23 +39,6 @@ function Description({ property }) {
           </div>
           <div className={classes.service_description_container}>
             <div className={classes.input_field_container_dual}>
-              <label>Phone (Home)</label>
-              {/* <div className={classes.input_field}> */}
-              <p className={classes.info_val}>
-                {property?.propertyListing?.contactPhoneHome}
-              </p>
-              {/* </div> */}
-            </div>
-            <div className={classes.input_field_container_dual}>
-              <label>Phone (Work)</label>
-              {/* <div className={classes.input_field}> */}
-              <p className={classes.info_val}>
-                {property?.propertyListing?.contactPhoneWork}
-              </p>
-              {/* </div> */}
-            </div>
-
-            <div className={classes.input_field_container_dual}>
               <label>Address</label>
               {/* <div className={classes.input_field}> */}
               <p className={classes.info_val}>

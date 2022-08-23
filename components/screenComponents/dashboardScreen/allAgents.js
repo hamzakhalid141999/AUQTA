@@ -127,6 +127,7 @@ function AllAgents() {
         <div className={classes.content_container}>
           {agents?.map((user, index) => (
             <AgentCard
+              isAgent={true}
               key={index}
               id={user?.user?._id}
               name={user?.user?.username}
