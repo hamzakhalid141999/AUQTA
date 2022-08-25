@@ -55,7 +55,7 @@ function ContentSection() {
           </p>
           <p className={classes.med_heading}>General Disclaimer:</p>
           <div className={classes.single_row}>
-            <img src={bullet.src} style={{ height: "20px" }} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -66,7 +66,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -78,7 +78,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -89,7 +89,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -99,7 +99,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -110,7 +110,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -121,7 +121,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -131,7 +131,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -146,7 +146,7 @@ function ContentSection() {
             General Terms and Conditions:
           </p>
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -158,7 +158,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -169,7 +169,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -180,7 +180,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -191,7 +191,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -202,7 +202,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -217,7 +217,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -238,7 +238,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -253,7 +253,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
             <p>
               {" "}
               Any reproduction, modification, creation of derivative works from
@@ -265,7 +265,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -280,7 +280,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -291,7 +291,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -308,7 +308,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}

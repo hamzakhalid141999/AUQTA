@@ -8,6 +8,7 @@ import icon1 from "../../../../public/assets/project_card_construction_site_icon
 import icon2 from "../../../../public/assets/project_card_interactive_broucher_icon.png";
 import icon3 from "../../../../public/assets/project_card_3d_plan_icon.png";
 import { useWindowSize } from "../../../../utils";
+import bullet from "../../../../public/assets/bullet.png";
 
 function ProjectConentSection({
   features,
@@ -103,7 +104,8 @@ function ProjectConentSection({
                 <div className={classes.bullet_points_grid}>
                   {amenities?.map((amenity, index) => (
                     <div key={index} className={classes.bullets_container}>
-                      <div className={classes.bullet} /> <p>{amenity}</p>
+                      <img src={bullet.src} style={{ height: "13px" }} />
+                      <p>{amenity}</p>
                     </div>
                   ))}
                 </div>
