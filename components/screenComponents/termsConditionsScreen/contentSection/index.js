@@ -2,6 +2,7 @@
 
 import React from "react";
 import classes from "./contentSection.module.css";
+import bullet from "../../../../public/assets/bullet.png";
 
 function ContentSection() {
   return (
@@ -54,7 +55,7 @@ function ContentSection() {
           </p>
           <p className={classes.med_heading}>General Disclaimer:</p>
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "20px" }} />
 
             <p>
               {" "}
