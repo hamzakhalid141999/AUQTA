@@ -61,8 +61,6 @@ function AllDevelopers() {
     fetchFilteredProperties();
   }, [developers]);
 
-  console.log(developers);
-
   function RenderMap() {
     return (
       <GoogleMap

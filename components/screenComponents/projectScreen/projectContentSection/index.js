@@ -182,35 +182,82 @@ function ProjectConentSection({
         </div>
         <div className={classes.augmented_reality_section}>
           <h1>AUGMENTED REALITY</h1>
-          <div className={classes.cards_container}>
-            <FindSectionCards
-              imgWidth={"50%"}
-              imgHeight={"40%"}
-              maxWidth={"350px"}
-              minWidth={"320px"}
-              icon={icon1}
-              titleColor={"black"}
-              title={"3D on Construction Site"}
-            />
-            <FindSectionCards
-              imgWidth={"50%"}
-              imgHeight={"40%"}
-              maxWidth={"350px"}
-              minWidth={"320px"}
-              icon={icon2}
-              titleColor={"black"}
-              title={"Interactive Broucher"}
-            />
-            <FindSectionCards
-              imgWidth={"50%"}
-              imgHeight={"40%"}
-              maxWidth={"350px"}
-              minWidth={"320px"}
-              icon={icon3}
-              titleColor={"black"}
-              title={"3D on Plan"}
-            />
-          </div>
+
+          {width < 786 ? (
+            <div className={classes.cards_container}>
+              {/* <a href="">
+
+
+            </a> */}
+              <a
+                href="https://mywebar.com/p/Project_8_nz3i3roow9"
+                target={"_blank"}
+                rel="noreferrer"
+              >
+                <FindSectionCards
+                  imgWidth={"50%"}
+                  imgHeight={"40%"}
+                  maxWidth={"350px"}
+                  minWidth={"320px"}
+                  icon={icon3}
+                  titleColor={"black"}
+                  title={"Interactive Layout ( Exterior)"}
+                />
+              </a>
+
+              <a
+                href="https://mywebar.com/p/Project_9_8xq88kb0qb"
+                target={"_blank"}
+                rel="noreferrer"
+              >
+                <FindSectionCards
+                  imgWidth={"50%"}
+                  imgHeight={"40%"}
+                  maxWidth={"350px"}
+                  minWidth={"320px"}
+                  icon={icon3}
+                  titleColor={"black"}
+                  title={"Interactive Layout ( 1 Bed Apartment)"}
+                />
+              </a>
+
+              <a
+                href="https://mywebar.com/p/Project_10_l53yep0som"
+                target={"_blank"}
+                rel="noreferrer"
+              >
+                <FindSectionCards
+                  imgWidth={"50%"}
+                  imgHeight={"40%"}
+                  maxWidth={"350px"}
+                  minWidth={"320px"}
+                  icon={icon3}
+                  titleColor={"black"}
+                  title={"Interactive Layout ( 2 Bed Apartment)"}
+                />
+              </a>
+
+              <a
+                href="https://mywebar.com/p/Project_5_txnu3qobej"
+                target={"_blank"}
+                rel="noreferrer"
+              >
+                <FindSectionCards
+                  imgWidth={"50%"}
+                  imgHeight={"40%"}
+                  maxWidth={"350px"}
+                  minWidth={"320px"}
+                  icon={icon3}
+                  titleColor={"black"}
+                  title={"Interactive Layout ( 3 Bed Apartment)"}
+                />
+              </a>
+            </div>
+          ) : (
+            <p style={{ marginTop: "60px" }}>
+              This feature is available on tablet and mobile devices
+            </p>
+          )}
         </div>
       </div>
     </div>

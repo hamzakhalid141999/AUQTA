@@ -42,6 +42,7 @@ function AgentForm() {
 
   const [email, setEmail] = useState();
   const [phoneNo, setPhoneNo] = useState();
+  const [phoneNoWork, setPhoneNoWork] = useState();
 
   const [cnic, setCnic] = useState();
 
@@ -202,8 +203,6 @@ function AgentForm() {
     }
   }, [agent]);
 
-  console.log(selectedSocialMedia);
-
   const Option = (props) => {
     return (
       <div>
@@ -332,6 +331,11 @@ function AgentForm() {
     if (phoneNo) {
       userData = { ...userData, phoneNo: phoneNo };
     }
+
+    if (phoneNoWork) {
+      userData = { ...userData, additionalPhoneNo: phoneNoWork };
+    }
+
     if (cnic) {
       userData = { ...userData, cnic: cnic };
     }
@@ -596,6 +600,32 @@ function AgentForm() {
                 className={classes.input_field_single}
               />
             </div>
+
+            <div className={classes.single_row}>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>Phone (Home)</p>
+                <input
+                  onChange={(e) => {
+                    setPhoneNo(e.target.value);
+                  }}
+                  placeholder={agent?.user?.phoneNo ? agent?.user?.phoneNo : ""}
+                  className={classes.input_field_dual}
+                />
+              </div>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>Phone (Work)</p>
+                <input
+                  onChange={(e) => {
+                    setPhoneNoWork(e.target.value);
+                  }}
+                  placeholder={
+                    agent?.additionalPhoneNo ? agent?.additionalPhoneNo : ""
+                  }
+                  className={classes.input_field_dual}
+                />
+              </div>
+            </div>
+
             <div className={classes.single_row}>
               <div className={classes.two_field_container}>
                 <p className={classes.label_dual}>Website URL</p>

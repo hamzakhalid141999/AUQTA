@@ -81,3 +81,21 @@
 .accept_btn:hover {
   background-color: #1174f6;
 }
+
+@media screen and (max-width: 768px) {
+  .confirmDelModal {
+    min-width: initial !important;
+    width: 90% !important;
+    border-radius: 15px !important;
+    margin-top: 80px !important;
+  }
+  .content_container {
+    width: 95%;
+  }
+  .content_container h1 {
+    text-align: center;
+    font-size: 17px;
+    font-weight: normal;
+    margin-top: 20px;
+  }
+}

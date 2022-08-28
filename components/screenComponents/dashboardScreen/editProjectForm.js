@@ -82,7 +82,7 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
 
   const [featuresArr, setFeaturesArr] = useState([]);
   const [amenitiesArr, setAmenitiesArr] = useState([]);
-  const [amenitiesArrFinal, setAmenitiesArrFinal] = useState();
+  const [amenitiesArrFinal, setAmenitiesArrFinal] = useState([]);
   const [cities, setCities] = useState([]);
   const [locations, setLocations] = useState([]);
   const [citiesAndLocations, setCitiesAndLocations] = useState();
@@ -112,6 +112,7 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
     useState(false);
   const [isShopImageUploaded, setIsShopImageUploaded] = useState(false);
   const [locationOverview, setLocationOverview] = useState();
+  const [selectedAmenities, setSelectedAmenities] = useState([]);
 
   useEffect(async () => {
     const data = await getAllCities();
@@ -205,14 +206,15 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
     if (lng) {
       userData = { ...userData, lng: lng };
     }
+    if (selectedAmenities) {
+      userData = { ...userData, amenities: selectedAmenities };
+    }
     userData = { ...userData, govtApproved: isGovApproved };
     userData = { ...userData, features: featuresArr };
     userData = { ...userData, locationFeatures: locationFeaturesArr };
 
     return userData;
   };
-
-  console.log(projectDetails);
 
   const success = () =>
     toast.success("Property updated", {
@@ -312,6 +314,14 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
       setIsGovApproved(projectDetails?.govtApproved);
       setInitialLat(parseFloat(projectDetails?.lat));
       setInitialLng(parseFloat(projectDetails?.lng));
+      setSelectedAmenities(projectDetails?.amenities);
+
+      projectDetails?.amenities?.map((amenity) => {
+        setAmenitiesArrFinal((single) => [
+          ...single,
+          amenitiesObj(amenity, amenity),
+        ]);
+      });
     }
   }, [projectDetails]);
 
@@ -374,7 +384,7 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
   const addAmenities = (amenitiesArr) => {
     const temp = [];
     amenitiesArr?.map((amenity) => temp.push(amenity?.value));
-    setAmenitiesArrFinal(temp);
+    setSelectedAmenities(temp);
   };
 
   const amenitiesObj = (landmark, name) => ({
@@ -1034,21 +1044,25 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
                 <p style={{ marginTop: "17px" }} className={classes.label}>
                   Amenities
                 </p>
-
-                <Select
-                  className={classes.input_field_single}
-                  components={{ Option }}
-                  hideSelectedOptions={false}
-                  options={amenitiesArr}
-                  closeMenuOnSelect={false}
-                  placeholder=" "
-                  isMulti
-                  isClearable
-                  onChange={(e) => {
-                    // addArtist(e);
-                    addAmenities(e);
-                  }}
-                />
+                {amenitiesArrFinal?.length > 0 && (
+                  <Select
+                    defaultValue={
+                      amenitiesArrFinal?.length > 0 && amenitiesArrFinal
+                    }
+                    className={classes.input_field_single}
+                    components={{ Option }}
+                    hideSelectedOptions={false}
+                    options={amenitiesArr}
+                    closeMenuOnSelect={false}
+                    placeholder=" "
+                    isMulti
+                    isClearable
+                    onChange={(e) => {
+                      // addArtist(e);
+                      addAmenities(e);
+                    }}
+                  />
+                )}
               </div>
             </div>
 

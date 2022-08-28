@@ -2,7 +2,13 @@ import React from "react";
 import Modal from "react-responsive-modal";
 import classes from "./contactDetailsModal.module.css";
 
-function ContactDetail({ setOpen, open, onCloseModal, propertyDetails }) {
+function ContactDetail({
+  setOpen,
+  open,
+  onCloseModal,
+  firstContact,
+  secondContact,
+}) {
   return (
     <Modal
       classNames={{
@@ -16,8 +22,8 @@ function ContactDetail({ setOpen, open, onCloseModal, propertyDetails }) {
       <div className={classes.main_container}>
         <div className={classes.content_container}>
           <h1>Get in touch!</h1>
-          <p>Home: {propertyDetails?.contactPhoneHome}</p>
-          <p>Work: {propertyDetails?.contactPhoneWork}</p>
+          <p>Home: {firstContact ? firstContact : "Not available"}</p>
+          <p>Work: {secondContact ? secondContact : "Not available"}</p>
         </div>
       </div>
     </Modal>

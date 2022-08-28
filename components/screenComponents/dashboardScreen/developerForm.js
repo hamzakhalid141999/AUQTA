@@ -42,6 +42,8 @@ function DeveloperForm() {
   const [citiesAndLocations, setCitiesAndLocations] = useState();
   const [lat, setLat] = useState();
   const [lng, setLng] = useState();
+  const [phoneNo, setPhoneNo] = useState();
+  const [phoneNoWork, setPhoneNoWork] = useState();
   const [initialLat, setInitialLat] = useState();
   const [initialLng, setInitialLng] = useState();
   const [name, setName] = useState(developer?.username);
@@ -274,6 +276,15 @@ function DeveloperForm() {
     if (websiteUrl) {
       userData = { ...userData, websiteURL: websiteUrl };
     }
+
+    if (phoneNoWork) {
+      userData = { ...userData, additionalPhoneNo: phoneNoWork };
+    }
+
+    if (phoneNo) {
+      userData = { ...userData, phoneNo: phoneNo };
+    }
+
     if (sinceYear) {
       userData = { ...userData, since: sinceYear };
     }
@@ -528,6 +539,34 @@ function DeveloperForm() {
             className={classes.input_field_single}
           />
         </div>
+
+        <div className={classes.single_row}>
+          <div className={classes.two_field_container}>
+            <p className={classes.label_dual}>Phone (Home)</p>
+            <input
+              onChange={(e) => {
+                setPhoneNo(e.target.value);
+              }}
+              placeholder={
+                developer?.user?.phoneNo ? developer?.user?.phoneNo : ""
+              }
+              className={classes.input_field_dual}
+            />
+          </div>
+          <div className={classes.two_field_container}>
+            <p className={classes.label_dual}>Phone (Work)</p>
+            <input
+              onChange={(e) => {
+                setPhoneNoWork(e.target.value);
+              }}
+              placeholder={
+                developer?.additionalPhoneNo ? developer?.additionalPhoneNo : ""
+              }
+              className={classes.input_field_dual}
+            />
+          </div>
+        </div>
+
         <div className={classes.single_row}>
           <div className={classes.two_field_container}>
             <p className={classes.label_dual}>Website URL</p>

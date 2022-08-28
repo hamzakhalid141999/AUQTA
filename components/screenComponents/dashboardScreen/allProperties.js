@@ -11,8 +11,6 @@ function AllProperties({ dashboardType }) {
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
 
-  console.log(properties);
-
   useEffect(() => {
     const fetchPropertiesByUserId = async () => {
       if (user?.id && dashboardType === "properties") {

@@ -107,7 +107,8 @@ function FirstSection({
       <ContactDetail
         open={openContactModal}
         onCloseModal={onCloseContactModal}
-        propertyDetails={propertyDetails}
+        firstContact={propertyDetails?.contactPhoneHome}
+        secondContact={propertyDetails?.contactPhoneWork}
       />
 
       <ProjectImagesModal
