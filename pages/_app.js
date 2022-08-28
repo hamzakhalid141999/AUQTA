@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }) {
       <MainLayout>
         <Head>
           <title>AUQTA | World's First Immersive Real Estate Poral</title>
-          <link rel="icon" href="/favicon.ico"></link>
+          {/* <link rel="icon" href="/favicon.ico"></link> */}
         </Head>
         <Layout>
           <TopProgressBar id="nprogress" />
