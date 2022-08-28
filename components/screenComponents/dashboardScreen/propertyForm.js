@@ -333,7 +333,6 @@ function PropertyForm() {
       setLoading(false);
       error();
       // if (err.response) {
-      //   console.log(err.response.data?.message);
       //   if (err.response.data?.message === "Invalid Password!") {
       //     error("Invaid Password");
       //   } else if (err.response.data?.message === "User not found") {
