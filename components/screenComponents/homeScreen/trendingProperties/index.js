@@ -119,23 +119,6 @@ function TrendingProperties({
           // data-aos="fade-up"
           className={classes.property_cards_container}
         >
-          {fromHome && (
-            <>
-              <PropertyCard
-                hardCodedProperty={true}
-                title={"KMK Towers"}
-                description={"Coming Soon"}
-                picture={kmk}
-              />
-              <PropertyCard
-                hardCodedProperty={true}
-                isProject={isProject}
-                title={"Gulberg Mall"}
-                description={"Coming Soon"}
-                picture={gulberg}
-              />
-            </>
-          )}
           {investmentProjects
             ?.filter((project, index) => (width < 1177 ? index < 1 : index < 2))
             .map((project, index) => (
@@ -151,6 +134,18 @@ function TrendingProperties({
                 id={project?._id}
               />
             ))}
+
+          {fromHome && (
+            <>
+              <PropertyCard
+                hardCodedProperty={true}
+                isProject={isProject}
+                title={"Gulberg Mall"}
+                description={"Coming Soon"}
+                picture={gulberg}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>
