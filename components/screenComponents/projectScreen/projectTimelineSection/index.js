@@ -5,7 +5,6 @@ import Image from "next/image";
 
 function ProjectTimelineSection({ project }) {
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
-
   return (
     <div className={classes.container}>
       <div className={classes.content_container}>
@@ -13,11 +12,24 @@ function ProjectTimelineSection({ project }) {
         <div className={classes.timeline_section}>
           <div className={classes.startTimeSection}>
             <p>
-              {project?.projectStartDate ? project?.projectStartDate : "N/A"}
+              {project?.projectStartDate
+                ? project?.projectStartDate
+                : project?._id === "6301e2257cd62ffd3a83a286"
+                ? "Jan 2020"
+                : "N/A"}
             </p>
           </div>
           <div className={classes.endTimeSection}>
-            <p>{project?.projectEndDate ? project?.projectEndDate : "N/A"}</p>
+            <p>
+              {project?.projectEndDate
+                ? project?.projectEndDate
+                : project?._id === "6301e2257cd62ffd3a83a286"
+                ? "Jan 2024"
+                : "N/A"}
+            </p>
+          </div>
+          <div className={classes.firstMilestoneSectionDate}>
+            <p>{project?.firstMilestone?.date}</p>
           </div>
           <div className={classes.firstMilestoneSection}>
             <img
@@ -25,11 +37,17 @@ function ProjectTimelineSection({ project }) {
               style={{ height: "100%" }}
             />
           </div>
+          <div className={classes.secondMilestoneSectionDate}>
+            <p>{project?.secondMilestone?.date}</p>
+          </div>
           <div className={classes.secondMilestoneSection}>
             <img
               src={baseS3Url + project?.secondMilestone?.image}
               style={{ height: "100%" }}
             />
+          </div>
+          <div className={classes.thirdMilestoneSectionDate}>
+            <p>{project?.secondMilestone?.date}</p>
           </div>
           <div className={classes.thirdMilestoneSection}>
             <img

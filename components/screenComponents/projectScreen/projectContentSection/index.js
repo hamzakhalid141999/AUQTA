@@ -23,14 +23,6 @@ function ProjectConentSection({
   // https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/6301e2257cd62ffd3a83a286-PT/6301e2257cd62ffd3a83a286-PT.html
   const toursBaseUrl = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
 
-  console.log(
-    toursBaseUrl +
-      projectDetails?._id +
-      "-LT/" +
-      projectDetails?._id +
-      "-LT.html"
-  );
-
   const showContent = () => {
     setShowMore(!showMore);
   };
@@ -55,6 +47,9 @@ function ProjectConentSection({
           className={classes.services_container}
         >
           <div className={classes.image_container}>
+            {isVideo && (
+              <p className={classes.tour_text}>Click above to launch Tour</p>
+            )}
             {projectDetails?._id === "6301e2257cd62ffd3a83a286" && !isVideo ? (
               <iframe
                 onClick={handleVideoToggle}
@@ -67,14 +62,39 @@ function ProjectConentSection({
                 style={{ borderRadius: "40px", objectFit: "initial" }}
                 className={classes.img}
               />
-            ) : (
-              isVideo && (
-                <Image
-                  onClick={handleVideoToggle}
-                  src={img1}
+            ) : isVideo &&
+              projectDetails?._id === "6301e2257cd62ffd3a83a286" &&
+              width > 786 ? (
+              <video
+                loop
+                onClick={handleVideoToggle}
+                autoPlay
+                muted
+                className={classes.img}
+                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/projects/6301e2257cd62ffd3a83a286/WhatsApp+Video+2022-08-16+at+1.08.28+PM.mp4"
+              />
+            ) : isVideo &&
+              projectDetails?._id === "6301e2257cd62ffd3a83a286" &&
+              width < 786 ? (
+              <a
+                href="/vr/6301e2257cd62ffd3a83a286-PT/6301e2257cd62ffd3a83a286-PT.html"
+                target={"_blank"}
+                rel="noreferrer"
+              >
+                <video
+                  loop
+                  autoPlay
+                  muted
                   className={classes.img}
+                  src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/projects/6301e2257cd62ffd3a83a286/WhatsApp+Video+2022-08-16+at+1.08.28+PM.mp4"
                 />
-              )
+              </a>
+            ) : (
+              <Image
+                onClick={handleVideoToggle}
+                src={img1}
+                className={classes.img}
+              />
             )}
           </div>
           <div className={classes.description}>
@@ -115,6 +135,9 @@ function ProjectConentSection({
         </div>
         <div className={classes.services_container}>
           <div className={classes.image_container}>
+            {isVideoLocation && (
+              <p className={classes.tour_text}>Click above to launch Tour</p>
+            )}
             {projectDetails?._id === "6301e2257cd62ffd3a83a286" &&
             !isVideoLocation ? (
               <iframe
@@ -128,14 +151,20 @@ function ProjectConentSection({
                 width="100%"
                 className={classes.img}
               />
+            ) : isVideoLocation && width > 786 ? (
+              <Image
+                onClick={handleVideoLocationToggle}
+                src={img2}
+                className={classes.img}
+              />
             ) : (
-              isVideoLocation && (
-                <Image
-                  onClick={handleVideoLocationToggle}
-                  src={img2}
-                  className={classes.img}
-                />
-              )
+              <a
+                href="/vr/6301e2257cd62ffd3a83a286-LT/6301e2257cd62ffd3a83a286-LT.html"
+                target={"_blank"}
+                rel="noreferrer"
+              >
+                <Image src={img2} className={classes.img} />
+              </a>
             )}
           </div>
           <div
@@ -171,12 +200,16 @@ function ProjectConentSection({
         </div>
         <div className={classes.video_container}>
           <video
-            src="https://farbe9d3fb46190ad4564938d20f57a5ad372133227-test.s3.eu-central-1.amazonaws.com/public/compressed/first_section_banner_video.mp4"
+            src={
+              projectDetails?._id === "6301e2257cd62ffd3a83a286"
+                ? "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/projects/6301e2257cd62ffd3a83a286/kmk+ffinal.mp4"
+                : "https://farbe9d3fb46190ad4564938d20f57a5ad372133227-test.s3.eu-central-1.amazonaws.com/public/compressed/first_section_banner_video.mp4"
+            }
             className={classes.video}
             alt="hero_banner_img"
             loop
-            autoPlay
             muted
+            controls
             playsInline={true}
           />
         </div>
@@ -189,69 +222,59 @@ function ProjectConentSection({
 
 
             </a> */}
-              <a
+              {/* <a
                 href="https://mywebar.com/p/Project_8_nz3i3roow9"
                 target={"_blank"}
                 rel="noreferrer"
-              >
-                <FindSectionCards
-                  imgWidth={"50%"}
-                  imgHeight={"40%"}
-                  maxWidth={"350px"}
-                  minWidth={"320px"}
-                  icon={icon3}
-                  titleColor={"black"}
-                  title={"Interactive Layout ( Exterior)"}
-                />
-              </a>
+              > */}
+              <FindSectionCards
+                imgWidth={"50%"}
+                imgHeight={"40%"}
+                maxWidth={"350px"}
+                minWidth={"320px"}
+                icon={icon3}
+                titleColor={"black"}
+                title={"Interactive Layout"}
+                link={"https://mywebar.com/p/Project_8_nz3i3roow9"}
+                subheading={"(Exterior)"}
+              />
+              {/* </a> */}
 
-              <a
-                href="https://mywebar.com/p/Project_9_8xq88kb0qb"
-                target={"_blank"}
-                rel="noreferrer"
-              >
-                <FindSectionCards
-                  imgWidth={"50%"}
-                  imgHeight={"40%"}
-                  maxWidth={"350px"}
-                  minWidth={"320px"}
-                  icon={icon3}
-                  titleColor={"black"}
-                  title={"Interactive Layout ( 1 Bed Apartment)"}
-                />
-              </a>
+              <FindSectionCards
+                imgWidth={"50%"}
+                imgHeight={"40%"}
+                maxWidth={"350px"}
+                minWidth={"320px"}
+                icon={icon3}
+                titleColor={"black"}
+                title={"Interactive Layout"}
+                link={"https://mywebar.com/p/Project_9_8xq88kb0qb"}
+                subheading={"(1 Bed Apartment)"}
+              />
 
-              <a
-                href="https://mywebar.com/p/Project_10_l53yep0som"
-                target={"_blank"}
-                rel="noreferrer"
-              >
-                <FindSectionCards
-                  imgWidth={"50%"}
-                  imgHeight={"40%"}
-                  maxWidth={"350px"}
-                  minWidth={"320px"}
-                  icon={icon3}
-                  titleColor={"black"}
-                  title={"Interactive Layout ( 2 Bed Apartment)"}
-                />
-              </a>
+              <FindSectionCards
+                imgWidth={"50%"}
+                imgHeight={"40%"}
+                maxWidth={"350px"}
+                minWidth={"320px"}
+                icon={icon3}
+                titleColor={"black"}
+                title={"Interactive Layout"}
+                link={"https://mywebar.com/p/Project_10_l53yep0som"}
+                subheading={"(2 Bed Apartment)"}
+              />
 
-              <a
-                href="https://mywebar.com/p/Project_5_txnu3qobej"
-                target={"_blank"}
-                rel="noreferrer"
-              >
-                <FindSectionCards
-                  imgWidth={"50%"}
-                  imgHeight={"40%"}
-                  maxWidth={"350px"}
-                  minWidth={"320px"}
-                  icon={icon3}
-                  titleColor={"black"}
-                  title={"Interactive Layout ( 3 Bed Apartment)"}
-                />
-              </a>
+              <FindSectionCards
+                imgWidth={"50%"}
+                imgHeight={"40%"}
+                maxWidth={"350px"}
+                minWidth={"320px"}
+                icon={icon3}
+                titleColor={"black"}
+                title={"Interactive Layout"}
+                link={"https://mywebar.com/p/Project_5_txnu3qobej"}
+                subheading={"(3 Bed Apartment)"}
+              />
             </div>
           ) : (
             <p style={{ marginTop: "60px" }}>

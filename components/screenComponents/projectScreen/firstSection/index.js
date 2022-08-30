@@ -23,9 +23,9 @@ function FirstSection({
   ownerDetails,
 }) {
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
-
+  console.log(projectDetails);
   const slideImages = [
-    "/assets/project_banner_img.png",
+    "/assets/kmkc_banner.jpg",
     "/assets/hotel_2.png",
     "/assets/hotel_3.png",
     "/assets/hotel_4.png",
@@ -172,19 +172,43 @@ function FirstSection({
           <div className={classes.banner_btns_container}>
             <div className={classes.btn_body}>
               <img src={project_brochure.src} className={classes.img_icon} />
-              <a href={projectBrochure} target="_blank" rel="noreferrer">
+              <a
+                href={
+                  projectDetails?._id === "6301e2257cd62ffd3a83a286"
+                    ? "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/projects/6301e2257cd62ffd3a83a286/Brochure.pdf"
+                    : projectBrochure
+                }
+                target="_blank"
+                rel="noreferrer"
+              >
                 BROCHURE
               </a>
             </div>
             <div className={classes.btn_body}>
               <img src={project_floorplan.src} className={classes.img_icon} />
-              <a href={floorPlan} target="_blank" rel="noreferrer">
+              <a
+                href={
+                  projectDetails?._id === "6301e2257cd62ffd3a83a286"
+                    ? "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/projects/6301e2257cd62ffd3a83a286/Floor+Plans.pdf"
+                    : projectBrochure
+                }
+                target="_blank"
+                rel="noreferrer"
+              >
                 FLOOR PLAN
               </a>
             </div>
             <div className={classes.btn_body}>
               <img src={project_price.src} className={classes.img_icon} />
-              <a href={pricePlan} target="_blank" rel="noreferrer">
+              <a
+                href={
+                  projectDetails?._id === "6301e2257cd62ffd3a83a286"
+                    ? "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/projects/6301e2257cd62ffd3a83a286/Price+List+Web+%26+Mobile+View+v4.pdf"
+                    : pricePlan
+                }
+                target="_blank"
+                rel="noreferrer"
+              >
                 PRICE PLAN
               </a>
             </div>

@@ -266,10 +266,10 @@ function PropertyForm() {
     } else if (!size) {
       missingCredError("size");
       return;
-    } else if (!bathroom) {
+    } else if (!bathroom && type === "residential") {
       missingCredError("bathroom");
       return;
-    } else if (!bedroom) {
+    } else if (!bedroom && type === "residential") {
       missingCredError("bedroom");
       return;
     } else if (!description) {

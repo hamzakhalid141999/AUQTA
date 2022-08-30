@@ -216,6 +216,7 @@
   width: 40%;
   height: 100%;
   display: flex;
+  margin-left: 40px;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
@@ -350,6 +351,7 @@
   }
   .banner_btns_container {
     width: 100% !important;
+    margin-left: 0px;
   }
   .banner_btn {
     padding: 5px 10px;

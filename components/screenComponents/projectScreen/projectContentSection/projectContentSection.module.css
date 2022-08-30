@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 60px;
 }
 .content_container {
   width: 90%;
@@ -98,6 +99,12 @@
   max-width: 590px;
   border-radius: 40px;
   flex-direction: column;
+}
+.tour_text {
+  position: absolute;
+  bottom: -40px;
+  font-weight: bolder;
+  color: #0169ec;
 }
 .image_container:hover .img {
   opacity: 1;
@@ -317,6 +324,7 @@
     width: 100%;
     /* justify-content: center; */
     align-items: center;
+    margin-top: 50px;
   }
   .description h1 {
     font-size: 20px;
