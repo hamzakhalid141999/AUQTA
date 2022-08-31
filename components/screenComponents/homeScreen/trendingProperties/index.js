@@ -127,6 +127,7 @@ function TrendingProperties({
                 title={project.projectName}
                 description={project.projectDescription}
                 price={project.priceRangeFrom}
+                priceTo={project.priceRangeTo}
                 location={project.location}
                 city={project.city}
                 picture={project.images[0]}
