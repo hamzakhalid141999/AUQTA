@@ -24,9 +24,12 @@ function PropertyCard({
   id,
   hardCodedProperty,
   openEdit,
+  priceTo,
 }) {
   const [source, setSource] = useState();
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
+  const [priceLower, setPriceLower] = useState();
+  const [priceUpper, setPriceUpper] = useState();
 
   useState(() => {
     setSource(baseS3Url + picture);
@@ -35,15 +38,35 @@ function PropertyCard({
   const [formattedPrice, setFormattedPrice] = useState();
 
   useEffect(() => {
-    if (price) {
-      let number = price;
-      setFormattedPrice(
-        number.toLocaleString("ur-PK", { currency: "PKR", style: "currency" })
-      ); // or en-PK
-    } else {
-      setFormattedPrice("-");
+    if (price && priceTo) {
+      const priceFromVar = numDifferentiation(price);
+      setPriceLower(priceFromVar);
+
+      const priceToVar = numDifferentiation(priceTo);
+      setPriceUpper(priceToVar);
     }
-  }, [price]);
+  }, [price, priceTo]);
+
+  function numDifferentiation(value) {
+    var val = Math.abs(value);
+    if (val >= 10000000) {
+      val = (val / 10000000).toFixed(2) + " Crores";
+    } else if (val >= 100000) {
+      val = (val / 100000).toFixed(2) + " Lac";
+    }
+    return val;
+  }
+
+  // useEffect(() => {
+  //   if (price) {
+  //     let number = price;
+  //     setFormattedPrice(
+  //       number.toLocaleString("ur-PK", { currency: "PKR", style: "currency" })
+  //     ); // or en-PK
+  //   } else {
+  //     setFormattedPrice("-");
+  //   }
+  // }, [price]);
 
   return (
     <>
@@ -182,7 +205,9 @@ function PropertyCard({
               </div>
               {!hardCodedProperty && (
                 <div className={classes.bottom_description_container}>
-                  <p className={classes.price}>{formattedPrice}</p>
+                  <p className={classes.price}>
+                    {priceLower} - {priceUpper}
+                  </p>
                   <FontAwesomeIcon
                     className={classes.heart_icon}
                     icon={faHeart}

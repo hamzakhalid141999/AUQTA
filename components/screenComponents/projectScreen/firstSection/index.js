@@ -23,15 +23,7 @@ function FirstSection({
   ownerDetails,
 }) {
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
-  console.log(projectDetails);
-  const slideImages = [
-    "/assets/kmkc_banner.jpg",
-    "/assets/hotel_2.png",
-    "/assets/hotel_3.png",
-    "/assets/hotel_4.png",
-    "/assets/hotel_5.png",
-    "/assets/hotel_6.png",
-  ];
+  const slideImages = ["/assets/kmkc_banner.jpg"];
 
   const [priceLowerBound, setPriceLowerBound] = useState();
   const [priceUpperBound, setPriceUpperBound] = useState();

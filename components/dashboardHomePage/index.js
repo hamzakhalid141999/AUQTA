@@ -47,6 +47,7 @@ function DashboardHomePage() {
     const fetchActiveProjects = async () => {
       if (user?.id) {
         const data = await fetchActiveProjectsByUserId(user?.id, true);
+
         setProjects(data);
       }
     };
@@ -225,6 +226,7 @@ function DashboardHomePage() {
                     title={project.projectName}
                     description={project.projectDescription}
                     price={project.priceRangeFrom}
+                    priceTo={project?.priceRangeTo}
                     location={project.location}
                     city={project.city}
                     picture={project.images[0]}
@@ -247,6 +249,7 @@ function DashboardHomePage() {
                     title={project.projectName}
                     description={project.projectDescription}
                     price={project.priceRangeFrom}
+                    priceTo={project?.priceRangeTo}
                     location={project.location}
                     city={project.city}
                     picture={project.images[0]}
@@ -329,6 +332,7 @@ function DashboardHomePage() {
                     title={project.projectName}
                     description={project.projectDescription}
                     price={project.priceRangeFrom}
+                    priceTo={project?.priceRangeTo}
                     location={project.location}
                     city={project.city}
                     picture={project.images[0]}
@@ -351,6 +355,7 @@ function DashboardHomePage() {
                     title={project.projectName}
                     description={project.projectDescription}
                     price={project.priceRangeFrom}
+                    priceTo={project?.priceRangeTo}
                     location={project.location}
                     city={project.city}
                     picture={project.images[0]}

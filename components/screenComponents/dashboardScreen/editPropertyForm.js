@@ -149,6 +149,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
   const { width } = useWindowSize();
   const [propertyId, setPropertyId] = useState();
   const [unit, setUnit] = useState();
+  const [elevator, setElevator] = useState();
   const [type, setType] = useState("residential");
   const [subtype, setSubtype] = useState();
   const [purposeSelected, setPurposeSelected] = useState("sell");
@@ -197,7 +198,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
   const [builtYear, setBuiltYear] = useState();
   const [facingView, setFacingView] = useState();
-  const [parking, setParking] = useState(false);
+  const [parking, setParking] = useState();
+  const [floorsInBuilding, setFloorsInBuilding] = useState();
 
   const [basementIncluded, setBasementIncluded] = useState(
     salientFeatures?.mainFeatures?.basementIncluded
@@ -234,7 +236,6 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
     if (salientFeatures) {
       //=================================== MAIN FEATURES ===================================
 
-      setParking(false);
       setBasementIncluded(salientFeatures?.mainFeatures?.basementIncluded);
       setParkingSpaces(salientFeatures?.mainFeatures?.parkingSpaces);
       setCentralHeating(salientFeatures?.mainFeatures?.centralHeating);
@@ -249,6 +250,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
       setAccessToNearbyPublicTransport(
         salientFeatures?.mainFeatures?.accessToNearbyPublicTransport
       );
+      setParking(salientFeatures?.mainFeatures?.parking);
 
       //=================================== ROOM FEATURES ===================================
 
@@ -276,7 +278,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
       setDrawingRoom(salientFeatures?.rooms?.drawingRoom);
       setKitchen(salientFeatures?.rooms?.kitchen);
       setDirtyKitchen(salientFeatures?.rooms?.dirtyKitchen);
-      setStoreRoom(salientFeatures?.rooms?.storeRoom);
+      setStoreRoom(salientFeatures?.rooms?.storeroom);
       setIroningRoom(salientFeatures?.rooms?.ironingRoom);
       setPowderRoom(salientFeatures?.rooms?.powderRoom);
       setLaundryRoom(salientFeatures?.rooms?.laundryRoom);
@@ -301,7 +303,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
 
       //=================================== COMMUNICATION FEATURES ===================================
 
-      setWater(salientFeatures?.rooms?.water);
+      setWater(salientFeatures?.utilities?.water);
       setBroadbandAccess(salientFeatures?.communication?.broadbandAccess);
 
       setSatelliteOrCableAccess(
@@ -325,6 +327,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
         salientFeatures?.communication?.otherFeatures
       );
       setFacilitiesOtherFeatures(salientFeatures?.otherFeatures?.otherFeatures);
+      setElevator(salientFeatures?.mainFeatures?.elevator);
     }
   }, [salientFeatures]);
 
@@ -452,7 +455,6 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
           drawingRoom: drawingRoom,
           kitchen: kitchen,
           dirtyKitchen: dirtyKitchen,
-          storeroom: storeRoom,
           ironingRoom: ironingRoom,
           powderRoom: powderRoom,
 
@@ -468,8 +470,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
           waterSupply: waterSupply,
           gasSupply: gasSupply,
 
-          electricityBackup: electricityBackup,
-          elevator: false,
+          elevator: elevator,
           parking: parking,
 
           laundryRoom: laundryRoom,
@@ -497,6 +498,14 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
           securityStaff: securityStaff,
           maintenanceStaff: maintenanceStaff,
           cctv: cctv,
+
+          conferenceRoom: conferenceRoom,
+          mediaRoom: mediaRoom,
+          cabinRoom: cabinRoom,
+          kitchen: kitchen,
+          storeroom: storeRoom,
+
+          floorsInBuilding: floorsInBuilding,
 
           accessibilityForSpecialOrElderlyPersons:
             accessibilityForSpecialOrElderlyPerson,
@@ -1995,6 +2004,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                         onChange={(e) => {
                           setElectricity(e.target.checked);
                         }}
+                        defaultChecked={salientFeatures?.utilities?.electricity}
                         className={classes.checkbox}
                         type="checkbox"
                         defaultChecked={salientFeatures?.utilities?.electricity}
@@ -2220,6 +2230,10 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                             onChange={(e) => {
                               setBuiltYear(e.target.value);
                             }}
+                            placeholder={
+                              salientFeatures &&
+                              salientFeatures?.mainFeatures?.builtYear
+                            }
                             className={classes.input_field_single}
                           />
                         </div>
@@ -2238,10 +2252,42 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                             className={classes.input_field_single}
                           >
                             <option>Select</option>
-                            <option value="East">East</option>
-                            <option value="West">West</option>
-                            <option value="North">North</option>
-                            <option value="South">South</option>
+                            <option
+                              selected={
+                                salientFeatures?.mainFeatures?.facingView ===
+                                "East"
+                              }
+                              value="East"
+                            >
+                              East
+                            </option>
+                            <option
+                              selected={
+                                salientFeatures?.mainFeatures?.facingView ===
+                                "West"
+                              }
+                              value="West"
+                            >
+                              West
+                            </option>
+                            <option
+                              selected={
+                                salientFeatures?.mainFeatures?.facingView ===
+                                "North"
+                              }
+                              value="North"
+                            >
+                              North
+                            </option>
+                            <option
+                              selected={
+                                salientFeatures?.mainFeatures?.facingView ===
+                                "South"
+                              }
+                              value="South"
+                            >
+                              South
+                            </option>
                           </select>
                         </div>
 
@@ -2255,6 +2301,12 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                             Floors in Building
                           </p>
                           <input
+                            onChange={(e) => {
+                              setFloorsInBuilding(e.target.value);
+                            }}
+                            placeholder={
+                              salientFeatures?.mainFeatures?.floorsInBuilding
+                            }
                             type="number"
                             className={classes.input_field_single}
                           />
@@ -2273,6 +2325,11 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                             onChange={(e) => {
                               setBuiltYear(e.target.value);
                             }}
+                            placeholder={
+                              propertyDetails &&
+                              propertyDetails?.resSalientFeatures?.mainFeatures
+                                ?.builtYear
+                            }
                             className={classes.input_field_single}
                           />
                         </div>
@@ -2284,22 +2341,27 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                           }
                         >
                           <p className={classes.top_label}>Nearby Landmarks</p>
-                          <Select
-                            defaultValue={landmarksFinalArray}
-                            className={classes.input_field_single}
-                            components={{ Option }}
-                            hideSelectedOptions={false}
-                            options={landmarkArr}
-                            closeMenuOnSelect={false}
-                            placeholder=" "
-                            isMulti
-                            isClearable
-                            onChange={(e) => {
-                              // addArtist(e);
-                              console.log(e);
-                              addLandmarks(e);
-                            }}
-                          />
+                          {landmarksFinalArray?.length > 0 && (
+                            <Select
+                              defaultValue={
+                                landmarksFinalArray?.length > 0 &&
+                                landmarksFinalArray
+                              }
+                              className={classes.input_field_single}
+                              components={{ Option }}
+                              hideSelectedOptions={false}
+                              options={landmarkArr}
+                              closeMenuOnSelect={false}
+                              placeholder=" "
+                              isMulti
+                              isClearable
+                              onChange={(e) => {
+                                // addArtist(e);
+                                console.log(e);
+                                addLandmarks(e);
+                              }}
+                            />
+                          )}
                         </div>
                       </>
                     )}
@@ -2312,22 +2374,27 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                       className={classes.input_field_with_label_top_container}
                     >
                       <p className={classes.top_label}>Nearby Landmarks</p>
-                      <Select
-                        defaultValue={landmarksFinalArray}
-                        className={classes.input_field_single}
-                        components={{ Option }}
-                        hideSelectedOptions={false}
-                        options={landmarkArr}
-                        closeMenuOnSelect={false}
-                        placeholder=" "
-                        isMulti
-                        isClearable
-                        onChange={(e) => {
-                          // addArtist(e);
-                          console.log(e);
-                          addLandmarks(e);
-                        }}
-                      />
+                      {landmarksFinalArray?.length > 0 && (
+                        <Select
+                          defaultValue={
+                            landmarksFinalArray?.length > 0 &&
+                            landmarksFinalArray
+                          }
+                          className={classes.input_field_single}
+                          components={{ Option }}
+                          hideSelectedOptions={false}
+                          options={landmarkArr}
+                          closeMenuOnSelect={false}
+                          placeholder=" "
+                          isMulti
+                          isClearable
+                          onChange={(e) => {
+                            // addArtist(e);
+                            console.log(e);
+                            addLandmarks(e);
+                          }}
+                        />
+                      )}
                     </div>
                   </div>
                 )}
@@ -2344,17 +2411,34 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                         }}
                         className={classes.checkbox}
                         type="checkbox"
+                        defaultChecked={salientFeatures?.mainFeatures?.parking}
                       />
                       <p className={classes.checkbox_label}>Parking</p>
                     </div>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        onChange={(e) => {
+                          setElectricityBackup(e.target.checked);
+                        }}
+                        className={classes.checkbox}
+                        type="checkbox"
+                        defaultChecked={
+                          salientFeatures?.mainFeatures?.electricityBackup
+                        }
+                      />
                       <p className={classes.checkbox_label}>
                         Electricity Backup
                       </p>
                     </div>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        onChange={(e) => {
+                          setElevator(e.target.checked);
+                        }}
+                        defaultChecked={salientFeatures?.mainFeatures?.elevator}
+                        className={classes.checkbox}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>Elevator/Lift</p>
                     </div>
                     <div className={classes.checkbox_container}>
@@ -2407,6 +2491,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                             onChange={(e) => {
                               setConferenceRoom(e.target.checked);
                             }}
+                            defaultChecked={
+                              salientFeatures?.rooms?.conferenceRoom
+                            }
                             className={classes.checkbox}
                             type="checkbox"
                           />
@@ -2419,6 +2506,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                             onChange={(e) => {
                               setMediaRoom(e.target.checked);
                             }}
+                            defaultChecked={salientFeatures?.rooms?.mediaRoom}
                             className={classes.checkbox}
                             type="checkbox"
                           />
@@ -2429,6 +2517,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                             onChange={(e) => {
                               setCabinRoom(e.target.checked);
                             }}
+                            defaultChecked={salientFeatures?.rooms?.cabinRoom}
                             className={classes.checkbox}
                             type="checkbox"
                           />
@@ -2439,6 +2528,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                             onChange={(e) => {
                               setKitchen(e.target.checked);
                             }}
+                            defaultChecked={salientFeatures?.rooms?.kitchen}
                             className={classes.checkbox}
                             type="checkbox"
                           />
@@ -2449,6 +2539,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                             onChange={(e) => {
                               setIsBathroom(e.target.checked);
                             }}
+                            defaultChecked={salientFeatures?.rooms?.kitchen}
                             className={classes.checkbox}
                             type="checkbox"
                           />
@@ -2459,6 +2550,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                             onChange={(e) => {
                               setStoreRoom(e.target.checked);
                             }}
+                            defaultChecked={salientFeatures?.rooms?.storeroom}
                             className={classes.checkbox}
                             type="checkbox"
                           />
@@ -2476,7 +2568,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                           Other Features
                         </p>
                         <ReactTagInput
-                          tags={otherMainFeature}
+                          tags={otherRoomFeature}
                           maxTags={50}
                           className={classes.input_field_single}
                           removeOnBackspace={true}
@@ -2497,19 +2589,47 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                 <div className={classes.single_row}>
                   <div className={classes.checkboxes_container}>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        onChange={(e) => {
+                          setElectricity(e.target.checked);
+                        }}
+                        defaultChecked={salientFeatures?.utilities?.electricity}
+                        className={classes.checkbox}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>Electricity</p>
                     </div>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        onChange={(e) => {
+                          setGas(e.target.checked);
+                        }}
+                        defaultChecked={salientFeatures?.utilities?.gas}
+                        className={classes.checkbox}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>Gas</p>
                     </div>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        defaultChecked={salientFeatures?.utilities?.water}
+                        className={classes.checkbox}
+                        onChange={(e) => {
+                          setWater(e.target.checked);
+                        }}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>Water</p>
                     </div>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        onChange={(e) => {
+                          setMaintenance(e.target.checked);
+                        }}
+                        defaultChecked={salientFeatures?.utilities?.maintenance}
+                        className={classes.checkbox}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>Maintenance</p>
                     </div>
                   </div>
@@ -2523,7 +2643,16 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                 >
                   <div className={classes.checkboxes_container}>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        defaultChecked={
+                          salientFeatures?.communication?.broadbandAccess
+                        }
+                        onChange={(e) => {
+                          setBroadbandAccess(e.target.checked);
+                        }}
+                        className={classes.checkbox}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>Broadband Access</p>
                     </div>
                     <div className={classes.checkbox_container}>
@@ -2532,6 +2661,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                           salientFeatures?.communication
                             ?.satelliteOrTvCableAccess
                         }
+                        onChange={(e) => {
+                          setSatelliteOrCableAccess(e.target.checked);
+                        }}
                         className={classes.checkbox}
                         type="checkbox"
                       />
@@ -2540,7 +2672,16 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                       </p>
                     </div>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        onChange={(e) => {
+                          setIntercom(e.target.checked);
+                        }}
+                        defaultChecked={
+                          salientFeatures?.communication?.intercom
+                        }
+                        className={classes.checkbox}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>Intercom</p>
                     </div>
                   </div>
@@ -2552,7 +2693,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                       Other Features
                     </p>
                     <ReactTagInput
-                      tags={otherMainFeature}
+                      tags={otherCommunicationFeature}
                       maxTags={50}
                       className={classes.input_field_single}
                       removeOnBackspace={true}
@@ -2574,7 +2715,16 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                 >
                   <div className={classes.checkboxes_container}>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        onChange={(e) => {
+                          setSecurityStaff(e.target.checked);
+                        }}
+                        className={classes.checkbox}
+                        type="checkbox"
+                        defaultChecked={
+                          salientFeatures?.otherFeatures?.securityStaff
+                        }
+                      />
                       <p className={classes.checkbox_label}>Security Staff</p>
                     </div>
                     <div className={classes.checkbox_container}>
@@ -2664,22 +2814,27 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                       className={classes.input_field_with_label_top_container}
                     >
                       <p className={classes.top_label}>Nearby Landmarks</p>
-                      <Select
-                        defaultValue={landmarksFinalArray}
-                        className={classes.input_field_single}
-                        components={{ Option }}
-                        hideSelectedOptions={false}
-                        options={landmarkArr}
-                        closeMenuOnSelect={false}
-                        placeholder=" "
-                        isMulti
-                        isClearable
-                        onChange={(e) => {
-                          // addArtist(e);
-                          console.log(e);
-                          addLandmarks(e);
-                        }}
-                      />
+                      {landmarksFinalArray?.length > 0 && (
+                        <Select
+                          defaultValue={
+                            landmarksFinalArray?.length > 0 &&
+                            landmarksFinalArray
+                          }
+                          className={classes.input_field_single}
+                          components={{ Option }}
+                          hideSelectedOptions={false}
+                          options={landmarkArr}
+                          closeMenuOnSelect={false}
+                          placeholder=" "
+                          isMulti
+                          isClearable
+                          onChange={(e) => {
+                            // addArtist(e);
+                            console.log(e);
+                            addLandmarks(e);
+                          }}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
