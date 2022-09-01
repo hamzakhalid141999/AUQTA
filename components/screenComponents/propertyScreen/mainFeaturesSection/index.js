@@ -113,6 +113,11 @@ function MainFeaturesSection({ property, features }) {
       let res = [];
       for (var i in features?.otherFeatures) {
         var result = i.replace(/([A-Z])/g, " $1");
+
+        if (result === "cctv") {
+          result = "CCTV";
+        }
+
         var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
         setOtherFeatures((featureArr) => [
           ...featureArr,
@@ -154,6 +159,9 @@ function MainFeaturesSection({ property, features }) {
       let res = [];
       for (var i in features?.rooms) {
         var result = i.replace(/([A-Z])/g, " $1");
+        if (result === "tv Lounge") {
+          result = "TV Lounge";
+        }
         var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
         setRoomFeatures((featureArr) => [
           ...featureArr,
@@ -333,9 +341,6 @@ function MainFeaturesSection({ property, features }) {
             <div className={classes.section}>
               <label>Other Features</label>
               <div className={classes.grid}>
-                {/* {
-            features?.mainFeatures
-          } */}
                 {otherFeatures
                   ?.filter((feature, idx) => feature?.value === true)
                   ?.map((feature, index) => (

@@ -315,6 +315,8 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
       setInitialLat(parseFloat(projectDetails?.lat));
       setInitialLng(parseFloat(projectDetails?.lng));
       setSelectedAmenities(projectDetails?.amenities);
+      setStartDate(projectDetails?.startDate?.date);
+      setEndDate(projectDetails?.endDate?.date);
 
       projectDetails?.amenities?.map((amenity) => {
         setAmenitiesArrFinal((single) => [
@@ -1407,6 +1409,7 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
                     onChange={(e) => {
                       setStartDate(e.target.value);
                     }}
+                    value={startDate}
                     style={{ width: "48%", paddingRight: "20px" }}
                     type="date"
                     className={classes.input_field_dual}
@@ -1448,6 +1451,7 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
                     onChange={(e) => {
                       setEndDate(e.target.value);
                     }}
+                    value={endDate}
                     style={{ width: "48%", paddingRight: "20px" }}
                     type="date"
                     className={classes.input_field_dual}

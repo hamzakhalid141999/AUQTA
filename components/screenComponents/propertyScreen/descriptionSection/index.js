@@ -25,7 +25,8 @@ function Description({ property }) {
                 <label>TYPE</label>
                 <div className={classes.input_field}>
                   <p className={classes.input_value}>
-                    {property?.propertyListing?.type}
+                    {property?.propertyListing?.type.charAt(0).toUpperCase() +
+                      property?.propertyListing?.type?.slice(1)}
                   </p>
                 </div>
               </div>

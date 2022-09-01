@@ -147,8 +147,9 @@ function FirstSection({
             </div>
           </div>
           {/* <p data-aos="fade-right">Lorem ipsum is just a dummy text which is used to fill in spaces when you have nothing else to write over there</p> */}
-          {ownerDetails?.userType !== "enduser" && (
-            <div className={classes.btns_container}>
+          {/* {ownerDetails?.userType !== "enduser" && ( */}
+          <div className={classes.btns_container}>
+            {ownerDetails?.userType !== "enduser" && (
               <div className={classes.upper_btns}>
                 <img
                   style={{ width: "20%" }}
@@ -178,8 +179,9 @@ function FirstSection({
                   </div>
                 </Link>
               </div>
-            </div>
-          )}
+            )}
+          </div>
+          {/* )} */}
         </div>
         <div className={classes.banner_btns_wrapper}>
           <div className={classes.banner_btns_container}>

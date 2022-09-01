@@ -36,6 +36,10 @@ function AgentForm() {
   const [cities, setCities] = useState([]);
   const [locations, setLocations] = useState([]);
   const [citiesAndLocations, setCitiesAndLocations] = useState();
+  const [facebookLink, setFacebookLink] = useState();
+  const [instaLink, setInstaLink] = useState();
+  const [youtubeLink, setYoutubeLink] = useState();
+  const [linkedinLink, setLinkedinLink] = useState();
 
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -621,6 +625,52 @@ function AgentForm() {
                   placeholder={
                     agent?.additionalPhoneNo ? agent?.additionalPhoneNo : ""
                   }
+                  className={classes.input_field_dual}
+                />
+              </div>
+            </div>
+
+            <div className={classes.single_row}>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>Facebook</p>
+                <input
+                  onChange={(e) => {
+                    setFacebookLink(e.target.value);
+                  }}
+                  placeholder={agent?.FacebookLink ? agent?.FacebookLink : ""}
+                  className={classes.input_field_dual}
+                />
+              </div>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>Instagram</p>
+                <input
+                  onChange={(e) => {
+                    setInstaLink(e.target.value);
+                  }}
+                  placeholder={agent?.InstagramLink ? agent?.InstagramLink : ""}
+                  className={classes.input_field_dual}
+                />
+              </div>
+            </div>
+
+            <div className={classes.single_row}>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>YouTube</p>
+                <input
+                  onChange={(e) => {
+                    setYoutubeLink(e.target.value);
+                  }}
+                  placeholder={agent?.YouTubeLink ? agent?.YouTubeLink : ""}
+                  className={classes.input_field_dual}
+                />
+              </div>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>LinkedIn</p>
+                <input
+                  onChange={(e) => {
+                    setLinkedinLink(e.target.value);
+                  }}
+                  placeholder={agent?.LinkedInLink ? agent?.LinkedInLink : ""}
                   className={classes.input_field_dual}
                 />
               </div>

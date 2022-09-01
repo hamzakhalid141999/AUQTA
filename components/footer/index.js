@@ -56,12 +56,12 @@ function Footer() {
           <Link href={"/all_developers"}>
             {/* <div className={classes.row}>
               <div className={classes.bullet} /> */}
-            <h1>Our Developers</h1>
+            <h1>Developers</h1>
             {/* </div> */}
           </Link>
 
           <Link href={"/all_agents"}>
-            <h1>Our Agents</h1>
+            <h1>Agents</h1>
           </Link>
         </div>
         <div className={classes.col_2}>

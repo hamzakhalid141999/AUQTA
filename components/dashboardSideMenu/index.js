@@ -10,6 +10,7 @@ import { fetchUserDetailsById } from "../utils/fetchUserDetailsById";
 import { useWindowSize } from "../../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import placeholder from "../../public/assets/placeholder_user.png";
 
 function DashboardSideMenu({ openSideBar, handleCloseSideBar }) {
   const { user, removeUser } = useAuth();
@@ -206,6 +207,11 @@ function DashboardSideMenu({ openSideBar, handleCloseSideBar }) {
                     }}
                     className={classes.pic_input}
                     type="file"
+                  />
+                  <img
+                    style={{ pointerEvents: "none" }}
+                    className={classes.img}
+                    src={placeholder.src}
                   />
                 </>
               )}

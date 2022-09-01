@@ -21,13 +21,7 @@ import "@pathofdev/react-tag-input/build/index.css";
 import Select, { components } from "react-select";
 import { getAllCities } from "../../utils";
 import { useRouter } from "next/router";
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  StandaloneSearchBox,
-  LoadScript,
-} from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { getPropertyDetailsById } from "../../utils/fetchPropertyById";
 
 function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
@@ -2007,7 +2001,6 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                         defaultChecked={salientFeatures?.utilities?.electricity}
                         className={classes.checkbox}
                         type="checkbox"
-                        defaultChecked={salientFeatures?.utilities?.electricity}
                       />
                       <p className={classes.checkbox_label}>Electricity</p>
                     </div>

@@ -48,6 +48,11 @@ function DeveloperForm() {
   const [initialLng, setInitialLng] = useState();
   const [name, setName] = useState(developer?.username);
 
+  const [facebookLink, setFacebookLink] = useState();
+  const [instaLink, setInstaLink] = useState();
+  const [youtubeLink, setYoutubeLink] = useState();
+  const [linkedinLink, setLinkedinLink] = useState();
+
   const socials = [
     {
       label: "Facebook",
@@ -302,6 +307,19 @@ function DeveloperForm() {
     }
     if (lng) {
       userData = { ...userData, lng: lng };
+    }
+
+    if (facebookLink) {
+      userData = { ...userData, FacebookLink: facebookLink };
+    }
+    if (youtubeLink) {
+      userData = { ...userData, YouTubeLink: youtubeLink };
+    }
+    if (linkedinLink) {
+      userData = { ...userData, LinkedInLink: linkedinLink };
+    }
+    if (instaLink) {
+      userData = { ...userData, InstagramLink: instaLink };
     }
     return userData;
   };
@@ -569,6 +587,58 @@ function DeveloperForm() {
 
         <div className={classes.single_row}>
           <div className={classes.two_field_container}>
+            <p className={classes.label_dual}>Facebook</p>
+            <input
+              onChange={(e) => {
+                setFacebookLink(e.target.value);
+              }}
+              placeholder={
+                developer?.FacebookLink ? developer?.FacebookLink : ""
+              }
+              className={classes.input_field_dual}
+            />
+          </div>
+          <div className={classes.two_field_container}>
+            <p className={classes.label_dual}>Instagram</p>
+            <input
+              onChange={(e) => {
+                setInstaLink(e.target.value);
+              }}
+              placeholder={
+                developer?.InstagramLink ? developer?.InstagramLink : ""
+              }
+              className={classes.input_field_dual}
+            />
+          </div>
+        </div>
+
+        <div className={classes.single_row}>
+          <div className={classes.two_field_container}>
+            <p className={classes.label_dual}>YouTube</p>
+            <input
+              onChange={(e) => {
+                setYoutubeLink(e.target.value);
+              }}
+              placeholder={developer?.YouTubeLink ? developer?.YouTubeLink : ""}
+              className={classes.input_field_dual}
+            />
+          </div>
+          <div className={classes.two_field_container}>
+            <p className={classes.label_dual}>LinkedIn</p>
+            <input
+              onChange={(e) => {
+                setLinkedinLink(e.target.value);
+              }}
+              placeholder={
+                developer?.LinkedInLink ? developer?.LinkedInLink : ""
+              }
+              className={classes.input_field_dual}
+            />
+          </div>
+        </div>
+
+        <div className={classes.single_row}>
+          <div className={classes.two_field_container}>
             <p className={classes.label_dual}>Website URL</p>
             <input
               onChange={(e) => {
@@ -578,23 +648,6 @@ function DeveloperForm() {
                 developer?.user?.websiteURL ? developer?.user?.websiteURL : ""
               }
               className={classes.input_field_dual}
-            />
-          </div>
-          <div className={classes.two_field_container}>
-            <p className={classes.label_dual}>Social Media</p>
-
-            <Select
-              className={classes.input_field_dual}
-              components={{ Option }}
-              hideSelectedOptions={false}
-              options={socials}
-              closeMenuOnSelect={false}
-              placeholder=" "
-              isMulti
-              isClearable
-              onChange={(e) => {
-                addSocials(e);
-              }}
             />
           </div>
         </div>

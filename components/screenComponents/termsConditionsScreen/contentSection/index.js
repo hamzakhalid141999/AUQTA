@@ -327,7 +327,7 @@ function ContentSection() {
             Service Terms and Conditions:
           </p>
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
 
             <p>
               {" "}
@@ -340,7 +340,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
+            <img src={bullet.src} style={{ height: "13px" }} />
             <p>
               {" "}
               Auqta.com does not guarantee the authenticity of the displayed
@@ -351,8 +351,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
-
+            <img src={bullet.src} style={{ height: "13px" }} />
             <p>
               {" "}
               All services related content displayed on the Portal and social
@@ -362,8 +361,7 @@ function ContentSection() {
           </div>
 
           <div className={classes.single_row}>
-            <div className={classes.bullet} />
-
+            <img src={bullet.src} style={{ height: "13px" }} />
             <p>
               {" "}
               Any reproduction, modification or redistribution of the Immersive

@@ -10,7 +10,6 @@ export const analytics = (
     "gtm.start": new Date().getTime(),
     event: "gtm.js",
   });
-  console.log("ANALYTICS FUNCTION CALLED: ");
   var dl = l != "dataLayer" ? "&l=" + l : "";
   var scr = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
   /*

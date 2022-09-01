@@ -4,6 +4,10 @@ import classes from "./contentSection.module.css";
 import img from "../../../../public/assets/developer_section_img.png";
 import { useWindowSize } from "../../../../utils";
 import { SocialIcon } from "react-social-icons";
+import facebookIcon from "../../../../public/assets/icons/facebookIcon.png";
+import youtubeIcon from "../../../../public/assets/icons/youtubeIcon.png";
+import linkedinIcon from "../../../../public/assets/icons/linkedinIcon.png";
+import instagramIcon from "../../../../public/assets/icons/instagramIcon.png";
 
 function ContentSection({ developerDetails }) {
   const [showMore, setShowMore] = useState(false);
@@ -109,30 +113,54 @@ function ContentSection({ developerDetails }) {
                 >
                   <p>Social Media</p>
                   <div className={classes.social_values_container}>
-                    {developerDetails?.user?.socialMedia?.map((link, index) => (
-                      <SocialIcon
-                        key={index}
-                        style={{
-                          height: 35,
-                          width: 35,
-                          marginLeft: "15px",
-                          marginRight: "15px",
-                          marginBottom: "10px",
-                        }}
-                        bgColor="#0169ec"
-                        fgColor="#fff"
-                        url={
-                          link === "Instagram"
-                            ? "https://instagram.com/a"
-                            : link === "Facebook"
-                            ? "www.facebook.com"
-                            : link === "Twitter"
-                            ? "https://twitter.com/a"
-                            : link === "Youtube" &&
-                              "https://www.youtube.com/channel/a"
-                        }
-                      />
-                    ))}
+                    {developerDetails?.FacebookLink && (
+                      <a
+                        href={developerDetails?.FacebookLink}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img
+                          src={facebookIcon.src}
+                          style={{ width: "30px", height: "30px" }}
+                        />
+                      </a>
+                    )}
+                    {developerDetails?.InstagramLink && (
+                      <a
+                        href={developerDetails?.InstagramLink}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img
+                          src={instagramIcon.src}
+                          style={{ width: "30px", height: "30px" }}
+                        />
+                      </a>
+                    )}
+                    {developerDetails?.YouTubeLink && (
+                      <a
+                        href={developerDetails?.YouTubeLink}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img
+                          src={youtubeIcon.src}
+                          style={{ width: "30px", height: "30px" }}
+                        />
+                      </a>
+                    )}
+                    {developerDetails?.LinkedInLink && (
+                      <a
+                        href={developerDetails?.LinkedInLink}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img
+                          src={linkedinIcon.src}
+                          style={{ width: "30px", height: "30px" }}
+                        />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

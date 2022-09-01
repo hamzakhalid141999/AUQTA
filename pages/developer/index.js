@@ -44,7 +44,7 @@ function Developer() {
     <div className={classes.developer_section}>
       <FirstSection developerDetails={developerDetails} />
       <ContentSection developerDetails={developerDetails} />
-      <UpcomingProjects />
+      {/* <UpcomingProjects /> */}
     </div>
   );
 }

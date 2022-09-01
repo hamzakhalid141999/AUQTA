@@ -11,22 +11,10 @@ function ProjectTimelineSection({ project }) {
         <h1 style={{ marginBottom: "60px" }}>PROJECT TIMELINE</h1>
         <div className={classes.timeline_section}>
           <div className={classes.startTimeSection}>
-            <p>
-              {project?.projectStartDate
-                ? project?.projectStartDate
-                : project?._id === "6301e2257cd62ffd3a83a286"
-                ? "Jan 2020"
-                : "N/A"}
-            </p>
+            <p>{project?.startDate?.date ? project?.startDate?.date : "N/A"}</p>
           </div>
           <div className={classes.endTimeSection}>
-            <p>
-              {project?.projectEndDate
-                ? project?.projectEndDate
-                : project?._id === "6301e2257cd62ffd3a83a286"
-                ? "Jan 2024"
-                : "N/A"}
-            </p>
+            <p>{project?.endDate?.date ? project?.endDate?.date : "N/A"}</p>
           </div>
           <div className={classes.firstMilestoneSectionDate}>
             <p>{project?.firstMilestone?.date}</p>
