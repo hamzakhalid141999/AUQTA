@@ -233,6 +233,7 @@ function ProjectConentSection({
                 maxWidth={"350px"}
                 minWidth={"320px"}
                 icon={icon3}
+                isStart={true}
                 titleColor={"black"}
                 title={"Interactive Layout"}
                 link={"https://mywebar.com/p/Project_8_nz3i3roow9"}
@@ -246,6 +247,7 @@ function ProjectConentSection({
                 maxWidth={"350px"}
                 minWidth={"320px"}
                 icon={icon3}
+                isStart={true}
                 titleColor={"black"}
                 title={"Interactive Layout"}
                 link={"https://mywebar.com/p/Project_9_8xq88kb0qb"}
@@ -258,6 +260,7 @@ function ProjectConentSection({
                 maxWidth={"350px"}
                 minWidth={"320px"}
                 icon={icon3}
+                isStart={true}
                 titleColor={"black"}
                 title={"Interactive Layout"}
                 link={"https://mywebar.com/p/Project_10_l53yep0som"}
@@ -270,6 +273,7 @@ function ProjectConentSection({
                 maxWidth={"350px"}
                 minWidth={"320px"}
                 icon={icon3}
+                isStart={true}
                 titleColor={"black"}
                 title={"Interactive Layout"}
                 link={"https://mywebar.com/p/Project_5_txnu3qobej"}

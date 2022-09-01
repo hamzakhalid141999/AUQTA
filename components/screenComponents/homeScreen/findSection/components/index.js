@@ -15,6 +15,7 @@ function findSectionCards({
   titleColor,
   subheading,
   link,
+  isStart,
 }) {
   return (
     <div
@@ -44,9 +45,11 @@ function findSectionCards({
           target={"_blank"}
           rel="noreferrer"
         >
-          <div className={classes.btn}>
-            <p>Start</p>
-          </div>
+          {isStart && (
+            <div className={classes.btn}>
+              <p>Start</p>
+            </div>
+          )}
         </a>
       </div>
     </div>
