@@ -113,7 +113,7 @@ function AllAgents() {
       >
         {!isLoaded ? <p>Loading</p> : <RenderMap />}
       </div>
-      <h1 className={classes.heading}>Our Agents</h1>
+      <h1 className={classes.heading}>Agents</h1>
 
       {loading ? (
         <div className={classes.loading_container}>

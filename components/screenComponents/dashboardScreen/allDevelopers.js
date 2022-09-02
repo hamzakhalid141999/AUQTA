@@ -104,7 +104,7 @@ function AllDevelopers() {
         {!isLoaded ? <p>Loading</p> : <RenderMap />}
       </div>
 
-      <h1 className={classes.heading}>Our Developers</h1>
+      <h1 className={classes.heading}>Developers</h1>
       {loading ? (
         <div className={classes.loading_container}>
           <ClipLoader size={"15px"} color="black" />

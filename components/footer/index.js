@@ -148,7 +148,11 @@ function Footer() {
           >
             <img src={twitter.src} className={classes.social_media_icon} />
           </a>
-          <a href={""} target="_blank" rel="noreferrer">
+          <a
+            href={"https://www.youtube.com/channel/UC0qSh7p3S4jo57LsnAk2KQQ"}
+            target="_blank"
+            rel="noreferrer"
+          >
             <img src={youtube.src} className={classes.social_media_icon} />
           </a>
           <a
@@ -206,7 +210,11 @@ function Footer() {
           >
             <img src={twitter.src} className={classes.social_media_icon} />
           </a>
-          <a href={""} target="_blank" rel="noreferrer">
+          <a
+            href={"https://www.youtube.com/channel/UC0qSh7p3S4jo57LsnAk2KQQ"}
+            target="_blank"
+            rel="noreferrer"
+          >
             <img src={youtube.src} className={classes.social_media_icon} />
           </a>
           <a
