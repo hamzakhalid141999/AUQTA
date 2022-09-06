@@ -2440,6 +2440,9 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                           salientFeatures?.mainFeatures
                             ?.accessToNearbyPublicTransport
                         }
+                        onChange={(e) => {
+                          setAccessToNearbyPublicTransport(e.target.checked);
+                        }}
                         className={classes.checkbox}
                         type="checkbox"
                       />

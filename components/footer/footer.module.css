@@ -70,7 +70,7 @@
   height: 50%;
   display: flex;
   flex-direction: row;
-  margin-top: 150px;
+  margin-top: 120px;
 }
 .col_1 {
   width: 40%;
@@ -82,19 +82,21 @@
   margin: 10px;
   width: 20%;
   display: flex;
+  margin-top: 40px;
   flex-direction: column;
 }
 .logo_container {
   width: 50%;
   max-width: 200px;
   height: fit-content;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .col_1 p {
   color: white;
   font-size: 12px;
   cursor: pointer;
   width: 75%;
+  margin-bottom: 20px;
   line-height: 20px;
 }
 .col_2 h1 {

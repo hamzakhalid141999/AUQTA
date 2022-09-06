@@ -53,6 +53,11 @@ function Footer() {
             <h1>About</h1>
           </Link>
 
+          <Link href={"/about"}>
+            <h1>Services</h1>
+          </Link>
+        </div>
+        <div className={classes.col_2}>
           <Link href={"/all_developers"}>
             {/* <div className={classes.row}>
               <div className={classes.bullet} /> */}
@@ -65,48 +70,12 @@ function Footer() {
           </Link>
         </div>
         <div className={classes.col_2}>
-          <Link href={"/services"}>
-            <h1>Services</h1>
-          </Link>
-          <Link href={"/blogs"}>
-            <h1>Blogs</h1>
-          </Link>
-
-          <Link href={"/FAQ"}>
-            <h1>FAQ</h1>
-          </Link>
-        </div>
-        <div className={classes.col_2}>
           <Link href={"/contact"}>
             <h1>Contact</h1>
           </Link>
-          <div className={classes.row}>
-            <img
-              style={{ height: "15px" }}
-              src={email.src}
-              className={classes.social_media_icon}
-            />
-            <p>info@auqta.com</p>
-          </div>
-          <div className={classes.row}>
-            <img
-              style={{ height: "15px" }}
-              src={call.src}
-              className={classes.social_media_icon}
-            />
-            <p>+92 331 5008852</p>
-          </div>
-          <div className={classes.row}>
-            <img
-              style={{ height: "15px" }}
-              src={pin_white.src}
-              className={classes.social_media_icon}
-            />
-            <p>
-              Raj Heights, River View Commercial, Phase 7. Bahria Town,
-              Islamabad
-            </p>
-          </div>
+          <Link href={"/FAQ"}>
+            <h1>FAQ</h1>
+          </Link>
         </div>
       </div>
       <div className={classes.footer_content_mobile}>

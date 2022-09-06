@@ -216,20 +216,24 @@ function MainFeaturesSection({ property, features }) {
       <div className={classes.main_features_section}>
         <h1>MAIN FEATURES</h1>
         <div className={classes.main_features_content}>
-          <div className={classes.single_row}>
-            <div className={classes.input_field_container_dual}>
-              <label>Build Year</label>
-              <div className={classes.input_field}>
-                <p>{features?.mainFeatures?.builtYear}</p>
+          {features?.mainFeatures?.builtYear &&
+            features?.mainFeatures?.facingView && (
+              <div className={classes.single_row}>
+                <div className={classes.input_field_container_dual}>
+                  <label>Build Year</label>
+                  <div className={classes.input_field}>
+                    <p>{features?.mainFeatures?.builtYear}</p>
+                  </div>
+                </div>
+                <div className={classes.input_field_container_dual}>
+                  <label>Facing View</label>
+                  <div className={classes.input_field}>
+                    <p>{features?.mainFeatures?.facingView}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className={classes.input_field_container_dual}>
-              <label>Facing View</label>
-              <div className={classes.input_field}>
-                <p>{features?.mainFeatures?.facingView}</p>
-              </div>
-            </div>
-          </div>
+            )}
+
           <div className={classes.section}>
             <label>Nearby Landmarks</label>
             <div className={classes.grid}>

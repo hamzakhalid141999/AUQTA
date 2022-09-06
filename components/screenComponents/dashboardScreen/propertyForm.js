@@ -38,6 +38,7 @@ function PropertyForm() {
   const { user } = useAuth();
   const { width } = useWindowSize();
   const [propertyId, setPropertyId] = useState();
+  const [floorsInBuilding, setFloorsInBuilding] = useState();
   const [unit, setUnit] = useState();
   const [type, setType] = useState("residential");
   const [subtype, setSubtype] = useState();
@@ -145,6 +146,7 @@ function PropertyForm() {
   const [otherCommunicationFeature, setOtherCommunicationFeature] = useState(
     []
   );
+  const [elevator, setElevator] = useState();
   const [elevatorOrLift, setElevatorOrLift] = useState(false);
   const [facilitiesOtherFeatures, setFacilitiesOtherFeatures] = useState([]);
 
@@ -438,7 +440,7 @@ function PropertyForm() {
               gasSupply: gasSupply,
 
               electricityBackup: electricityBackup,
-              elevator: elevatorOrLift,
+              elevator: elevator,
               parking: parking,
 
               laundryRoom: laundryRoom,
@@ -466,6 +468,16 @@ function PropertyForm() {
               securityStaff: securityStaff,
               maintenanceStaff: maintenanceStaff,
               cctv: cctv,
+
+              conferenceRoom: conferenceRoom,
+              mediaRoom: mediaRoom,
+              cabinRoom: cabinRoom,
+              kitchen: kitchen,
+              storeroom: storeRoom,
+
+              bathroom: isBathroom,
+
+              floorsInBuilding: floorsInBuilding,
 
               accessibilityForSpecialOrElderlyPersons:
                 accessibilityForSpecialOrElderlyPerson,
@@ -1663,6 +1675,9 @@ function PropertyForm() {
                     >
                       <p className={classes.top_label}>Floors in Building</p>
                       <input
+                        onChange={(e) => {
+                          setFloorsInBuilding(e.target.value);
+                        }}
                         type="number"
                         className={classes.input_field_single}
                       />
@@ -1760,7 +1775,13 @@ function PropertyForm() {
                   <p className={classes.checkbox_label}>Electricity Backup</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setElevator(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Elevator/Lift</p>
                 </div>
                 <div className={classes.checkbox_container}>
@@ -1818,23 +1839,53 @@ function PropertyForm() {
                       <p className={classes.checkbox_label}>Conference Room</p>
                     </div>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        onChange={(e) => {
+                          setMediaRoom(e.target.checked);
+                        }}
+                        className={classes.checkbox}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>Media Room</p>
                     </div>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        onChange={(e) => {
+                          setCabinRoom(e.target.checked);
+                        }}
+                        className={classes.checkbox}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>Cabin Room</p>
                     </div>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        onChange={(e) => {
+                          setKitchen(e.target.checked);
+                        }}
+                        className={classes.checkbox}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>Kitchen</p>
                     </div>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        onChange={(e) => {
+                          setIsBathroom(e.target.checked);
+                        }}
+                        className={classes.checkbox}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>Bathroom</p>
                     </div>
                     <div className={classes.checkbox_container}>
-                      <input className={classes.checkbox} type="checkbox" />
+                      <input
+                        onChange={(e) => {
+                          setStoreRoom(e.target.checked);
+                        }}
+                        className={classes.checkbox}
+                        type="checkbox"
+                      />
                       <p className={classes.checkbox_label}>Store Room</p>
                     </div>
                   </div>
@@ -1846,7 +1897,7 @@ function PropertyForm() {
                       Other Features
                     </p>
                     <ReactTagInput
-                      tags={otherMainFeature}
+                      tags={otherRoomFeature}
                       maxTags={50}
                       className={classes.input_field_single}
                       removeOnBackspace={true}
@@ -1867,19 +1918,43 @@ function PropertyForm() {
             <div className={classes.single_row}>
               <div className={classes.checkboxes_container}>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setElectricity(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Electricity</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setGas(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Gas</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setWater(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Water</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setMaintenance(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Maintenance</p>
                 </div>
               </div>
@@ -1893,17 +1968,35 @@ function PropertyForm() {
             >
               <div className={classes.checkboxes_container}>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setBroadbandAccess(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Broadband Access</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setSatelliteOrCableAccess(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>
                     Sattelite or TV Cable Access
                   </p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setIntercom(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Intercom</p>
                 </div>
               </div>
@@ -1915,7 +2008,7 @@ function PropertyForm() {
                   Other Features
                 </p>
                 <ReactTagInput
-                  tags={otherMainFeature}
+                  tags={otherCommunicationFeature}
                   maxTags={50}
                   className={classes.input_field_single}
                   removeOnBackspace={true}
@@ -1937,15 +2030,33 @@ function PropertyForm() {
             >
               <div className={classes.checkboxes_container}>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setSecurityStaff(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Security Staff</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setMaintenanceStaff(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>Maintenance Staff</p>
                 </div>
                 <div className={classes.checkbox_container}>
-                  <input className={classes.checkbox} type="checkbox" />
+                  <input
+                    onChange={(e) => {
+                      setCctv(e.target.checked);
+                    }}
+                    className={classes.checkbox}
+                    type="checkbox"
+                  />
                   <p className={classes.checkbox_label}>CCTV</p>
                 </div>
                 <div className={classes.checkbox_container}>

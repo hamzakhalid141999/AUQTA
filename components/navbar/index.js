@@ -469,19 +469,20 @@ function Navbar() {
                     : classes.profile_dropdown_hidden
                 }
               >
-                <div className={classes.option}>
-                  <Link
-                    href={
-                      user?.usertype === "agent"
-                        ? "/dashboard/agent"
-                        : user?.userType === "enduser"
-                        ? "/dashboard/user"
-                        : "/dashboard/developer"
-                    }
-                  >
+                <Link
+                  href={
+                    user?.usertype === "agent"
+                      ? "/dashboard/agent"
+                      : user?.userType === "enduser"
+                      ? "/dashboard/user"
+                      : "/dashboard/developer"
+                  }
+                >
+                  <div className={classes.option}>
                     <p>Profile</p>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
+
                 <div onClick={handleSignOut} className={classes.option}>
                   <p>Logout</p>
                 </div>
