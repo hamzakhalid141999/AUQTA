@@ -1,10 +1,10 @@
 import axios from "axios";
 import { baseURL } from "../../constants";
 
-async function getAllProperties() {
+async function getAdminProperties() {
   try {
     const data = await axios.get(
-      baseURL + "/api/property/all",
+      baseURL + "/api/admin/property/getAllPropertiesAsAdmin",
       {
         params: {
           pageNumber: 1,
@@ -23,4 +23,4 @@ async function getAllProperties() {
   }
 }
 
-export { getAllProperties };
+export { getAdminProperties };
