@@ -22,7 +22,7 @@ function FirstSection() {
       <div className={classes.banner_img_container}>
         <div className={classes.overlay} />
         <Image
-          src={width < 786 ? banner_img : banner_img_desktop}
+          src={banner_img}
           className={classes.banner_img}
           alt="hero_banner_img"
           layout="fill"

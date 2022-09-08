@@ -8,6 +8,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import { useWindowSize } from "../../../../utils";
+import Next from "../../../CarouselArrows/next";
+import Prev from "../../../CarouselArrows/prev";
 
 function FindSection() {
   const { width } = useWindowSize();
@@ -46,6 +48,8 @@ function FindSection() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
+    // nextArrow: <Next top={"50%"} />,
+    // prevArrow: <Prev top={"50%"} />,
   };
 
   return (

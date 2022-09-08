@@ -53,7 +53,7 @@ function Footer() {
             <h1>About</h1>
           </Link>
 
-          <Link href={"/about"}>
+          <Link href={"/services"}>
             <h1>Services</h1>
           </Link>
         </div>

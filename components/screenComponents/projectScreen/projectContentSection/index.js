@@ -63,19 +63,7 @@ function ProjectConentSection({
                 className={classes.img}
               />
             ) : isVideo &&
-              projectDetails?._id === "6301e2257cd62ffd3a83a286" &&
-              width > 786 ? (
-              <video
-                loop
-                onClick={handleVideoToggle}
-                autoPlay
-                muted
-                className={classes.img}
-                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/projects/6301e2257cd62ffd3a83a286/WhatsApp+Video+2022-08-16+at+1.08.28+PM.mp4"
-              />
-            ) : isVideo &&
-              projectDetails?._id === "6301e2257cd62ffd3a83a286" &&
-              width < 786 ? (
+              projectDetails?._id === "6301e2257cd62ffd3a83a286" ? (
               <a
                 href="/vr/6301e2257cd62ffd3a83a286-PT/6301e2257cd62ffd3a83a286-PT.html"
                 target={"_blank"}
@@ -151,12 +139,6 @@ function ProjectConentSection({
                 width="100%"
                 className={classes.img}
               />
-            ) : isVideoLocation && width > 786 ? (
-              <Image
-                onClick={handleVideoLocationToggle}
-                src={img2}
-                className={classes.img}
-              />
             ) : (
               <a
                 href="/vr/6301e2257cd62ffd3a83a286-LT/6301e2257cd62ffd3a83a286-LT.html"
@@ -199,19 +181,30 @@ function ProjectConentSection({
           </div>
         </div>
         <div className={classes.video_container}>
-          <video
-            src={
-              projectDetails?._id === "6301e2257cd62ffd3a83a286"
-                ? "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/projects/6301e2257cd62ffd3a83a286/kmk+ffinal.mp4"
-                : "https://farbe9d3fb46190ad4564938d20f57a5ad372133227-test.s3.eu-central-1.amazonaws.com/public/compressed/first_section_banner_video.mp4"
-            }
-            className={classes.video}
-            alt="hero_banner_img"
-            loop
-            muted
-            controls
-            playsInline={true}
-          />
+          {projectDetails?._id === "6301e2257cd62ffd3a83a286" ? (
+            <iframe
+              className={classes.video}
+              src="https://www.youtube.com/embed/0QU3_L3x-QM"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          ) : (
+            <video
+              src={
+                projectDetails?._id === "6301e2257cd62ffd3a83a286"
+                  ? "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/projects/6301e2257cd62ffd3a83a286/kmk+ffinal.mp4"
+                  : "https://farbe9d3fb46190ad4564938d20f57a5ad372133227-test.s3.eu-central-1.amazonaws.com/public/compressed/first_section_banner_video.mp4"
+              }
+              className={classes.video}
+              alt="hero_banner_img"
+              loop
+              muted
+              controls
+              playsInline={true}
+            />
+          )}
         </div>
         <div className={classes.augmented_reality_section}>
           <h1>AUGMENTED REALITY</h1>

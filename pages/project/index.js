@@ -124,8 +124,8 @@ function Project() {
             address={project?.address}
             projectDetails={project}
           />
-          <SimilarPropertySection />
           <ProjectTimelineSection project={project} />
+          <SimilarPropertySection />
         </>
       )}
     </div>

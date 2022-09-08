@@ -18,6 +18,8 @@ import { fetchActiveProjectsByUserId } from "../utils/getActiveProjectsByUserId"
 import { fetchInActiveProjectsByUserId } from "../utils/getInActiveProjectsByUserId";
 import { fetchActivePropertiesByUserId } from "../utils/getActivePropertiesByUserId";
 import { fetchInActivePropertiesByUserId } from "../utils/getInActivePropertiesByUserId";
+import Next from "../CarouselArrows/next";
+import Prev from "../CarouselArrows/prev";
 
 function DashboardHomePage() {
   const { width } = useWindowSize();
@@ -101,6 +103,8 @@ function DashboardHomePage() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
+    nextArrow: <Next />,
+    prevArrow: <Prev />,
   };
 
   return (
