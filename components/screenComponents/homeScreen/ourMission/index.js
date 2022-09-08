@@ -91,8 +91,8 @@ function OurMission() {
                   href="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/vr/Business_District_Bahria_Town_VR.html"
                 >
                   <video
-                    playsInline
                     className={classes.video_card}
+                    playsInline
                     loop
                     muted
                     autoPlay
@@ -101,8 +101,8 @@ function OurMission() {
                 </a>
               ) : (
                 <video
-                  playsInline
                   className={classes.video_card}
+                  playsInline
                   loop
                   muted
                   autoPlay

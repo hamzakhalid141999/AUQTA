@@ -73,6 +73,7 @@ function ProjectConentSection({
                   loop
                   autoPlay
                   muted
+                  playsInline
                   className={classes.img}
                   src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/projects/6301e2257cd62ffd3a83a286/WhatsApp+Video+2022-08-16+at+1.08.28+PM.mp4"
                 />
