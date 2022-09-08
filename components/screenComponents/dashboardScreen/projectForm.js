@@ -24,7 +24,7 @@ function ProjectForm() {
   });
 
   const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
-
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const { width } = useWindowSize();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
@@ -690,20 +690,25 @@ function ProjectForm() {
   }, [shopImgKeysArr]);
 
   useEffect(() => {
-    if (
-      isImagesUploaded &&
-      isBrochureImageUploaded &&
-      isFirstMilestoneImageUploaded &&
-      isSecondMilestoneImageUploaded &&
-      isThirdMilestoneImageUploaded &&
-      isFloorPlanImageUplaoded &&
-      isPricePlanImageUploaded &&
-      isShopImageUploaded
-    ) {
-      success();
-      setLoading(false);
-      window.location.reload();
-    }
+    const handleFinishPropertyAddition = async () => {
+      if (
+        isImagesUploaded &&
+        isBrochureImageUploaded &&
+        isFirstMilestoneImageUploaded &&
+        isSecondMilestoneImageUploaded &&
+        isThirdMilestoneImageUploaded &&
+        isFloorPlanImageUplaoded &&
+        isPricePlanImageUploaded &&
+        isShopImageUploaded
+      ) {
+        success();
+        projectAddDisclaimer();
+        setLoading(false);
+        await delay(2000);
+        window.location.reload();
+      }
+    };
+    handleFinishPropertyAddition();
   }, [
     isImagesUploaded,
     isBrochureImageUploaded,
@@ -727,8 +732,18 @@ function ProjectForm() {
     amenitiesArr[id] = value;
   };
 
+  const projectAddDisclaimer = () =>
+    toast.info("Your project will be displayed after authentication", {
+      position: "bottom-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+    });
+
   const success = () =>
-    toast.success("Property added!", {
+    toast.success("Project Added Successfully", {
       position: "bottom-center",
       autoClose: 1000,
       hideProgressBar: true,

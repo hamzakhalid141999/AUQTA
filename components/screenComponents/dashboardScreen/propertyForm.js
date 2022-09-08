@@ -388,12 +388,20 @@ function PropertyForm() {
     }
   }, [imagesKeysArr]);
 
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
   useEffect(() => {
-    if (isImageUploadCompleted) {
-      setLoading(false);
-      success();
-      window.location.reload();
-    }
+    const handleFinishPropertyAddition = async () => {
+      if (isImageUploadCompleted) {
+        setLoading(false);
+        success();
+        propertyAddDisclaimer();
+        await delay(2000);
+        window.location.reload();
+      }
+    };
+
+    handleFinishPropertyAddition();
   }, [isImageUploadCompleted]);
 
   useEffect(() => {
@@ -628,7 +636,17 @@ function PropertyForm() {
   };
 
   const success = () =>
-    toast.success("Property added!", {
+    toast.success("Property Added Successfully", {
+      position: "bottom-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+    });
+
+  const propertyAddDisclaimer = () =>
+    toast.info("Your property will be displayed after authentication", {
       position: "bottom-center",
       autoClose: 1000,
       hideProgressBar: true,

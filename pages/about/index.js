@@ -12,8 +12,8 @@ function about() {
     <div className={classes.about_section}>
       <FirstSection />
       <OurMission />
-      <VisionSection/>
-      <UniqueSection/>
+      <VisionSection />
+      <UniqueSection />
     </div>
   );
 }
