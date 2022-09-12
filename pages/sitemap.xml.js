@@ -1,4 +1,4 @@
-import * as fs from "fs";
+// import * as fs from "fs";
 import { getAdminProjects } from "../components/utils/getAdminProjects";
 import { getAdminProperties } from "../components/utils/getAdminProperties";
 import { getAllDevelopers } from "../components/utils/getAllDevelopers";
@@ -9,20 +9,45 @@ const Sitemap = () => {
 export const getServerSideProps = async ({ res }) => {
   const BASE_URL = "www.auqta.com";
 
-  const staticPaths = fs
-    .readdirSync("pages")
-    .filter((staticPage) => {
-      return ![
-        "api",
-        "_app.js",
-        "_document.js",
-        "404.js",
-        "sitemap.xml.js",
-      ].includes(staticPage);
-    })
-    .map((staticPagePath) => {
-      return `${BASE_URL}/${staticPagePath}`;
-    });
+  // const staticPaths = fs
+  //   .readdirSync("pages")
+  //   .filter((staticPage) => {
+  //     return ![
+  //       "api",
+  //       "_app.js",
+  //       "_document.js",
+  //       "404.js",
+  //       "sitemap.xml.js",
+  //     ].includes(staticPage);
+  //   })
+  //   .map((staticPagePath) => {
+  //     return `${BASE_URL}/${staticPagePath}`;
+  //   });
+
+  const staticPaths = [
+    "www.auqta.com/.DS_Store",
+    "www.auqta.com/FAQ",
+    "www.auqta.com/about",
+    "www.auqta.com/agent",
+    "www.auqta.com/all_agents",
+    "www.auqta.com/all_developers",
+    "www.auqta.com/blogs",
+    "www.auqta.com/confirmUser",
+    "www.auqta.com/contact",
+    "www.auqta.com/dashboard",
+    "www.auqta.com/developer",
+    "www.auqta.com/forgotPassword",
+    "www.auqta.com/index.js",
+    "www.auqta.com/invest",
+    "www.auqta.com/map",
+    "www.auqta.com/project",
+    "www.auqta.com/project_specific",
+    "www.auqta.com/property",
+    "www.auqta.com/rent",
+    "www.auqta.com/services",
+    "www.auqta.com/signUp",
+    "www.auqta.com/terms_and_conditions",
+  ];
 
   const projects = await getAdminProjects();
   const properties = await getAdminProperties();

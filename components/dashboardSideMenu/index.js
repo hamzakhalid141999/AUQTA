@@ -14,6 +14,7 @@ import placeholder from "../../public/assets/placeholder_user.png";
 
 function DashboardSideMenu({ openSideBar, handleCloseSideBar }) {
   const { user, removeUser } = useAuth();
+  // user?.userType = "admin";
   const [img, setImg] = useState();
   const [imagesBlobArr, setImagesBlobArr] = useState();
   const [imgArr, setImgArr] = useState();
@@ -22,9 +23,6 @@ function DashboardSideMenu({ openSideBar, handleCloseSideBar }) {
   const { width } = useWindowSize();
 
   const bucketBaseUrl = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
-
-  //users/developer/6299050a03ba683caaea666d/profile/profileImage-8-8-2022-1659964467685.jpeg
-  //users/developer/6299050a03ba683caaea666d/profile/profileImage-8-8-2022-1659963644310.jpeg
 
   const handleImg = async (event) => {
     if (event) {
@@ -244,17 +242,44 @@ function DashboardSideMenu({ openSideBar, handleCloseSideBar }) {
             </Link>
           )}
 
-          <Link href={"/dashboard/properties"}>
-            <p>Properties</p>
-          </Link>
+          {user?.userType !== "admin" && (
+            <Link href={"/dashboard/properties"}>
+              <p>Properties</p>
+            </Link>
+          )}
+
+          {user?.userType === "admin" && (
+            <Link href={"/dashboard/admin_properties"}>
+              <p>Properties</p>
+            </Link>
+          )}
+          {user?.userType === "admin" && (
+            <Link href={"/dashboard/admin_projects"}>
+              <p>Projects</p>
+            </Link>
+          )}
+          {user?.userType === "admin" && (
+            <Link href={"/dashboard/admin_agents"}>
+              <p>Agents</p>
+            </Link>
+          )}
+          {user?.userType === "admin" && (
+            <Link href={"/dashboard/admin_developers"}>
+              <p>Developers</p>
+            </Link>
+          )}
+
           {user?.userType === "developer" && (
             <Link href={"/dashboard/add_project"}>
               <p>Add Project</p>
             </Link>
           )}
-          <Link href={"/dashboard/add_property"}>
-            <p>Add Property</p>
-          </Link>
+
+          {user?.userType !== "admin" && (
+            <Link href={"/dashboard/add_property"}>
+              <p>Add Property</p>
+            </Link>
+          )}
         </div>
       </div>
     </div>

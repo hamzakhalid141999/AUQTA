@@ -25,11 +25,14 @@ function DashboardHomePage() {
   const { width } = useWindowSize();
   const [slidesToShow, setSlidesToShow] = useState(4);
   const { user } = useAuth();
+  // user?.userType = "admin";
   const [properties, setProperties] = useState([]);
   const [projects, setProjects] = useState([]);
   const [inboundMessages, setInboundMessages] = useState();
   const [inActiveProjects, setInActiveProjects] = useState();
   const [inActiveProperties, setInActiveProperties] = useState();
+
+  console.log(user?.userType);
 
   useEffect(() => {
     const fetchActiveProperties = async () => {
@@ -109,38 +112,47 @@ function DashboardHomePage() {
 
   return (
     <div className={classes.content_section}>
-      <h1 className={classes.page_section}>Hello, {user?.username}</h1>
+      <h1 className={classes.page_section}>
+        {" "}
+        {user?.userType === "admin" ? "Super Admin" : "Hello, "}{" "}
+        {user?.userType !== "admin" && user?.username}
+      </h1>
       <p className={classes.subheading}>
         {user?.userType === "developer"
           ? "Auqta Developer Control System"
           : user?.userType === "enduser"
           ? "Auqta User Control System"
-          : "Auqta Agent Control System"}
+          : user?.userType === "agent"
+          ? "Auqta Agent Control System"
+          : user?.userType === "admin" && "Super Admin Page"}
       </p>
-      <div className={classes.calls_msgs_tab_container}>
-        <div className={classes.tab}>
-          <img src={email.src} className={classes.logo} />
-          <div className={classes.tab_heading}>
-            <h1>COMPLETED MESSAGES</h1>
-            <p>{inboundMessages}</p>
+      {user?.userType !== "admin" && (
+        <div className={classes.calls_msgs_tab_container}>
+          <div className={classes.tab}>
+            <img src={email.src} className={classes.logo} />
+            <div className={classes.tab_heading}>
+              <h1>COMPLETED MESSAGES</h1>
+              <p>{inboundMessages}</p>
+            </div>
+            <div className={classes.inbound_outbound}>
+              <p className={classes.inbound_outbound_text}>
+                <span style={{ color: "#0068ed", fontWeight: "bolder" }}>
+                  {inboundMessages}
+                </span>{" "}
+                INBOUND
+              </p>
+              <p className={classes.inbound_outbound_text}>
+                <span style={{ color: "#0068ed", fontWeight: "bolder" }}>
+                  0
+                </span>{" "}
+                OUTBOUND
+              </p>
+              <Link href="/dashboard/inbox">
+                <p>VIEW ALL</p>
+              </Link>
+            </div>
           </div>
-          <div className={classes.inbound_outbound}>
-            <p className={classes.inbound_outbound_text}>
-              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>
-                {inboundMessages}
-              </span>{" "}
-              INBOUND
-            </p>
-            <p className={classes.inbound_outbound_text}>
-              <span style={{ color: "#0068ed", fontWeight: "bolder" }}>0</span>{" "}
-              OUTBOUND
-            </p>
-            <Link href="/dashboard/inbox">
-              <p>VIEW ALL</p>
-            </Link>
-          </div>
-        </div>
-        {/* <div className={classes.tab}>
+          {/* <div className={classes.tab}>
           <img src={phone.src} className={classes.logo} />
           <div className={classes.tab_heading}>
             <h1>COMPLETED CALLS</h1>
@@ -158,7 +170,8 @@ function DashboardHomePage() {
             <p>VIEW ALL</p>
           </div>
         </div> */}
-      </div>
+        </div>
+      )}
 
       {(user?.userType === "agent" ||
         user?.userType === "developer" ||

@@ -32,10 +32,21 @@ import AllProjects from "../../../components/screenComponents/dashboardScreen/al
 import AllAgents from "../../../components/screenComponents/dashboardScreen/allAgents";
 import AllDevelopers from "../../../components/screenComponents/dashboardScreen/allDevelopers";
 import { getAllCities } from "../../../components/utils";
+import AdminProperties from "../../../components/screenComponents/dashboardScreen/adminProperties";
+import ActivatePropertyOrProject from "../../../components/modals/activatePropertyOrProject";
+import AdminProjects from "../../../components/screenComponents/dashboardScreen/adminProjects";
 
 function Dashboard() {
   const { user } = useAuth();
   const { width } = useWindowSize();
+  const [open, setOpen] = useState();
+  const handleOpenModal = () => {
+    setOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpen(false);
+  };
   const [dashboardType, setDashboardType] = useState();
   const router = useRouter();
   const { id } = router.query;
@@ -44,6 +55,9 @@ function Dashboard() {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [propertyId, _setPropertyId] = useState();
   const [projectId, _setProjectId] = useState();
+  const [selectedRealEstateId, setSelectedRealEstateId] = useState();
+  const [isActive, setIsActive] = useState();
+  const [isProject, setIsProject] = useState();
 
   const onCloseDeleteModal = () => {
     setOpenDeleteModal(false);
@@ -122,6 +136,13 @@ function Dashboard() {
 
   return (
     <>
+      <ActivatePropertyOrProject
+        isActive={isActive}
+        open={open}
+        onCloseModal={handleCloseModal}
+        selectedRealEstateId={selectedRealEstateId}
+        isProject={isProject}
+      />
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -154,6 +175,65 @@ function Dashboard() {
         <div className={classes.dashboard_screen}>
           <DashboardNavbar handleOpenSideBar={handleOpenSideBar} />
           <div className={classes.dashboard_content_container}>
+            {dashboardType === "admin_properties" ? (
+              <>
+                <div className={classes.top_content}>
+                  <div className={classes.heading_contaienr}>
+                    <h1 className={classes.page_section}>All Properties</h1>
+                  </div>
+                </div>
+                <AdminProperties
+                  setSelectedRealEstateId={setSelectedRealEstateId}
+                  handleOpenModal={handleOpenModal}
+                  setIsActive={setIsActive}
+                />
+              </>
+            ) : dashboardType === "admin_projects" ? (
+              <>
+                <div className={classes.top_content}>
+                  <div className={classes.heading_contaienr}>
+                    <h1 className={classes.page_section}>All Properties</h1>
+                  </div>
+                </div>
+                <AdminProjects
+                  setSelectedRealEstateId={setSelectedRealEstateId}
+                  handleOpenModal={handleOpenModal}
+                  setIsActive={setIsActive}
+                  setIsProject={setIsProject}
+                />
+              </>
+            ) : dashboardType === "admin_developers" ? (
+              <>
+                <div className={classes.top_content}>
+                  <div className={classes.heading_contaienr}>
+                    <h1 className={classes.page_section}>All Properties</h1>
+                  </div>
+                </div>
+                <AdminProjects
+                  setSelectedRealEstateId={setSelectedRealEstateId}
+                  handleOpenModal={handleOpenModal}
+                  setIsActive={setIsActive}
+                  setIsProject={setIsProject}
+                />
+              </>
+            ) : (
+              dashboardType === "admin_agents" && (
+                <>
+                  <div className={classes.top_content}>
+                    <div className={classes.heading_contaienr}>
+                      <h1 className={classes.page_section}>All Properties</h1>
+                    </div>
+                  </div>
+                  <AdminProjects
+                    setSelectedRealEstateId={setSelectedRealEstateId}
+                    handleOpenModal={handleOpenModal}
+                    setIsActive={setIsActive}
+                    setIsProject={setIsProject}
+                  />
+                </>
+              )
+            )}
+
             {dashboardType === "developer" ||
             dashboardType === "agent" ||
             dashboardType === "user" ? (
