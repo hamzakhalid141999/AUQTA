@@ -7,7 +7,7 @@ const Sitemap = () => {
   return null;
 };
 export const getServerSideProps = async ({ res }) => {
-  const BASE_URL = "www.auqta.com";
+  const BASE_URL = "https://www.auqta.com";
 
   // const staticPaths = fs
   //   .readdirSync("pages")
