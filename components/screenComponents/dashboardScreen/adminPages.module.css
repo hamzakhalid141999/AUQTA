@@ -57,6 +57,7 @@
   min-width: 170px;
   color: rgb(50, 50, 50);
   font-size: 13px;
+  max-width: 170px;
 }
 .status {
   padding: 10px 15px;
@@ -66,4 +67,11 @@
 .status:hover {
   cursor: pointer;
   transition: ease-in-out 200ms;
+}
+.loader_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -25,14 +25,13 @@ function DashboardHomePage() {
   const { width } = useWindowSize();
   const [slidesToShow, setSlidesToShow] = useState(4);
   const { user } = useAuth();
-  // user?.userType = "admin";
   const [properties, setProperties] = useState([]);
   const [projects, setProjects] = useState([]);
   const [inboundMessages, setInboundMessages] = useState();
   const [inActiveProjects, setInActiveProjects] = useState();
   const [inActiveProperties, setInActiveProperties] = useState();
 
-  console.log(user?.userType);
+  console.log(user);
 
   useEffect(() => {
     const fetchActiveProperties = async () => {

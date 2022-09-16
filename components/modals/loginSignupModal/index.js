@@ -106,8 +106,10 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
         router.push("/dashboard/developer");
       } else if (data?.data?.userType === "agent") {
         router.push("/dashboard/agent");
-      } else {
+      } else if (data?.data?.userType === "enduser") {
         router.push("/dashboard/user");
+      } else if (data?.data?.userType === "admin") {
+        router.push("/dashboard/admin_properties");
       }
     } catch (err) {
       if (err.response) {

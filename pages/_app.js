@@ -7,6 +7,7 @@ import { AuthProvider, user } from "../contextAPI";
 import dynamic from "next/dynamic";
 import { analytics } from "../components/utils/seo/analytics.tsx";
 import { useRouter } from "next/router";
+import Script from "next/script";
 
 const TopProgressBar = dynamic(
   () => {
@@ -38,18 +39,36 @@ function MyApp({ Component, pageProps }) {
   const Layout = Component.Layout || defaultLayout;
 
   return (
-    <AuthProvider>
-      <MainLayout>
-        <Head>
-          <title>AUQTA | World's First Immersive Real Estate Poral</title>
-          {/* <link rel="icon" href="/favicon.ico"></link> */}
-        </Head>
-        <Layout>
-          <TopProgressBar id="nprogress" />
-          <Component {...pageProps} />
-        </Layout>
-      </MainLayout>
-    </AuthProvider>
+    <>
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=G-8KGKB9HT3P`}
+      />
+
+      <Script strategy="lazyOnload">
+        {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8KGKB9HT3P', {
+            page_path: window.location.pathname,
+            });
+        `}
+      </Script>
+
+      <AuthProvider>
+        <MainLayout>
+          <Head>
+            <title>AUQTA | World's First Immersive Real Estate Poral</title>
+            {/* <link rel="icon" href="/favicon.ico"></link> */}
+          </Head>
+          <Layout>
+            <TopProgressBar id="nprogress" />
+            <Component {...pageProps} />
+          </Layout>
+        </MainLayout>
+      </AuthProvider>
+    </>
   );
 }
 

@@ -4,39 +4,41 @@ import { getAdminProjects } from "../../utils/getAdminProjects";
 import pending from "../../../public/assets/pending.png";
 import check from "../../../public/assets/check.png";
 import ActivatePropertyOrProject from "../../modals/activatePropertyOrProject";
+import { getAllDevelopers } from "../../utils/getAllDevelopers";
 import { ClipLoader } from "react-spinners";
 
-function AdminProjects({
+function AdminDevelopers({
   handleOpenModal,
   setSelectedRealEstateId,
   setIsActive,
   setIsProject,
 }) {
-  const [projects, setProjects] = useState([]);
+  const [developers, setDevelopers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getProjects = async () => {
+    const fetchDevelopers = async () => {
       try {
-        const data = await getAdminProjects();
-        setProjects(data);
+        const data = await getAllDevelopers();
+        setDevelopers(data);
         setLoading(false);
       } catch (e) {
         setLoading(false);
       }
     };
 
-    getProjects();
+    fetchDevelopers();
   }, []);
 
-  console.log(projects);
+  console.log(developers);
 
   return (
     <div className={classes.table_container}>
       <div className={classes.table}>
         <div className={classes.table_heading_bar}>
-          <p className={classes.heading}>Project Name</p>
-          <p className={classes.heading}>Owned By</p>
+          <p className={classes.heading}>Name</p>
+          <p className={classes.heading}>Username</p>
+          <p className={classes.heading}>Email</p>
           <p className={classes.heading}>Status</p>
         </div>
 
@@ -46,19 +48,22 @@ function AdminProjects({
               <ClipLoader size={"20px"} color="black" />
             </div>
           ) : (
-            projects?.map((project, index) => (
+            developers?.map((developer, index) => (
               <div key={index} className={classes.single_entry}>
-                <p>{project?.projectName}</p>
-                <p>Random Name</p>
+                <p>
+                  {developer?.user?.firstName} {developer?.user?.lastName}
+                </p>
+                <p>{developer?.user?.username}</p>
+                <p>{developer?.user?.email}</p>
                 <div style={{ minWidth: "170px" }}>
                   <img
                     onClick={() => {
                       handleOpenModal();
-                      setSelectedRealEstateId(project?._id);
-                      setIsActive(project?.isActive);
+                      setSelectedRealEstateId(developer?._id);
+                      setIsActive(developer?.isActive);
                       setIsProject(true);
                     }}
-                    src={project?.isActive === true ? check.src : pending.src}
+                    src={developer?.pause === true ? pending.src : check.src}
                     style={{ height: "30px", cursor: "pointer" }}
                   />
                 </div>
@@ -71,4 +76,4 @@ function AdminProjects({
   );
 }
 
-export default AdminProjects;
+export default AdminDevelopers;

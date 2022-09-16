@@ -35,6 +35,8 @@ import { getAllCities } from "../../../components/utils";
 import AdminProperties from "../../../components/screenComponents/dashboardScreen/adminProperties";
 import ActivatePropertyOrProject from "../../../components/modals/activatePropertyOrProject";
 import AdminProjects from "../../../components/screenComponents/dashboardScreen/adminProjects";
+import AdminDevelopers from "../../../components/screenComponents/dashboardScreen/adminDevelopers";
+import AdminAgents from "../../../components/screenComponents/dashboardScreen/adminAgents";
 
 function Dashboard() {
   const { user } = useAuth();
@@ -192,7 +194,7 @@ function Dashboard() {
               <>
                 <div className={classes.top_content}>
                   <div className={classes.heading_contaienr}>
-                    <h1 className={classes.page_section}>All Properties</h1>
+                    <h1 className={classes.page_section}>All Projects</h1>
                   </div>
                 </div>
                 <AdminProjects
@@ -206,10 +208,10 @@ function Dashboard() {
               <>
                 <div className={classes.top_content}>
                   <div className={classes.heading_contaienr}>
-                    <h1 className={classes.page_section}>All Properties</h1>
+                    <h1 className={classes.page_section}>All Developers</h1>
                   </div>
                 </div>
-                <AdminProjects
+                <AdminDevelopers
                   setSelectedRealEstateId={setSelectedRealEstateId}
                   handleOpenModal={handleOpenModal}
                   setIsActive={setIsActive}
@@ -221,10 +223,10 @@ function Dashboard() {
                 <>
                   <div className={classes.top_content}>
                     <div className={classes.heading_contaienr}>
-                      <h1 className={classes.page_section}>All Properties</h1>
+                      <h1 className={classes.page_section}>All Agents</h1>
                     </div>
                   </div>
-                  <AdminProjects
+                  <AdminAgents
                     setSelectedRealEstateId={setSelectedRealEstateId}
                     handleOpenModal={handleOpenModal}
                     setIsActive={setIsActive}

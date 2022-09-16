@@ -14,7 +14,6 @@ import placeholder from "../../public/assets/placeholder_user.png";
 
 function DashboardSideMenu({ openSideBar, handleCloseSideBar }) {
   const { user, removeUser } = useAuth();
-  // user?.userType = "admin";
   const [img, setImg] = useState();
   const [imagesBlobArr, setImagesBlobArr] = useState();
   const [imgArr, setImgArr] = useState();
@@ -222,6 +221,8 @@ function DashboardSideMenu({ openSideBar, handleCloseSideBar }) {
             ? "Developer"
             : user?.userType === "agent"
             ? "Agent"
+            : user?.userType === "admin"
+            ? "Admin"
             : "User"}
         </p>
         <div className={classes.side_menu_btns_container}>
