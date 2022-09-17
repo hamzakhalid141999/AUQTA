@@ -475,7 +475,10 @@ function Navbar() {
                       ? "/dashboard/agent"
                       : user?.userType === "enduser"
                       ? "/dashboard/user"
-                      : "/dashboard/developer"
+                      : user?.userType === "developer"
+                      ? "/dashboard/developer"
+                      : user?.userType === "admin" &&
+                        "/dashboard/admin_properties"
                   }
                 >
                   <div className={classes.option}>

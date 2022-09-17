@@ -8,6 +8,8 @@ import { adminActivateProject } from "../../utils/adminActivateProject";
 import { adminActivateProperty } from "../../utils/adminActivateProperty";
 import { adminDeactivateProject } from "../../utils/adminDeactivateProject";
 import { adminDeactivateProperty } from "../../utils/adminDeactivateProperty";
+import { pauseUser } from "../../utils/pauseUser";
+import { unpauseUser } from "../../utils/unpauseUser";
 
 function ActivatePropertyOrProject({
   setOpen,
@@ -18,11 +20,31 @@ function ActivatePropertyOrProject({
   isActive,
   selectedRealEstateId,
   isProject,
+  isUserActivation,
+  isPaused,
+  isAgent,
+  selectedUserId,
 }) {
   const [propertyOrProject, setProjectOrProperty] = useState();
   const [loading, setLoading] = useState(false);
 
   console.log(selectedRealEstateId);
+
+  const handlePauseUser = async () => {
+    setLoading(true);
+    const data = await pauseUser(selectedUserId);
+    console.log(data);
+    setLoading(false);
+    window.location.reload();
+  };
+
+  const handleUnpauseUser = async () => {
+    setLoading(true);
+    const data = await unpauseUser(selectedUserId);
+    console.log(data);
+    setLoading(false);
+    window.location.reload();
+  };
 
   const handleDeactivateProperty = async () => {
     setLoading(true);
@@ -68,28 +90,44 @@ function ActivatePropertyOrProject({
     >
       <div className={classes.main_container}>
         <div className={classes.content_container}>
-          <h1>
-            Are you sure you want to{" "}
-            {isActive === true ? "deactivate" : "activate"} this{" "}
-            {isProject ? "project" : "property"}?
-          </h1>
+          {isUserActivation ? (
+            <h1>
+              Are you sure you want to {isPaused === true ? "unpause" : "pause"}{" "}
+              this {isAgent ? "agent" : "developer"}?
+            </h1>
+          ) : (
+            <h1>
+              Are you sure you want to{" "}
+              {isActive === true ? "deactivate" : "activate"} this{" "}
+              {isProject ? "project" : "property"}?
+            </h1>
+          )}
+
           <div className={classes.row}>
             <div onClick={onCloseModal} className={classes.deny_btn}>
               <p>No</p>
             </div>
             <div
               onClick={() => {
-                if (isActive) {
-                  if (isProject) {
-                    handleDeactivateProject();
+                if (!isUserActivation) {
+                  if (isActive) {
+                    if (isProject) {
+                      handleDeactivateProject();
+                    } else {
+                      handleDeactivateProperty();
+                    }
                   } else {
-                    handleDeactivateProperty();
+                    if (isProject) {
+                      handleActivateProject();
+                    } else {
+                      handleActivateProperty();
+                    }
                   }
                 } else {
-                  if (isProject) {
-                    handleActivateProject();
+                  if (isPaused) {
+                    handleUnpauseUser();
                   } else {
-                    handleActivateProperty();
+                    handlePauseUser();
                   }
                 }
               }}

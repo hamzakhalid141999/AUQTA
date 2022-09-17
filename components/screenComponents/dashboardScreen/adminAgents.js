@@ -4,29 +4,28 @@ import { getAdminProjects } from "../../utils/getAdminProjects";
 import pending from "../../../public/assets/pending.png";
 import check from "../../../public/assets/check.png";
 import ActivatePropertyOrProject from "../../modals/activatePropertyOrProject";
-import { getAllAgents } from "../../utils/getAllAgents";
+import { getAdminAgents } from "../../utils/adminAgents";
 import { ClipLoader } from "react-spinners";
 
 function AdminAgents({
   handleOpenModal,
-  setSelectedRealEstateId,
-  setIsActive,
-  setIsProject,
+  setSelectedUserId,
+  setIsAgent,
+  setIsUserActivation,
+  setIsPaused,
 }) {
   const [agents, setAgents] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAgents = async () => {
-      const data = await getAllAgents();
+      const data = await getAdminAgents();
       setAgents(data);
       setLoading(false);
     };
 
     fetchAgents();
   }, []);
-
-  console.log(agents);
 
   return (
     <div className={classes.table_container}>
@@ -55,9 +54,10 @@ function AdminAgents({
                   <img
                     onClick={() => {
                       handleOpenModal();
-                      setSelectedRealEstateId(agent?._id);
-                      setIsActive(agent?.isActive);
-                      setIsProject(true);
+                      setSelectedUserId(agent?.user?._id);
+                      setIsAgent(true);
+                      setIsUserActivation(true);
+                      setIsPaused(agent?.pause);
                     }}
                     src={agent?.pause === true ? pending.src : check.src}
                     style={{ height: "30px", cursor: "pointer" }}

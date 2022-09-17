@@ -4,14 +4,17 @@ import { getAdminProjects } from "../../utils/getAdminProjects";
 import pending from "../../../public/assets/pending.png";
 import check from "../../../public/assets/check.png";
 import ActivatePropertyOrProject from "../../modals/activatePropertyOrProject";
-import { getAllDevelopers } from "../../utils/getAllDevelopers";
+import { getAdminDevelopers } from "../../utils/adminDevelopers";
 import { ClipLoader } from "react-spinners";
+import { pauseUser } from "../../utils/pauseUser.js";
+import { unpauseUser } from "../../utils/unpauseUser.js";
 
 function AdminDevelopers({
   handleOpenModal,
-  setSelectedRealEstateId,
-  setIsActive,
-  setIsProject,
+  setSelectedUserId,
+  setIsAgent,
+  setIsUserActivation,
+  setIsPaused,
 }) {
   const [developers, setDevelopers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,7 +22,7 @@ function AdminDevelopers({
   useEffect(() => {
     const fetchDevelopers = async () => {
       try {
-        const data = await getAllDevelopers();
+        const data = await getAdminDevelopers();
         setDevelopers(data);
         setLoading(false);
       } catch (e) {
@@ -29,8 +32,6 @@ function AdminDevelopers({
 
     fetchDevelopers();
   }, []);
-
-  console.log(developers);
 
   return (
     <div className={classes.table_container}>
@@ -59,9 +60,10 @@ function AdminDevelopers({
                   <img
                     onClick={() => {
                       handleOpenModal();
-                      setSelectedRealEstateId(developer?._id);
-                      setIsActive(developer?.isActive);
-                      setIsProject(true);
+                      setSelectedUserId(developer?.user?._id);
+                      setIsAgent(false);
+                      setIsUserActivation(true);
+                      setIsPaused(developer?.pause);
                     }}
                     src={developer?.pause === true ? pending.src : check.src}
                     style={{ height: "30px", cursor: "pointer" }}

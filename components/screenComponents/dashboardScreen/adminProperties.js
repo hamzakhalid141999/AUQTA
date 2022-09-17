@@ -5,6 +5,9 @@ import pending from "../../../public/assets/pending.png";
 import check from "../../../public/assets/check.png";
 import ActivatePropertyOrProject from "../../modals/activatePropertyOrProject";
 import { ClipLoader } from "react-spinners";
+import Link from "next/link";
+import { fetchUserDetailsById } from "../../utils/fetchUserDetailsById";
+
 function AdminProperties({
   handleOpenModal,
   setSelectedRealEstateId,
@@ -17,6 +20,15 @@ function AdminProperties({
     const getProperties = async () => {
       try {
         const data = await getAdminProperties();
+
+        for (var i = 0; i < data?.length; i++) {
+          const user = await fetchUserDetailsById(
+            data[i]?.propertyListing?.userId
+          );
+          data[i].owner = user?.username;
+        }
+
+        console.log(data);
         setProperties(data);
         setLoading(false);
       } catch (e) {
@@ -26,8 +38,6 @@ function AdminProperties({
 
     getProperties();
   }, []);
-
-  console.log(properties);
 
   return (
     <div className={classes.table_container}>
@@ -46,8 +56,19 @@ function AdminProperties({
           ) : (
             properties?.map((property, index) => (
               <div key={index} className={classes.single_entry}>
-                <p>{property?.propertyListing?.title}</p>
-                <p>Random Name</p>
+                <Link
+                  href={{
+                    pathname: "/dashboard/edit_property",
+                    query: {
+                      propertyId: property?.propertyListing?._id,
+                    },
+                  }}
+                >
+                  <p style={{ cursor: "pointer" }}>
+                    {property?.propertyListing?.title}
+                  </p>
+                </Link>
+                <p>{property?.owner}</p>
                 <div style={{ minWidth: "170px" }}>
                   <img
                     onClick={() => {

@@ -60,6 +60,10 @@ function Dashboard() {
   const [selectedRealEstateId, setSelectedRealEstateId] = useState();
   const [isActive, setIsActive] = useState();
   const [isProject, setIsProject] = useState();
+  const [selectedUserId, setSelectedUserId] = useState();
+  const [isAgent, setIsAgent] = useState();
+  const [isPaused, setIsPaused] = useState();
+  const [isUserActivation, setIsUserActivation] = useState();
 
   const onCloseDeleteModal = () => {
     setOpenDeleteModal(false);
@@ -144,6 +148,10 @@ function Dashboard() {
         onCloseModal={handleCloseModal}
         selectedRealEstateId={selectedRealEstateId}
         isProject={isProject}
+        isUserActivation={isUserActivation}
+        isPaused={isPaused}
+        selectedUserId={selectedUserId}
+        isAgent={isAgent}
       />
       <ToastContainer
         position="top-center"
@@ -212,10 +220,11 @@ function Dashboard() {
                   </div>
                 </div>
                 <AdminDevelopers
-                  setSelectedRealEstateId={setSelectedRealEstateId}
                   handleOpenModal={handleOpenModal}
-                  setIsActive={setIsActive}
-                  setIsProject={setIsProject}
+                  setSelectedUserId={setSelectedUserId}
+                  setIsAgent={setIsAgent}
+                  setIsUserActivation={setIsUserActivation}
+                  setIsPaused={setIsPaused}
                 />
               </>
             ) : (
@@ -227,10 +236,11 @@ function Dashboard() {
                     </div>
                   </div>
                   <AdminAgents
-                    setSelectedRealEstateId={setSelectedRealEstateId}
                     handleOpenModal={handleOpenModal}
-                    setIsActive={setIsActive}
-                    setIsProject={setIsProject}
+                    setSelectedUserId={setSelectedUserId}
+                    setIsAgent={setIsAgent}
+                    setIsUserActivation={setIsUserActivation}
+                    setIsPaused={setIsPaused}
                   />
                 </>
               )

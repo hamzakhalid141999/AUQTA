@@ -5,6 +5,8 @@ import pending from "../../../public/assets/pending.png";
 import check from "../../../public/assets/check.png";
 import ActivatePropertyOrProject from "../../modals/activatePropertyOrProject";
 import { ClipLoader } from "react-spinners";
+import { fetchUserDetailsById } from "../../utils/fetchUserDetailsById";
+import Link from "next/link";
 
 function AdminProjects({
   handleOpenModal,
@@ -19,6 +21,10 @@ function AdminProjects({
     const getProjects = async () => {
       try {
         const data = await getAdminProjects();
+        for (var i = 0; i < data?.length; i++) {
+          const user = await fetchUserDetailsById(data[i]?.userId);
+          data[i].owner = user?.user?.username;
+        }
         setProjects(data);
         setLoading(false);
       } catch (e) {
@@ -28,8 +34,6 @@ function AdminProjects({
 
     getProjects();
   }, []);
-
-  console.log(projects);
 
   return (
     <div className={classes.table_container}>
@@ -48,8 +52,17 @@ function AdminProjects({
           ) : (
             projects?.map((project, index) => (
               <div key={index} className={classes.single_entry}>
-                <p>{project?.projectName}</p>
-                <p>Random Name</p>
+                <Link
+                  href={{
+                    pathname: "/dashboard/edit_project",
+                    query: {
+                      projectId: project?._id,
+                    },
+                  }}
+                >
+                  <p style={{ cursor: "pointer" }}>{project?.projectName}</p>
+                </Link>
+                <p>{project?.owner}</p>
                 <div style={{ minWidth: "170px" }}>
                   <img
                     onClick={() => {
