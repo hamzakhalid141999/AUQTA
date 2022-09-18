@@ -32,6 +32,7 @@
   font-weight: bolder;
   min-width: 170px;
   color: rgb(87, 93, 101);
+  max-width: 170px;
 }
 .table_content {
   width: 100%;

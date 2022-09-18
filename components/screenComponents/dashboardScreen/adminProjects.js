@@ -7,6 +7,9 @@ import ActivatePropertyOrProject from "../../modals/activatePropertyOrProject";
 import { ClipLoader } from "react-spinners";
 import { fetchUserDetailsById } from "../../utils/fetchUserDetailsById";
 import Link from "next/link";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { faShare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function AdminProjects({
   handleOpenModal,
@@ -24,6 +27,7 @@ function AdminProjects({
         for (var i = 0; i < data?.length; i++) {
           const user = await fetchUserDetailsById(data[i]?.userId);
           data[i].owner = user?.user?.username;
+          data[i].ownerEmail = user?.user?.email;
         }
         setProjects(data);
         setLoading(false);
@@ -41,7 +45,11 @@ function AdminProjects({
         <div className={classes.table_heading_bar}>
           <p className={classes.heading}>Project Name</p>
           <p className={classes.heading}>Owned By</p>
-          <p className={classes.heading}>Status</p>
+          <p className={classes.heading}>Owned Email</p>
+          <p style={{ minWidth: "120px" }} className={classes.heading}>
+            Status
+          </p>
+          <p style={{ minWidth: "100px", color: "transparent" }}>asd</p>
         </div>
 
         <div className={classes.table_content}>
@@ -63,7 +71,8 @@ function AdminProjects({
                   <p style={{ cursor: "pointer" }}>{project?.projectName}</p>
                 </Link>
                 <p>{project?.owner}</p>
-                <div style={{ minWidth: "170px" }}>
+                <p>{project?.ownerEmail}</p>
+                <div style={{ minWidth: "100px" }}>
                   <img
                     onClick={() => {
                       handleOpenModal();
@@ -75,6 +84,37 @@ function AdminProjects({
                     style={{ height: "30px", cursor: "pointer" }}
                   />
                 </div>
+                <Link
+                  href={{
+                    pathname: "/project",
+                    query: {
+                      projectId: project?._id,
+                    },
+                  }}
+                >
+                  <FontAwesomeIcon
+                    // className={classes.location_icon}
+                    style={{ cursor: "pointer" }}
+                    icon={faShare}
+                    size={"1x"}
+                  />
+                </Link>
+
+                <Link
+                  href={{
+                    pathname: "/dashboard/edit_project",
+                    query: {
+                      projectId: project?._id,
+                    },
+                  }}
+                >
+                  <FontAwesomeIcon
+                    // className={classes.location_icon}
+                    style={{ cursor: "pointer" }}
+                    icon={faPencil}
+                    size={"1x"}
+                  />
+                </Link>
               </div>
             ))
           )}
