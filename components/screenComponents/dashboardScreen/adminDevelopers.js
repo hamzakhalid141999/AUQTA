@@ -8,6 +8,7 @@ import { getAdminDevelopers } from "../../utils/adminDevelopers";
 import { ClipLoader } from "react-spinners";
 import { pauseUser } from "../../utils/pauseUser.js";
 import { unpauseUser } from "../../utils/unpauseUser.js";
+import Link from "next/link";
 
 function AdminDevelopers({
   handleOpenModal,
@@ -51,9 +52,18 @@ function AdminDevelopers({
           ) : (
             developers?.map((developer, index) => (
               <div key={index} className={classes.single_entry}>
-                <p>
-                  {developer?.user?.firstName} {developer?.user?.lastName}
-                </p>
+                <Link
+                  href={{
+                    pathname: "/developer",
+                    query: {
+                      developerId: developer?.user?._id,
+                    },
+                  }}
+                >
+                  <p style={{ cursor: "pointer" }}>
+                    {developer?.user?.firstName} {developer?.user?.lastName}
+                  </p>
+                </Link>
                 <p>{developer?.user?.username}</p>
                 <p>{developer?.user?.email}</p>
                 <div style={{ minWidth: "170px" }}>

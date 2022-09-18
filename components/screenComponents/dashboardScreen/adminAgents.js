@@ -6,6 +6,7 @@ import check from "../../../public/assets/check.png";
 import ActivatePropertyOrProject from "../../modals/activatePropertyOrProject";
 import { getAdminAgents } from "../../utils/adminAgents";
 import { ClipLoader } from "react-spinners";
+import Link from "next/link";
 
 function AdminAgents({
   handleOpenModal,
@@ -45,9 +46,18 @@ function AdminAgents({
           ) : (
             agents?.map((agent, index) => (
               <div key={index} className={classes.single_entry}>
-                <p>
-                  {agent?.user?.firstName} {agent?.user?.lastName}
-                </p>
+                <Link
+                  href={{
+                    pathname: "/agent",
+                    query: {
+                      developerId: agent?.user?._id,
+                    },
+                  }}
+                >
+                  <p style={{ cursor: "pointer" }}>
+                    {agent?.user?.firstName} {agent?.user?.lastName}
+                  </p>
+                </Link>
                 <p>{agent?.user?.username}</p>
                 <p>{agent?.user?.email}</p>
                 <div style={{ minWidth: "170px" }}>
