@@ -20,6 +20,7 @@ function AgentCard({
   logo,
   id,
   isAgent,
+  isSmall,
 }) {
   const [source, setSource] = useState();
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
@@ -45,7 +46,11 @@ function AgentCard({
         },
       }}
     >
-      <div className={classes.card_body}>
+      <div
+        className={
+          isSmall === true ? classes.card_body_small : classes.card_body
+        }
+      >
         <div className={classes.logo_container}>
           {/* <div className={classes.logo_image_container}>
           {logo && <img src={baseS3Url + logo} style={{ height: "90%" }} />}

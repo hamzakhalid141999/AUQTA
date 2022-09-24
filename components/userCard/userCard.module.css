@@ -9,6 +9,17 @@
   border-bottom: 2px solid rgb(204, 204, 204);
   cursor: pointer;
 }
+.card_body_small {
+  height: 240px;
+  width: 250px;
+  min-width: 250px;
+  border-radius: 30px;
+  flex-direction: column;
+  position: relative;
+  transition: ease-in-out 200ms;
+  border-bottom: 2px solid rgb(204, 204, 204);
+  cursor: pointer;
+}
 .logo_container {
   position: absolute;
   display: flex;

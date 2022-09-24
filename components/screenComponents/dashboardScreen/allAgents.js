@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import classes from "./allAgentsAndDevelopers.module.css";
 import {
   GoogleMap,
@@ -6,6 +6,7 @@ import {
   Marker,
   StandaloneSearchBox,
   LoadScript,
+  InfoWindow,
 } from "@react-google-maps/api";
 import axios from "axios";
 import { getAllAgents } from "../../utils/getAllAgents";
@@ -16,12 +17,19 @@ function AllAgents() {
   const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
   const [loading, setLoading] = useState(true);
   const [longLatArr, setLongLatArr] = useState([]);
+  const [activeMarker, setActiveMarker] = useState(null);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
   });
 
   const [agents, setAgents] = useState();
+  const handleActiveMarker = (marker) => {
+    if (marker === activeMarker) {
+      return;
+    }
+    setActiveMarker(marker);
+  };
 
   useEffect(() => {
     const fetchFilteredProperties = async () => {
@@ -71,7 +79,7 @@ function AllAgents() {
     fetchAgents();
   }, []);
 
-  function RenderMap() {
+  const map = useMemo(() => {
     return (
       <GoogleMap
         // className={classes.iframe}
@@ -95,11 +103,37 @@ function AllAgents() {
               "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/assets/pin-without-shadow.png"
             }
             position={{ lat: location?.lat, lng: location?.lng }}
-          />
+            onClick={() => handleActiveMarker(index)}
+          >
+            {activeMarker === index && (
+              <InfoWindow
+                position={{
+                  lat: location?.lat,
+                  lng: location?.lng,
+                }}
+                onCloseClick={() => setActiveMarker(null)}
+              >
+                <AgentCard
+                  isAgent={true}
+                  key={index}
+                  isSmall={true}
+                  id={agents[index]?.user?._id}
+                  name={agents[index]?.user?.username}
+                  city={agents[index]?.user?.city}
+                  location={agents[index]?.user?.location}
+                  picture={agents[index]?.user?.profilePicture}
+                  description={agents[index]?.user?.aboutInformation}
+                  logo={agents[index]?.companyLogo}
+                />
+              </InfoWindow>
+            )}
+          </Marker>
         ))}
       </GoogleMap>
     );
-  }
+  }, [longLatArr, activeMarker]);
+
+  console.log(agents);
 
   return (
     <div className={classes.container}>
@@ -111,7 +145,7 @@ function AllAgents() {
           height: "500px",
         }}
       >
-        {!isLoaded ? <p>Loading</p> : <RenderMap />}
+        {!isLoaded ? <p>Loading</p> : map}
       </div>
       <h1 className={classes.heading}>Agents</h1>
 

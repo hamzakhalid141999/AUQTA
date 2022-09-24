@@ -69,7 +69,12 @@ input[type="file"]::file-selector-button {
   /* Firefox - for hiding scrollbar */
   -ms-overflow-style: none !important;
 }
-
+.gm-style .gm-style-iw-c {
+  border-top-right-radius: 10px !important;
+  border-top-left-radius: 33px !important;
+  border-bottom-right-radius: 33px !important;
+  border-bottom-left-radius: 33px !important;
+}
 .css-1pahdxg-control::-webkit-scrollbar {
   /* WebKit for hiding scrollbar */
   width: 0 !important;

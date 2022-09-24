@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
     import("react-facebook-pixel")
       .then((x) => x.default)
       .then((ReactPixel) => {
-        ReactPixel.init("796409181495556"); // facebookPixelId
+        ReactPixel.init("1718277208571044"); // facebookPixelId
         ReactPixel.pageView();
 
         router.events.on("routeChangeComplete", () => {
@@ -59,7 +59,13 @@ function MyApp({ Component, pageProps }) {
       <AuthProvider>
         <MainLayout>
           <Head>
-            <title>AUQTA | World's First Immersive Real Estate Poral</title>
+            <title>
+              Auqta.com | World's First Immersive Real Estate Portal
+            </title>
+            <meta
+              name="facebook-domain-verification"
+              content="41hk5o0p039gl353xrlbhst33mt0w9"
+            />
             {/* <link rel="icon" href="/favicon.ico"></link> */}
           </Head>
           <Layout>

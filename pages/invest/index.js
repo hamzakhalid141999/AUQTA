@@ -9,10 +9,21 @@ import {
   LoadScript,
   InfoWindow,
 } from "@react-google-maps/api";
+import {
+  faBath,
+  faBed,
+  faMapMarker,
+  faHeart,
+  faExternalLink,
+  faCog,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { baseURL } from "../../constants";
 import { PuffLoader } from "react-spinners";
+import placeholder from "../../public/assets/placeholder-company.png";
 
 function Invest() {
   const router = useRouter();
@@ -32,7 +43,7 @@ function Invest() {
   };
 
   const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
-
+  const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
   });
@@ -135,7 +146,7 @@ function Invest() {
     [longLatArr]
   );
 
-  function RenderMap() {
+  const map = useMemo(() => {
     return (
       <GoogleMap
         // className={classes.iframe}
@@ -169,14 +180,59 @@ function Invest() {
                 }}
                 onCloseClick={() => setActiveMarker(null)}
               >
-                <span>Something</span>
+                <div className={classes.card_body}>
+                  <div className={classes.image_container}>
+                    <Image
+                      layout="fill"
+                      className={classes.property_picture}
+                      src={
+                        baseS3Url + filteredProperties[index]?.images[0]
+                          ? baseS3Url + filteredProperties[index]?.images[0]
+                          : placeholder
+                      }
+                      alt="picture"
+                    />
+                  </div>
+                  <div className={classes.description_container}>
+                    <div className={classes.title_and_price_container}>
+                      <p className={classes.title}>
+                        {filteredProperties[index]?.projectName}
+                      </p>
+                    </div>
+                    <>
+                      <div className={classes.location_container}>
+                        <FontAwesomeIcon
+                          className={classes.location_icon}
+                          icon={faMapMarker}
+                          size={"1x"}
+                        />
+                        <p className={classes.location}>
+                          {filteredProperties[index]?.location},{" "}
+                          {filteredProperties[index]?.city}
+                        </p>
+                      </div>
+                    </>
+
+                    <div className={classes.property_description_container}>
+                      <p>{filteredProperties[index]?.projectDescription}</p>
+                    </div>
+                    <div className={classes.bottom_description_container}>
+                      <p className={classes.price}>
+                        {filteredProperties[index]?.priceRangeFrom} -{" "}
+                        {filteredProperties[index]?.priceRangeTo}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </InfoWindow>
             )}
           </Marker>
         ))}
       </GoogleMap>
     );
-  }
+  }, [center, longLatArr, activeMarker]);
+
+  console.log(filteredProperties);
 
   return (
     <div>
@@ -200,7 +256,7 @@ function Invest() {
             <p>No Properties Found</p>
           </div>
         ) : (
-          <RenderMap />
+          map
         )}
       </div>
 
