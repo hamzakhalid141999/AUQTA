@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import classes from "./map.module.css";
 import PropertyCard from "./components/propertyCard";
 import img from "../../public/assets/map_property_img.png";
@@ -8,6 +8,8 @@ import {
   Marker,
   StandaloneSearchBox,
   LoadScript,
+  InfoWindow,
+  MarkerWithLabel,
 } from "@react-google-maps/api";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -21,6 +23,15 @@ function Map() {
   const [searchedParams, setSearchedParams] = useState();
   const [longLatArr, setLongLatArr] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState();
+  const [activeMarker, setActiveMarker] = useState(null);
+
+  const handleActiveMarker = (marker) => {
+    if (marker === activeMarker) {
+      return;
+    }
+    setActiveMarker(marker);
+  };
+
   const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
 
   const { isLoaded } = useLoadScript({
@@ -129,7 +140,7 @@ function Map() {
     fetchSearchedProperties();
   }, [searchedParams]);
 
-  function RenderMap() {
+  const map = useMemo(() => {
     return (
       <GoogleMap
         // className={classes.iframe}
@@ -153,11 +164,53 @@ function Map() {
               "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/assets/pin-without-shadow.png"
             }
             position={{ lat: location?.lat, lng: location?.lng }}
-          />
+            onClick={() => handleActiveMarker(index)}
+          >
+            {activeMarker === index && (
+              <InfoWindow
+                position={{
+                  lat: location?.lat,
+                  lng: location?.lng,
+                }}
+                onCloseClick={() => setActiveMarker(null)}
+              >
+                <PropertyCard
+                  isMapCard={true}
+                  propertyId={filteredProperties[index]?._id}
+                  title={
+                    searchedParams?.type
+                      ? filteredProperties[index]?.propertyListing?.title
+                      : filteredProperties[index]?.title
+                  }
+                  price={
+                    searchedParams?.type
+                      ? filteredProperties[index]?.propertyListing?.price
+                      : filteredProperties[index]?.price
+                  }
+                  location={
+                    searchedParams?.type
+                      ? filteredProperties[index]?.propertyListing?.location
+                      : filteredProperties[index]?.location
+                  }
+                  city={
+                    searchedParams?.type
+                      ? filteredProperties[index]?.propertyListing?.city
+                      : filteredProperties[index]?.city
+                  }
+                  picture={
+                    searchedParams?.type
+                      ? filteredProperties[index]?.propertyListing?.images[0]
+                      : filteredProperties[index]?.images?.length > 0 &&
+                        filteredProperties[index]?.images[0]
+                  }
+                />
+              </InfoWindow>
+            )}
+          </Marker>
         ))}
       </GoogleMap>
     );
-  }
+  }, [longLatArr, activeMarker]);
 
   return (
     <div>
@@ -181,7 +234,7 @@ function Map() {
             <p>No Properties Found</p>
           </div>
         ) : (
-          <RenderMap />
+          map
         )}
       </div>
 

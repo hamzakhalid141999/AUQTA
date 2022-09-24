@@ -8,6 +8,16 @@
   transition: ease-in-out 200ms;
   position: relative;
 }
+.card_body_map_card {
+  height: 340px;
+  width: 270px;
+  min-width: 260px;
+  border-radius: 30px;
+  flex-direction: column;
+  position: relative;
+  transition: ease-in-out 200ms;
+  position: relative;
+}
 .card_body:hover {
   transform: translate3d(0px, -3px, 0px);
   box-shadow: 0 5px 30px 10px rgba(8, 72, 146, 0.24);
@@ -154,6 +164,16 @@
 
 @media only screen and (max-width: 700px) {
   .card_body {
+    height: 220px;
+    width: 150px;
+    min-width: 150px;
+    border-radius: 30px;
+    flex-direction: column;
+    position: relative;
+    transition: ease-in-out 200ms;
+    position: relative;
+  }
+  .card_body_map_card {
     height: 220px;
     width: 150px;
     min-width: 150px;

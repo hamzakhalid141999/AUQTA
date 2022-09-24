@@ -24,6 +24,7 @@ import { useRouter } from "next/router";
 import { baseURL } from "../../constants";
 import { PuffLoader } from "react-spinners";
 import placeholder from "../../public/assets/placeholder-company.png";
+import Link from "next/link";
 
 function Invest() {
   const router = useRouter();
@@ -48,12 +49,15 @@ function Invest() {
     googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
   });
 
-  const handleToggleOpen = () => {
-    setIsOpen(true);
-  };
-  const handleToggleClose = () => {
-    setIsOpen(false);
-  };
+  function numDifferentiation(value) {
+    var val = Math.abs(value);
+    if (val >= 10000000) {
+      val = (val / 10000000).toFixed(2) + " Crores";
+    } else if (val >= 100000) {
+      val = (val / 100000).toFixed(2) + " Lac";
+    }
+    return val;
+  }
 
   useEffect(() => {
     if (router) {
@@ -128,6 +132,16 @@ function Invest() {
               },
             }
           );
+
+          for (var i = 0; i < data?.data?.length; i++) {
+            data.data[i].priceLower = numDifferentiation(
+              data?.data[i]?.priceRangeFrom
+            );
+            data.data[i].priceUpper = numDifferentiation(
+              data?.data[i]?.priceRangeTo
+            );
+          }
+
           setFilteredProperties(data?.data);
           if (data?.data?.length === 0) {
             setLoading(false);
@@ -180,50 +194,59 @@ function Invest() {
                 }}
                 onCloseClick={() => setActiveMarker(null)}
               >
-                <div className={classes.card_body}>
-                  <div className={classes.image_container}>
-                    <Image
-                      layout="fill"
-                      className={classes.property_picture}
-                      src={
-                        baseS3Url + filteredProperties[index]?.images[0]
-                          ? baseS3Url + filteredProperties[index]?.images[0]
-                          : placeholder
-                      }
-                      alt="picture"
-                    />
-                  </div>
-                  <div className={classes.description_container}>
-                    <div className={classes.title_and_price_container}>
-                      <p className={classes.title}>
-                        {filteredProperties[index]?.projectName}
-                      </p>
+                <Link
+                  href={{
+                    pathname: "/project",
+                    query: {
+                      projectId: filteredProperties[index]._id,
+                    },
+                  }}
+                >
+                  <div className={classes.card_body}>
+                    <div className={classes.image_container}>
+                      <Image
+                        layout="fill"
+                        className={classes.property_picture}
+                        src={
+                          baseS3Url + filteredProperties[index]?.images[0]
+                            ? baseS3Url + filteredProperties[index]?.images[0]
+                            : placeholder
+                        }
+                        alt="picture"
+                      />
                     </div>
-                    <>
-                      <div className={classes.location_container}>
-                        <FontAwesomeIcon
-                          className={classes.location_icon}
-                          icon={faMapMarker}
-                          size={"1x"}
-                        />
-                        <p className={classes.location}>
-                          {filteredProperties[index]?.location},{" "}
-                          {filteredProperties[index]?.city}
+                    <div className={classes.description_container}>
+                      <div className={classes.title_and_price_container}>
+                        <p className={classes.title}>
+                          {filteredProperties[index]?.projectName}
                         </p>
                       </div>
-                    </>
+                      <>
+                        <div className={classes.location_container}>
+                          <FontAwesomeIcon
+                            className={classes.location_icon}
+                            icon={faMapMarker}
+                            size={"1x"}
+                          />
+                          <p className={classes.location}>
+                            {filteredProperties[index]?.location},{" "}
+                            {filteredProperties[index]?.city}
+                          </p>
+                        </div>
+                      </>
 
-                    <div className={classes.property_description_container}>
-                      <p>{filteredProperties[index]?.projectDescription}</p>
-                    </div>
-                    <div className={classes.bottom_description_container}>
-                      <p className={classes.price}>
-                        {filteredProperties[index]?.priceRangeFrom} -{" "}
-                        {filteredProperties[index]?.priceRangeTo}
-                      </p>
+                      <div className={classes.property_description_container}>
+                        <p>{filteredProperties[index]?.projectDescription}</p>
+                      </div>
+                      <div className={classes.bottom_description_container}>
+                        <p className={classes.price}>
+                          {filteredProperties[index]?.priceLower} -{" "}
+                          {filteredProperties[index]?.priceUpper}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </InfoWindow>
             )}
           </Marker>

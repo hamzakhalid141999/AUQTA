@@ -105,7 +105,7 @@
   flex-direction: column;
   position: relative;
   transition: ease-in-out 200ms;
-  border-bottom: 2px solid rgb(204, 204, 204);
+  /* border-bottom: 2px solid rgb(204, 204, 204); */
   cursor: pointer;
 }
 .like {
