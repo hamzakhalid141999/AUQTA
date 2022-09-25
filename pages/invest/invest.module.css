@@ -59,6 +59,18 @@
   font-size: 15px;
   color: rgb(90, 90, 90);
 }
+
+.card_body {
+  height: 300px;
+  width: 270px;
+  min-width: 250px;
+  border-radius: 30px;
+  flex-direction: column;
+  position: relative;
+  transition: ease-in-out 200ms;
+  /* border-bottom: 2px solid rgb(204, 204, 204); */
+  cursor: pointer;
+}
 @media only screen and (max-width: 1260px) {
   .cards {
     width: 90%;
@@ -95,19 +107,20 @@
     place-items: center;
     grid-template-columns: 1fr 1fr;
   }
+  @media only screen and (max-width: 700px) {
+    .card_body {
+      height: 250px !important;
+      width: 230px !important;
+      min-width: initial;
+      border-radius: 30px;
+      flex-direction: column;
+      position: relative;
+      transition: ease-in-out 200ms;
+      position: relative;
+    }
+  }
 }
 
-.card_body {
-  height: 300px;
-  width: 270px;
-  min-width: 250px;
-  border-radius: 30px;
-  flex-direction: column;
-  position: relative;
-  transition: ease-in-out 200ms;
-  /* border-bottom: 2px solid rgb(204, 204, 204); */
-  cursor: pointer;
-}
 .like {
   transition: ease-in-out 200ms;
   position: absolute;
@@ -230,12 +243,4 @@
   font-size: 15px;
   margin-left: 10px;
   margin-right: 15px;
-}
-@media screen and (max-height: 600px) {
-  .card_body {
-    height: 250px !important;
-    width: 220px !important;
-    min-width: initial !important;
-    box-shadow: 0 5px 30px 10px rgba(8, 72, 146, 0.24);
-  }
 }
