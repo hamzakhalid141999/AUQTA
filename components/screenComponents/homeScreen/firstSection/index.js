@@ -32,13 +32,6 @@ function FirstSection() {
   };
 
   useEffect(() => {
-    // AOS.init({
-    //   startEvent: "load",
-    //   disableMutationObserver: false,
-    //   duration: 500,
-    // });
-    // AOS.refresh();
-
     const fetchAllCities = async () => {
       const data = await getAllCities();
       setCitiesAndLocations(data);
@@ -281,7 +274,11 @@ function FirstSection() {
                         className={classes.input_field}
                       >
                         <option>Select City</option>
-
+                        <option value="Islamabad">Islamabad</option>
+                        <option value="Lahore">Lahore</option>
+                        <option value="Karachi">Karachi</option>
+                        <option value="Faisalabad">Faisalabad</option>
+                        <option value="Rawalpindi">Rawalpindi</option>
                         {cities?.map((city, index) => (
                           <option key={index} value={city}>
                             {city}

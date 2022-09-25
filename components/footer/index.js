@@ -96,7 +96,7 @@ function Footer() {
         </div>
         <div className={classes.socials_container_mobile}>
           <a
-            href={"https://www.facebook.com/auqta.platforms/"}
+            href={"https://www.facebook.com/auqtacom"}
             rel="noreferrer"
             target="_blank"
           >
@@ -104,14 +104,14 @@ function Footer() {
             <img src={facebook.src} className={classes.social_media_icon} />
           </a>
           <a
-            href={"https://www.instagram.com/auqta.platforms/"}
+            href={"https://www.instagram.com/auqtacom/"}
             target="_blank"
             rel="noreferrer"
           >
             <img src={instagram.src} className={classes.social_media_icon} />
           </a>
           <a
-            href={"https://twitter.com/auqta_platforms"}
+            href={"https://twitter.com/auqtacom"}
             target="_blank"
             rel="noreferrer"
           >
@@ -158,7 +158,7 @@ function Footer() {
         <div className={classes.social_media_icons}>
           Follow us
           <a
-            href={"https://www.facebook.com/auqta.platforms/"}
+            href={"https://www.facebook.com/auqtacom"}
             target="_blank"
             rel="noreferrer"
           >
@@ -166,14 +166,14 @@ function Footer() {
             <img src={facebook.src} className={classes.social_media_icon} />
           </a>
           <a
-            href={"https://www.instagram.com/auqta.platforms/"}
+            href={"https://www.instagram.com/auqtacom/"}
             target="_blank"
             rel="noreferrer"
           >
             <img src={instagram.src} className={classes.social_media_icon} />
           </a>
           <a
-            href={"https://twitter.com/auqta_platforms"}
+            href={"https://twitter.com/auqtacom"}
             target="_blank"
             rel="noreferrer"
           >
