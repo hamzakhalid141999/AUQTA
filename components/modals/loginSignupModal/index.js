@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { sendResetPasswordEmail } from "../../utils/sendResetPasswordEmail";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FacebookSignIn } from "../../utils/facebookSignin";
 
 function LoginSignupModal({ setOpen, open, onCloseModal }) {
   const router = useRouter();
@@ -127,6 +128,10 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
       console.log(err);
       setLoading(false);
     }
+  };
+
+  const handleFacebookSignin = async () => {
+    const data = await FacebookSignIn();
   };
 
   const handleForgotPasswordEmail = async () => {
@@ -347,6 +352,13 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                 >
                   Forgot your password?
                 </p>
+                {/* <div className={classes.divider} /> */}
+                {/* <div
+                  onClick={handleFacebookSignin}
+                  className={classes.facebook_btn}
+                >
+                  <p>Continue with Facebook</p>
+                </div> */}
                 {/* <div className={classes.divider} />
                 <p className={classes.connect_with}>:</p>
                 <div className={classes.apple_btn}>
@@ -513,7 +525,13 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                     I accept Auqta{"'"}s terms of use
                   </p>
                 </div>
-
+                {/* <div className={classes.divider} /> */}
+                {/* <div
+                  onClick={handleFacebookSignin}
+                  className={classes.facebook_btn}
+                >
+                  <p>Continue with Facebook</p>
+                </div> */}
                 {/* <div className={classes.divider} />
                 <p className={classes.connect_with}>Or connect with:</p>
                 <div className={classes.apple_btn}>

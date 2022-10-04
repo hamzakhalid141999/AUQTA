@@ -135,7 +135,7 @@ function OurMission() {
                 </div>
               </div>
               <div className={classes.description_container}>
-                <h1>DIGITAL IMMERSION</h1>
+                <h2>DIGITAL IMMERSION</h2>
                 <p>
                   Auqta provides digital visualisation of every property space
                   from anywhere around the world.{" "}
@@ -152,7 +152,7 @@ function OurMission() {
                 </div>
               </div>
               <div className={classes.description_container}>
-                <h1>CONVENIENT VIEWING</h1>
+                <h2>CONVENIENT VIEWING</h2>
                 <p>
                   Have the convenience of viewing and analysing
                   projects/properties and their respected locations from your
@@ -170,7 +170,7 @@ function OurMission() {
                 </div>
               </div>
               <div className={classes.description_container}>
-                <h1>SMART INVESTING</h1>
+                <h2>SMART INVESTING</h2>
                 <p>
                   Analysing investment options in terms of location and the
                   project itself requires a lot of time and resources. Make
@@ -188,7 +188,7 @@ function OurMission() {
                 </div>
               </div>
               <div className={classes.description_container}>
-                <h1>ELEVATED MARKETING</h1>
+                <h2>ELEVATED MARKETING</h2>
                 <p>
                   Enhance the marketing prospects of your project/property. The
                   integration of immersive technologies will genuinely enhance

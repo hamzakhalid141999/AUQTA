@@ -34,7 +34,7 @@ function TrendingProperties({
   return (
     <div className={classes.trending_wrapper}>
       <div id="trending" className={classes.trending_container}>
-        <h1
+        <h2
           style={{
             marginBottom:
               noButtons && width > 1000
@@ -46,7 +46,7 @@ function TrendingProperties({
           // data-aos="fade-up"
         >
           {heading ? heading : "TOP INVESTMENT OPPORTUNITIES"}
-        </h1>
+        </h2>
 
         {noButtons ? (
           <></>

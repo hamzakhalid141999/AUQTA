@@ -8,7 +8,7 @@ import OurMission from "../components/screenComponents/homeScreen/ourMission";
 import TrendingProperties from "../components/screenComponents/homeScreen/trendingProperties";
 import { getHomePageProjects } from "../components/utils/fetchProjectsByProvince";
 import ComingSoonModal from "../components/modals/comingSoonProjectModal";
-
+import Head from "next/head";
 export default function Home() {
   const [projects, setProjects] = useState([]);
 

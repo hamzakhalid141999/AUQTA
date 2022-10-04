@@ -55,11 +55,11 @@ function FindSection() {
   return (
     <div className={classes.find_section_wrapper}>
       <div id="buy" className={classes.find_section_section}>
-        <h1
+        <h2
         //  data-aos="fade-up"
         >
           BENEFITS OF USING THIS PLATFORM
-        </h1>
+        </h2>
         <div
           //  data-aos="fade-up"
           className={classes.cards_container}
