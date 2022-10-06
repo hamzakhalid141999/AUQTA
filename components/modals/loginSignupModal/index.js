@@ -352,13 +352,18 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                 >
                   Forgot your password?
                 </p>
-                {/* <div className={classes.divider} /> */}
-                {/* <div
-                  onClick={handleFacebookSignin}
+                <div className={classes.divider} />
+                <div
+                  // onClick={handleFacebookSignin}
                   className={classes.facebook_btn}
                 >
-                  <p>Continue with Facebook</p>
-                </div> */}
+                  <a
+                    href="https://vu6m4wwwek.execute-api.ap-southeast-1.amazonaws.com/dev/api/auth/facebook"
+                    target={"_blank"}
+                  >
+                    Continue with Facebook
+                  </a>
+                </div>
                 {/* <div className={classes.divider} />
                 <p className={classes.connect_with}>:</p>
                 <div className={classes.apple_btn}>
@@ -525,13 +530,13 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                     I accept Auqta{"'"}s terms of use
                   </p>
                 </div>
-                {/* <div className={classes.divider} /> */}
-                {/* <div
+                <div className={classes.divider} />
+                <div
                   onClick={handleFacebookSignin}
                   className={classes.facebook_btn}
                 >
                   <p>Continue with Facebook</p>
-                </div> */}
+                </div>
                 {/* <div className={classes.divider} />
                 <p className={classes.connect_with}>Or connect with:</p>
                 <div className={classes.apple_btn}>

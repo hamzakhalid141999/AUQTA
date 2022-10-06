@@ -56,13 +56,13 @@ function OurMission() {
           </div>
         </div>
 
-        <h1
+        <h2
           className={classes.heading}
           style={{ textTransform: "uppercase" }}
           // data-aos="fade-up"
         >
           World{"’"}s First Immersive Real Estate Portal
-        </h1>
+        </h2>
         <p
           className={classes.subheading}
           // data-aos="fade-up"

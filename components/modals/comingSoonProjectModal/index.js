@@ -18,7 +18,7 @@ function ComingSoonModal({ setOpen, open, onCloseModal }) {
         <div className={classes.main_container}>
           <div className={classes.content_container}>
             <img src={kmk.src} className={classes.single_img} />
-            <h1>KMK Towers</h1>
+            <h2>KMK Towers</h2>
             <p>Coming Soon!</p>
           </div>
         </div>

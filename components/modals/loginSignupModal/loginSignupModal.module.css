@@ -137,6 +137,7 @@
   border-radius: 5px;
   transition: ease-in-out 200ms;
   cursor: pointer;
+  text-decoration: none;
 }
 .google_btn {
   margin-top: 10px;
@@ -159,10 +160,11 @@
   background-color: rgb(243, 243, 243);
 }
 .apple_btn,
-.facebook_btn p {
+.facebook_btn a {
   text-align: center;
   color: white;
   font-size: 14px;
+  text-decoration: none;
 }
 .google_btn {
   text-align: center;

@@ -50,7 +50,7 @@
   width: 100%;
   object-fit: contain;
 }
-.content_container h1 {
+.content_container h2 {
   font-size: 42px;
   color: black;
   text-align: center;
@@ -280,7 +280,7 @@
   .professional_information_container h1 {
     font-size: 18px !important;
   }
-  .content_container h1 {
+  .content_container h2 {
     font-size: 25px;
   }
   .content_container p {

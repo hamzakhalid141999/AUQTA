@@ -22,10 +22,7 @@ function findSectionCards({
       style={{ maxWidth: maxWidth && maxWidth, minWidth: minWidth && minWidth }}
       className={classes.card_bg}
     >
-      <div
-        // style={{ marginTop: lower ? "120px" : "0px" }}
-        className={classes.card_body}
-      >
+      <div className={classes.card_body}>
         <div
           style={{
             height: imgHeight && imgHeight,
@@ -35,7 +32,7 @@ function findSectionCards({
         >
           <Image src={icon} layout="fill" className={classes.icon} alt="icon" />
         </div>
-        <h1 color="black">{title}</h1>
+        <h2 color="black">{title}</h2>
         <p className={classes.subheading}>{subheading}</p>
         <p>{description}</p>
 
