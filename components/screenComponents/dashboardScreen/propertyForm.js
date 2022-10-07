@@ -75,6 +75,9 @@ function PropertyForm() {
   // Salient Features
 
   const [builtYear, setBuiltYear] = useState();
+  const [youtubeLink1, setYoutubeLink1] = useState();
+  const [youtubeLink2, setYoutubeLink2] = useState();
+
   const [facingView, setFacingView] = useState();
   const [basementIncluded, setBasementIncluded] = useState(false);
   const [parkingSpaces, setParkingSpaces] = useState(false);
@@ -321,6 +324,8 @@ function PropertyForm() {
           contactEmail: contactEmail,
           contactPhoneWork: contactPhoneWork,
           contactPhoneHome: contactPhoneHome,
+          youtubeVideo1: youtubeLink1,
+          youtubeVideo2: youtubeLink2,
           // images: [],
         },
         {
@@ -334,13 +339,6 @@ function PropertyForm() {
     } catch (err) {
       setLoading(false);
       error();
-      // if (err.response) {
-      //   if (err.response.data?.message === "Invalid Password!") {
-      //     error("Invaid Password");
-      //   } else if (err.response.data?.message === "User not found") {
-      //     error("User not found");
-      //   }
-      // }
       console.log(err);
     }
   };
@@ -1092,6 +1090,29 @@ function PropertyForm() {
             style={{ height: "150px", paddingTop: "10px" }}
             className={classes.input_field_single}
           />
+        </div>
+
+        <div className={classes.single_row}>
+          <div className={classes.two_field_container}>
+            <p className={classes.label_dual}>YouTube Link 1</p>
+            <input
+              onChange={(e) => {
+                setYoutubeLink1(e.target.value);
+              }}
+              type="text"
+              className={classes.input_field_dual}
+            />
+          </div>
+          <div className={classes.two_field_container}>
+            <p className={classes.label_dual}>YouTube Link 2</p>
+            <input
+              type="text"
+              onChange={(e) => {
+                setYoutubeLink2(e.target.value);
+              }}
+              className={classes.input_field_dual}
+            />
+          </div>
         </div>
       </div>
 

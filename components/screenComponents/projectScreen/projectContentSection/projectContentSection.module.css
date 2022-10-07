@@ -29,6 +29,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 100px;
   max-width: 1400px;
 }
 .video {
@@ -36,6 +37,10 @@
   max-width: 1250px;
   height: 700px;
   width: 100%;
+  margin-top: 100px;
+
+  margin-bottom: 100px;
+
   border-radius: 35px;
 }
 .video_card {

@@ -21,6 +21,24 @@
   padding-top: 60px;
   padding-bottom: 60px;
 }
+.video_container {
+  width: 100%;
+  height: 550px;
+  border-radius: 35px;
+  /* background-color: #0050b9; */
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1400px;
+}
+.video {
+  object-fit: cover;
+  max-width: 1250px;
+  height: 700px;
+  width: 100%;
+  border-radius: 35px;
+}
 .single_row {
   display: flex;
   flex-direction: row;
@@ -110,6 +128,18 @@
   border-radius: 30px;
 }
 @media screen and (max-width: 1000px) {
+  .video {
+    object-fit: contain;
+    height: 300px;
+    border-radius: 0px;
+  }
+  .video_container {
+    width: 100vw;
+    height: fit-content;
+    padding-top: 0px;
+    border-radius: 0px;
+    margin-top: 30px;
+  }
   .main_features_content {
     width: 95%;
     padding-left: 40px;

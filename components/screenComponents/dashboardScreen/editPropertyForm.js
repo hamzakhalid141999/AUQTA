@@ -60,6 +60,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
   useEffect(() => {
     if (propertyDetails) {
       setImgArr(propertyDetails?.propertyListing?.images);
+      setYoutubeLink1(propertyDetails?.propertyListing?.youtubeVideo1);
+      setYoutubeLink2(propertyDetails?.propertyListing?.youtubeVideo2);
 
       setIsPropertyActive(propertyDetails?.propertyListing?.isActive);
       if (propertyDetails?.resSalientFeatures) {
@@ -162,6 +164,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
   const [contactEmail, setContactEmail] = useState();
   const [contactCnic, setContactCnic] = useState();
   const [files, setFiles] = useState({ files: [] });
+  const [youtubeLink1, setYoutubeLink1] = useState();
+  const [youtubeLink2, setYoutubeLink2] = useState();
   const [filesToUpload, setFilesToUpload] = useState({
     file: "",
   });
@@ -499,6 +503,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
           kitchen: kitchen,
           storeroom: storeRoom,
 
+          youtubeVideo1: youtubeLink1,
+          youtubeVideo2: youtubeLink2,
           floorsInBuilding: floorsInBuilding,
 
           accessibilityForSpecialOrElderlyPersons:
@@ -528,6 +534,8 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
       console.log(err);
     }
   };
+
+  console.log(propertyDetails);
 
   const getUpdatedData = () => {
     let userData = {};
@@ -1534,6 +1542,37 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                   propertyDetails?.propertyListing?.description
                 }
               />
+            </div>
+
+            <div className={classes.single_row}>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>YouTube Link 1</p>
+                <input
+                  onChange={(e) => {
+                    setBedroom(e.target.value);
+                  }}
+                  type="text"
+                  placeholder={
+                    propertyDetails &&
+                    propertyDetails?.propertyListing?.youtubeVideo1
+                  }
+                  className={classes.input_field_dual}
+                />
+              </div>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>YouTube Link 2</p>
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    setBathroom(e.target.value);
+                  }}
+                  className={classes.input_field_dual}
+                  placeholder={
+                    propertyDetails &&
+                    propertyDetails?.propertyListing?.youtubeVideo2
+                  }
+                />
+              </div>
             </div>
           </div>
 
