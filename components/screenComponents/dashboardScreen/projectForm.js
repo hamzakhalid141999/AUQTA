@@ -33,6 +33,8 @@ function ProjectForm() {
   const [amenityArr, setAmenityArr] = useState([1, 2, 3, 4, 5, 6, 7]);
 
   const [locationFeatureArr, setLocationFeatureArr] = useState([1, 2, 3, 4]);
+  const [youtubeLink1, setYoutubeLink1] = useState();
+  const [youtubeLink2, setYoutubeLink2] = useState();
 
   const [name, setName] = useState();
   const [priceLowerBound, setPriceLowerBound] = useState();
@@ -339,6 +341,8 @@ function ProjectForm() {
           userId: user?.id,
           lat: lat,
           lng: lng,
+          youtubeVideo1: youtubeLink1,
+          youtubeVideo2: youtubeLink2,
         },
         {
           headers: {
@@ -1230,6 +1234,29 @@ function ProjectForm() {
                 <h3 className={classes.add_field}>+</h3>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div className={classes.single_row}>
+          <div className={classes.two_field_container}>
+            <p className={classes.label_dual}>YouTube Link 1</p>
+            <input
+              onChange={(e) => {
+                setYoutubeLink1(e.target.value);
+              }}
+              type="text"
+              className={classes.input_field_dual}
+            />
+          </div>
+          <div className={classes.two_field_container}>
+            <p className={classes.label_dual}>YouTube Link 2</p>
+            <input
+              type="text"
+              onChange={(e) => {
+                setYoutubeLink2(e.target.value);
+              }}
+              className={classes.input_field_dual}
+            />
           </div>
         </div>
       </div>

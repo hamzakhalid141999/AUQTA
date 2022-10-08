@@ -7,13 +7,14 @@ import {
   StandaloneSearchBox,
   LoadScript,
 } from "@react-google-maps/api";
+import { useAuth } from "../../../../contextAPI";
 
 function MainFeaturesSection({ property, features }) {
+  const { user } = useAuth();
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
   });
-
-  console.log(property);
 
   function RenderMap() {
     return (
@@ -360,31 +361,35 @@ function MainFeaturesSection({ property, features }) {
         </div>
         {isLoaded && property?.lng && property?.lat ? <RenderMap /> : <></>}
 
-        {/* {property?.youtubeVideo1 && (
-          <div className={classes.video_container}>
-            <iframe
-              className={classes.video}
-              src={property?.youtubeVideo1}
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        )}
+        {property?.youtubeVideo1 &&
+          property?.youtubeVideo1 !== "" &&
+          property?.youtubeVideo1 !== " " && (
+            <div className={classes.video_container}>
+              <iframe
+                className={classes.video}
+                src={property?.youtubeVideo1}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          )}
 
-        {property?.youtubeVideo1 && (
-          <div className={classes.video_container}>
-            <iframe
-              className={classes.video}
-              src={property?.youtubeVideo2}
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        )} */}
+        {property?.youtubeVideo2 &&
+          property?.youtubeVideo2 !== "" &&
+          property?.youtubeVideo2 !== " " && (
+            <div className={classes.video_container}>
+              <iframe
+                className={classes.video}
+                src={property?.youtubeVideo2}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          )}
       </div>
     </>
   );

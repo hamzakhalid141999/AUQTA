@@ -6,6 +6,7 @@
   align-items: center;
   height: fit-content;
   padding-bottom: 80px;
+  margin-bottom: 50px;
 }
 .main_features_section h1 {
   padding-bottom: 50px;
@@ -34,8 +35,8 @@
 }
 .video {
   object-fit: cover;
-  max-width: 1250px;
-  height: 700px;
+  max-width: 1200px;
+  height: 550px;
   width: 100%;
   border-radius: 35px;
 }

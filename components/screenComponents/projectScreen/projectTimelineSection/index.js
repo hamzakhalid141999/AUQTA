@@ -4,8 +4,6 @@ import timeline from "../../../../public/assets/timeline.png";
 import Image from "next/image";
 
 function ProjectTimelineSection({ project }) {
-  console.log(project?.firstMilestone?.date.length);
-
   const baseS3Url = "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/";
   return (
     <div className={classes.container}>

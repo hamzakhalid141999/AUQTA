@@ -181,32 +181,36 @@ function ProjectConentSection({
             </div>
           </div>
         </div>
-        <div className={classes.video_container}>
-          {projectDetails?._id === "6301e2257cd62ffd3a83a286" ? (
-            <iframe
-              className={classes.video}
-              src="https://www.youtube.com/embed/0QU3_L3x-QM"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          ) : (
-            <video
-              src={
-                projectDetails?._id === "6301e2257cd62ffd3a83a286"
-                  ? "https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/projects/6301e2257cd62ffd3a83a286/kmk+ffinal.mp4"
-                  : "https://farbe9d3fb46190ad4564938d20f57a5ad372133227-test.s3.eu-central-1.amazonaws.com/public/compressed/first_section_banner_video.mp4"
-              }
-              className={classes.video}
-              alt="hero_banner_img"
-              loop
-              muted
-              controls
-              playsInline={true}
-            />
+        {projectDetails?.youtubeVideo1 &&
+          projectDetails?.youtubeVideo1 !== "" &&
+          projectDetails?.youtubeVideo1 !== " " && (
+            <div className={classes.video_container}>
+              <iframe
+                className={classes.video}
+                src={projectDetails?.youtubeVideo1}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
           )}
-        </div>
+
+        {projectDetails?.youtubeVideo2 &&
+          projectDetails?.youtubeVideo2 !== "" &&
+          projectDetails?.youtubeVideo2 !== " " && (
+            <div className={classes.video_container}>
+              <iframe
+                className={classes.video}
+                src={projectDetails?.youtubeVideo2}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          )}
+
         <div className={classes.augmented_reality_section}>
           <h1>AUGMENTED REALITY</h1>
 

@@ -33,6 +33,9 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
   const [initialLng, setInitialLng] = useState();
 
   const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
+
+  const [youtubeLink1, setYoutubeLink1] = useState();
+  const [youtubeLink2, setYoutubeLink2] = useState();
   const router = useRouter();
   const { width } = useWindowSize();
   const [projectDetails, setProjectDetails] = useState();
@@ -212,7 +215,8 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
     userData = { ...userData, govtApproved: isGovApproved };
     userData = { ...userData, features: featuresArr };
     userData = { ...userData, locationFeatures: locationFeaturesArr };
-
+    userData = { ...userData, youtubeVideo1: youtubeLink1 };
+    userData = { ...userData, youtubeVideo2: youtubeLink2 };
     return userData;
   };
 
@@ -317,6 +321,8 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
       setSelectedAmenities(projectDetails?.amenities);
       setStartDate(projectDetails?.startDate?.date);
       setEndDate(projectDetails?.endDate?.date);
+      setYoutubeLink1(projectDetails?.youtubeVideo1);
+      setYoutubeLink2(projectDetails?.youtubeVideo2);
 
       projectDetails?.amenities?.map((amenity) => {
         setAmenitiesArrFinal((single) => [
@@ -1375,6 +1381,30 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
                     <h3 className={classes.add_field}>+</h3>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div className={classes.single_row}>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>YouTube Link 1</p>
+                <input
+                  onChange={(e) => {
+                    setYoutubeLink1(e.target.value);
+                  }}
+                  type="text"
+                  placeholder={projectDetails && projectDetails?.youtubeVideo1}
+                  className={classes.input_field_dual}
+                />
+              </div>
+              <div className={classes.two_field_container}>
+                <p className={classes.label_dual}>YouTube Link 2</p>
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    setYoutubeLink2(e.target.value);
+                  }}
+                  className={classes.input_field_dual}
+                  placeholder={projectDetails && projectDetails?.youtubeVideo2}
+                />
               </div>
             </div>
           </div>

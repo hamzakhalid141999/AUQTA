@@ -18,6 +18,13 @@ function AllAgents() {
   const [loading, setLoading] = useState(true);
   const [longLatArr, setLongLatArr] = useState([]);
   const [activeMarker, setActiveMarker] = useState(null);
+  const [searchCity, setSearchCity] = useState();
+
+  // console.log(searchCity);
+
+  const handleCityFilter = async (e) => {
+    console.log(e);
+  };
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
@@ -133,8 +140,6 @@ function AllAgents() {
     );
   }, [longLatArr, activeMarker]);
 
-  console.log(agents);
-
   return (
     <div className={classes.container}>
       <div
@@ -149,6 +154,16 @@ function AllAgents() {
       </div>
       <h1 className={classes.heading}>Agents</h1>
 
+      <div className={classes.search_container}>
+        <input
+          onChange={(e) => {
+            setSearchCity(e.target.value);
+          }}
+          placeholder="Search Agent by city"
+          className={classes.search}
+        />
+      </div>
+
       {loading ? (
         <div className={classes.loading_container}>
           <ClipLoader size={"15px"} color="black" />
@@ -159,19 +174,39 @@ function AllAgents() {
         </div>
       ) : (
         <div className={classes.content_container}>
-          {agents?.map((user, index) => (
-            <AgentCard
-              isAgent={true}
-              key={index}
-              id={user?.user?._id}
-              name={user?.user?.username}
-              city={user?.user?.city}
-              location={user?.user?.location}
-              picture={user?.user?.profilePicture}
-              description={user?.user?.aboutInformation}
-              logo={user?.companyLogo}
-            />
-          ))}
+          {searchCity
+            ? agents
+                ?.filter((user, index) =>
+                  user?.user?.city
+                    ?.toLowerCase()
+                    .includes(searchCity?.toLowerCase())
+                )
+                ?.map((user, index) => (
+                  <AgentCard
+                    isAgent={true}
+                    key={index}
+                    id={user?.user?._id}
+                    name={user?.user?.username}
+                    city={user?.user?.city}
+                    location={user?.user?.location}
+                    picture={user?.user?.profilePicture}
+                    description={user?.user?.aboutInformation}
+                    logo={user?.companyLogo}
+                  />
+                ))
+            : agents?.map((user, index) => (
+                <AgentCard
+                  isAgent={true}
+                  key={index}
+                  id={user?.user?._id}
+                  name={user?.user?.username}
+                  city={user?.user?.city}
+                  location={user?.user?.location}
+                  picture={user?.user?.profilePicture}
+                  description={user?.user?.aboutInformation}
+                  logo={user?.companyLogo}
+                />
+              ))}
         </div>
       )}
     </div>

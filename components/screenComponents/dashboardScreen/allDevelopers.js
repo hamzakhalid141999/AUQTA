@@ -21,6 +21,7 @@ function AllDevelopers() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyB5IIMJRaxx9edKZkXEeyYiaRUSeqEoXx8",
   });
+  const [searchCity, setSearchCity] = useState();
 
   const [developers, setDevelopers] = useState();
 
@@ -136,6 +137,17 @@ function AllDevelopers() {
       </div>
 
       <h1 className={classes.heading}>Developers</h1>
+
+      <div className={classes.search_container}>
+        <input
+          onChange={(e) => {
+            setSearchCity(e.target.value);
+          }}
+          placeholder="Search Developer by city"
+          className={classes.search}
+        />
+      </div>
+
       {loading ? (
         <div className={classes.loading_container}>
           <ClipLoader size={"15px"} color="black" />
@@ -146,18 +158,37 @@ function AllDevelopers() {
         </div>
       ) : (
         <div className={classes.content_container}>
-          {developers?.map((user, index) => (
-            <DeveloperCard
-              key={index}
-              id={user?.user?._id}
-              name={user?.user?.username}
-              city={user?.user?.city}
-              location={user?.user?.location}
-              picture={user?.user?.profilePicture}
-              description={user?.user?.aboutInformation}
-              logo={user?.developerLogo}
-            />
-          ))}
+          {searchCity
+            ? developers
+                ?.filter((user, index) =>
+                  user?.user?.city
+                    ?.toLowerCase()
+                    .includes(searchCity?.toLowerCase())
+                )
+                ?.map((user, index) => (
+                  <DeveloperCard
+                    key={index}
+                    id={user?.user?._id}
+                    name={user?.user?.username}
+                    city={user?.user?.city}
+                    location={user?.user?.location}
+                    picture={user?.user?.profilePicture}
+                    description={user?.user?.aboutInformation}
+                    logo={user?.developerLogo}
+                  />
+                ))
+            : developers?.map((user, index) => (
+                <DeveloperCard
+                  key={index}
+                  id={user?.user?._id}
+                  name={user?.user?.username}
+                  city={user?.user?.city}
+                  location={user?.user?.location}
+                  picture={user?.user?.profilePicture}
+                  description={user?.user?.aboutInformation}
+                  logo={user?.developerLogo}
+                />
+              ))}
         </div>
       )}
     </div>

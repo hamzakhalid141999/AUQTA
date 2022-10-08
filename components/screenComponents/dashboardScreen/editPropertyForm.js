@@ -535,8 +535,6 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
     }
   };
 
-  console.log(propertyDetails);
-
   const getUpdatedData = () => {
     let userData = {};
     if (title) {
@@ -1549,7 +1547,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                 <p className={classes.label_dual}>YouTube Link 1</p>
                 <input
                   onChange={(e) => {
-                    setBedroom(e.target.value);
+                    setYoutubeLink1(e.target.value);
                   }}
                   type="text"
                   placeholder={
@@ -1564,7 +1562,7 @@ function EditPropertyForm({ _setPropertyId, setIsPropertyActive }) {
                 <input
                   type="text"
                   onChange={(e) => {
-                    setBathroom(e.target.value);
+                    setYoutubeLink2(e.target.value);
                   }}
                   className={classes.input_field_dual}
                   placeholder={

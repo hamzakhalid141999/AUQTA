@@ -31,8 +31,6 @@ function DashboardHomePage() {
   const [inActiveProjects, setInActiveProjects] = useState();
   const [inActiveProperties, setInActiveProperties] = useState();
 
-  console.log(user);
-
   useEffect(() => {
     const fetchActiveProperties = async () => {
       if (user?.id) {

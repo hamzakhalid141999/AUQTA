@@ -28,12 +28,9 @@ function ActivatePropertyOrProject({
   const [propertyOrProject, setProjectOrProperty] = useState();
   const [loading, setLoading] = useState(false);
 
-  console.log(selectedRealEstateId);
-
   const handlePauseUser = async () => {
     setLoading(true);
     const data = await pauseUser(selectedUserId);
-    console.log(data);
     setLoading(false);
     window.location.reload();
   };
@@ -41,7 +38,6 @@ function ActivatePropertyOrProject({
   const handleUnpauseUser = async () => {
     setLoading(true);
     const data = await unpauseUser(selectedUserId);
-    console.log(data);
     setLoading(false);
     window.location.reload();
   };
@@ -49,7 +45,6 @@ function ActivatePropertyOrProject({
   const handleDeactivateProperty = async () => {
     setLoading(true);
     const data = await adminDeactivateProperty(selectedRealEstateId);
-    console.log(data);
     setLoading(false);
     window.location.reload();
   };
@@ -57,7 +52,6 @@ function ActivatePropertyOrProject({
   const handleActivateProperty = async () => {
     setLoading(true);
     const data = await adminActivateProperty(selectedRealEstateId);
-    console.log(data);
     setLoading(false);
     window.location.reload();
   };
@@ -65,7 +59,6 @@ function ActivatePropertyOrProject({
   const handleDeactivateProject = async () => {
     setLoading(true);
     const data = await adminDeactivateProject(selectedRealEstateId);
-    console.log(data);
     setLoading(false);
     window.location.reload();
   };
@@ -73,7 +66,6 @@ function ActivatePropertyOrProject({
   const handleActivateProject = async () => {
     setLoading(true);
     const data = await adminActivateProject(selectedRealEstateId);
-    console.log(data);
     setLoading(false);
     window.location.reload();
   };

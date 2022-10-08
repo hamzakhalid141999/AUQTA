@@ -32,7 +32,6 @@ function AdminProperties({
           data[i].ownerEmail = user?.email;
         }
 
-        console.log(data);
         setProperties(data);
         setLoading(false);
       } catch (e) {
