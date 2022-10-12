@@ -241,6 +241,9 @@ function DeveloperForm() {
           },
         }
       );
+      if (data?.data?.user?.name) {
+        data.data.user.username = data?.data?.user?.name;
+      }
       setDeveloper(data?.data);
       setInitialLat(parseFloat(data?.data?.lat));
       setInitialLng(parseFloat(data?.data?.lng));

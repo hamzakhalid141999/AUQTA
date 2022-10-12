@@ -55,6 +55,9 @@ function ProjectForm() {
   const [imgArr, setImgArr] = useState([]);
   const [imagesBlobArr, setImagesBlobArr] = useState([]);
 
+  const [arImgArr, setArImgArr] = useState([]);
+  const [arImagesBlobArr, setArImagesBlobArr] = useState([]);
+
   const [brochureImgArr, setBrochureImg] = useState([]);
   const [brochureImgBlobArr, setBrochureImgBlobArr] = useState([]);
 
@@ -68,6 +71,8 @@ function ProjectForm() {
   const [shopImgBlobArr, setShopImgBlobArr] = useState([]);
 
   const [imgsKeysArr, setImgsKeysArr] = useState([]);
+  const [arImgsKeysArr, setArImgsKeysArr] = useState([]);
+
   const [brochureImgKeysArr, setBrochureImgKeysArr] = useState([]);
   const [priceImgKeysArr, setPriceImgKeysArr] = useState([]);
   const [floorPlanImgKeysArr, setFloorPlanImgKeysArr] = useState([]);
@@ -95,6 +100,8 @@ function ProjectForm() {
   const [thirdMilestoneImageKey, setThirdMilestoneImageKey] = useState();
 
   const [isImagesUploaded, setIsImagesUploaded] = useState(false);
+  const [isArImagesUploaded, setIsArImagesUploaded] = useState(false);
+
   const [isFirstMilestoneImageUploaded, setIsFirstMilestoneImageUploaded] =
     useState(false);
   const [isSecondMilestoneImageUploaded, setIsSecondMilestoneImageUploaded] =
@@ -213,6 +220,13 @@ function ProjectForm() {
     for (var i = 0; i < files?.length; i++) {
       setImgArr((imgsArr) => [...imgsArr, files[i]?.name]);
       setImagesBlobArr((blobArr) => [...blobArr, files[i]]);
+    }
+  };
+
+  const handleArImages = (files) => {
+    for (var i = 0; i < files?.length; i++) {
+      setArImgArr((imgsArr) => [...imgsArr, files[i]?.name]);
+      setArImagesBlobArr((blobArr) => [...blobArr, files[i]]);
     }
   };
 
@@ -356,6 +370,9 @@ function ProjectForm() {
       if (!secondMilestoneImage) {
         setIsSecondMilestoneImageUploaded(true);
       }
+      if (!arImgArr) {
+        setIsArImagesUploaded(true);
+      }
       if (!thirdMilestoneImage) {
         setIsThirdMilestoneImageUploaded(true);
       }
@@ -369,6 +386,7 @@ function ProjectForm() {
         setIsFloorPlanImageUploaded(true);
       }
       setImgsKeysArr(data?.data?.newproject?.images);
+      setArImgsKeysArr(data?.data?.newproject?.ARimages);
       setPriceImgKeysArr(data?.data?.newproject?.pricePlan);
       setBrochureImgKeysArr(data?.data?.newproject?.projectBrochure);
       setFloorPlanImgKeysArr(data?.data?.newproject?.floorPlan);
@@ -538,6 +556,47 @@ function ProjectForm() {
   }, [imgsKeysArr]);
 
   useEffect(() => {
+    if (arImgsKeysArr.length > 0) {
+      for (var i = 0; i < arImgsKeysArr?.length; i++) {
+        const data = {
+          fileKey: arImgsKeysArr[i],
+        };
+        axios
+          .post(baseURL + "/api/s3/getUrlWithKey", data, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((url) => {
+            const blobUrl = URL.createObjectURL(imagesBlobArr[i], {
+              type: "image/png",
+            });
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", blobUrl, true);
+            xhr.responseType = "blob";
+            xhr.onload = async function (e) {
+              if (this.status === 200) {
+                var myBlob = this.response;
+                const myHeaders = new Headers({ "Content-Type": "image/*" });
+                const response = await fetch(url.data.body.presigned_url, {
+                  method: "PUT",
+                  headers: myHeaders,
+                  body: myBlob,
+                });
+                const s3Url = response?.url?.split("?")[0];
+                if (i === arImgsKeysArr?.length - 1) {
+                  setIsImagesUploaded(true);
+                }
+              }
+            };
+            xhr.send();
+          });
+      }
+    }
+  }, [arImgsKeysArr]);
+
+  useEffect(() => {
     if (floorPlanImgKeysArr.length > 0) {
       for (var i = 0; i < floorPlanImgKeysArr?.length; i++) {
         const data = {
@@ -703,7 +762,8 @@ function ProjectForm() {
         isThirdMilestoneImageUploaded &&
         isFloorPlanImageUplaoded &&
         isPricePlanImageUploaded &&
-        isShopImageUploaded
+        isShopImageUploaded &&
+        isArImagesUploaded
       ) {
         success();
         projectAddDisclaimer();
@@ -722,6 +782,7 @@ function ProjectForm() {
     isFloorPlanImageUplaoded,
     isPricePlanImageUploaded,
     isShopImageUploaded,
+    isArImagesUploaded,
   ]);
 
   const handleFeaturesInputChange = (value, id) => {
@@ -1257,6 +1318,30 @@ function ProjectForm() {
               }}
               className={classes.input_field_dual}
             />
+          </div>
+        </div>
+      </div>
+
+      <div className={classes.section}>
+        <h1 className={classes.heading}>AR Data Upload</h1>
+        <div className={classes.single_row}>
+          <div className={classes.data_tabs_container}>
+            <div className={classes.data_input_container}>
+              <p>Images</p>
+              <input
+                onChange={(e) => {
+                  handleArImages(e.target.files);
+                }}
+                style={{ width: "100%", marginBottom: "20px" }}
+                placeholder="Images"
+                type={"file"}
+                multiple
+                className={classes.input_field_dual}
+              />
+              <div className={classes.add_btn_border}>
+                <h3 className={classes.add_field}>+</h3>
+              </div>
+            </div>
           </div>
         </div>
       </div>

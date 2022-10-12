@@ -471,14 +471,15 @@ function Navbar() {
               >
                 <Link
                   href={
-                    user?.usertype === "agent"
+                    user?.userType === "agent"
                       ? "/dashboard/agent"
                       : user?.userType === "enduser"
                       ? "/dashboard/user"
                       : user?.userType === "developer"
                       ? "/dashboard/developer"
-                      : user?.userType === "admin" &&
-                        "/dashboard/admin_properties"
+                      : user?.userType === "admin"
+                      ? "/dashboard/admin_properties"
+                      : "/dashboard/admin_properties"
                   }
                 >
                   <div className={classes.option}>

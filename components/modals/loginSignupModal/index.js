@@ -364,6 +364,14 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                     Continue with Facebook
                   </a>
                 </div>
+                <div className={classes.google_btn}>
+                  <a
+                    href="https://vu6m4wwwek.execute-api.ap-southeast-1.amazonaws.com/dev/api/auth/google"
+                    target={"_blank"}
+                  >
+                    Continue with Google
+                  </a>
+                </div>
                 {/* <div className={classes.divider} />
                 <p className={classes.connect_with}>:</p>
                 <div className={classes.apple_btn}>
@@ -371,9 +379,6 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                 </div>
                 <div className={classes.facebook_btn}>
                   <p>Continue with Facebook</p>
-                </div>
-                <div className={classes.google_btn}>
-                  <p>Continue with Google</p>
                 </div> */}
               </div>
             ) : currentState === 2 ? (

@@ -19,6 +19,7 @@ import {
 function AgentForm() {
   const { user } = useAuth();
   const [agent, setAgent] = useState();
+  const [agentOuterInfo, setAgentOuterInfo] = useState();
   const [name, setName] = useState();
   const [sinceYear, setSinceYear] = useState();
   const [about, setAbout] = useState();
@@ -40,6 +41,7 @@ function AgentForm() {
   const [instaLink, setInstaLink] = useState();
   const [youtubeLink, setYoutubeLink] = useState();
   const [linkedinLink, setLinkedinLink] = useState();
+  const [agentCompany, setAgentCompany] = useState();
 
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -59,10 +61,7 @@ function AgentForm() {
   const [lng, setLng] = useState();
   const [initialLat, setInitialLat] = useState();
   const [initialLng, setInitialLng] = useState();
-
   const [selectedSocialMedia, setSelectedSocialMedia] = useState([]);
-
-  const [profilePicture, setProfilePicture] = useState();
 
   const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
 
@@ -147,7 +146,11 @@ function AgentForm() {
           },
         }
       );
+      if (data?.data?.user?.name) {
+        data.data.user.username = data?.data?.user?.name;
+      }
       setAgent(data?.data);
+      setAgentOuterInfo(data);
       setInitialLat(parseFloat(data?.data?.lat));
       setInitialLng(parseFloat(data?.data?.lng));
       // setCity(data?.data?.user?.city);
@@ -349,6 +352,9 @@ function AgentForm() {
     if (lat) {
       userData = { ...userData, lat: lat };
     }
+    if (agentCompany) {
+      userData = { ...userData, agentCompany: agentCompany };
+    }
 
     return userData;
   };
@@ -442,6 +448,33 @@ function AgentForm() {
             </h1>
             <div className={classes.single_row}>
               {user?.userType === "agent" ? (
+                <>
+                  <p className={classes.label}>Company Name</p>
+                  <input
+                    onChange={(e) => {
+                      setAgentCompany(e.target.value);
+                    }}
+                    placeholder={agent?.agentCompany ? agent?.agentCompany : ""}
+                    className={classes.input_field_single}
+                  />
+                </>
+              ) : (
+                <>
+                  <p className={classes.label_dual}>Name</p>
+                  <input
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    placeholder={
+                      agent?.user?.username ? agent?.user?.username : ""
+                    }
+                    className={classes.input_field_single}
+                  />
+                </>
+              )}
+            </div>
+            <div className={classes.single_row}>
+              {user?.userType === "agent" ? (
                 <div className={classes.two_field_container}>
                   <p className={classes.label_dual}>Name</p>
                   <input
@@ -462,7 +495,11 @@ function AgentForm() {
                       setName(e.target.value);
                     }}
                     placeholder={
-                      agent?.user?.username ? agent?.user?.username : ""
+                      agent?.user?.username
+                        ? agent?.user?.username
+                        : agent?.user?.name
+                        ? agent?.user?.name
+                        : ""
                     }
                     className={classes.input_field_single}
                   />
@@ -688,40 +725,6 @@ function AgentForm() {
                   }
                   className={classes.input_field_dual}
                 />
-              </div>
-              <div className={classes.two_field_container}>
-                <p className={classes.label_dual}>Social Media</p>
-                {socialMediaArr?.length > 0 && (
-                  <Select
-                    className={classes.input_field_dual}
-                    components={{ Option }}
-                    defaultValue={socialMediaArr?.length > 0 && socialMediaArr}
-                    hideSelectedOptions={false}
-                    options={socials}
-                    closeMenuOnSelect={false}
-                    placeholder=" "
-                    isMulti
-                    isClearable
-                    onChange={(e) => {
-                      addSocials(e);
-                    }}
-                  />
-                )}
-                {socialMediaArr?.length === 0 && (
-                  <Select
-                    className={classes.input_field_dual}
-                    components={{ Option }}
-                    hideSelectedOptions={false}
-                    options={socials}
-                    closeMenuOnSelect={false}
-                    placeholder=" "
-                    isMulti
-                    isClearable
-                    onChange={(e) => {
-                      addSocials(e);
-                    }}
-                  />
-                )}
               </div>
             </div>
 
