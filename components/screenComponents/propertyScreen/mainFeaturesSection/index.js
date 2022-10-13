@@ -370,7 +370,8 @@ function MainFeaturesSection({ property, features }) {
                 src={property?.youtubeVideo1}
                 title="YouTube video player"
                 frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowFullScreen
                 allowfullscreen
               ></iframe>
             </div>
@@ -385,7 +386,8 @@ function MainFeaturesSection({ property, features }) {
                 src={property?.youtubeVideo2}
                 title="YouTube video player"
                 frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowFullScreen
                 allowfullscreen
               ></iframe>
             </div>

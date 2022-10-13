@@ -125,7 +125,11 @@ function AllAgents() {
                   key={index}
                   isSmall={true}
                   id={agents[index]?.user?._id}
-                  name={agents[index]?.user?.username}
+                  name={
+                    agents[index]?.agentCompany
+                      ? agents[index]?.agentCompany
+                      : agents[index]?.user?.username
+                  }
                   city={agents[index]?.user?.city}
                   location={agents[index]?.user?.location}
                   picture={agents[index]?.user?.profilePicture}
@@ -186,7 +190,11 @@ function AllAgents() {
                     isAgent={true}
                     key={index}
                     id={user?.user?._id}
-                    name={user?.user?.username}
+                    name={
+                      user?.agentCompany
+                        ? user?.agentCompany
+                        : user?.user?.username
+                    }
                     city={user?.user?.city}
                     location={user?.user?.location}
                     picture={user?.user?.profilePicture}
@@ -199,7 +207,11 @@ function AllAgents() {
                   isAgent={true}
                   key={index}
                   id={user?.user?._id}
-                  name={user?.user?.username}
+                  name={
+                    user?.agentCompany
+                      ? user?.agentCompany
+                      : user?.user?.username
+                  }
                   city={user?.user?.city}
                   location={user?.user?.location}
                   picture={user?.user?.profilePicture}
