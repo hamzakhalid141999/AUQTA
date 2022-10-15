@@ -31,6 +31,7 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
   const [lng, setLng] = useState();
   const [initialLat, setInitialLat] = useState();
   const [initialLng, setInitialLng] = useState();
+  const [isArImagesUploaded, setIsArImagesUploaded] = useState();
 
   const GEOCODING_API = "AIzaSyDz7IuvTbai-teM0mRziq4-j-pxBNn3APg";
 
@@ -61,6 +62,7 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
   const [firstMilestone, setFirstMilestone] = useState();
   const [secondMilestone, setSecondMilestone] = useState();
   const [thirdMilestone, setThirdMilestone] = useState();
+  const [arImagesArrStartingIndex, setArImagesStartingIndex] = useState();
 
   const [imgArr, setImgArr] = useState([]);
   const [imagesBlobArr, setImagesBlobArr] = useState([]);
@@ -82,6 +84,7 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
   const [priceImgKeysArr, setPriceImgKeysArr] = useState([]);
   const [floorPlanImgKeysArr, setFloorPlanImgKeysArr] = useState([]);
   const [shopImgKeysArr, setShopImgKeysArr] = useState([]);
+  const [arImgsKeysArr, setArImgsKeysArr] = useState([]);
 
   const [featuresArr, setFeaturesArr] = useState([]);
   const [amenitiesArr, setAmenitiesArr] = useState([]);
@@ -96,6 +99,9 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
   const [secondMilestoneBlob, setSecondMilestoneBlob] = useState();
   const [thirdMilestoneImage, setThirdMilestoneImg] = useState();
   const [thirdMilestoneBlob, setThirdMilestoneBlob] = useState();
+
+  const [arImgArr, setArImgArr] = useState([]);
+  const [arImagesBlobArr, setArImagesBlobArr] = useState([]);
 
   const [firstMilestoneImageKey, setFirstMilestoneImageKey] = useState();
   const [secondMilestoneImageKey, setSecondMilestoneImageKey] = useState();
@@ -124,6 +130,13 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
       setCities((city) => [...city, cityObject?.cityName])
     );
   }, []);
+
+  const handleArImages = (files) => {
+    for (var i = 0; i < files?.length; i++) {
+      setArImgArr((imgsArr) => [...imgsArr, files[i]?.name]);
+      setArImagesBlobArr((blobArr) => [...blobArr, files[i]]);
+    }
+  };
 
   useEffect(() => {
     const fetchFilteredProperties = async () => {
@@ -212,6 +225,10 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
     if (selectedAmenities) {
       userData = { ...userData, amenities: selectedAmenities };
     }
+    if (arImgArr?.length > 0) {
+      const arImages = projectDetails?.ARimages?.concat(arImgArr);
+      userData = { ...userData, ARimages: arImages };
+    }
     userData = { ...userData, govtApproved: isGovApproved };
     userData = { ...userData, features: featuresArr };
     userData = { ...userData, locationFeatures: locationFeaturesArr };
@@ -297,9 +314,11 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
         }
       );
 
-      setLoading(false);
-      success();
-      window.location.reload();
+      console.log(data);
+      setArImgsKeysArr(data?.data?.updatedProject?.ARimages);
+      if (!arImgArr) {
+        setIsArImagesUploaded(true);
+      }
     } catch (err) {
       setLoading(false);
       error();
@@ -323,7 +342,7 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
       setEndDate(projectDetails?.endDate?.date);
       setYoutubeLink1(projectDetails?.youtubeVideo1);
       setYoutubeLink2(projectDetails?.youtubeVideo2);
-
+      setArImagesStartingIndex(projectDetails?.ARimages?.length);
       projectDetails?.amenities?.map((amenity) => {
         setAmenitiesArrFinal((single) => [
           ...single,
@@ -628,6 +647,51 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
   }, [imgsKeysArr]);
 
   useEffect(() => {
+    if (arImgsKeysArr.length > 0) {
+      for (
+        var i = arImagesArrStartingIndex, j = 0;
+        i < arImgsKeysArr?.length;
+        i++, j++
+      ) {
+        const data = {
+          fileKey: arImgsKeysArr[i],
+        };
+        axios
+          .post(baseURL + "/api/s3/getUrlWithKey", data, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((url) => {
+            const blobUrl = URL.createObjectURL(arImagesBlobArr[j], {
+              type: "image/png",
+            });
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", blobUrl, true);
+            xhr.responseType = "blob";
+            xhr.onload = async function (e) {
+              if (this.status === 200) {
+                var myBlob = this.response;
+                const myHeaders = new Headers({ "Content-Type": "image/*" });
+                const response = await fetch(url.data.body.presigned_url, {
+                  method: "PUT",
+                  headers: myHeaders,
+                  body: myBlob,
+                });
+                const s3Url = response?.url?.split("?")[0];
+                if (i === arImgsKeysArr?.length - 1) {
+                  setIsArImagesUploaded(true);
+                }
+              }
+            };
+            xhr.send();
+          });
+      }
+    }
+  }, [arImgsKeysArr]);
+
+  useEffect(() => {
     if (floorPlanImgKeysArr.length > 0) {
       for (var i = 0; i < floorPlanImgKeysArr?.length; i++) {
         const data = {
@@ -784,30 +848,12 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
   }, [shopImgKeysArr]);
 
   useEffect(() => {
-    if (
-      isImagesUploaded &&
-      isBrochureImageUploaded &&
-      isFirstMilestoneImageUploaded &&
-      isSecondMilestoneImageUploaded &&
-      isThirdMilestoneImageUploaded &&
-      isFloorPlanImageUplaoded &&
-      isPricePlanImageUploaded &&
-      isShopImageUploaded
-    ) {
+    if (isArImagesUploaded) {
       success();
       setLoading(false);
       window.location.reload();
     }
-  }, [
-    isImagesUploaded,
-    isBrochureImageUploaded,
-    isFirstMilestoneImageUploaded,
-    isSecondMilestoneImageUploaded,
-    isThirdMilestoneImageUploaded,
-    isFloorPlanImageUplaoded,
-    isPricePlanImageUploaded,
-    isShopImageUploaded,
-  ]);
+  }, [isArImagesUploaded]);
 
   const handleFeaturesInputChange = (value, id) => {
     featuresArr[id] = value;
@@ -1405,6 +1451,30 @@ function EditProjectForm({ _setProjectId, setIsProjectActive }) {
                   className={classes.input_field_dual}
                   placeholder={projectDetails && projectDetails?.youtubeVideo2}
                 />
+              </div>
+            </div>
+          </div>
+
+          <div className={classes.section}>
+            <h1 className={classes.heading}>AR Data Upload</h1>
+            <div className={classes.single_row}>
+              <div className={classes.data_tabs_container}>
+                <div className={classes.data_input_container}>
+                  <p>Images</p>
+                  <input
+                    onChange={(e) => {
+                      handleArImages(e.target.files);
+                    }}
+                    style={{ width: "100%", marginBottom: "20px" }}
+                    placeholder="Images"
+                    type={"file"}
+                    multiple
+                    className={classes.input_field_dual}
+                  />
+                  <div className={classes.add_btn_border}>
+                    <h3 className={classes.add_field}>+</h3>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

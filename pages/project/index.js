@@ -9,6 +9,7 @@ import ProjectTimelineSection from "../../components/screenComponents/projectScr
 import { useAuth } from "../../contextAPI";
 import { ClipLoader } from "react-spinners";
 import { useRouter } from "next/router";
+import ProjectImagesModal from "../../components/modals/projectImagesModal.js";
 
 function Project() {
   const [project, setProject] = useState();
@@ -48,6 +49,10 @@ function Project() {
       const data = projects?.data;
       setProjectOwnerId(data?.userId?._id);
 
+      for (var i = 0; i < data?.ARimages?.length; i++) {
+        data.ARimages[i] = baseUrl + data.ARimages[i];
+      }
+
       for (var i = 0; i < data?.floorPlan?.length; i++) {
         data.floorPlan[i] = baseUrl + data.floorPlan[i];
       }
@@ -72,6 +77,8 @@ function Project() {
       console.log(err);
     }
   };
+
+  console.log(project);
 
   useEffect(() => {
     const fetchDeveloperDetails = async () => {
@@ -123,6 +130,7 @@ function Project() {
             amenities={project?.amenities}
             address={project?.address}
             projectDetails={project}
+            arImages={project?.ARimages}
           />
           <ProjectTimelineSection project={project} />
           <SimilarPropertySection />

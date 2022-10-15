@@ -28,8 +28,6 @@ function AdminAgents({
     fetchAgents();
   }, []);
 
-  console.log(agents);
-
   return (
     <div className={classes.table_container}>
       <div className={classes.table}>

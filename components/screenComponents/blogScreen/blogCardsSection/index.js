@@ -5,11 +5,11 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import BlogCard from "../components/blogCard";
 import { useWindowSize } from "../../../../utils";
+import { blogsData } from "../../../../pages/blogs/blogsData";
 
 function BlogCardsSection({ isTitle }) {
   const { width } = useWindowSize();
   const [slidesToShow, setSlidesToShow] = useState(4);
-
   const settings = {
     dots: false,
     infinite: true,
@@ -40,14 +40,34 @@ function BlogCardsSection({ isTitle }) {
     <div className={classes.blogs_section_container}>
       {isTitle && <h1>YOU MAY ALSO LIKE</h1>}
       <div className={classes.blogs_section}>
-        <h1>Coming Soon</h1>
-        {/* <Slider slidesToShow={slidesToShow} {...settings}>
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-        </Slider> */}
+        {/* <h1>Coming Soon</h1> */}
+        {blogsData?.length > 3 ? (
+          <Slider slidesToShow={slidesToShow} {...settings}>
+            {blogsData?.map((blog, index) => (
+              <BlogCard blogId={blog?.blogId} blogName={blog?.blogName} />
+            ))}
+          </Slider>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              columnGap: "20px",
+              width: "100%",
+            }}
+          >
+            {blogsData?.map((blog, index) => (
+              <BlogCard
+                image={blog?.blogImage}
+                blogId={blog?.blogId}
+                blogName={blog?.blogName}
+                title={blog?.blogTitle}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

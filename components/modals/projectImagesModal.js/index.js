@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./projectImagesModal.module.css";
 import Modal from "react-responsive-modal";
 
-function ProjectImagesModal({ setOpen, open, onCloseModal, pictures }) {
+function ProjectImagesModal({ open, onCloseModal, pictures }) {
   return (
     <>
       <Modal

@@ -20,6 +20,25 @@
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 15px;
 }
+.ar_imgs_btn {
+  height: 40px;
+  width: 120px;
+  background-color: #0169ec;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: ease-in-out 200ms;
+  margin-top: 30px;
+}
+.ar_imgs_btn p {
+  color: white;
+}
+.ar_imgs_btn:hover {
+  background-color: #368af0;
+}
 .video_container {
   width: 100%;
   height: 550px;
@@ -259,6 +278,7 @@
   display: flex;
   max-width: 1400px;
   flex-direction: column;
+  align-items: center;
 }
 .cards_container {
   width: 100%;

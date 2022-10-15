@@ -9,14 +9,21 @@ import icon2 from "../../../../public/assets/project_card_interactive_broucher_i
 import icon3 from "../../../../public/assets/project_card_3d_plan_icon.png";
 import { useWindowSize } from "../../../../utils";
 import bullet from "../../../../public/assets/bullet.png";
+import ProjectImagesModal from "../../../modals/projectImagesModal.js";
 
 function ProjectConentSection({
   features,
   amenities,
   address,
   projectDetails,
+  arImages,
 }) {
   const [showMore, setShowMore] = useState(false);
+  const [open, setOpen] = useState();
+  const handleModal = () => {
+    setOpen(true);
+  };
+  const onCloseModal = () => setOpen(false);
   const { width } = useWindowSize();
   const [isVideo, setIsVideo] = useState(true);
   const [isVideoLocation, setIsVideoLocation] = useState(true);
@@ -41,6 +48,11 @@ function ProjectConentSection({
 
   return (
     <div className={classes.container}>
+      <ProjectImagesModal
+        open={open}
+        onCloseModal={onCloseModal}
+        pictures={arImages}
+      />
       <div className={classes.content_container}>
         <div
           style={{ flexDirection: width < 1000 ? "column" : "row-reverse" }}
@@ -213,71 +225,76 @@ function ProjectConentSection({
 
         <div className={classes.augmented_reality_section}>
           <h1>AUGMENTED REALITY</h1>
-
           {width < 786 ? (
-            <div className={classes.cards_container}>
-              {/* <a href="">
+            <>
+              <div onClick={handleModal} className={classes.ar_imgs_btn}>
+                <p>AR Images</p>
+              </div>
+
+              <div className={classes.cards_container}>
+                {/* <a href="">
 
 
             </a> */}
-              {/* <a
+                {/* <a
                 href="https://mywebar.com/p/Project_8_nz3i3roow9"
                 target={"_blank"}
                 rel="noreferrer"
               > */}
-              <FindSectionCards
-                imgWidth={"50%"}
-                imgHeight={"40%"}
-                maxWidth={"350px"}
-                minWidth={"320px"}
-                icon={icon3}
-                isStart={true}
-                titleColor={"black"}
-                title={"Interactive Layout"}
-                link={"https://mywebar.com/p/Project_8_nz3i3roow9"}
-                subheading={"(Exterior)"}
-              />
-              {/* </a> */}
+                <FindSectionCards
+                  imgWidth={"50%"}
+                  imgHeight={"40%"}
+                  maxWidth={"350px"}
+                  minWidth={"320px"}
+                  icon={icon3}
+                  isStart={true}
+                  titleColor={"black"}
+                  title={"Interactive Layout"}
+                  link={"https://mywebar.com/p/Project_8_nz3i3roow9"}
+                  subheading={"(Exterior)"}
+                />
+                {/* </a> */}
 
-              <FindSectionCards
-                imgWidth={"50%"}
-                imgHeight={"40%"}
-                maxWidth={"350px"}
-                minWidth={"320px"}
-                icon={icon3}
-                isStart={true}
-                titleColor={"black"}
-                title={"Interactive Layout"}
-                link={"https://mywebar.com/p/Project_9_8xq88kb0qb"}
-                subheading={"(1 Bed Apartment)"}
-              />
+                <FindSectionCards
+                  imgWidth={"50%"}
+                  imgHeight={"40%"}
+                  maxWidth={"350px"}
+                  minWidth={"320px"}
+                  icon={icon3}
+                  isStart={true}
+                  titleColor={"black"}
+                  title={"Interactive Layout"}
+                  link={"https://mywebar.com/p/Project_9_8xq88kb0qb"}
+                  subheading={"(1 Bed Apartment)"}
+                />
 
-              <FindSectionCards
-                imgWidth={"50%"}
-                imgHeight={"40%"}
-                maxWidth={"350px"}
-                minWidth={"320px"}
-                icon={icon3}
-                isStart={true}
-                titleColor={"black"}
-                title={"Interactive Layout"}
-                link={"https://mywebar.com/p/Project_10_l53yep0som"}
-                subheading={"(2 Bed Apartment)"}
-              />
+                <FindSectionCards
+                  imgWidth={"50%"}
+                  imgHeight={"40%"}
+                  maxWidth={"350px"}
+                  minWidth={"320px"}
+                  icon={icon3}
+                  isStart={true}
+                  titleColor={"black"}
+                  title={"Interactive Layout"}
+                  link={"https://mywebar.com/p/Project_10_l53yep0som"}
+                  subheading={"(2 Bed Apartment)"}
+                />
 
-              <FindSectionCards
-                imgWidth={"50%"}
-                imgHeight={"40%"}
-                maxWidth={"350px"}
-                minWidth={"320px"}
-                icon={icon3}
-                isStart={true}
-                titleColor={"black"}
-                title={"Interactive Layout"}
-                link={"https://mywebar.com/p/Project_5_txnu3qobej"}
-                subheading={"(3 Bed Apartment)"}
-              />
-            </div>
+                <FindSectionCards
+                  imgWidth={"50%"}
+                  imgHeight={"40%"}
+                  maxWidth={"350px"}
+                  minWidth={"320px"}
+                  icon={icon3}
+                  isStart={true}
+                  titleColor={"black"}
+                  title={"Interactive Layout"}
+                  link={"https://mywebar.com/p/Project_5_txnu3qobej"}
+                  subheading={"(3 Bed Apartment)"}
+                />
+              </div>
+            </>
           ) : (
             <p style={{ marginTop: "60px" }}>
               This feature is available on tablet and mobile devices

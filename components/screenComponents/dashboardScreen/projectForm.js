@@ -340,6 +340,7 @@ function ProjectForm() {
           address: address,
           province: province,
           isActive: false,
+          ARimages: arImgArr,
           dateAdded: Math.floor(Date.now() / 1000),
           currentScenario: "ongoing",
           projectStartDate: startDate,
@@ -1141,6 +1142,7 @@ function ProjectForm() {
             }}
           >
             <option>Select</option>
+            <option value={"Islamabad"}>Islamabad</option>
             <option value={"Punjab"}>Punjab</option>
             <option value={"Baluchistan"}>Baluchistan</option>
             <option value={"KPK"}>KPK</option>

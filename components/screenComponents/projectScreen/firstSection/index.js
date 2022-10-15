@@ -142,7 +142,9 @@ function FirstSection({
               >
                 <div style={{ width: "80%" }} className={classes.banner_btn}>
                   <p>
-                    {ownerDetails?.user?.username}
+                    {ownerDetails?.user?.username
+                      ? ownerDetails?.user?.username
+                      : ownerDetails?.user?.name}
                     <span>{">"}</span>
                   </p>
                 </div>
