@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import BlogCard from "../components/blogCard";
 import { useWindowSize } from "../../../../utils";
-import { blogsData } from "../../../../pages/blogs/blogsData";
+import { blogsData } from "../../../../components/screenComponents/blogScreen/blogsData";
 
 function BlogCardsSection({ isTitle }) {
   const { width } = useWindowSize();
@@ -60,6 +60,7 @@ function BlogCardsSection({ isTitle }) {
           >
             {blogsData?.map((blog, index) => (
               <BlogCard
+                key={index}
                 image={blog?.blogImage}
                 blogId={blog?.blogId}
                 blogName={blog?.blogName}
