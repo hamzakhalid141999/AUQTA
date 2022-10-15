@@ -11,6 +11,8 @@ import { sendResetPasswordEmail } from "../../utils/sendResetPasswordEmail";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FacebookSignIn } from "../../utils/facebookSignin";
+import google from "../../../public/assets/icons/google_icon.png";
+import facebook from "../../../public/assets/icons/facebook_icon.png";
 
 function LoginSignupModal({ setOpen, open, onCloseModal }) {
   const router = useRouter();
@@ -363,6 +365,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                   >
                     Continue with Facebook
                   </a>
+                  <img src={facebook.src} style={{ width: "40px" }} />
                 </div>
                 <div className={classes.google_btn}>
                   <a
@@ -371,6 +374,7 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                   >
                     Continue with Google
                   </a>
+                  <img src={google.src} style={{ width: "25px" }} />
                 </div>
                 {/* <div className={classes.divider} />
                 <p className={classes.connect_with}>:</p>
@@ -535,13 +539,13 @@ function LoginSignupModal({ setOpen, open, onCloseModal }) {
                     I accept Auqta{"'"}s terms of use
                   </p>
                 </div>
-                <div className={classes.divider} />
+                {/* <div className={classes.divider} />
                 <div
                   onClick={handleFacebookSignin}
                   className={classes.facebook_btn}
                 >
                   <p>Continue with Facebook</p>
-                </div>
+                </div> */}
                 {/* <div className={classes.divider} />
                 <p className={classes.connect_with}>Or connect with:</p>
                 <div className={classes.apple_btn}>

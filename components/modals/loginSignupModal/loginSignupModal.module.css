@@ -133,12 +133,17 @@
 .facebook_btn,
 .google_btn {
   width: 100%;
-  padding: 15px 30px;
+  height: 50px;
   border-radius: 5px;
   transition: ease-in-out 200ms;
   cursor: pointer;
   text-decoration: none;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
 }
 .google_btn {
   margin-top: 10px;
@@ -166,13 +171,11 @@
   color: white;
   font-size: 14px;
   text-decoration: none;
-  padding: 15px 50px;
 }
 .google_btn a {
   text-align: center;
   color: black;
   font-size: 14px;
-  padding: 15px 50px;
 }
 .forgot_password {
   text-align: center;
