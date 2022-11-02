@@ -225,12 +225,11 @@ function ProjectConentSection({
 
         <div className={classes.augmented_reality_section}>
           <h1>AUGMENTED REALITY</h1>
+          <div onClick={handleModal} className={classes.ar_imgs_btn}>
+            <p>AR Images</p>
+          </div>
           {width < 786 ? (
             <>
-              <div onClick={handleModal} className={classes.ar_imgs_btn}>
-                <p>AR Images</p>
-              </div>
-
               <div className={classes.cards_container}>
                 {/* <a href="">
 
