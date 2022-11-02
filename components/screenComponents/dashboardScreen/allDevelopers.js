@@ -108,7 +108,11 @@ function AllDevelopers() {
                   key={index}
                   isSmall={true}
                   id={developers[index]?.user?._id}
-                  name={developers[index]?.user?.username}
+                  name={
+                    developers[index]?.user?.username
+                      ? developers[index]?.user?.username
+                      : developers[index]?.user?.name
+                  }
                   city={developers[index]?.user?.city}
                   location={developers[index]?.user?.location}
                   picture={developers[index]?.user?.profilePicture}
@@ -169,7 +173,11 @@ function AllDevelopers() {
                   <DeveloperCard
                     key={index}
                     id={user?.user?._id}
-                    name={user?.user?.username}
+                    name={
+                      user?.user?.username
+                        ? user?.user?.username
+                        : user?.user?.name
+                    }
                     city={user?.user?.city}
                     location={user?.user?.location}
                     picture={user?.user?.profilePicture}
@@ -181,7 +189,11 @@ function AllDevelopers() {
                 <DeveloperCard
                   key={index}
                   id={user?.user?._id}
-                  name={user?.user?.username}
+                  name={
+                    user?.user?.username
+                      ? user?.user?.username
+                      : user?.user?.name
+                  }
                   city={user?.user?.city}
                   location={user?.user?.location}
                   picture={user?.user?.profilePicture}

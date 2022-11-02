@@ -37,6 +37,7 @@ function AllAgents() {
     }
     setActiveMarker(marker);
   };
+  console.log(agents);
 
   useEffect(() => {
     const fetchFilteredProperties = async () => {
@@ -194,6 +195,8 @@ function AllAgents() {
                       user?.agentCompany
                         ? user?.agentCompany
                         : user?.user?.username
+                        ? user?.user?.username
+                        : user?.user?.name
                     }
                     city={user?.user?.city}
                     location={user?.user?.location}
@@ -211,6 +214,8 @@ function AllAgents() {
                     user?.agentCompany
                       ? user?.agentCompany
                       : user?.user?.username
+                      ? user?.user?.username
+                      : user?.user?.name
                   }
                   city={user?.user?.city}
                   location={user?.user?.location}

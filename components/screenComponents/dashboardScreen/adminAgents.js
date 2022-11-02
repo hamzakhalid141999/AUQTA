@@ -28,6 +28,8 @@ function AdminAgents({
     fetchAgents();
   }, []);
 
+  console.log(agents);
+
   return (
     <div className={classes.table_container}>
       <div className={classes.table}>
@@ -55,11 +57,14 @@ function AdminAgents({
                   }}
                 >
                   <p style={{ cursor: "pointer" }}>
-                    {agent?.user?.firstName} {agent?.user?.lastName}
+                    {agent?.user?.firstName
+                      ? agent?.user?.firstName
+                      : agent?.user?.name}{" "}
+                    {agent?.user?.lastName}
                   </p>
                 </Link>
-                <p>{agent?.user?.username}</p>
-                <p>{agent?.user?.email}</p>
+                <p>{agent?.user?.username ? agent?.user?.username : "N/A"}</p>
+                <p>{agent?.user?.email ? agent?.user?.email : "N/A"}</p>
                 <div style={{ minWidth: "170px" }}>
                   <img
                     onClick={() => {

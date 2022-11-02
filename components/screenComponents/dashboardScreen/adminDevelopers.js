@@ -61,11 +61,18 @@ function AdminDevelopers({
                   }}
                 >
                   <p style={{ cursor: "pointer" }}>
-                    {developer?.user?.firstName} {developer?.user?.lastName}
+                    {developer?.user?.firstName
+                      ? developer?.user?.firstName
+                      : developer?.user?.name}{" "}
+                    {developer?.user?.lastName}
                   </p>
                 </Link>
-                <p>{developer?.user?.username}</p>
-                <p>{developer?.user?.email}</p>
+                <p>
+                  {developer?.user?.username
+                    ? developer?.user?.username
+                    : "N/A"}
+                </p>
+                <p>{developer?.user?.email ? developer?.user?.email : "N/A"}</p>
                 <div style={{ minWidth: "170px" }}>
                   <img
                     onClick={() => {

@@ -8,7 +8,6 @@ function AccordionSection() {
     return (
       <>
         <div className={classes.answer_section}>
-          <div className={classes.divider} />
           <p>{content}</p>
         </div>
       </>
