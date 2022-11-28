@@ -6,7 +6,7 @@ import blog_pic from "../../../../../public/assets/blog_picture.png";
 import Image from "next/image";
 import Link from "next/link";
 
-function BlogCard({ blogId, blogName, image, title }) {
+function BlogCard({ blogId, blogName, image, title, date }) {
   return (
     <Link href={"/blogs/" + blogId + "+" + blogName}>
       <div className={classes.card_body}>
@@ -18,7 +18,7 @@ function BlogCard({ blogId, blogName, image, title }) {
             alt="picture"
           />
         </div>
-        <p className={classes.time}>12 Nov 2021</p>
+        <p className={classes.time}>{date}</p>
         <h1 className={classes.title}>{title}</h1>
         {/* <p className={classes.description}>
           Lorem Ipsum is simply dummy text of the printing and typesetting

@@ -5,6 +5,7 @@ import img from "../../../public/assets/blog_picture.png";
 import BlogCardsSection from "../../../components/screenComponents/blogScreen/blogCardsSection";
 import Blog1 from "../../../components/screenComponents/blogScreen/blogs/blog1";
 import { useRouter } from "next/router";
+import Blog2 from "../../../components/screenComponents/blogScreen/blogs/blog2";
 
 function Blog() {
   const router = useRouter();
@@ -19,7 +20,7 @@ function Blog() {
   return (
     <div className={classes.blog_content_container}>
       <div className={classes.blog_content}>
-        {blogId === "1" ? <Blog1 /> : <></>}
+        {blogId === "1" ? <Blog1 /> : blogId === "2" ? <Blog2 /> : <></>}
       </div>
       <BlogCardsSection isTitle={true} />
     </div>

@@ -54,7 +54,7 @@ function BlogCardsSection({ isTitle }) {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "center",
-              columnGap: "20px",
+              columnGap: "50px",
               width: "100%",
             }}
           >
@@ -65,6 +65,7 @@ function BlogCardsSection({ isTitle }) {
                 blogId={blog?.blogId}
                 blogName={blog?.blogName}
                 title={blog?.blogTitle}
+                date={blog?.date}
               />
             ))}
           </div>
