@@ -41,10 +41,17 @@ function BlogCardsSection({ isTitle }) {
       {isTitle && <h1>YOU MAY ALSO LIKE</h1>}
       <div className={classes.blogs_section}>
         {/* <h1>Coming Soon</h1> */}
-        {blogsData?.length > 3 ? (
+        {blogsData?.length > 2 ? (
           <Slider slidesToShow={slidesToShow} {...settings}>
             {blogsData?.map((blog, index) => (
-              <BlogCard blogId={blog?.blogId} blogName={blog?.blogName} />
+              <BlogCard
+                key={index}
+                image={blog?.blogImage}
+                blogId={blog?.blogId}
+                blogName={blog?.blogName}
+                title={blog?.blogTitle}
+                date={blog?.date}
+              />
             ))}
           </Slider>
         ) : (
