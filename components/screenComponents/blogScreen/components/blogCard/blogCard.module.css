@@ -1,5 +1,5 @@
 .card_body {
-  height: 450px;
+  height: 430px;
   width: 330px;
   min-width: 260px;
   border-radius: 30px;
@@ -20,7 +20,7 @@
   font-size: 13px;
 }
 .title {
-  font-size: 24px;
+  font-size: 18px;
   padding-top: 15px;
   color: rgb(68, 68, 68) !important;
 }
@@ -31,11 +31,15 @@
   margin-top: 15px !important;
 }
 .btn {
+  cursor: pointer;
   width: fit-content;
   border-radius: 100px;
   padding: 10px 15px;
   margin-top: 20px;
   background-color: #0068ed;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 .btn p {
   font-size: 12px;

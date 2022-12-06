@@ -6,6 +6,7 @@ import BlogCardsSection from "../../../components/screenComponents/blogScreen/bl
 import Blog1 from "../../../components/screenComponents/blogScreen/blogs/blog1";
 import { useRouter } from "next/router";
 import Blog2 from "../../../components/screenComponents/blogScreen/blogs/blog2";
+import Blog3 from "../../../components/screenComponents/blogScreen/blogs/blog3";
 
 function Blog() {
   const router = useRouter();
@@ -20,7 +21,15 @@ function Blog() {
   return (
     <div className={classes.blog_content_container}>
       <div className={classes.blog_content}>
-        {blogId === "1" ? <Blog1 /> : blogId === "2" ? <Blog2 /> : <></>}
+        {blogId === "1" ? (
+          <Blog1 />
+        ) : blogId === "2" ? (
+          <Blog2 />
+        ) : blogId === "3" ? (
+          <Blog3 />
+        ) : (
+          <></>
+        )}
       </div>
       <BlogCardsSection isTitle={true} />
     </div>
