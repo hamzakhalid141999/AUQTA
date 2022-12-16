@@ -22,6 +22,13 @@ const blogsData = [
     blogTitle: "How immersive technologies can uplift real estate in Pakistan",
     date: "6 Dec 2022",
   },
+  {
+    blogName: "how-do-immersive-technologies-work?",
+    blogId: "4",
+    blogImage: images.blog4Img,
+    blogTitle: "How do Immersive Technologies work?",
+    date: "16 Dec 2022",
+  },
 ];
 
 export { blogsData };
