@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import Blog2 from "../../../components/screenComponents/blogScreen/blogs/blog2";
 import Blog3 from "../../../components/screenComponents/blogScreen/blogs/blog3";
 import Blog4 from "../../../components/screenComponents/blogScreen/blogs/blog4";
+import Blog5 from "../../../components/screenComponents/blogScreen/blogs/blog5";
 
 function Blog() {
   const router = useRouter();
@@ -30,6 +31,8 @@ function Blog() {
           <Blog3 />
         ) : blogId === "4" ? (
           <Blog4 />
+        ) : blogId === "5" ? (
+          <Blog5 />
         ) : (
           <></>
         )}

@@ -29,6 +29,13 @@ const blogsData = [
     blogTitle: "How do Immersive Technologies work?",
     date: "16 Dec 2022",
   },
+  {
+    blogName: "technology-adaptation",
+    blogId: "5",
+    blogImage: images.blog5Img,
+    blogTitle: "Technology Adaptation",
+    date: "2 Jan 2023",
+  },
 ];
 
 export { blogsData };
