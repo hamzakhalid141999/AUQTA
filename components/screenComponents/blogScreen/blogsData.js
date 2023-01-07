@@ -36,6 +36,13 @@ const blogsData = [
     blogTitle: "Technology Adaptation",
     date: "2 Jan 2023",
   },
+  {
+    blogName: "real-estate-market-potential-in-pakistan",
+    blogId: "6",
+    blogImage: images.blog6Img,
+    blogTitle: "Real Estate Market Potential in Pakistan",
+    date: "7 Jan 2023",
+  },
 ];
 
 export { blogsData };

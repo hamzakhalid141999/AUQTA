@@ -9,6 +9,7 @@ import Blog2 from "../../../components/screenComponents/blogScreen/blogs/blog2";
 import Blog3 from "../../../components/screenComponents/blogScreen/blogs/blog3";
 import Blog4 from "../../../components/screenComponents/blogScreen/blogs/blog4";
 import Blog5 from "../../../components/screenComponents/blogScreen/blogs/blog5";
+import Blog6 from "../../../components/screenComponents/blogScreen/blogs/blog6";
 
 function Blog() {
   const router = useRouter();
@@ -33,6 +34,8 @@ function Blog() {
           <Blog4 />
         ) : blogId === "5" ? (
           <Blog5 />
+        ) : blogId === "6" ? (
+          <Blog6 />
         ) : (
           <></>
         )}
