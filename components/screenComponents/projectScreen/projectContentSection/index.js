@@ -139,14 +139,17 @@ function ProjectConentSection({
             {isVideoLocation && (
               <p className={classes.tour_text}>Click above to launch Tour</p>
             )}
-            {projectDetails?._id === "6301e2257cd62ffd3a83a286" &&
-            !isVideoLocation ? (
+            {!isVideoLocation ? (
               <iframe
                 onClick={handleVideoLocationToggle}
                 style={{ borderRadius: "40px", objectFit: "initial" }}
                 allowFullScreen
                 src={
-                  "/vr/6301e2257cd62ffd3a83a286-LT/6301e2257cd62ffd3a83a286-LT.html"
+                  toursBaseUrl +
+                  projectDetails?._id +
+                  "-LT/" +
+                  projectDetails?._id +
+                  "-LT.html"
                 }
                 height="100%"
                 width="100%"
@@ -154,7 +157,13 @@ function ProjectConentSection({
               />
             ) : (
               <a
-                href="/vr/6301e2257cd62ffd3a83a286-LT/6301e2257cd62ffd3a83a286-LT.html"
+                href={
+                  toursBaseUrl +
+                  projectDetails?._id +
+                  "-LT/" +
+                  projectDetails?._id +
+                  "-LT.html"
+                }
                 target={"_blank"}
                 rel="noreferrer"
               >

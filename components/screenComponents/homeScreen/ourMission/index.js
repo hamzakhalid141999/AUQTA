@@ -118,7 +118,7 @@ function OurMission() {
                   // pointerEvents: "none",
                 }}
                 allowFullScreen
-                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/vr/Business_District_Bahria_Town_VR.html"
+                src="https://auqta-bucket.s3.ap-southeast-1.amazonaws.com/index.html"
                 // height="500px"
                 // width="100%"
               />
